@@ -1,17 +1,31 @@
-import { Component } from '@angular/core';
-import { Router, RouterLink } from '@angular/router';
+import { Component, HostListener } from '@angular/core';
+import { Router } from '@angular/router';
 import APP_ROUTES from '../../constants/routes';
 
 @Component({
   selector: 'app-navbar',
   templateUrl: './navbar.component.html',
-  styleUrl: './navbar.component.scss'
+  styleUrls: ['./navbar.component.scss']
 })
 export class NavbarComponent {
-  APP_ROUTES = APP_ROUTES
+  APP_ROUTES = APP_ROUTES;
+  menuOpen = false;
 
-  constructor(private router: Router) {
+  constructor(private router: Router) { }
 
+  @HostListener('window:resize', ['$event'])
+  onResize(event: Event) {
+    this.checkScreenWidth();
+  }
+
+  private checkScreenWidth() {
+    if (window.innerWidth > 800) {
+      this.menuOpen = false;
+    }
+  }
+
+  toggleMenu() {
+    this.menuOpen = !this.menuOpen;
   }
 
   openFindMyMeds() {
