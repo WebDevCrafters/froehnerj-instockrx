@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { RouterLink } from '@angular/router';
+import { Router, RouterLink } from '@angular/router';
 import APP_ROUTES from '../../constants/routes';
 
 @Component({
@@ -9,4 +9,13 @@ import APP_ROUTES from '../../constants/routes';
 })
 export class NavbarComponent {
   APP_ROUTES = APP_ROUTES
+
+  constructor(private router: Router) {
+
+  }
+
+  openFindMyMeds() {
+    const url = this.router.serializeUrl(this.router.createUrlTree([APP_ROUTES.findMyMeds]));
+    window.open(url, '_blank');
+  }
 }
