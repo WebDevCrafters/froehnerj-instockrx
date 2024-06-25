@@ -1,0 +1,54 @@
+.input_container {
+    margin: 5rem;
+    border-radius: 12px;
+    border: 1.6px solid #d0cccc;
+    transition: all 0.5s ease;
+    color: #d0cccc;
+    position: relative;
+
+    .animated_label {
+        font-size: 12px;
+        top: -0.5rem;
+        left: 8px;
+    }
+
+    &:focus-within {
+        border-color: #221918;
+        &:not(:hover) {
+            border-color: #fe6b6a;
+        }
+        label {
+            font-size: 12px;
+            top: -0.5rem;
+            left: 8px;
+        }
+    }
+
+    &:hover {
+        border-color: #221918;
+    }
+
+    label {
+        position: absolute;
+        background-color: #ffffff;
+        padding: 0 3px;
+        transition: all 0.2s ease;
+
+        font-size: 1rem;
+        top: 0.7rem;
+        left: 0.5rem;
+    }
+
+    input {
+        border-radius: 12px;
+        padding: 0.7rem;
+        border: none;
+        width: 100%;
+        font-size: 1rem;
+        caret-color: red;
+
+        &:focus {
+            outline: none;
+        }
+    }
+}
