@@ -5,7 +5,7 @@ import { Component } from '@angular/core';
   standalone: true,
   imports: [],
   templateUrl: './find-my-meds.component.html',
-  styleUrl: './find-my-meds.component.css'
+  styleUrl: './find-my-meds.component.scss'
 })
 export class FindMyMedsComponent {
 
