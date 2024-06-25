@@ -1,7 +1,24 @@
-<ul>
-    <li><a [routerLink]="APP_ROUTES.pricing">pricing</a></li>
-    <li><a [routerLink]="APP_ROUTES.patients">Patients</a></li>
-    <li><a [routerLink]="APP_ROUTES.providers">Provicers</a></li>
-    <li><a [routerLink]="APP_ROUTES.about">About</a></li>
-    <li><a (click)="openFindMyMeds()">Find my meds</a></li>
-</ul>
+<div class="main_container">
+  <div class="logo_and_name_container">
+    <a [routerLink]="APP_ROUTES._">
+      <img src="assets/images/png/pill-logo.png" alt="logo">
+      <div class="name_container">
+        <div class="heading">FindMyMed</div>
+        <div class="sub_heading">by InStockRx</div>
+      </div>
+    </a>
+  </div>
+  <div class="menu_icon" (click)="toggleMenu()">
+    <img *ngIf="!menuOpen" src="assets/images/svg/menu-icon.svg" alt="menu">
+    <img *ngIf="menuOpen" src="assets/images/svg/close-icon.svg" alt="close">
+  </div>
+  <div class="routes_container" [ngClass]="{'open': menuOpen}">
+    <ul class="route_list">
+      <li><a [routerLink]="APP_ROUTES.pricing">Pricing</a></li>
+      <li><a [routerLink]="APP_ROUTES.patients">Patients</a></li>
+      <li><a [routerLink]="APP_ROUTES.providers">Providers</a></li>
+      <li><a [routerLink]="APP_ROUTES.about">About Us</a></li>
+      <li><a (click)="openFindMyMeds()">Find my meds</a></li>
+    </ul>
+  </div>
+</div>
