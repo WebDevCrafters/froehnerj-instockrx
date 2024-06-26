@@ -1,1 +1,1 @@
-<button [class]="clicked && 'clicked'" (click)="onClick()">{{text}}</button>
+<button [ngClass]="{clicked: clicked}" (click)="onClickButton($event)">{{text}}</button>
