@@ -11,11 +11,9 @@ import { EventEmitter } from 'stream';
 })
 export class ButtonComponent {
   @Input() text: string = ""
-  @Output() onClick = new EventEmitter<any>();
   clicked: boolean = false
 
   onClickButton(event: MouseEvent) {
-    this.onClick.emit(event);
     this.clicked = true
     setTimeout(() => {
       this.clicked = false
