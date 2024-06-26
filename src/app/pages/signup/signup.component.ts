@@ -12,16 +12,26 @@ import { ButtonComponent } from '../../_shared/components/button/button.componen
 })
 export class SignupComponent {
 
-  step: number = 1;
+  stepNumber: number = 1;
+  medicationList=[1]
 
-  formGroup = new FormGroup({
-    fullName: new FormControl("", [Validators.required]),
-    phoneNumber: new FormControl("", [Validators.required]),
-    email: new FormControl("", [Validators.required])
-  })
+  personalInfoForm = new FormGroup({
+    fullName: new FormControl('', [Validators.required]),
+    phoneNumber: new FormControl('', [Validators.required]),
+    email: new FormControl('', [Validators.required, Validators.email])
+  });
 
-  onContinuePress(event: MouseEvent) {
-    // this.step = this.step + 1;
-    console.log(this.step)
+  additionalInfoForm = new FormGroup({
+    dob: new FormControl('', [Validators.required]),
+    zipCode: new FormControl('', [Validators.required]),
+    prescriber: new FormControl('', [Validators.required]),
+    prescribedMedication: new FormControl('', [Validators.required]),
+    pickupDate: new FormControl('', [Validators.required])
+  });
+
+  onContinuePress() {
+    console.log(this.stepNumber)
+    this.stepNumber = this.stepNumber + 1;
+    console.log(this.stepNumber)
   }
 }
