@@ -1,7 +1,9 @@
 <div class="input_container">
+    @if (label) {
     <label [for]="id" [ngClass]="{animated_label: control.value}" (click)="focusInput(inputElement)">
         {{label}}
     </label>
-    <input type="text" [formControl]="control" [id]="id" [placeholder]="isFocused ? placeholder : ''" #inputElement
+    }
+    <input [type]="type" [formControl]="control" [id]="id" [placeholder]="isFocused ? placeholder : ''" #inputElement
         (focus)="onFocus()" (blur)="onBlur()">
 </div>

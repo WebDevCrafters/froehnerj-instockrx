@@ -17,7 +17,7 @@
         <app-input [control]="formGroup.controls.phoneNumber" id="phoneNumber" label="Phone Number" />
         <app-input [control]="formGroup.controls.email" id="email" label="Email" />
         <div class="terms">
-            <input type="checkbox" />
+            <app-input [control]="formGroup.controls.email" id="email" type="checkbox"/>
             <span>
                 I have read and agree to the
                     <a href="#">
@@ -31,5 +31,6 @@
             </span>
 
         </div>
+        <button>Continue</button>
     </div>
 </div>

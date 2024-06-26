@@ -14,6 +14,7 @@ export class InputComponent implements OnInit {
   @Input() control = new FormControl();
   @Input() id: string = ""
   @Input() placeholder: string = ""
+  @Input() type: "text" | "checkbox" | "phoneNumber" = "text"
   isFocused = false;
 
   ngOnInit() {
