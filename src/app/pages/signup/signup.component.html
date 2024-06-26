@@ -8,29 +8,39 @@
             </div>
         </div>
         <p>Never Search For Your Meds Again</p>
+        @if (step===1) {
         <span>
             {{"Let us find your meds for you! \n We just need a little info to start:"}}
         </span>
+        }
     </div>
     <div class="form_container">
+        @if (step===1) {
         <app-input [control]="formGroup.controls.fullName" id="fullName" label="Full Name" />
         <app-input [control]="formGroup.controls.phoneNumber" id="phoneNumber" label="Phone Number" />
         <app-input [control]="formGroup.controls.email" id="email" label="Email" />
         <div class="terms">
-            <app-input [control]="formGroup.controls.email" id="email" type="checkbox"/>
+            <div>
+                <app-input [control]="formGroup.controls.email" id="email" type="checkbox" />
+            </div>
             <span>
                 I have read and agree to the
-                    <a href="#">
-                        privacy policy
-                    </a>
-                    and 
-                    <a href="#">
-                        terms of service.
-                    </a>
-                 {{"\nI also agree to recieve SMS messages from FindMyMed by InStockRx regarding search status updates and marketting. Reply STOP to opt out, HELP for assistance. Standard message and data rates amay apply. The tests are non-recurring."}}
+                <a href="#">
+                    privacy policy
+                </a>
+                and
+                <a href="#">
+                    terms of service.
+                </a>
+                {{"\nI also agree to recieve SMS messages from FindMyMed by InStockRx regarding search status updates"
+                +"and marketting. Reply STOP to opt out, HELP for assistance. Standard message and data rates amay"
+                +"apply."
+                +"The tests are non-recurring."}}
             </span>
 
         </div>
-        <button>Continue</button>
+        <app-button text="Continue" />
+        }
     </div>
+
 </div>

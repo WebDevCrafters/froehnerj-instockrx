@@ -1,9 +1,14 @@
+:host {
+    width: 100%;
+}
+
 .input_container {
     border-radius: 12px;
     border: 1.6px solid #ac9d9e;
     transition: border 0.5s ease;
     color: #ac9d9e;
     position: relative;
+    flex-grow: 0;
 
     .animated_label {
         font-size: 12px;
@@ -32,7 +37,10 @@
         position: absolute;
         background-color: #ffffff;
         padding: 0 3px;
-        transition: top 0.2s ease, left 0.2s ease, font-size 0.2s ease;
+        transition:
+            top 0.2s ease,
+            left 0.2s ease,
+            font-size 0.2s ease;
 
         font-size: 1rem;
         top: 0.7rem;
