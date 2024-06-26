@@ -1,15 +1,15 @@
 .input_container {
-    margin: 5rem;
     border-radius: 12px;
-    border: 1.6px solid #d0cccc;
-    transition: all 0.5s ease;
-    color: #d0cccc;
+    border: 1.6px solid #ac9d9e;
+    transition: border 0.5s ease;
+    color: #ac9d9e;
     position: relative;
 
     .animated_label {
         font-size: 12px;
         top: -0.5rem;
         left: 8px;
+        width: unset;
     }
 
     &:focus-within {
@@ -32,11 +32,12 @@
         position: absolute;
         background-color: #ffffff;
         padding: 0 3px;
-        transition: all 0.2s ease;
+        transition: top 0.2s ease, left 0.2s ease, font-size 0.2s ease;
 
         font-size: 1rem;
         top: 0.7rem;
         left: 0.5rem;
+        cursor: text;
     }
 
     input {
@@ -46,6 +47,10 @@
         width: 100%;
         font-size: 1rem;
         caret-color: red;
+
+        ::placeholder {
+            color: #ac9d9e;
+        }
 
         &:focus {
             outline: none;

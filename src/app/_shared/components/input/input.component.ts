@@ -1,5 +1,5 @@
 import { CommonModule } from '@angular/common';
-import { Component, OnChanges, OnInit, SimpleChanges } from '@angular/core';
+import { Component, Input, OnChanges, OnInit, SimpleChanges } from '@angular/core';
 import { FormControl, ReactiveFormsModule } from '@angular/forms';
 
 @Component({
@@ -10,14 +10,28 @@ import { FormControl, ReactiveFormsModule } from '@angular/forms';
   styleUrl: './input.component.scss'
 })
 export class InputComponent implements OnInit {
-  label: string = 'Full Name';
-  control = new FormControl();
-  id: string = ""
+  @Input() label: string = '';
+  @Input() control = new FormControl();
+  @Input() id: string = ""
+  @Input() placeholder: string = ""
+  isFocused = false;
 
   ngOnInit() {
     this.control.valueChanges.subscribe((res) => {
       console.log(res)
     })
+  }
+
+  focusInput(input: HTMLInputElement): void {
+    input.focus();
+  }
+
+  onFocus(): void {
+    this.isFocused = true;
+  }
+
+  onBlur(): void {
+    this.isFocused = false;
   }
 
 }

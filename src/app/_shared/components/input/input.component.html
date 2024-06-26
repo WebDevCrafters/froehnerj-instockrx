@@ -1,4 +1,7 @@
 <div class="input_container">
-    <label [for]="id" [ngClass]="{animated_label: control.value}">{{label}}</label>
-    <input type="text" [formControl]="control" [id]="id">
+    <label [for]="id" [ngClass]="{animated_label: control.value}" (click)="focusInput(inputElement)">
+        {{label}}
+    </label>
+    <input type="text" [formControl]="control" [id]="id" [placeholder]="isFocused ? placeholder : ''" #inputElement
+        (focus)="onFocus()" (blur)="onBlur()">
 </div>
