@@ -1,5 +1,5 @@
-<div class="signup_container">
-    <div class="header">
+<div class="signup_container" [ngClass]="{small_header_active: stepNumber===3}">
+    <div class="header" [ngClass]="{small_header: stepNumber===3}">
         <div class="brand">
             <img src="assets/images/png/pill-logo.png" alt="">
             <div class="brand_name">
@@ -7,7 +7,9 @@
                 <div class="sub_heading">by InStockRx</div>
             </div>
         </div>
+        @if (stepNumber!==3) {
         <p (click)="onContinuePress()">Never Search For Your Meds Again</p>
+        }
         @if (stepNumber===1) {
         <span>
             {{"Let us find your meds for you! \n We just need a little info to start:"}}
@@ -92,9 +94,57 @@
             <div class="button_container">
                 <app-button text="Wed, June 6" />
             </div>
-            
+
             <app-button text="Continue" />
         </div>
+        }
+
+        @else if(stepNumber===3){
+
+        <div class="select_package_conatiner">
+            <p class="package_heading">
+                Choose a package
+            </p>
+
+            <div class="packages">
+                <div class="package_card">
+                    <p class="heading">
+                        One Med Search
+                    </p>
+                    <p class="cost">
+                        $50
+                    </p>
+                    <p class="desc">
+                        {{"$50 per successfull search.\nGet a full refund if we dont find your medication."}}
+                    </p>
+                </div>
+                <div class="package_card selected_card">
+                    <p class="heading">
+                        One Med Search
+                    </p>
+                    <p class="cost">
+                        $50
+                    </p>
+                    <p class="desc">
+                        {{"$50 per successfull search.\nGet a full refund if we dont find your medication."}}
+                    </p>
+                </div>
+                <div class="package_card">
+                    <p class="heading">
+                        One Med Search
+                    </p>
+                    <p class="cost">
+                        $50
+                    </p>
+                    <p class="desc">
+                        {{"$50 per successfull search.\nGet a full refund if we dont find your medication."}}
+                    </p>
+                </div>
+            </div>
+
+            <app-button text="Select Package" />
+        </div>
+
         }
     </div>
 

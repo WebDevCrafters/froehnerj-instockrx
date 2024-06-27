@@ -2,17 +2,18 @@ import { Component } from '@angular/core';
 import { InputComponent } from '../../_shared/components/input/input.component';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { ButtonComponent } from '../../_shared/components/button/button.component';
+import { CommonModule } from '@angular/common';
 
 @Component({
   selector: 'app-signup',
   standalone: true,
-  imports: [InputComponent, ButtonComponent],
+  imports: [InputComponent, ButtonComponent, CommonModule],
   templateUrl: './signup.component.html',
   styleUrl: './signup.component.scss'
 })
 export class SignupComponent {
 
-  stepNumber: number = 1;
+  stepNumber: number = 3;
   medicationList=[1]
 
   personalInfoForm = new FormGroup({

@@ -8,10 +8,39 @@
     gap: 2rem;
     padding: 3rem;
 
+    &.small_header_active {
+        padding: 0;
+        justify-content: start;
+    }
+
     .header {
         display: flex;
         gap: 2rem;
         flex-direction: column;
+
+        &.small_header {
+            // border: 1px solid red;
+            width: 100%;
+            display: flex;
+            align-items: center;
+            padding: 0.25rem;
+            border-bottom: 1px solid rgb(209, 208, 208);
+
+            .brand {
+                > img {
+                    height: 3.5rem;
+                }
+
+                .brand_name {
+                    .heading {
+                        font-size: 1rem;
+                    }
+                    .sub_heading {
+                        font-size: 0.8rem;
+                    }
+                }
+            }
+        }
 
         .brand {
             display: flex;
@@ -110,8 +139,60 @@
                 }
             }
 
-            .button_container{
+            .button_container {
                 width: 100%;
+            }
+        }
+
+        .select_package_conatiner {
+            width: 100%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            flex-direction: column;
+            padding: 5rem;
+            gap: 2rem;
+            color: #221819;
+
+            .package_heading {
+                font-size: 1.8rem;
+                font-weight: 100;
+            }
+
+            .packages {
+                display: grid;
+                row-gap: 2rem;
+                column-gap: 2rem;
+                grid-template-columns: 1fr 1fr 1fr;
+
+                .package_card {
+                    background-color: white;
+                    border: 1px solid rgb(209, 208, 208);
+                    border-radius: 12px;
+                    padding: 1.3rem 3rem;
+                    display: flex;
+                    flex-direction: column;
+                    align-items: center;
+                    gap: 1.5rem;
+
+                    &.selected_card{
+                        background-color: red;
+                    }
+
+                    .heading {
+                        font-size: 1.5rem;
+                    }
+
+                    .cost {
+                        font-size: 1.8rem;
+                    }
+
+                    .desc {
+                        line-height: 1.5rem;
+                        white-space: pre-wrap;
+                        text-align: center;
+                    }
+                }
             }
         }
     }
