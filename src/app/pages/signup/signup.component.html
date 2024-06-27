@@ -107,39 +107,21 @@
             </p>
 
             <div class="packages">
-                <div class="package_card">
+                @for (package of packageOptions; track $index) {
+                <div class="package_card" [ngClass]="{selected_card: selectedPackage===package.id}"
+                (click)="selectPackage(package.id)"
+                >
                     <p class="heading">
-                        One Med Search
+                        {{package.title}}
                     </p>
                     <p class="cost">
-                        $50
+                        ${{package.cost}}
                     </p>
                     <p class="desc">
-                        {{"$50 per successfull search.\nGet a full refund if we dont find your medication."}}
+                        {{package.description}}
                     </p>
                 </div>
-                <div class="package_card selected_card">
-                    <p class="heading">
-                        One Med Search
-                    </p>
-                    <p class="cost">
-                        $50
-                    </p>
-                    <p class="desc">
-                        {{"$50 per successfull search.\nGet a full refund if we dont find your medication."}}
-                    </p>
-                </div>
-                <div class="package_card">
-                    <p class="heading">
-                        One Med Search
-                    </p>
-                    <p class="cost">
-                        $50
-                    </p>
-                    <p class="desc">
-                        {{"$50 per successfull search.\nGet a full refund if we dont find your medication."}}
-                    </p>
-                </div>
+                }
             </div>
 
             <app-button text="Select Package" />

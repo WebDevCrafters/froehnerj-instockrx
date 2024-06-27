@@ -14,7 +14,28 @@ import { CommonModule } from '@angular/common';
 export class SignupComponent {
 
   stepNumber: number = 3;
-  medicationList=[1]
+  medicationList = [1]
+  selectedPackage: string = "2";
+  packageOptions = [
+    {
+      id: "1",
+      title: "One Med Search",
+      cost: 50,
+      description: "$50 per successfull search.\nGet a full refund if we don't find your medication!"
+    },
+    {
+      id: "2",
+      title: "Three Med Searches",
+      cost: 120,
+      description: "$40 per successfull search.\nMost popular package. Use remaining searches anytime in the future for any medications."
+    },
+    {
+      id: "3",
+      title: "Six Med Searches",
+      cost: 180,
+      description: "$30 per successfull search.\nBest value! Use remaining searches any time in the future, for any medication."
+    },
+  ]
 
   personalInfoForm = new FormGroup({
     fullName: new FormControl('', [Validators.required]),
@@ -35,4 +56,9 @@ export class SignupComponent {
     this.stepNumber = this.stepNumber + 1;
     console.log(this.stepNumber)
   }
+
+  selectPackage(selectedPackageId: string){
+    this.selectedPackage = selectedPackageId;
+  }
+
 }
