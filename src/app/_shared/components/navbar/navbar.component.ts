@@ -1,6 +1,7 @@
 import { Component, HostListener } from '@angular/core';
 import { Router } from '@angular/router';
 import APP_ROUTES from '../../constants/routes';
+import { ButtonComponent } from '../button/button.component';
 
 @Component({
   selector: 'app-navbar',
@@ -26,6 +27,10 @@ export class NavbarComponent {
 
   toggleMenu() {
     this.menuOpen = !this.menuOpen;
+  }
+
+  closeMenu() {
+    this.menuOpen = false;
   }
 
   openFindMyMeds() {
