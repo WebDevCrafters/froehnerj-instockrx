@@ -3,7 +3,7 @@ import { InputComponent } from '../../_shared/components/input/input.component';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { ButtonComponent } from '../../_shared/components/button/button.component';
 import { CommonModule } from '@angular/common';
-import { HeaderComponent } from '../../_shared/components/header/header.component';
+import { HeaderComponent } from './header/header.component';
 
 @Component({
   selector: 'app-signup',
@@ -56,4 +56,9 @@ export class SignupComponent {
     this.selectedPackage = selectedPackageId;
   }
 
+  onContinuePress() {
+    console.log(this.stepNumber)
+    this.stepNumber = this.stepNumber + 1;
+    console.log(this.stepNumber)
+  }
 }
