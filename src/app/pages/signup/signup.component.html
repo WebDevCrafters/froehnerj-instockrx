@@ -1,25 +1,10 @@
 <div class="signup_container" [ngClass]="{small_header_active: stepNumber===3}">
-    <div class="header" [ngClass]="{small_header: stepNumber===3}">
-        <div class="brand">
-            <img src="assets/images/png/pill-logo.png" alt="">
-            <div class="brand_name">
-                <div class="heading">FindMyMed</div>
-                <div class="sub_heading">by InStockRx</div>
-            </div>
-        </div>
-        @if (stepNumber!==3) {
-        <p (click)="onContinuePress()">Never Search For Your Meds Again</p>
-        }
-        @if (stepNumber===1) {
-        <span>
-            {{"Let us find your meds for you! \n We just need a little info to start:"}}
-        </span>
-        }
-    </div>
+
+    <app-header [stepNumber]="stepNumber"/>
+
     <div class="form_container">
         @if (stepNumber===1) {
         <div class="form">
-
             <app-input [control]="personalInfoForm.controls.fullName" id="fullName" label="Full Name" />
             <app-input [control]="personalInfoForm.controls.phoneNumber" id="phoneNumber" label="Phone Number" />
             <app-input [control]="personalInfoForm.controls.email" id="email" label="Email" />
