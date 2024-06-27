@@ -3,12 +3,11 @@ import { InputComponent } from '../../_shared/components/input/input.component';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { ButtonComponent } from '../../_shared/components/button/button.component';
 import { CommonModule } from '@angular/common';
-import { HeaderComponent } from './header/header.component';
 
 @Component({
   selector: 'app-signup',
   standalone: true,
-  imports: [InputComponent, ButtonComponent, CommonModule, HeaderComponent],
+  imports: [InputComponent, ButtonComponent, CommonModule],
   templateUrl: './signup.component.html',
   styleUrl: './signup.component.scss'
 })
