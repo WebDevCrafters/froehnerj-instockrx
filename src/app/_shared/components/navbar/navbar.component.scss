@@ -57,9 +57,24 @@
           text-decoration: none;
           color: #111111;
           font-weight: 500;
-          font-size: 14px;
+          font-size: 16px;
           font-family: "Unbounded", sans-serif;
+          line-height: 1.5em;
+
+          &:hover {
+            color: #468a8e;
+            text-decoration-line: underline;
+          }
+
+          &.active-link {
+            color: #468a8e;
+            text-decoration-line: underline;
+          }
         }
+      }
+
+      .button_container {
+        width: 192px;
       }
     }
   }
@@ -94,7 +109,6 @@
       ul.route_list {
         display: none;
         flex-direction: column;
-        gap: 16px;
         padding: 16px;
 
         li {

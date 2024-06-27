@@ -1,1 +1,111 @@
-<p>home works!</p>
+<div class="main_container">
+
+    <section id="find_my_meds_section">
+        <h1 class="heading">
+            We find hard to find medications
+        </h1>
+        <h2 class="sub_heading">
+            We find local pharmacies that have your medications in stock so you don't have to work or worry.
+        </h2>
+        <div class="button_container">
+            <app-button [title]="'Find my meds'" [type]="'default_primary'"></app-button>
+        </div>
+    </section>
+
+    <section id="infinite_scroll_section">
+        <div class="card_container">
+            <div class="profile_and_name">
+                <div class="img_container">
+                    <img src="assets/images/png/profile-icon.png" alt="">
+                </div>
+                <span>Joey R.</span>
+            </div>
+            <div class="rating_container">
+                <img src="assets/images/png/stars-icon.png" alt="">
+            </div>
+            <div class="review">
+                <div class="heading">I can't thank this guys enough</div>
+                <div class="content">
+                    I was out of my medication for two months and this company getting my vyvanse for me within 24hrs
+                    was
+                    phenomenal. Their response time and understanding of my situation was top notch. I found them
+                    through tiktok
+                    and will definitely be using in the future.
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="specification">
+        <div class="heading">
+            Never worry about finding your meds again
+        </div>
+        <div class="feature_container">
+            <div class="card">
+                <!-- <img src="assets/images/png/percentage-icon.png" alt="" style="width: 160px;height: 100px; padding-top:20px"> -->
+                <div class="caption">
+                    Success rate finding medications
+                </div>
+            </div>
+            <div class="card">
+                <!-- <img src="assets/images/png/no-calls-icon.png" alt=""> -->
+                <div class="caption">
+                    No more calling around to find in stock pharmacies
+                </div>
+            </div>
+            <div class="card">
+                <!-- <img src="assets/images/png/circle-tik-icon.png" alt=""> -->
+                <div class="caption">
+                    We'll find your meds or refund your search
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="working_section">
+        <h1 class="heading">
+            How it works
+        </h1>
+        <div class="content">
+            <div class="card">
+                <div class="step_number">1</div>
+                <div class="step_description">
+                    <a href="">Sign up online</a> and enter your information.
+                </div>
+            </div>
+            <div class="card">
+                <div class="step_number">2</div>
+                <div class="step_description">
+                    We find your script at a pharmacy in your area.
+                </div>
+            </div>
+            <div class="card">
+                <div class="step_number">3</div>
+                <div class="step_description">
+                    Send your doctor the pharmacy info and pick up your script!
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="FAQ_section">
+        <h1 class="heading">
+            Questions? We've got answers.
+        </h1>
+        <div class="faq-container">
+            @for(faq of faqs; track faqs;let idx = $index) {
+            <div class="faq-item">
+                <div class="faq-question" (click)="toggleAnswer(idx)">
+                    {{ faq.question }}
+                    <span class="faq-toggle">{{ faq.isOpen ? '-' : '+' }}</span>
+                </div>
+                @if(faq.isOpen) {
+                <div class="faq-answer">
+                    {{ faq.answer }}
+                </div>
+                }
+            </div>
+            }
+        </div>
+    </section>
+</div>
