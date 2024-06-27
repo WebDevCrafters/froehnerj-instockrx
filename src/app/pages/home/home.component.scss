@@ -296,6 +296,36 @@
             }
         }
     }
+
+    #signup_find_meds_section {
+        width: 100%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        flex-direction: column;
+        gap: 20px;
+        padding: 100px 50px;
+        background-color: #ffffff;
+
+        .heading {
+            font-size: 76px;
+            font-weight: 700;
+            color: #001122;
+            text-align: center;
+            letter-spacing: -2.8px;
+            line-height: 1.2em;
+            padding-bottom: 30px;
+            width: 90%;
+        }
+
+        .button_container {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            width: 300px;
+            padding-top: 20px;
+        }
+    }
 }
 
 @media screen and (max-width: 800px) {
@@ -340,6 +370,17 @@
                         }
                     }
                 }
+            }
+        }
+
+        #signup_find_meds_section {
+            .heading {
+                font-size: 50px;
+                padding-bottom: 10px;
+            }
+
+            .button_container {
+                width: 100%;
             }
         }
     }

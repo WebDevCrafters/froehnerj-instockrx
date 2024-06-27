@@ -1,126 +1,126 @@
 .main_container {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  padding: 24px;
-  background-color: white;
-  position: relative;
-
-  .logo_and_name_container {
-    a {
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      text-decoration: none;
-      color: #48525c;
-
-      > img {
-        height: 24px;
-      }
-
-      .name_container {
-        margin-left: 3px;
-
-        .heading {
-          font-size: 13px;
-          font-weight: 500;
-          font-family: "Unbounded", sans-serif;
-        }
-        .sub_heading {
-          font-size: 8px;
-          font-family: "Unbounded", sans-serif;
-          font-weight: 600;
-        }
-      }
-    }
-  }
-
-  .menu_icon {
-    display: none;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 18px 24px;
+    background-color: white;
     position: relative;
-    img {
-      height: 32px;
-      cursor: pointer;
-    }
-  }
 
-  .routes_container {
-    ul.route_list {
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      list-style: none;
-      gap: 24px;
-
-      li {
+    .logo_and_name_container {
         a {
-          text-decoration: none;
-          color: #111111;
-          font-weight: 500;
-          font-size: 16px;
-          font-family: "Unbounded", sans-serif;
-          line-height: 1.5em;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-decoration: none;
+            color: #48525c;
 
-          &:hover {
-            color: #468a8e;
-            text-decoration-line: underline;
-          }
+            > img {
+                height: 24px;
+            }
 
-          &.active-link {
-            color: #468a8e;
-            text-decoration-line: underline;
-          }
+            .name_container {
+                margin-left: 3px;
+
+                .heading {
+                    font-size: 13px;
+                    font-weight: 500;
+                    font-family: "Unbounded", sans-serif;
+                }
+                .sub_heading {
+                    font-size: 8px;
+                    font-family: "Unbounded", sans-serif;
+                    font-weight: 600;
+                }
+            }
         }
-      }
-
-      .button_container {
-        width: 192px;
-      }
     }
-  }
+
+    .menu_icon {
+        display: none;
+        position: relative;
+        img {
+            height: 32px;
+            cursor: pointer;
+        }
+    }
+
+    .routes_container {
+        ul.route_list {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            list-style: none;
+            gap: 24px;
+
+            li {
+                a {
+                    text-decoration: none;
+                    color: #111111;
+                    font-weight: 500;
+                    font-size: 16px;
+                    font-family: "Unbounded", sans-serif;
+                    line-height: 1.5em;
+
+                    &:hover {
+                        color: #468a8e;
+                        text-decoration-line: underline;
+                    }
+
+                    &.active-link {
+                        color: #468a8e;
+                        text-decoration-line: underline;
+                    }
+                }
+            }
+
+            .button_container {
+                width: 192px;
+            }
+        }
+    }
 }
 
 @media screen and (max-width: 1150px) {
-  .main_container {
-    .routes_container {
-      ul.route_list {
-        li {
-          a {
-            font-size: 12px;
-          }
+    .main_container {
+        .routes_container {
+            ul.route_list {
+                li {
+                    a {
+                        font-size: 12px;
+                    }
+                }
+            }
         }
-      }
     }
-  }
 }
 
 @media screen and (max-width: 800px) {
-  .main_container {
-    .menu_icon {
-      display: block;
-    }
-    .routes_container {
-      position: absolute;
-      top: 100%;
-      left: 0;
-      width: 100%;
-      background-color: white;
-
-      ul.route_list {
-        display: none;
-        flex-direction: column;
-        padding: 16px;
-
-        li {
-          a {
-            font-size: 16px;
-          }
+    .main_container {
+        .menu_icon {
+            display: block;
         }
-      }
+        .routes_container {
+            position: absolute;
+            top: 100%;
+            left: 0;
+            width: 100%;
+            background-color: white;
 
-      &.open ul.route_list {
-        display: flex;
-      }
+            ul.route_list {
+                display: none;
+                flex-direction: column;
+                padding: 16px;
+
+                li {
+                    a {
+                        font-size: 16px;
+                    }
+                }
+            }
+
+            &.open ul.route_list {
+                display: flex;
+            }
+        }
     }
-  }
 }
