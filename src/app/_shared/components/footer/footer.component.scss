@@ -1,3 +1,87 @@
 .main_container {
-    background-color: #132F4E;
+    background-color: #132f4e;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 40px 0;
+    margin: 0;
+
+    .footer {
+        width: 65%;
+
+        .vr {
+            border: 1px solid #ff6b6b;
+            margin: 20px 0;
+        }
+
+        .list_container {
+            display: flex;
+            align-items: flex-start;
+            justify-content: flex-start;
+            gap: 240px;
+            margin-bottom: 40px;
+
+            ul {
+                .header {
+                    font-size: 16px;
+                    font-family: "Unbounded", sans-serif;
+                    color: white;
+                    margin-bottom: 16px;
+                }
+
+                li {
+                    list-style: none;
+                    font-size: 16px;
+                    color: #f8f1e5;
+                    margin-bottom: 12px;
+                    font-weight: 600;
+                    line-height: 1.5em;
+                }
+            }
+        }
+
+        .contact_section {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 10px 0;
+
+            .info_container {
+                font-weight: 600;
+                line-height: 1.5em;
+
+                .heading,
+                .sub_heading {
+                    color: #f8f1e5;
+                }
+            }
+
+            .social_media_icons {
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                gap: 20px;
+                img {
+                    height: 30px;
+                    width: 30px;
+                }
+            }
+        }
+    }
+}
+
+@media screen and (max-width: 800px) {
+    .main_container {
+        .footer {
+            width: 80%;
+            .list_container {
+                flex-direction: column;
+                gap: 50px;
+            }
+            .contact_section {
+                flex-direction: column;
+                gap: 20px;
+            }
+        }
+    }
 }
