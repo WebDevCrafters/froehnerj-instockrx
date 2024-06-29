@@ -20,9 +20,7 @@
         @if (stepNumber===1) {
         <div class="form">
 
-            <app-input [control]="personalInfoForm.controls.fullName" id="fullName" label="Full Name" 
-            [errorMessage]="'Patient\'s Name cannot be empty'"
-            />
+            <app-input [control]="personalInfoForm.controls.fullName" id="fullName" label="Full Name"/>
             <app-input [control]="personalInfoForm.controls.phoneNumber" id="phoneNumber" label="Phone Number" [type]="'phoneNumber'"/>
             <app-input [control]="personalInfoForm.controls.email" id="email" label="Email" />
             <div class="terms">

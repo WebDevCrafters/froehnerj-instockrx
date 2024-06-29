@@ -3,6 +3,7 @@ import { InputComponent } from '../../_shared/components/input/input.component';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { ButtonComponent } from '../../_shared/components/button/button.component';
 import { CommonModule } from '@angular/common';
+import { emailValidator, requiredValidator } from '../../_shared/utils/Validators';
 
 @Component({
   selector: 'app-signup',
@@ -38,9 +39,10 @@ export class SignupComponent {
   ]
 
   personalInfoForm = new FormGroup({
-    fullName: new FormControl('', [Validators.required]),
-    phoneNumber: new FormControl('', [Validators.required]),
-    email: new FormControl('', [Validators.required, Validators.email])
+    fullName: new FormControl('', requiredValidator("Patient's Name cannot be empty")),
+    phoneNumber: new FormControl('', requiredValidator("Patient's phone number cannot be empty")),
+    email: new FormControl('', [requiredValidator("Patient's email cannot be empty"),
+    emailValidator("Please enter a valid email")])
   });
 
   additionalInfoForm = new FormGroup({

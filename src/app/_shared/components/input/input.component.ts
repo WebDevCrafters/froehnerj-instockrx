@@ -15,14 +15,20 @@ import { FormControl, ReactiveFormsModule } from '@angular/forms';
   templateUrl: './input.component.html',
   styleUrl: './input.component.scss',
 })
-export class InputComponent {
+export class InputComponent implements OnInit {
   @Input() label: string = '';
-  @Input() errorMessage: string = '';
   @Input() control = new FormControl();
   @Input() id: string = '';
   @Input() placeholder: string = '';
   @Input() type: 'text' | 'checkbox' | 'phoneNumber' = 'text';
   isFocused = false;
+  errorMessage: string = ""
+
+  ngOnInit() {
+    this.control.statusChanges.subscribe(() => {
+      this.updateErrorMessage();
+    });
+  }
 
   formatPhoneNumber(): void {
     if (this.type === 'phoneNumber') {
@@ -37,6 +43,18 @@ export class InputComponent {
       }
       this.control.setValue(value, { emitEvent: false });
     }
+  }
+
+  updateErrorMessage(): void {
+    if (this.control.errors) {
+      for (const errorName in this.control.errors) {
+        if (this.control.errors.hasOwnProperty(errorName)) {
+          this.errorMessage = this.control.errors[errorName];
+          return;
+        }
+      }
+    }
+    this.errorMessage = '';
   }
 
   focusInput(input: HTMLInputElement): void {

@@ -21,5 +21,10 @@
     [attr.maxlength]="type === 'phoneNumber' ? 14 : null"
   />
 
-  <span class="error_message" [ngClass]="{visible: control.dirty && control.invalid}">{{ errorMessage }}</span>
+  <span
+    class="error_message"
+    [ngClass]="{ visible: control.dirty && control.invalid }"
+  >
+    {{ errorMessage }}
+  </span>
 </div>
