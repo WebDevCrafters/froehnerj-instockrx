@@ -1,4 +1,70 @@
 <div class="main_container">
-    <app-section-banner [title]="'Sign up today and never search for your meds again'"
-        [primaryBtnText]="'Find my meds'" />
+  <section id="search_pricing_container">
+    <h1 class="heading">Save money by purchasing multiple med searches</h1>
+    <h2 class="sub_heading">
+      One-time, up front prices. No subscriptions, no additional fees, never
+      expires.
+    </h2>
+    <div class="feature_container">
+      <div class="card">
+        <div class="title">One Med Search</div>
+        <div class="pricing">
+          <span class="large">$50</span>
+          <span> One-Time</span>
+        </div>
+        <div class="caption">
+          $50 Per Search
+          <br />
+          Find any med, one time
+        </div>
+        <div class="button_container">
+          <app-button
+            [title]="'Find my meds'"
+            [type]="'default_primary'"
+          ></app-button>
+        </div>
+      </div>
+      <div class="card">
+        <div class="title">Three Med Searches</div>
+        <div class="pricing">
+          <span class="large">$120 </span>
+          <span> One-Time</span>
+        </div>
+        <div class="caption">
+          $40 Per Search
+          <br />
+          Find any med, three times
+        </div>
+        <div class="button_container">
+          <app-button
+            [title]="'Find my meds'"
+            [type]="'default_primary'"
+          ></app-button>
+        </div>
+      </div>
+      <div class="card">
+        <div class="title">Six Med Searches</div>
+        <div class="pricing">
+          <span class="large">$180</span>
+          <span> One-Time</span>
+        </div>
+        <div class="caption">
+          $30 Per Search
+          <br />
+          Find any med, six times
+        </div>
+        <div class="button_container">
+          <app-button
+            [title]="'Find my meds'"
+            [type]="'default_primary'"
+          ></app-button>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <app-section-banner
+    [title]="'Sign up today and never search for your meds again'"
+    [primaryBtnText]="'Find my meds'"
+  />
 </div>
