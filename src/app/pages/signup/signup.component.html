@@ -1,46 +1,180 @@
-<div class="signup_container">
-    <div class="header">
-        <div class="brand">
-            <img src="assets/images/png/pill-logo.png" alt="">
-            <div class="brand_name">
-                <div class="heading">FindMyMed</div>
-                <div class="sub_heading">by InStockRx</div>
-            </div>
+<div
+  class="signup_container"
+  [ngClass]="{ small_header_active: stepNumber === 3 }"
+>
+  <div class="header" [ngClass]="{ small_header: stepNumber === 3 }">
+    <div class="brand">
+      <img src="assets/images/png/pill-logo.png" alt="" />
+      <div class="brand_name">
+        <div class="heading">FindMyMed</div>
+        <div class="sub_heading">by InStockRx</div>
+      </div>
+    </div>
+    @if (stepNumber!==3) {
+    <p>Never Search For Your Meds Again</p>
+    } @if (stepNumber===1) {
+    <span>
+      {{
+        "Let us find your meds for you! \n We just need a little info to start:"
+      }}
+    </span>
+    }
+  </div>
+  <div class="form_container">
+    @if (stepNumber===1) {
+    <form class="form" [formGroup]="personalInfoForm" (ngSubmit)="onPersonalInfoSubmit()">
+      <app-input
+        [control]="personalInfoForm.controls.fullName"
+        id="fullName"
+        label="Full Name"
+      />
+      <app-input
+        [control]="personalInfoForm.controls.phoneNumber"
+        id="phoneNumber"
+        label="Phone Number"
+        [type]="'phoneNumber'"
+      />
+      <app-input
+        [control]="personalInfoForm.controls.email"
+        id="email"
+        label="Email"
+      />
+      <div class="terms">
+        <div>
+          <app-input
+            [control]="personalInfoForm.controls.terms"
+            id="email"
+            type="checkbox"
+          />
         </div>
-        <p>Never Search For Your Meds Again</p>
-        @if (step===1) {
         <span>
-            {{"Let us find your meds for you! \n We just need a little info to start:"}}
+          I have read and agree to the
+          <a href="#"> privacy policy </a>
+          and
+          <a href="#"> terms of service. </a>
+          {{
+            "\nI also agree to recieve SMS messages from FindMyMed by InStockRx regarding search status" +
+              "updates" +
+              "and marketting. Reply STOP to opt out, HELP for assistance. Standard message and data rates amay" +
+              "apply." +
+              "The tests are non-recurring."
+          }}
         </span>
-        }
-    </div>
-    <div class="form_container">
-        @if (step===1) {
-        <app-input [control]="formGroup.controls.fullName" id="fullName" label="Full Name" />
-        <app-input [control]="formGroup.controls.phoneNumber" id="phoneNumber" label="Phone Number" />
-        <app-input [control]="formGroup.controls.email" id="email" label="Email" />
-        <div class="terms">
-            <div>
-                <app-input [control]="formGroup.controls.email" id="email" type="checkbox" />
-            </div>
-            <span>
-                I have read and agree to the
-                <a href="#">
-                    privacy policy
-                </a>
-                and
-                <a href="#">
-                    terms of service.
-                </a>
-                {{"\nI also agree to recieve SMS messages from FindMyMed by InStockRx regarding search status updates"
-                +"and marketting. Reply STOP to opt out, HELP for assistance. Standard message and data rates amay"
-                +"apply."
-                +"The tests are non-recurring."}}
-            </span>
+      </div>
+      <div>
+        <app-button
+          [title]="'Continue'"
+          [type]="'small_primary'"
+          [shape]="'rounded'"
+        />
+      </div>
+    </form>
+    } @else if(stepNumber===2){
+    <div class="form">
+      <app-input
+        [control]="additionalInfoForm.controls.dob"
+        id="dob"
+        label="Date of Birth"
+        placeholder="MM/DD/YYYY"
+      />
+      <app-input
+        [control]="additionalInfoForm.controls.zipCode"
+        id="zipCode"
+        label="Zip Code"
+        placeholder="12345"
+      />
+      <app-input
+        [control]="additionalInfoForm.controls.prescriber"
+        id="presciber"
+        label="Presciber"
+        placeholder="Dr. John Doe"
+      />
+      <div class="field-info">
+        <p>Medication to be found</p>
+        <span
+          >Add as many alternatives as you would like in the order of
+          preference.</span
+        >
+      </div>
+      @for (medication of medicationList; track $index) {
+      <div class="prescribed_medication">
+        <p>Option {{ $index + 1 }}</p>
 
+        <app-input
+          [control]="additionalInfoForm.controls.prescribedMedication"
+          id="prescribedMedication"
+          label="Medication Name"
+          placeholder="Adderall XR"
+        />
+        <div class="medication_info">
+          <span>
+            <app-input
+              [control]="additionalInfoForm.controls.prescribedMedication"
+              id="dose"
+              label="Dose"
+              placeholder="10 mg"
+            />
+          </span>
+          <span>
+            <app-input
+              [control]="additionalInfoForm.controls.prescribedMedication"
+              id="quantity"
+              label="Quantity"
+              placeholder="30"
+            />
+          </span>
+          <span>
+            <app-input
+              [control]="additionalInfoForm.controls.prescribedMedication"
+              id="brandName"
+              label="Brand Name"
+              placeholder="Mankind"
+            />
+          </span>
         </div>
-        <app-button text="Continue" />
+      </div>
+      }
+
+      <div class="button_container">
+        <app-button text="Add alternative" />
+      </div>
+
+      <div class="field-info">
+        <p>When will you be ready to pick up your meds?</p>
+        <span>Your meds may be found on or after this date.</span>
+      </div>
+      <div class="button_container">
+        <app-button text="Wed, June 6" />
+      </div>
+
+      <app-button text="Continue" />
+    </div>
+    } @else if(stepNumber===3){
+
+    <div class="select_package_conatiner">
+      <p class="package_heading">Choose a package</p>
+
+      <div class="packages">
+        @for (package of packageOptions; track $index) {
+        <div
+          class="package_card"
+          [ngClass]="{ selected_card: selectedPackage === package.id }"
+          (click)="selectPackage(package.id)"
+        >
+          <p class="heading">
+            {{ package.title }}
+          </p>
+          <p class="cost">${{ package.cost }}</p>
+          <p class="desc">
+            {{ package.description }}
+          </p>
+        </div>
         }
+      </div>
+
+      <app-button text="Select Package" />
     </div>
 
+    }
+  </div>
 </div>
