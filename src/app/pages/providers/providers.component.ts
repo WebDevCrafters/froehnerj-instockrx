@@ -1,11 +1,12 @@
 import { Component } from '@angular/core';
 import { SectionBannerComponent } from '../_shared/components/section-banner/section-banner.component';
 import { HowItWorksComponent, StepsType } from '../_shared/components/how-it-works/how-it-works.component';
+import { SpecificationSectionComponent } from '../_shared/components/specification-section/specification-section.component';
 
 @Component({
     selector: 'app-providers',
     standalone: true,
-    imports: [SectionBannerComponent, HowItWorksComponent],
+    imports: [SectionBannerComponent, HowItWorksComponent, SpecificationSectionComponent],
     templateUrl: './providers.component.html',
     styleUrl: './providers.component.scss'
 })
