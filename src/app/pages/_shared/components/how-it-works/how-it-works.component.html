@@ -1,18 +1,16 @@
 <section id="main_container">
-    <h1 class="heading">
-        How it works
-    </h1>
-    <div class="content">
-        @for(step of stepsArray; track $index) {
-        <div class="card">
-            <div class="step_number">{{$index+1}}</div>
-            <div class="step_description">
-                @if(step.highlightedText) {
-                <a href="">{{step.highlightedText}}</a>
-                }
-                {{step.normalText}}
-            </div>
-        </div>
+  <h1 class="heading">How it works</h1>
+  <div class="content">
+    @for(step of stepsArray; track $index) {
+    <div class="card">
+      <div class="step_number">{{ $index + 1 }}</div>
+      <div class="step_description">
+        @if(step.highlightedText) {
+        <a href="">{{ step.highlightedText }}</a>
         }
+        {{ step.normalText }}
+      </div>
     </div>
+    }
+  </div>
 </section>
