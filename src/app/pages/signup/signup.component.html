@@ -79,7 +79,11 @@
       </div>
     </form>
     } @else if(stepNumber===2){
-    <div class="form">
+    <form
+      class="form"
+      [formGroup]="additionalInfoForm"
+      (ngSubmit)="onAdditionalInfoSubmit()"
+    >
       <app-input
         [control]="additionalInfoForm.controls.dob"
         id="dates"
@@ -112,7 +116,16 @@
         *ngFor="let medication of prescribedMedication.controls; let i = index"
       >
         <div class="prescribed_medication">
-          <p>Option {{ i + 1 }}</p>
+          <div class="options">
+            <p>Option {{ i + 1 }}</p>
+            @if (i!==0) {
+            <img
+              src="assets/images/svg/delete-icon.svg"
+              alt="Delete"
+              (click)="removeMedication(i)"
+            />
+            }
+          </div>
 
           <app-input
             [control]="getControl(i, 'name')"
@@ -149,12 +162,13 @@
         </div>
       </div>
 
-      <div class="button_container">
+      <div class="button_container" (click)="addMedication()">
         <app-button
           title="Add alternative"
           type="small_secondary"
           shape="rounded"
           [src]="'assets/images/svg/plus-icon.svg'"
+          [formButtonType]="'button'"
         />
       </div>
 
@@ -167,6 +181,7 @@
           title="Wed, June 6"
           type="small_secondary"
           shape="rounded"
+          [formButtonType]="'button'"
         />
       </div>
 
@@ -175,7 +190,7 @@
           <app-button title="Continue" type="small_primary" shape="rounded" />
         </div>
       </div>
-    </div>
+    </form>
     } @else if(stepNumber===3){
 
     <div class="select_package_conatiner">

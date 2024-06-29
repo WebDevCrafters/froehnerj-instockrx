@@ -74,6 +74,7 @@ export class SignupComponent {
     ]),
     terms: new FormControl(false, requiredValidator('Please accept')),
   });
+
   termsControl: FormControl = this.personalInfoForm.controls.terms;
   additionalInfoForm = new FormGroup({
     dob: new FormControl('', [
@@ -88,14 +89,21 @@ export class SignupComponent {
       requiredValidator("Prescriber's name cannot be empty"),
     ]),
     prescribedMedication: new FormArray([
-      this.createPrescribedMedicationFormGroup(),
+      new FormGroup({
+        name: new FormControl('', [
+          requiredValidator('Medication option 1 cannot be empty'),
+        ]),
+        dose: new FormControl(''),
+        quantity: new FormControl(''),
+        brand: new FormControl(''),
+      }),
     ]),
     pickupDate: new FormControl('', [Validators.required]),
   });
 
   createPrescribedMedicationFormGroup(): FormGroup {
     return new FormGroup({
-      name: new FormControl('', [requiredValidator("Medication option 1 cannot be empty")]),
+      name: new FormControl(''),
       dose: new FormControl(''),
       quantity: new FormControl(''),
       brand: new FormControl(''),
@@ -107,6 +115,7 @@ export class SignupComponent {
   }
 
   addMedication() {
+    console.log('adding');
     this.prescribedMedication.push(this.createPrescribedMedicationFormGroup());
   }
 
@@ -129,16 +138,48 @@ export class SignupComponent {
     }
   }
 
+  onAdditionalInfoSubmit() {
+    if (this.additionalInfoForm.valid) {
+      console.log(this.additionalInfoForm.value);
+      this.stepNumber += 1;
+    } else {
+      this.additionalInfoForm.markAllAsTouched();
+      this.markAllAsDirty(this.additionalInfoForm);
+      console.log(this.additionalInfoForm.value);
+    }
+  }
+
   markAllAsDirty(formGroup: FormGroup) {
     Object.keys(formGroup.controls).forEach((key) => {
-      formGroup.get(key)?.markAsDirty();
+      const control = formGroup.get(key);
+
+      if (control instanceof FormGroup) {
+        this.markAllAsDirty(control); // Recursively mark nested FormGroups as dirty
+      } else if (control instanceof FormArray) {
+        this.markAllAsDirtyInArray(control); // Handle FormArray
+      } else {
+        control?.markAsDirty();
+      }
+    });
+  }
+
+  markAllAsDirtyInArray(formArray: FormArray) {
+    formArray.controls.forEach((control) => {
+      if (control instanceof FormGroup) {
+        this.markAllAsDirty(control); // Recursively mark nested FormGroups in the array as dirty
+      } else if (control instanceof FormArray) {
+        this.markAllAsDirtyInArray(control); // Handle nested FormArrays
+      } else {
+        control.markAsDirty();
+      }
     });
   }
 
   getControl(formArrayIndex: number, formControlName: string): FormControl {
-    const medicationFormGroup = this.additionalInfoForm.controls.prescribedMedication.at(
-      formArrayIndex
-    ) as FormGroup;
+    const medicationFormGroup =
+      this.additionalInfoForm.controls.prescribedMedication.at(
+        formArrayIndex
+      ) as FormGroup;
     return medicationFormGroup.get(formControlName) as FormControl;
   }
 }

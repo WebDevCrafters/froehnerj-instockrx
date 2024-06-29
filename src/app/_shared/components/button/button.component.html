@@ -1,4 +1,4 @@
-<button [ngClass]="[type, shape]" (click)="onClick()">
+<button [ngClass]="[type, shape]" (click)="onClick()" [type]="formButtonType">
     <div class="icon_and_title_container">
         <ng-container *ngIf="leftImageSrc || src">
             <div class="icon">
