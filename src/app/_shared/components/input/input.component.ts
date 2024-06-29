@@ -30,6 +30,15 @@ export class InputComponent implements OnInit {
     });
   }
 
+  handleChange(event: Event): void {
+    if (this.type === 'checkbox') {
+      const input = event.target as HTMLInputElement;
+      this.control.setValue(input.checked);
+    } else if(this.type==="phoneNumber"){
+      this.formatPhoneNumber(); 
+    }
+  }
+
   formatPhoneNumber(): void {
     if (this.type === 'phoneNumber') {
       let value = this.control.value.replace(/\D/g, '');

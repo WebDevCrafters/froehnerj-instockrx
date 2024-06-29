@@ -17,7 +17,7 @@
     #inputElement
     (focus)="onFocus()"
     (blur)="onBlur()"
-    (input)="formatPhoneNumber()"
+    (change)="handleChange($event)"
     [attr.maxlength]="type === 'phoneNumber' ? 14 : null"
   />
 
