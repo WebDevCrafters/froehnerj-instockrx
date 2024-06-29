@@ -33,7 +33,7 @@ import { CheckboxComponent } from '../../_shared/components/checkbox/checkbox.co
   styleUrl: './signup.component.scss',
 })
 export class SignupComponent {
-  stepNumber: number = 2;
+  stepNumber: number = 1;
   selectedPackage: string = '2';
   packageOptions = [
     {
@@ -98,7 +98,7 @@ export class SignupComponent {
         brand: new FormControl(''),
       }),
     ]),
-    pickupDate: new FormControl('', [Validators.required]),
+    // pickupDate: new FormControl('', [Validators.required]),
   });
 
   createPrescribedMedicationFormGroup(): FormGroup {
@@ -142,10 +142,11 @@ export class SignupComponent {
     if (this.additionalInfoForm.valid) {
       console.log(this.additionalInfoForm.value);
       this.stepNumber += 1;
+      console.log("step was added")
     } else {
       this.additionalInfoForm.markAllAsTouched();
       this.markAllAsDirty(this.additionalInfoForm);
-      console.log(this.additionalInfoForm.value);
+      console.log(this.additionalInfoForm );
     }
   }
 
