@@ -1,31 +1,50 @@
 <div class="main_container">
-    <div class="footer">
-        <div class="list_container">
-            <ul>
-                <h1 class="header">General</h1>
-                <li>Patients</li>
-                <li>Providers</li>
-                <li>Pricing</li>
-                <li>About Us</li>
-                <li>Find My Meds</li>
-            </ul>
-            <ul>
-                <h1 class="header">Company</h1>
-                <li>Privacy</li>
-                <li>Terms of Service</li>
-                <li>Contact Us</li>
-            </ul>
-        </div>
-        <hr class="vr">
-        <div class="contact_section">
-            <div class="info_container">
-                <div class="heading">{{"Questions? Text (617) 631-8894 or email support@insitohealth.com"}}</div>
-                <div class="sub_heading">{{"© 2024 insito health"}}</div>
-            </div>
-            <div class="social_media_icons">
-                <img src="assets/images/svg/twitter-icon.svg" alt="">
-                <img src="assets/images/svg/linkedln-icon.svg" alt="">
-            </div>
-        </div>
+  <div class="footer">
+    <div class="list_container">
+      <ul>
+        <h1 class="header">General</h1>
+        <li>
+          <a [routerLink]="APP_ROUTES.pricing" routerLinkActive="active-link"
+            >Pricing
+          </a>
+        </li>
+        <li>
+          <a [routerLink]="APP_ROUTES.patients" routerLinkActive="active-link"
+            >Patients
+          </a>
+        </li>
+        <li>
+          <a [routerLink]="APP_ROUTES.providers" routerLinkActive="active-link"
+            >Providers
+          </a>
+        </li>
+        <li>
+          <a [routerLink]="APP_ROUTES.about" routerLinkActive="active-link"
+            >About Us
+          </a>
+        </li>
+      </ul>
+      <ul>
+        <h1 class="header">Company</h1>
+        <li>Privacy</li>
+        <li>Terms of Service</li>
+        <li>Contact Us</li>
+      </ul>
     </div>
+    <hr class="vr" />
+    <div class="contact_section">
+      <div class="info_container">
+        <div class="heading">
+          {{
+            "Questions? Text (617) 631-8894 or email support@insitohealth.com"
+          }}
+        </div>
+        <div class="sub_heading">{{ "© 2024 insito health" }}</div>
+      </div>
+      <div class="social_media_icons">
+        <img src="assets/images/svg/twitter-icon.svg" alt="" />
+        <img src="assets/images/svg/linkedln-icon.svg" alt="" />
+      </div>
+    </div>
+  </div>
 </div>
