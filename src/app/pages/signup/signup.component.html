@@ -22,7 +22,11 @@
   </div>
   <div class="form_container">
     @if (stepNumber===1) {
-    <form class="form" [formGroup]="personalInfoForm" (ngSubmit)="onPersonalInfoSubmit()">
+    <form
+      class="form"
+      [formGroup]="personalInfoForm"
+      (ngSubmit)="onPersonalInfoSubmit()"
+    >
       <app-input
         [control]="personalInfoForm.controls.fullName"
         id="fullName"
@@ -39,27 +43,32 @@
         id="email"
         label="Email"
       />
-      <div class="terms">
-        <div>
-          <app-input
-            [control]="personalInfoForm.controls.terms"
-            id="email"
-            type="checkbox"
-          />
+      <div class="terms_container">
+        <div class="terms">
+          <div>
+            <app-checkbox [control]="termsControl" />
+          </div>
+          <span>
+            I have read and agree to the
+            <a href="#"> privacy policy </a>
+            and
+            <a href="#"> terms of service. </a>
+            {{
+              "\nI also agree to recieve SMS messages from FindMyMed by InStockRx regarding search status" +
+                "updates" +
+                "and marketting. Reply STOP to opt out, HELP for assistance. Standard message and data rates amay" +
+                "apply." +
+                "The tests are non-recurring."
+            }}
+          </span>
         </div>
-        <span>
-          I have read and agree to the
-          <a href="#"> privacy policy </a>
-          and
-          <a href="#"> terms of service. </a>
-          {{
-            "\nI also agree to recieve SMS messages from FindMyMed by InStockRx regarding search status" +
-              "updates" +
-              "and marketting. Reply STOP to opt out, HELP for assistance. Standard message and data rates amay" +
-              "apply." +
-              "The tests are non-recurring."
-          }}
-        </span>
+        @if (termsControl.dirty && termsControl.touched && termsControl.invalid)
+        {
+        <span class="error_message">
+          <img src="assets/svg/exclamation.svg" alt="" />
+          Please agree to terms and conditions and privacy policy</span
+        >
+        }
       </div>
       <div>
         <app-button
@@ -70,17 +79,23 @@
       </div>
     </form>
     } @else if(stepNumber===2){
-    <div class="form">
+    <form
+      class="form"
+      [formGroup]="additionalInfoForm"
+      (ngSubmit)="onAdditionalInfoSubmit()"
+    >
       <app-input
         [control]="additionalInfoForm.controls.dob"
-        id="dob"
+        id="dates"
         label="Date of Birth"
         placeholder="MM/DD/YYYY"
+        type="dates"
       />
       <app-input
         [control]="additionalInfoForm.controls.zipCode"
         id="zipCode"
         label="Zip Code"
+        type="numbers"
         placeholder="12345"
       />
       <app-input
@@ -96,47 +111,65 @@
           preference.</span
         >
       </div>
-      @for (medication of medicationList; track $index) {
-      <div class="prescribed_medication">
-        <p>Option {{ $index + 1 }}</p>
+      <div
+        class="prescribed_medication"
+        *ngFor="let medication of prescribedMedication.controls; let i = index"
+      >
+        <div class="prescribed_medication">
+          <div class="options">
+            <p>Option {{ i + 1 }}</p>
+            @if (i!==0) {
+            <img
+              src="assets/images/svg/delete-icon.svg"
+              alt="Delete"
+              (click)="removeMedication(i)"
+            />
+            }
+          </div>
 
-        <app-input
-          [control]="additionalInfoForm.controls.prescribedMedication"
-          id="prescribedMedication"
-          label="Medication Name"
-          placeholder="Adderall XR"
-        />
-        <div class="medication_info">
-          <span>
-            <app-input
-              [control]="additionalInfoForm.controls.prescribedMedication"
-              id="dose"
-              label="Dose"
-              placeholder="10 mg"
-            />
-          </span>
-          <span>
-            <app-input
-              [control]="additionalInfoForm.controls.prescribedMedication"
-              id="quantity"
-              label="Quantity"
-              placeholder="30"
-            />
-          </span>
-          <span>
-            <app-input
-              [control]="additionalInfoForm.controls.prescribedMedication"
-              id="brandName"
-              label="Brand Name"
-              placeholder="Mankind"
-            />
-          </span>
+          <app-input
+            [control]="getControl(i, 'name')"
+            id="prescribedMedication"
+            label="Medication Name"
+            placeholder="Adderall XR"
+          />
+          <div class="medication_info">
+            <span>
+              <app-input
+                [control]="getControl(i, 'dose')"
+                id="dose"
+                label="Dose"
+                placeholder="10 mg"
+              />
+            </span>
+            <span>
+              <app-input
+                [control]="getControl(i, 'quantity')"
+                id="quantity"
+                label="Quantity"
+                placeholder="30"
+              />
+            </span>
+            <span>
+              <app-input
+                [control]="getControl(i, 'brand')"
+                id="brandName"
+                label="Brand Name"
+                placeholder="Mankind"
+              />
+            </span>
+          </div>
         </div>
       </div>
-      }
 
-      <div class="button_container">
-        <app-button text="Add alternative" />
+      <div class="button_container" (click)="addMedication()">
+        <app-button
+          title="Add alternative"
+          type="small_secondary"
+          shape="rounded"
+          [src]="'assets/images/svg/plus-icon.svg'"
+          [formButtonType]="'button'"
+        />
       </div>
 
       <div class="field-info">
@@ -144,11 +177,20 @@
         <span>Your meds may be found on or after this date.</span>
       </div>
       <div class="button_container">
-        <app-button text="Wed, June 6" />
+        <app-button
+          title="Wed, June 6"
+          type="small_secondary"
+          shape="rounded"
+          [formButtonType]="'button'"
+        />
       </div>
 
-      <app-button text="Continue" />
-    </div>
+      <div class="continue_button_container">
+        <div class="button">
+          <app-button title="Continue" type="small_primary" shape="rounded" />
+        </div>
+      </div>
+    </form>
     } @else if(stepNumber===3){
 
     <div class="select_package_conatiner">
@@ -172,7 +214,11 @@
         }
       </div>
 
-      <app-button text="Select Package" />
+      <app-button
+        [title]="'Select Package'"
+        type="small_primary"
+        shape="rounded"
+      />
     </div>
 
     }
