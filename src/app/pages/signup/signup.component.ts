@@ -4,11 +4,13 @@ import { FormArray, FormControl, FormGroup, ReactiveFormsModule, Validators } fr
 import { ButtonComponent } from '../../_shared/components/button/button.component';
 import { CommonModule } from '@angular/common';
 import { emailValidator, requiredValidator } from '../../_shared/utils/Validators';
+import { checkPrime } from 'crypto';
+import { CheckboxComponent } from '../../_shared/components/checkbox/checkbox.component';
 
 @Component({
   selector: 'app-signup',
   standalone: true,
-  imports: [InputComponent, ButtonComponent, CommonModule, ReactiveFormsModule],
+  imports: [InputComponent, ButtonComponent, CommonModule, ReactiveFormsModule, CheckboxComponent],
   templateUrl: './signup.component.html',
   styleUrl: './signup.component.scss'
 })
@@ -63,7 +65,7 @@ export class SignupComponent {
   onPersonalInfoSubmit() {
     if (this.personalInfoForm.valid) {
       console.log(this.personalInfoForm.value);
-      this.stepNumber += 1;
+      // this.stepNumber += 1;
 
     } else {
       this.personalInfoForm.markAllAsTouched()

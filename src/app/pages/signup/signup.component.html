@@ -41,11 +41,7 @@
       />
       <div class="terms">
         <div>
-          <app-input
-            [control]="personalInfoForm.controls.terms"
-            id="email"
-            type="checkbox"
-          />
+          <app-checkbox [control]="personalInfoForm.controls.terms"/>
         </div>
         <span>
           I have read and agree to the
