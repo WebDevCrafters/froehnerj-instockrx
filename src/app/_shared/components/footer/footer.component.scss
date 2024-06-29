@@ -7,7 +7,7 @@
     margin: 0;
 
     .footer {
-        width: 65%;
+        width: 55%;
 
         .vr {
             border: 1px solid #ff6b6b;
@@ -31,11 +31,27 @@
 
                 li {
                     list-style: none;
-                    font-size: 16px;
-                    color: #f8f1e5;
                     margin-bottom: 12px;
-                    font-weight: 600;
-                    line-height: 1.5em;
+                    color: #f8f1e5;
+
+                    a {
+                        text-decoration: none;
+                        color: #f8f1e5;
+                        font-size: 16px;
+                        color: #f8f1e5;
+                        font-weight: 600;
+                        line-height: 1.5em;
+
+                        &:hover {
+                            color: #468a8e;
+                            text-decoration-line: underline;
+                        }
+
+                        &.active-link {
+                            color: #111111;
+                            text-decoration-line: underline;
+                        }
+                    }
                 }
             }
         }
