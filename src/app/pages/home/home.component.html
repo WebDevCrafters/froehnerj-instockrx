@@ -1,15 +1,7 @@
 <div class="main_container">
-    <section id="find_my_meds_section">
-        <h1 class="heading">
-            We find hard to find medications
-        </h1>
-        <h2 class="sub_heading">
-            We find local pharmacies that have your medications in stock so you don't have to work or worry.
-        </h2>
-        <div class="button_container">
-            <app-button [title]="'Find my meds'" [type]="'default_primary'"></app-button>
-        </div>
-    </section>
+    <app-section-banner [title]="'We find hard to find medications'"
+        [subHeading]="'We find local pharmacies that have your medications in stock so you don\'t have to work or worry.'"
+        [primaryBtnText]="'Find my meds'" />
 
     <section id="infinite_scroll_section">
         <div class="card_container">
@@ -87,7 +79,7 @@
         </div>
     </section>
 
-    <section id="FAQ_section">
+    <section id="Query_section">
         <h1 class="heading">
             Questions? We've got answers.
         </h1>
@@ -108,12 +100,6 @@
         </div>
     </section>
 
-    <section id="signup_find_meds_section">
-        <h1 class="heading">
-            Sign up today and never search for your meds again
-        </h1>
-        <div class="button_container">
-            <app-button [title]="'Find my meds'" [type]="'default_primary'"></app-button>
-        </div>
-    </section>
+    <app-section-banner [title]="'Sign up today and never search for your meds again'"
+        [primaryBtnText]="'Find my meds'" />
 </div>

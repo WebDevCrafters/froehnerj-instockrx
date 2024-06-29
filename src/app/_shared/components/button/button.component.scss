@@ -6,13 +6,20 @@ button {
     width: 100%;
     background-color: #ff6b6b;
     color: white;
-    padding: 1rem;
+    padding: 0.8rem;
     min-width: 10rem;
     border-radius: 8px;
     border: none;
     font-weight: 600;
     cursor: pointer;
     position: relative;
+    box-shadow:
+    0 0.7065919983928324px 0.7065919983928324px -0.625px #0000002e,
+    0 1.8065619053231785px 1.8065619053231785px -1.25px #0000002e,
+    0 3.6217592146567767px 3.6217592146567767px -1.875px #0000002c,
+    0 6.8655999097303715px 6.8655999097303715px -2.5px #00000029,
+    0 13.646761411524492px 13.646761411524492px -3.125px #00000021,
+    0 30px 30px -3.75px #00000010;
 
     &.rounded {
         border-radius: 50px;
@@ -28,13 +35,6 @@ button {
 
     &.default_primary {
         font-size: 19px;
-        box-shadow:
-            0 0.7065919983928324px 0.7065919983928324px -0.625px #0000002e,
-            0 1.8065619053231785px 1.8065619053231785px -1.25px #0000002e,
-            0 3.6217592146567767px 3.6217592146567767px -1.875px #0000002c,
-            0 6.8655999097303715px 6.8655999097303715px -2.5px #00000029,
-            0 13.646761411524492px 13.646761411524492px -3.125px #00000021,
-            0 30px 30px -3.75px #00000010;
 
         &:hover {
             background-color: #b44d4d;
@@ -70,6 +70,20 @@ button {
                 height: 1.2rem;
                 width: 1.2rem;
             }
+        }
+    }
+}
+
+@media screen and (max-width: 800px) {
+    button {
+        &.small_primary,
+        &.small_secondary {
+            font-size: 12px;
+        }
+
+        &.default_primary,
+        &.default_secondary {
+            font-size: 14px;
         }
     }
 }
