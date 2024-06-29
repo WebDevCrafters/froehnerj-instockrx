@@ -20,7 +20,7 @@ export class InputComponent implements OnInit {
   @Input() control = new FormControl();
   @Input() id: string = '';
   @Input() placeholder: string = '';
-  @Input() type: 'text' | 'checkbox' | 'phoneNumber' = 'text';
+  @Input() type: 'text' | 'checkbox' | 'phoneNumber' | 'dates' | "numbers"= 'text';
   isFocused = false;
   errorMessage: string = ""
 
@@ -36,8 +36,14 @@ export class InputComponent implements OnInit {
     if (this.type === 'checkbox') {
       const input = event.target as HTMLInputElement;
       this.control.setValue(input.checked);
-    } else if(this.type==="phoneNumber"){
-      this.formatPhoneNumber(); 
+    } else if (this.type === "phoneNumber") {
+      this.formatPhoneNumber();
+    }
+    else if(this.type==="dates"){
+      this.formatDate();
+    }
+    else if(this.type==='numbers'){
+      this.formatNumber();
     }
   }
 
@@ -54,6 +60,21 @@ export class InputComponent implements OnInit {
       }
       this.control.setValue(value, { emitEvent: false });
     }
+  }
+
+  formatDate(): void {
+    let value = this.control.value.replace(/\D/g, ''); 
+    if (value.length > 2 && value.length <= 4) {
+      value = `${value.slice(0, 2)}/${value.slice(2)}`;
+    } else if (value.length > 4) {
+      value = `${value.slice(0, 2)}/${value.slice(2, 4)}/${value.slice(4, 8)}`;
+    }
+    this.control.setValue(value, { emitEvent: false });
+  }
+  
+  formatNumber(){
+    let value = this.control.value.replace(/\D/g, ''); 
+    this.control.setValue(value, { emitEvent: false });
   }
 
   updateErrorMessage(): void {
