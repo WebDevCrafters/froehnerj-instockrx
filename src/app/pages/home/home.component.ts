@@ -1,11 +1,12 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
 import { ButtonComponent } from '../../_shared/components/button/button.component';
 import { SectionBannerComponent } from '../_shared/components/section-banner/section-banner.component';
+import { HowItWorksComponent, StepsType } from '../_shared/components/how-it-works/how-it-works.component';
 
 @Component({
     selector: 'app-home',
     standalone: true,
-    imports: [ButtonComponent, SectionBannerComponent],
+    imports: [ButtonComponent, SectionBannerComponent, HowItWorksComponent],
     templateUrl: './home.component.html',
     styleUrl: './home.component.scss'
 })
@@ -27,6 +28,19 @@ export class HomeComponent {
             isOpen: false
         }
     ];
+
+    public stepsArray: StepsType[] = [
+        {
+            highlightedText: 'Sign up online',
+            normalText: 'and enter your information.',
+        },
+        {
+            normalText: 'We find your script at a pharmacy in your area.',
+        },
+        {
+            normalText: 'Send your doctor the pharmacy info and pick up your script!',
+        }
+    ]
 
     toggleAnswer(index: number) {
         this.faqs[index].isOpen = !this.faqs[index].isOpen;
