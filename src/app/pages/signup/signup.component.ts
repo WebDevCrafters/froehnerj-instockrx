@@ -125,6 +125,7 @@ export class SignupComponent {
 
   selectPackage(selectedPackageId: string) {
     this.selectedPackage = selectedPackageId;
+    this.stepNumber += 1;
   }
 
   onPersonalInfoSubmit() {
@@ -142,12 +143,16 @@ export class SignupComponent {
     if (this.additionalInfoForm.valid) {
       console.log(this.additionalInfoForm.value);
       this.stepNumber += 1;
-      console.log("step was added")
+      console.log('step was added');
     } else {
       this.additionalInfoForm.markAllAsTouched();
       this.markAllAsDirty(this.additionalInfoForm);
-      console.log(this.additionalInfoForm );
+      console.log(this.additionalInfoForm);
     }
+  }
+
+  onSelectPackageSubmit() {
+    this.stepNumber += 1;
   }
 
   markAllAsDirty(formGroup: FormGroup) {
