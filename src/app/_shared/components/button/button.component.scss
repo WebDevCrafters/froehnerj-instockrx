@@ -61,6 +61,10 @@ button {
         justify-content: center;
         gap: 8px;
 
+        &.icon_vertical{
+            flex-direction: column;
+        }
+
         .icon {
             display: flex;
             align-items: center;

@@ -1,5 +1,5 @@
 <button [ngClass]="[type, shape]" (click)="onClick()" [type]="formButtonType">
-    <div class="icon_and_title_container">
+    <div class="icon_and_title_container" [ngClass]="{icon_vertical: iconAlignment==='vertical'}">
         <ng-container *ngIf="leftImageSrc || src">
             <div class="icon">
                 <img [src]="leftImageSrc || src" alt="">
