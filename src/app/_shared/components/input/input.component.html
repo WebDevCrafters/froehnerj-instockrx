@@ -1,9 +1,30 @@
 <div class="input_container">
-    @if (label) {
-    <label [for]="id" [ngClass]="{animated_label: control.value}" (click)="focusInput(inputElement)">
-        {{label}}
-    </label>
-    }
-    <input [type]="type" [formControl]="control" [id]="id" [placeholder]="isFocused ? placeholder : ''" #inputElement
-        (focus)="onFocus()" (blur)="onBlur()">
+  @if (label) {
+  <label
+    [for]="id"
+    [ngClass]="{ animated_label: control.value }"
+    (click)="focusInput(inputElement)"
+  >
+    {{ label }}
+  </label>
+  }
+  <input
+    [ngClass]="{ error_input: control.dirty && control.invalid }"
+    [type]="type"
+    [formControl]="control"
+    [id]="id"
+    [placeholder]="isFocused ? placeholder : ''"
+    #inputElement
+    (focus)="onFocus()"
+    (blur)="onBlur()"
+    (input)="handleChange($event)"
+    [attr.maxlength]="type === 'phoneNumber' ? 14 : null"
+  />
+
+  <span
+    class="error_message"
+    [ngClass]="{ visible: control.touched && control.dirty && control.invalid}"
+  >
+    {{ errorMessage }}
+  </span>
 </div>
