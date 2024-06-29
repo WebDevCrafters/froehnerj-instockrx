@@ -70,12 +70,16 @@
         >
         }
       </div>
-      <div>
-        <app-button
-          [title]="'Continue'"
-          [type]="'small_primary'"
-          [shape]="'rounded'"
-        />
+      <div
+        class="continue_button_container"
+      >
+        <div>
+          <app-button
+            [title]="'Continue'"
+            [type]="'small_primary'"
+            [shape]="'rounded'"
+          />
+        </div>
       </div>
     </form>
     } @else if(stepNumber===2){
@@ -188,7 +192,7 @@
       </div>
 
       <div class="continue_button_container">
-        <div class="button">
+        <div >
           <app-button title="Continue" type="small_primary" shape="rounded" />
         </div>
       </div>

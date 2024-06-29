@@ -125,7 +125,6 @@ export class SignupComponent {
 
   selectPackage(selectedPackageId: string) {
     this.selectedPackage = selectedPackageId;
-    this.stepNumber += 1;
   }
 
   onPersonalInfoSubmit() {
