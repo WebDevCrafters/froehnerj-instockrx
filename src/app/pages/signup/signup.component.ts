@@ -13,7 +13,7 @@ import { CommonModule } from '@angular/common';
 })
 export class SignupComponent {
 
-  stepNumber: number = 3;
+  stepNumber: number = 1;
   medicationList = [1]
   selectedPackage: string = "2";
   packageOptions = [
@@ -51,7 +51,7 @@ export class SignupComponent {
     pickupDate: new FormControl('', [Validators.required])
   });
 
-  selectPackage(selectedPackageId: string){
+  selectPackage(selectedPackageId: string) {
     this.selectedPackage = selectedPackageId;
   }
 

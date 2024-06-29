@@ -20,8 +20,10 @@
         @if (stepNumber===1) {
         <div class="form">
 
-            <app-input [control]="personalInfoForm.controls.fullName" id="fullName" label="Full Name" />
-            <app-input [control]="personalInfoForm.controls.phoneNumber" id="phoneNumber" label="Phone Number" />
+            <app-input [control]="personalInfoForm.controls.fullName" id="fullName" label="Full Name" 
+            [errorMessage]="'Patient\'s Name cannot be empty'"
+            />
+            <app-input [control]="personalInfoForm.controls.phoneNumber" id="phoneNumber" label="Phone Number" [type]="'phoneNumber'"/>
             <app-input [control]="personalInfoForm.controls.email" id="email" label="Email" />
             <div class="terms">
                 <div>
@@ -44,7 +46,9 @@
                 </span>
 
             </div>
-            <app-button text="Continue" />
+            <div>
+                <app-button [title]="'Continue'" [type]="'small_primary'" [shape]="'rounded'"/>
+            </div>
         </div>
         }
         @else if(stepNumber===2){
@@ -109,8 +113,7 @@
             <div class="packages">
                 @for (package of packageOptions; track $index) {
                 <div class="package_card" [ngClass]="{selected_card: selectedPackage===package.id}"
-                (click)="selectPackage(package.id)"
-                >
+                    (click)="selectPackage(package.id)">
                     <p class="heading">
                         {{package.title}}
                     </p>

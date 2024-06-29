@@ -4,11 +4,13 @@
 
 .input_container {
     border-radius: 12px;
-    border: 1.6px solid #ac9d9e;
-    transition: border 0.5s ease;
-    color: #ac9d9e;
     position: relative;
     flex-grow: 0;
+    background-color: #ffffff;
+    color: #ac9d9e;
+    display: flex;
+    flex-direction: column;
+    transition: all 0.2s ease;
 
     .animated_label {
         font-size: 12px;
@@ -18,19 +20,11 @@
     }
 
     &:focus-within {
-        border-color: #221918;
-        &:not(:hover) {
-            border-color: #fe6b6a;
-        }
         label {
             font-size: 12px;
             top: -0.5rem;
             left: 8px;
         }
-    }
-
-    &:hover {
-        border-color: #221918;
     }
 
     label {
@@ -50,18 +44,46 @@
 
     input {
         border-radius: 12px;
+        border: 1.6px solid #ac9d9e;
+        transition: border 0.5s ease;
         padding: 0.7rem;
-        border: none;
         width: 100%;
         font-size: 1rem;
         caret-color: #fe6b6a;
+
+        &:focus {
+            border-color: #221918;
+            outline: none;
+            &:not(:hover) {
+                border-color: #fe6b6a;
+            }
+        }
 
         ::placeholder {
             color: #ac9d9e;
         }
 
-        &:focus {
-            outline: none;
+        &.error_input {
+            border-color: #ba1e1f;
+        }
+
+        &:hover {
+            border-color: #221918;
+        }
+    }
+
+    .error_message {
+        opacity: 0;
+        transition: all 0.2s ease;
+        color: #ba1e1f;
+        font-size: 0.8rem;
+        height: 0;
+        padding: 0 0.3rem;
+
+        &.visible {
+            height: unset;
+            padding: 0.3rem ;
+            opacity: 1;
         }
     }
 }
