@@ -28,6 +28,8 @@ export class InputComponent implements OnInit {
     this.control.statusChanges.subscribe(() => {
       this.updateErrorMessage();
     });
+
+    this.updateErrorMessage();
   }
 
   handleChange(event: Event): void {

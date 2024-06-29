@@ -17,13 +17,13 @@
     #inputElement
     (focus)="onFocus()"
     (blur)="onBlur()"
-    (change)="handleChange($event)"
+    (input)="handleChange($event)"
     [attr.maxlength]="type === 'phoneNumber' ? 14 : null"
   />
 
   <span
     class="error_message"
-    [ngClass]="{ visible: control.dirty && control.invalid }"
+    [ngClass]="{ visible: control.touched && control.dirty && control.invalid}"
   >
     {{ errorMessage }}
   </span>

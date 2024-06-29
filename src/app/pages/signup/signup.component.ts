@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
 import { InputComponent } from '../../_shared/components/input/input.component';
-import { FormControl, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
+import { FormArray, FormControl, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
 import { ButtonComponent } from '../../_shared/components/button/button.component';
 import { CommonModule } from '@angular/common';
 import { emailValidator, requiredValidator } from '../../_shared/utils/Validators';
@@ -60,22 +60,22 @@ export class SignupComponent {
     this.selectedPackage = selectedPackageId;
   }
 
-  onContinuePress() {
-    console.log(this.stepNumber)
-    this.stepNumber = this.stepNumber + 1;
-    console.log(this.stepNumber)
-  }
-
   onPersonalInfoSubmit() {
     if (this.personalInfoForm.valid) {
-     
       console.log(this.personalInfoForm.value);
-      
-      
+      this.stepNumber += 1;
+
     } else {
-      
-      console.log('Form is invalid');
+      this.personalInfoForm.markAllAsTouched()
+      this.markAllAsDirty(this.personalInfoForm);
       console.log(this.personalInfoForm.value);
     }
   }
+
+  markAllAsDirty(formGroup: FormGroup) {
+    Object.keys(formGroup.controls).forEach(key => {
+      formGroup.get(key)?.markAsDirty();
+    });
+  }
+
 }
