@@ -1,8 +1,8 @@
 <div
   class="signup_container"
-  [ngClass]="{ small_header_active: stepNumber === 3 }"
+  [ngClass]="{ small_header_active: stepNumber >= 3 }"
 >
-  <div class="header" [ngClass]="{ small_header: stepNumber === 3 }">
+  <div class="header" [ngClass]="{ small_header: stepNumber >= 3 }">
     <div class="brand">
       <img src="assets/images/png/pill-logo.png" alt="" />
       <div class="brand_name">
@@ -10,7 +10,7 @@
         <div class="sub_heading">by InStockRx</div>
       </div>
     </div>
-    @if (stepNumber!==3) {
+    @if (stepNumber<3) {
     <p>Never Search For Your Meds Again</p>
     } @if (stepNumber===1) {
     <span>
@@ -70,12 +70,14 @@
         >
         }
       </div>
-      <div>
-        <app-button
-          [title]="'Continue'"
-          [type]="'small_primary'"
-          [shape]="'rounded'"
-        />
+      <div class="continue_button_container">
+        <div>
+          <app-button
+            [title]="'Continue'"
+            [type]="'small_primary'"
+            [shape]="'rounded'"
+          />
+        </div>
       </div>
     </form>
     } @else if(stepNumber===2){
@@ -176,17 +178,19 @@
         <p>When will you be ready to pick up your meds?</p>
         <span>Your meds may be found on or after this date.</span>
       </div>
-      <div class="button_container">
+      <div class="button_container" (click)="openDateChooserModal()">
         <app-button
           title="Wed, June 6"
           type="small_secondary"
-          shape="rounded"
+          shape="square"
           [formButtonType]="'button'"
+          iconAlignment="vertical"
+          src="assets/images/svg/calendar-icon.svg"
         />
       </div>
 
       <div class="continue_button_container">
-        <div class="button">
+        <div>
           <app-button title="Continue" type="small_primary" shape="rounded" />
         </div>
       </div>
@@ -214,13 +218,28 @@
         }
       </div>
 
-      <app-button
-        [title]="'Select Package'"
-        type="small_primary"
-        shape="rounded"
-      />
+      <div (click)="onSelectPackageSubmit()">
+        <app-button
+          [title]="'Select Package'"
+          type="small_primary"
+          shape="rounded"
+        />
+      </div>
     </div>
-
-    }
+    } @else if(stepNumber===4){ Hwllo }
   </div>
 </div>
+<app-modal
+  [title]="'Example Modal'"
+  [isVisible]="modalVisible"
+  (closeModal)="closeDateChooserModal()"
+>
+  <div class="modal_content">
+    <div class="content">Select date</div>
+    <mat-form-field>
+      <input matInput [matDatepicker]="picker" placeholder="Choose a date">
+      <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+      <mat-datepicker #picker [opened]="true"></mat-datepicker>
+    </mat-form-field>
+  </div>
+</app-modal>

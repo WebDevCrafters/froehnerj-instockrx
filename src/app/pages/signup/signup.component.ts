@@ -18,6 +18,11 @@ import {
 } from '../../_shared/utils/Validators';
 import { checkPrime } from 'crypto';
 import { CheckboxComponent } from '../../_shared/components/checkbox/checkbox.component';
+import { ModalComponent } from '../../_shared/components/modal/modal.component';
+import { MatDatepickerModule } from '@angular/material/datepicker';
+import { MatInputModule } from '@angular/material/input';
+import { MatNativeDateModule } from '@angular/material/core';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
 @Component({
   selector: 'app-signup',
@@ -28,13 +33,19 @@ import { CheckboxComponent } from '../../_shared/components/checkbox/checkbox.co
     CommonModule,
     ReactiveFormsModule,
     CheckboxComponent,
+    ModalComponent,
+    MatDatepickerModule, 
+    MatNativeDateModule,  
+    MatInputModule, 
   ],
   templateUrl: './signup.component.html',
   styleUrl: './signup.component.scss',
 })
 export class SignupComponent {
   stepNumber: number = 2;
+  modalVisible: boolean = false;
   selectedPackage: string = '2';
+  selectedDate: Date = new Date();
   packageOptions = [
     {
       id: '1',
@@ -98,7 +109,7 @@ export class SignupComponent {
         brand: new FormControl(''),
       }),
     ]),
-    pickupDate: new FormControl('', [Validators.required]),
+    // pickupDate: new FormControl('', [Validators.required]),
   });
 
   createPrescribedMedicationFormGroup(): FormGroup {
@@ -142,11 +153,16 @@ export class SignupComponent {
     if (this.additionalInfoForm.valid) {
       console.log(this.additionalInfoForm.value);
       this.stepNumber += 1;
+      console.log('step was added');
     } else {
       this.additionalInfoForm.markAllAsTouched();
       this.markAllAsDirty(this.additionalInfoForm);
-      console.log(this.additionalInfoForm.value);
+      console.log(this.additionalInfoForm);
     }
+  }
+
+  onSelectPackageSubmit() {
+    this.stepNumber += 1;
   }
 
   markAllAsDirty(formGroup: FormGroup) {
@@ -181,5 +197,13 @@ export class SignupComponent {
         formArrayIndex
       ) as FormGroup;
     return medicationFormGroup.get(formControlName) as FormControl;
+  }
+
+  openDateChooserModal(){
+    this.modalVisible = true;
+  }
+
+  closeDateChooserModal(): void {
+    this.modalVisible = false;
   }
 }

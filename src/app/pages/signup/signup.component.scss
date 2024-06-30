@@ -169,7 +169,6 @@
                     display: flex;
                     justify-content: space-between;
                     gap: 1rem;
-                    max-width: 70%;
                 }
             }
 
@@ -182,10 +181,7 @@
                 display: flex;
                 align-items: center;
                 justify-content: center;
-
-                .button{
-                    width: 10rem
-                }
+                margin: 2rem 0;
             }
         }
 
@@ -245,6 +241,19 @@
                 }
             }
         }
+    }
+}
+
+.modal_content{
+    background-color: #F6E5E2;
+    border-radius: 12px;
+    position: relative;
+
+    .date_picker{
+        top: 0;
+        left: 0;
+        border: 5rem solid yellow;
+        position: absolute;
     }
 }
 
