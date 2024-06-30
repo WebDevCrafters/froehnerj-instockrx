@@ -98,11 +98,18 @@
 
 @media screen and (max-width: 800px) {
     .main_container {
-        .menu_icon {
-            display: block;
+        flex-direction: column;
+
+        .logo_and_toggle_icon {
+            width: 100%;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            .menu_icon {
+                display: block;
+            }
         }
         .routes_container {
-            position: absolute;
             top: 100%;
             left: 0;
             width: 100%;
@@ -122,6 +129,7 @@
 
             &.open ul.route_list {
                 display: flex;
+                position: static;
             }
         }
     }
