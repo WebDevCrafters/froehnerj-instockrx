@@ -18,6 +18,7 @@ import {
 } from '../../_shared/utils/Validators';
 import { checkPrime } from 'crypto';
 import { CheckboxComponent } from '../../_shared/components/checkbox/checkbox.component';
+import { ModalComponent } from '../../_shared/components/modal/modal.component';
 
 @Component({
   selector: 'app-signup',
@@ -28,12 +29,14 @@ import { CheckboxComponent } from '../../_shared/components/checkbox/checkbox.co
     CommonModule,
     ReactiveFormsModule,
     CheckboxComponent,
+    ModalComponent
   ],
   templateUrl: './signup.component.html',
   styleUrl: './signup.component.scss',
 })
 export class SignupComponent {
-  stepNumber: number = 1;
+  stepNumber: number = 2;
+  modalVisible: boolean = false;
   selectedPackage: string = '2';
   packageOptions = [
     {
@@ -186,5 +189,13 @@ export class SignupComponent {
         formArrayIndex
       ) as FormGroup;
     return medicationFormGroup.get(formControlName) as FormControl;
+  }
+
+  openDateChooserModal(){
+    this.modalVisible = true;
+  }
+
+  closeDateChooserModal(): void {
+    this.modalVisible = false;
   }
 }

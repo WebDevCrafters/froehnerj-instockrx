@@ -70,9 +70,7 @@
         >
         }
       </div>
-      <div
-        class="continue_button_container"
-      >
+      <div class="continue_button_container">
         <div>
           <app-button
             [title]="'Continue'"
@@ -180,7 +178,7 @@
         <p>When will you be ready to pick up your meds?</p>
         <span>Your meds may be found on or after this date.</span>
       </div>
-      <div class="button_container">
+      <div class="button_container" (click)="openDateChooserModal()">
         <app-button
           title="Wed, June 6"
           type="small_secondary"
@@ -192,7 +190,7 @@
       </div>
 
       <div class="continue_button_container">
-        <div >
+        <div>
           <app-button title="Continue" type="small_primary" shape="rounded" />
         </div>
       </div>
@@ -231,3 +229,8 @@
     } @else if(stepNumber===4){ Hwllo }
   </div>
 </div>
+<app-modal [title]="'Example Modal'" [isVisible]="modalVisible"  (closeModal)="closeDateChooserModal()">
+  <p style="background-color: red; height: 20rem; width: 20rem">
+    Modal Content Goes Here
+  </p>
+</app-modal>
