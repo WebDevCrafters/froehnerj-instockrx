@@ -1,11 +1,14 @@
 .infinit_scroll_container {
     display: flex;
     overflow-x: hidden;
+    gap: 2rem;
+
     #infinite_scroll_section {
         display: flex;
         animation: 40s slide infinite linear;
         gap: 2rem;
         padding: 1.5rem 0 ;
+
         .card_container {
             width: 50rem;
             max-width: 447px;
