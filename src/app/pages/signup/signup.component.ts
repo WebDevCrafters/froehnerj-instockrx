@@ -16,13 +16,8 @@ import {
   emailValidator,
   requiredValidator,
 } from '../../_shared/utils/Validators';
-import { checkPrime } from 'crypto';
 import { CheckboxComponent } from '../../_shared/components/checkbox/checkbox.component';
 import { ModalComponent } from '../../_shared/components/modal/modal.component';
-import { MatDatepickerModule } from '@angular/material/datepicker';
-import { MatInputModule } from '@angular/material/input';
-import { MatNativeDateModule } from '@angular/material/core';
-import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
 @Component({
   selector: 'app-signup',
@@ -34,9 +29,6 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
     ReactiveFormsModule,
     CheckboxComponent,
     ModalComponent,
-    MatDatepickerModule, 
-    MatNativeDateModule,  
-    MatInputModule, 
   ],
   templateUrl: './signup.component.html',
   styleUrl: './signup.component.scss',
