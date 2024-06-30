@@ -19,6 +19,10 @@ import {
 import { checkPrime } from 'crypto';
 import { CheckboxComponent } from '../../_shared/components/checkbox/checkbox.component';
 import { ModalComponent } from '../../_shared/components/modal/modal.component';
+import { MatDatepickerModule } from '@angular/material/datepicker';
+import { MatInputModule } from '@angular/material/input';
+import { MatNativeDateModule } from '@angular/material/core';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
 @Component({
   selector: 'app-signup',
@@ -29,7 +33,10 @@ import { ModalComponent } from '../../_shared/components/modal/modal.component';
     CommonModule,
     ReactiveFormsModule,
     CheckboxComponent,
-    ModalComponent
+    ModalComponent,
+    MatDatepickerModule, 
+    MatNativeDateModule,  
+    MatInputModule, 
   ],
   templateUrl: './signup.component.html',
   styleUrl: './signup.component.scss',
@@ -38,6 +45,7 @@ export class SignupComponent {
   stepNumber: number = 2;
   modalVisible: boolean = false;
   selectedPackage: string = '2';
+  selectedDate: Date = new Date();
   packageOptions = [
     {
       id: '1',
