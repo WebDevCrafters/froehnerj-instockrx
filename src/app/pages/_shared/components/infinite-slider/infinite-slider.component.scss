@@ -4,12 +4,33 @@
     display: flex;
     overflow-x: hidden;
     gap: 2rem;
+    position: relative;
+
+    &::before,
+    &::after {
+        content: "";
+        position: absolute;
+        top: 0;
+        bottom: 0;
+        width: 10%;
+        z-index: 1;
+    }
+
+    &::before {
+        left: 0;
+        background: linear-gradient(to right, #ffffff, rgba(255, 255, 255, 0));
+    }
+
+    &::after {
+        right: 0;
+        background: linear-gradient(to left, #ffffff, rgba(255, 255, 255, 0));
+    }
 
     #infinite_scroll_section {
         display: flex;
-        animation: 40s slide infinite linear;
+        animation: 50s slide infinite linear;
         gap: 2rem;
-        padding: 1.5rem 0 ;
+        padding: 1.5rem 0;
 
         .card_container {
             width: 30rem;
