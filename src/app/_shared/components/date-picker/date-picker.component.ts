@@ -15,6 +15,8 @@ export class DatePickerComponent implements OnInit {
   selectedDay: number = this.dateToday.getDate();
   selectedMonth: number = this.dateToday.getMonth();
   selectedYear: number = this.dateToday.getFullYear();
+  currentMonth: number = this.dateToday.getMonth();
+  currentYear: number = this.dateToday.getFullYear();
   yearsArray: number[] = [];
   weekNames = ['Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat'];
   monthNames: string[] = [
@@ -36,13 +38,12 @@ export class DatePickerComponent implements OnInit {
   constructor() {}
 
   ngOnInit(): void {
-    console.log(this.selectedDay, 'sdbk');
-    this.generateCalendar(this.selectedYear, this.selectedMonth);
+    this.generateCalendar(this.currentYear, this.currentMonth);
     this.generateYearArray();
   }
 
   generateYearArray() {
-    for (let i = this.selectedYear; i < this.selectedYear + 100; i++) {
+    for (let i = this.currentYear; i < this.currentYear + 100; i++) {
       this.yearsArray.push(i);
     }
   }
@@ -62,22 +63,22 @@ export class DatePickerComponent implements OnInit {
   }
 
   previousMonth() {
-    let newMonth = this.selectedMonth - 1;
+    let newMonth = this.currentMonth - 1;
     if (newMonth === -1) {
       newMonth = 11;
-      this.selectedYear-=1;
+      this.currentYear -= 1;
     }
-    this.selectedMonth = newMonth;
-    this.generateCalendar(this.selectedYear, newMonth);
+    this.currentMonth = newMonth;
+    this.generateCalendar(this.currentYear, newMonth);
   }
 
   nextMonth() {
-    const newMonth = (this.selectedMonth + 1) % 12;
+    const newMonth = (this.currentMonth + 1) % 12;
     if (newMonth === 0) {
-      this.selectedYear += 1;
+      this.currentYear += 1;
     }
-    this.selectedMonth = newMonth;
-    this.generateCalendar(this.selectedYear, newMonth);
+    this.currentMonth = newMonth;
+    this.generateCalendar(this.currentYear, newMonth);
   }
 
   toggleYearSelection() {
@@ -85,8 +86,8 @@ export class DatePickerComponent implements OnInit {
   }
 
   onSelectYear(newYear: number) {
-    this.selectedYear = newYear;
-    this.generateCalendar(newYear, this.selectedMonth);
+    this.currentYear = newYear;
+    this.generateCalendar(newYear, this.currentMonth);
     this.toggleYearSelection();
   }
 
@@ -95,13 +96,26 @@ export class DatePickerComponent implements OnInit {
     return date.getTime();
   }
 
-  checkIfPastDay(year: number, month: number, day: number): boolean {
-    const inputDate = new Date(year, month, day);
+  checkIfPastDay(day: number | null): boolean {
+    if (!day) return true;
+    const inputDate = new Date(this.currentYear, this.currentMonth, day);
     const startOfToday = new Date(
       this.dateToday.getFullYear(),
       this.dateToday.getMonth(),
       this.dateToday.getDate()
     );
     return inputDate.getTime() < startOfToday.getTime();
+  }
+
+  checkIfSelectedDay(day: number | null) {
+    if (!day) return false;
+    if (
+      this.currentYear === this.selectedYear &&
+      this.currentMonth === this.selectedMonth &&
+      day === this.selectedDay
+    ) {
+      return true;
+    }
+    return false;
   }
 }

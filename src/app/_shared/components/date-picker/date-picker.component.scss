@@ -84,6 +84,9 @@
   flex-wrap: wrap;
   > span {
     cursor: pointer;
+    &.selected {
+      background-color: green;
+    }
     &.inactive {
       cursor: default;
       color: rgb(210, 210, 210);

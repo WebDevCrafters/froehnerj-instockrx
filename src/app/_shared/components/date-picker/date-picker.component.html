@@ -2,7 +2,7 @@
 <div class="calendar-container">
   <div class="header">
     <span (click)="toggleYearSelection()"
-      >{{ monthNames[selectedMonth] }} {{ selectedYear }}</span
+      >{{ monthNames[currentMonth] }} {{ currentYear }}</span
     >
     @if (!yearSelectionActive) {
     <div>
@@ -19,7 +19,7 @@
     @if (yearSelectionActive) { @for (year of yearsArray; track $index) {
     <span
       (click)="onSelectYear(year)"
-      [ngClass]="{ selected: selectedYear === year }"
+      [ngClass]="{ selected: currentYear === year }"
       >{{ year }}</span
     >
     } } @else{
@@ -33,12 +33,11 @@
       @for ( day of daysArray; track $index) {
       <span
         [ngClass]="{
-          inactive:
-            checkIfPastDay(selectedYear, selectedMonth, day || 1)
+          inactive: checkIfPastDay(day),
+          selected: checkIfSelectedDay(day)
         }"
         >{{ day }}</span
       >
-
       }
     </div>
     }
