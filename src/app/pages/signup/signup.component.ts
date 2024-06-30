@@ -39,6 +39,7 @@ import { formatTimestamp } from '../../_shared/utils/dateTime';
 export class SignupComponent {
   stepNumber: number = 2;
   modalVisible: boolean = false;
+  isDateInputActive: boolean = false;
   selectedPackage: string = '2';
   selectedDate: string = formatTimestamp(new Date().getTime());
   packageOptions = [

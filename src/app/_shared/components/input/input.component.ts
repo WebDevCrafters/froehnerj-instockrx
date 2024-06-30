@@ -20,6 +20,7 @@ export class InputComponent implements OnInit {
   @Input() control = new FormControl();
   @Input() id: string = '';
   @Input() placeholder: string = '';
+  @Input() bg: string = '';
   @Input() type: 'text' | 'checkbox' | 'phoneNumber' | 'dates' | "numbers"= 'text';
   isFocused = false;
   errorMessage: string = ""
