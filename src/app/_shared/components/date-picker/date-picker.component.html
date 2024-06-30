@@ -1,0 +1,24 @@
+<!-- src/app/calendar/calendar.component.html -->
+<div class="calendar-container">
+  <div class="header">
+    <span>{{ monthNames[month-1] }}, {{ year }}</span>
+    <div>
+        <span (click)="previousMonth()"><</span>
+        <span (click)="nextMonth()">></span>
+    </div>
+  </div>
+  
+  <div class="calendar">
+    <div class="days-of-week">
+      @for ( day of weekArr; track $index) {
+      <span>{{ day }}</span>
+      }
+    </div>
+    <div class="days">
+      @for ( day of daysArray; track $index) {
+      <span>{{ day }}</span>
+
+      }
+    </div>
+  </div>
+</div>
