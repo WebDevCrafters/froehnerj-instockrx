@@ -1,16 +1,22 @@
 <div class="main_container">
-  <div class="logo_and_name_container">
-    <a [routerLink]="APP_ROUTES._" (click)="closeMenu()">
-      <img src="assets/images/png/pill-logo.png" alt="logo" />
-      <div class="name_container">
-        <div class="heading">FindMyMed</div>
-        <div class="sub_heading">by InStockRx</div>
-      </div>
-    </a>
-  </div>
-  <div class="menu_icon" (click)="toggleMenu()">
-    <img *ngIf="!menuOpen" src="assets/images/svg/menu-icon.svg" alt="menu" />
-    <img *ngIf="menuOpen" src="assets/images/svg/close-icon.svg" alt="close" />
+  <div class="logo_and_toggle_icon">
+    <div class="logo_and_name_container">
+      <a [routerLink]="APP_ROUTES._" (click)="closeMenu()">
+        <img src="assets/images/png/pill-logo.png" alt="logo" />
+        <div class="name_container">
+          <div class="heading">FindMyMed</div>
+          <div class="sub_heading">by InStockRx</div>
+        </div>
+      </a>
+    </div>
+    <div class="menu_icon" (click)="toggleMenu()">
+      <img *ngIf="!menuOpen" src="assets/images/svg/menu-icon.svg" alt="menu" />
+      <img
+        *ngIf="menuOpen"
+        src="assets/images/svg/close-icon.svg"
+        alt="close"
+      />
+    </div>
   </div>
   <div class="routes_container" [ngClass]="{ open: menuOpen }">
     <ul class="route_list">
