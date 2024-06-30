@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, EventEmitter, OnInit, Output } from '@angular/core';
 import { getDaysInMonth, getStartDayOfMonth } from '../../utils/dateTime';
 import { CommonModule } from '@angular/common';
 
@@ -17,7 +17,9 @@ export class DatePickerComponent implements OnInit {
   selectedYear: number = this.dateToday.getFullYear();
   currentMonth: number = this.dateToday.getMonth();
   currentYear: number = this.dateToday.getFullYear();
+  @Output() onDatePicked = new EventEmitter<any>();
   yearsArray: number[] = [];
+  daysArray: (number | null)[] = [];
   weekNames = ['S', 'M', 'T', 'W', 'T', 'F', 'S'];
   monthNames: string[] = [
     'January',
@@ -33,7 +35,6 @@ export class DatePickerComponent implements OnInit {
     'November',
     'December',
   ];
-  daysArray: (number | null)[] = [];
 
   constructor() {}
 
@@ -122,9 +123,12 @@ export class DatePickerComponent implements OnInit {
   onSelectDay(day: number | null) {
     if (!day) return;
     if (this.checkIfPastDay(day)) return;
-    
+
     this.selectedDay = day;
     this.selectedMonth = this.currentMonth;
     this.selectedYear = this.currentYear;
+    this.onDatePicked.emit(
+      new Date(this.selectedYear, this.selectedMonth, day).getTime()
+    );
   }
 }
