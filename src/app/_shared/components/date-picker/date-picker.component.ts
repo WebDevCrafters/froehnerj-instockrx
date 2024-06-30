@@ -51,8 +51,7 @@ export class DatePickerComponent implements OnInit {
     this.daysArray = [];
     const startDay = getStartDayOfMonth(year, month);
     const daysInMonth = getDaysInMonth(year, month);
-
-    console.log({ startDay }, this.weekNames[startDay]);
+    console.log(month, daysInMonth);
     for (let i = 0; i < startDay; i++) {
       this.daysArray.push(null);
     }
@@ -66,6 +65,7 @@ export class DatePickerComponent implements OnInit {
     let newMonth = this.selectedMonth - 1;
     if (newMonth === -1) {
       newMonth = 11;
+      this.selectedYear-=1;
     }
     this.selectedMonth = newMonth;
     this.generateCalendar(this.selectedYear, newMonth);
@@ -73,6 +73,9 @@ export class DatePickerComponent implements OnInit {
 
   nextMonth() {
     const newMonth = (this.selectedMonth + 1) % 12;
+    if (newMonth === 0) {
+      this.selectedYear += 1;
+    }
     this.selectedMonth = newMonth;
     this.generateCalendar(this.selectedYear, newMonth);
   }

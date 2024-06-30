@@ -6,7 +6,5 @@ export function getStartDayOfMonth(year: number, month: number): number {
 }
 
 export function getDaysInMonth(year: number, month: number): number {
-  return new Date(year, month, 0).getDate(); // day 0 of the next month is the last day of the current month
+  return new Date(year, month + 1, 0).getDate();
 }
-
-
