@@ -10,8 +10,7 @@
         padding: 1.5rem 0 ;
 
         .card_container {
-            width: 50rem;
-            max-width: 447px;
+            width: 30rem;
             padding: 30px;
             box-shadow:
                 0 0.7961918735236395px 2.3885756205709185px -0.625px #0000000d,
@@ -34,6 +33,7 @@
 
                     img {
                         height: 50px;
+                        object-fit: cover;
                         width: 50px;
                     }
                 }
