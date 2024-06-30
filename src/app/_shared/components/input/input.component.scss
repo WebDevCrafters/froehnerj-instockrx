@@ -1,3 +1,5 @@
+@import "variables";
+
 :host {
     width: 100%;
 }
@@ -6,8 +8,8 @@
     border-radius: 12px;
     position: relative;
     flex-grow: 0;
-    background-color: #ffffff;
-    color: #ac9d9e;
+    background-color: $globalWhiteColor;
+    color: $darkGreyColor;
     display: flex;
     flex-direction: column;
     transition: all 0.2s ease;
@@ -29,7 +31,7 @@
 
     label {
         position: absolute;
-        background-color: #ffffff;
+        background-color: $globalWhiteColor;
         padding: 0 3px;
         transition:
             top 0.2s ease,
@@ -44,45 +46,45 @@
 
     input {
         border-radius: 12px;
-        border: 1.6px solid #ac9d9e;
+        border: 1.6px solid $darkGreyColor;
         transition: border 0.5s ease;
         padding: 0.7rem;
         width: 100%;
         font-size: 1rem;
-        caret-color: #fe6b6a;
+        caret-color: $brandPrimaryColor;
 
         &:focus {
             border-color: #221918;
             outline: none;
             &:not(:hover) {
-                border-color: #fe6b6a;
+                border-color: $brandPrimaryColor;
             }
         }
 
         ::placeholder {
-            color: #ac9d9e;
+            color: $darkGreyColor;
         }
 
         &.error_input {
-            border-color: #ba1e1f;
+            border-color: $dangerColor;
         }
 
         &:hover {
-            border-color: #221918;
+            border-color: $globalBlackColor;
         }
     }
 
     .error_message {
         opacity: 0;
         transition: all 0.2s ease;
-        color: #ba1e1f;
+        color: $dangerColor;
         font-size: 0.8rem;
         height: 0;
         padding: 0 0.3rem;
 
         &.visible {
             height: unset;
-            padding: 0.3rem ;
+            padding: 0.3rem;
             opacity: 1;
         }
     }

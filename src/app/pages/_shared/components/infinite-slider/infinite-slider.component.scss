@@ -1,3 +1,5 @@
+@import "variables";
+
 .infinit_scroll_container {
     display: flex;
     overflow-x: hidden;
@@ -44,7 +46,7 @@
                     font-weight: 600;
                     letter-spacing: -0.5px;
                     line-height: 1.4em;
-                    color: #001122;
+                    color: $globalBlackColor;
                 }
             }
         }
@@ -58,7 +60,7 @@
 
         .review {
             .heading {
-                color: #132f4e;
+                color: $darkBlueColor;
                 font-size: 19px;
                 font-weight: 700;
                 line-height: 1.6em;
@@ -68,7 +70,7 @@
                 font-size: 16px;
                 font-weight: 500;
                 line-height: 1.6em;
-                color: #666666;
+                color: $darkGreyColor;
             }
         }
     }

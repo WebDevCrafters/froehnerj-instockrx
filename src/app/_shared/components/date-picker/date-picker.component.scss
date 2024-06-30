@@ -1,125 +1,127 @@
+@import "variables";
+
 /* src/app/calendar/calendar.component.css */
 .calendar-container {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  padding: 20px;
-  background-color: white;
-  border-radius: 10px;
-  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-  width: 25rem;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 20px;
+    background-color: $globalWhiteColor;
+    border-radius: 10px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    width: 25rem;
 }
 
 .header {
-  display: flex;
-  justify-content: space-between;
-  width: 100%;
-  align-items: center;
+    display: flex;
+    justify-content: space-between;
+    width: 100%;
+    align-items: center;
 
-  > span {
-    cursor: pointer;
-  }
+    > span {
+        cursor: pointer;
+    }
 }
 
 .header h2 {
-  font-size: 18px;
-  font-weight: bold;
+    font-size: 18px;
+    font-weight: bold;
 }
 
 .dropdown {
-  display: flex;
-  align-items: center;
+    display: flex;
+    align-items: center;
 }
 
 .dropdown button {
-  background: none;
-  border: none;
-  font-size: 16px;
-  cursor: pointer;
+    background: none;
+    border: none;
+    font-size: 16px;
+    cursor: pointer;
 }
 
 .calendar {
-  margin-top: 20px;
-  width: 100%;
+    margin-top: 20px;
+    width: 100%;
 
-  &.yearSelectionActive {
-    height: 17rem;
-    display: grid;
-    grid-template-columns: 1fr 1fr 1fr;
-    // row-gap: 2rem;
-    overflow-y: scroll;
-    padding-top: 1rem;
+    &.yearSelectionActive {
+        height: 17rem;
+        display: grid;
+        grid-template-columns: 1fr 1fr 1fr;
+        // row-gap: 2rem;
+        overflow-y: scroll;
+        padding-top: 1rem;
 
-    span {
-      text-align: center;
-      padding: 1.5rem;
-      transition: all 0.3s ease;
-      border-radius: 24px;
+        span {
+            text-align: center;
+            padding: 1.5rem;
+            transition: all 0.3s ease;
+            border-radius: 24px;
 
-      &.selected {
-        background-color: green;
-      }
+            &.selected {
+                background-color: green;
+            }
 
-      &:hover {
-        background-color: rgba(0, 0, 0, 0.212);
-        cursor: pointer;
-      }
+            &:hover {
+                background-color: rgba(0, 0, 0, 0.212);
+                cursor: pointer;
+            }
+        }
     }
-  }
 }
 
 .days-of-week {
-  display: flex;
-  span {
-    text-align: center;
-    font-weight: bold;
-    width: 14%;
-    height: 40px;
     display: flex;
-    justify-content: center;
-    align-items: center;
-  }
+    span {
+        text-align: center;
+        font-weight: bold;
+        width: 14%;
+        height: 40px;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+    }
 }
 
 .days {
-  display: flex;
-  flex-wrap: wrap;
-  > span {
-    cursor: pointer;
-    width: 14%;
-    height: 40px;
     display: flex;
-    justify-content: center;
-    align-items: center;
+    flex-wrap: wrap;
+    > span {
+        cursor: pointer;
+        width: 14%;
+        height: 40px;
+        display: flex;
+        justify-content: center;
+        align-items: center;
 
-    &.selected {
-      background-color: green;
-    }
+        &.selected {
+            background-color: green;
+        }
 
-    &.inactive {
-      cursor: default;
-      color: rgb(210, 210, 210);
+        &.inactive {
+            cursor: default;
+            color: rgb(210, 210, 210);
+        }
     }
-  }
 }
 
 ::-webkit-scrollbar {
-  width: 10px;
+    width: 10px;
 }
 
 /* Track */
 ::-webkit-scrollbar-track {
-  background: transparent;
+    background: transparent;
 }
 
 /* Handle */
 ::-webkit-scrollbar-thumb {
-  transition: all 0.5s ease;
-  background: transparent;
-  border-radius: 24px;
+    transition: all 0.5s ease;
+    background: transparent;
+    border-radius: 24px;
 }
 
 /* Handle on hover */
 ::-webkit-scrollbar-thumb:hover {
-  background: #cecece;
+    background: #cecece;
 }

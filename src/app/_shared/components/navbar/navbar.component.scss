@@ -1,9 +1,11 @@
+@import "variables";
+
 .main_container {
     display: flex;
     align-items: center;
     justify-content: space-between;
     padding: 18px 24px;
-    background-color: white;
+    background-color: $globalWhiteColor;
     position: relative;
 
     .logo_and_name_container {
@@ -12,7 +14,7 @@
             align-items: center;
             justify-content: center;
             text-decoration: none;
-            color: #48525c;
+            color: $midBlueColor;
 
             > img {
                 height: 24px;
@@ -55,19 +57,19 @@
             li {
                 a {
                     text-decoration: none;
-                    color: #111111;
+                    color: $globalBlackColor;
                     font-weight: 500;
                     font-size: 16px;
                     font-family: "Unbounded", sans-serif;
                     line-height: 1.5em;
 
                     &:hover {
-                        color: #468a8e;
+                        color: $midGreenColor;
                         text-decoration-line: underline;
                     }
 
                     &.active-link {
-                        color: #468a8e;
+                        color: $midGreenColor;
                         text-decoration-line: underline;
                     }
                 }
@@ -104,7 +106,7 @@
             top: 100%;
             left: 0;
             width: 100%;
-            background-color: white;
+            background-color: $globalWhiteColor;
 
             ul.route_list {
                 display: none;
