@@ -5,9 +5,10 @@
     flex-direction: column;
     align-items: center;
     background-color: $globalWhiteColor;
-    width: 20rem;
+    width: 15rem;
     background-color: $brandExtraLightPrimaryColor;
-    height: 22rem;
+    height: 16rem;
+    transition: all 1.2s ease;
 }
 
 .header {
@@ -15,9 +16,27 @@
     justify-content: space-between;
     width: 100%;
     align-items: center;
+    color: $darkGreyColor;
 
     > span {
+        display: flex;
+        align-items: center;
         cursor: pointer;
+        gap: 0.1rem;
+        >img{
+            transition: all 0.2s ease;
+            height: 1.3rem;
+            &.yearSelectionActive{
+                transform: rotate(180deg);
+            }
+        }
+    }
+    .arrows{
+        display: flex;
+        gap: 1rem;
+        img {
+            height: 1rem;
+        }
     }
 }
 
@@ -29,13 +48,13 @@
         display: grid;
         grid-template-columns: 1fr 1fr 1fr;
         overflow-y: scroll;
-        gap: 1rem;
+        row-gap: 2rem;
 
         span {
             text-align: center;
-            padding: 1.5rem;
             transition: all 0.3s ease;
             border-radius: 24px;
+            padding: 0.5rem;
 
             &.selected {
                 background-color: $brandDarkPrimaryColor;

@@ -244,12 +244,56 @@
 
 .modal_content {
     background-color: $brandExtraLightPrimaryColor;
-    border-radius: 35px;
+    border-radius: 30px;
     display: flex;
-    padding: 1rem;
+    // width: 33rem;
     // flex-direction: column;
 
     .date_picker {
+        padding: 1rem;
+        border-left: 1px solid $darkGreyColor;
+        display: flex;
+        flex-direction: column;
+        justify-content: space-between;
+
+        .picker_options {
+            display: flex;
+            align-items: end;
+            justify-content: end;
+            gap: 1rem;
+            .options {
+                color: $brandPrimaryColor;
+                cursor: pointer;
+            }
+        }
+    }
+
+    .content {
+        padding: 1rem;
+        display: flex;
+        gap: 1.5rem;
+        flex-direction: column;
+        justify-content: space-between;
+        align-items: start;
+        color: $offBlackColor;
+        width: 10rem;
+        .details {
+            display: flex;
+            gap: 1.5rem;
+            font-size: 0.8rem;
+            color: $offBlackColor;
+            flex-direction: column;
+            > span {
+                font-size: 2rem;
+                &.dateInputActive{
+                    font-size: 1.3rem;
+                }
+            }
+        }
+
+        >img{
+            height: 1.5rem;
+        }
     }
 }
 
@@ -260,5 +304,10 @@
                 width: 100%;
             }
         }
+    }
+
+    .modal_content {
+        flex-direction: column;
+        width: unset;
     }
 }

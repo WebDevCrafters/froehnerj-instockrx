@@ -157,7 +157,7 @@
                 [control]="getControl(i, 'brand')"
                 id="brandName"
                 label="Brand Name"
-                placeholder="Mankind"
+                placeholder="Preffered Brand"
               />
             </span>
           </div>
@@ -235,9 +235,29 @@
   (closeModal)="closeDateChooserModal()"
 >
   <div class="modal_content">
-    <div class="content">Select date</div>
+    <div class="content">
+      <div class="details">
+        <p>Select date</p>
+        <span [ngClass]="{ dateInputActive: isDateInputActive }">
+          {{ selectedDate }}
+        </span>
+      </div>
+      @if (isDateInputActive) {
+      <img src="assets/images/svg/calendar-icon.svg" alt="" srcset="" />
+      } @else {
+      <img src="assets/images/svg/edit-icon.svg" alt="" srcset="" />
+      }
+    </div>
     <div class="date_picker">
+      @if (isDateInputActive) {
+      <app-input type="dates" label="Enter date" bg="#fae7e0" />
+      } @else {
       <app-date-picker (onDatePicked)="onDatePicked($event)" />
+      }
+      <div class="picker_options">
+        <span class="options">Cancel</span>
+        <span class="options">OK</span>
+      </div>
     </div>
   </div>
 </app-modal>

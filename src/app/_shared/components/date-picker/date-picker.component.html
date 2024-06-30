@@ -2,12 +2,18 @@
 <div class="calendar-container">
   <div class="header">
     <span (click)="toggleYearSelection()"
-      >{{ monthNames[currentMonth] }} {{ currentYear }}</span
+      >{{ monthNames[currentMonth] }} {{ currentYear }}
+      <img src="assets/images/svg/arrow-down.svg" alt="Dropdown"  [ngClass]="{ yearSelectionActive: yearSelectionActive }">
+      </span
     >
     @if (!yearSelectionActive) {
-    <div>
-      <span (click)="previousMonth()"><</span>
-      <span (click)="nextMonth()">></span>
+    <div class="arrows">
+      <span (click)="previousMonth()"
+        ><img src="assets/images/svg/arrow-backward.svg" alt="Forward"
+      /></span>
+      <span (click)="nextMonth()"
+        ><img src="assets/images/svg/arrow-forward.svg" alt="Backward"
+      /></span>
     </div>
     }
   </div>
