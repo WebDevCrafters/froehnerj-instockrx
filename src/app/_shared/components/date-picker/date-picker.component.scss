@@ -5,9 +5,9 @@
     flex-direction: column;
     align-items: center;
     background-color: $globalWhiteColor;
-    width: 20rem;
+    width: 15rem;
     background-color: $brandExtraLightPrimaryColor;
-    height: 22rem;
+    height: 16rem;
 }
 
 .header {
@@ -29,13 +29,14 @@
         display: grid;
         grid-template-columns: 1fr 1fr 1fr;
         overflow-y: scroll;
-        gap: 1rem;
+        row-gap: 2rem;
+
 
         span {
             text-align: center;
-            padding: 1.5rem;
             transition: all 0.3s ease;
             border-radius: 24px;
+            padding: 0.5rem;
 
             &.selected {
                 background-color: $brandDarkPrimaryColor;
