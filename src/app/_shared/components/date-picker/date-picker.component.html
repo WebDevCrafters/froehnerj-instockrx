@@ -36,6 +36,7 @@
           inactive: checkIfPastDay(day),
           selected: checkIfSelectedDay(day)
         }"
+        (click)="onSelectDay(day)"
         >{{ day }}</span
       >
       }

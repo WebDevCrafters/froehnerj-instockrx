@@ -70,13 +70,15 @@
 
 .days-of-week {
   display: flex;
-  justify-content: space-around;
-}
-
-.days-of-week span {
-  width: 14%;
-  text-align: center;
-  font-weight: bold;
+  span {
+    text-align: center;
+    font-weight: bold;
+    width: 14%;
+    height: 40px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
 }
 
 .days {
@@ -84,22 +86,21 @@
   flex-wrap: wrap;
   > span {
     cursor: pointer;
+    width: 14%;
+    height: 40px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
     &.selected {
       background-color: green;
     }
+
     &.inactive {
       cursor: default;
       color: rgb(210, 210, 210);
     }
   }
-}
-
-.days span {
-  width: 14%;
-  height: 40px;
-  display: flex;
-  justify-content: center;
-  align-items: center;
 }
 
 ::-webkit-scrollbar {

@@ -18,7 +18,7 @@ export class DatePickerComponent implements OnInit {
   currentMonth: number = this.dateToday.getMonth();
   currentYear: number = this.dateToday.getFullYear();
   yearsArray: number[] = [];
-  weekNames = ['Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat'];
+  weekNames = ['S', 'M', 'T', 'W', 'T', 'F', 'S'];
   monthNames: string[] = [
     'January',
     'February',
@@ -117,5 +117,14 @@ export class DatePickerComponent implements OnInit {
       return true;
     }
     return false;
+  }
+
+  onSelectDay(day: number | null) {
+    if (!day) return;
+    if (this.checkIfPastDay(day)) return;
+    
+    this.selectedDay = day;
+    this.selectedMonth = this.currentMonth;
+    this.selectedYear = this.currentYear;
   }
 }
