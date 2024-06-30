@@ -1,3 +1,5 @@
+@import "variables";
+
 #main_container {
     width: 100%;
     display: flex;
@@ -6,12 +8,12 @@
     flex-direction: column;
     gap: 20px;
     padding: 100px 30px;
-    background-color: #ffffff;
+    background-color: $globalWhiteColor;
 
     .heading {
         font-size: 76px;
         font-weight: 700;
-        color: #001122;
+        color: $globalBlackColor;
         text-align: center;
         letter-spacing: -2.8px;
         line-height: 1.2em;
@@ -23,11 +25,11 @@
         margin: 0 auto;
         padding: 0 16px;
         font-family: Arial, sans-serif;
-        border: 1px solid #ff6b6b;
+        border: 1px solid $brandPrimaryColor;
         border-radius: 16px;
 
         .faq_item {
-            border-bottom: 1px solid #ff6b6b;
+            border-bottom: 1px solid $brandPrimaryColor;
 
             &:last-child {
                 border-bottom: none;
@@ -46,7 +48,7 @@
                     display: flex;
                     align-items: flex-start;
                     justify-content: center;
-                    color: #dac8d0;
+                    color: $darkGreyColor;
                     font-size: 30px;
                     width: 30px;
                     transition: transform 0.3s ease;
@@ -70,12 +72,12 @@
                         padding: 20px 0 10px 0;
                         font-size: 16px;
                         font-family: "Unbounded", sans-serif;
-                        color: #333333;
+                        color: $offBlackColor;
                     }
 
                     .faq_answer {
                         font-size: 16px;
-                        color: #666666;
+                        color: $darkGreyColor;
                         width: 100%;
                         line-height: 1.5em;
                         padding: 0;

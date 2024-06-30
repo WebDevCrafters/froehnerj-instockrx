@@ -1,5 +1,7 @@
+@import "variables";
+
 .main_container {
-    background-color: #132f4e;
+    background-color: $darkBlueColor;
     display: flex;
     align-items: center;
     justify-content: center;
@@ -10,7 +12,7 @@
         width: 55%;
 
         .vr {
-            border: 1px solid #ff6b6b;
+            border: 1px solid $brandPrimaryColor;
             margin: 20px 0;
         }
 
@@ -25,31 +27,31 @@
                 .header {
                     font-size: 16px;
                     font-family: "Unbounded", sans-serif;
-                    color: white;
+                    color: $globalWhiteColor;
                     margin-bottom: 16px;
                 }
 
                 li {
                     list-style: none;
                     margin-bottom: 12px;
-                    color: #f8f1e5;
+                    color: $offWhiteColor;
 
                     a {
                         cursor: pointer;
                         text-decoration: none;
-                        color: #f8f1e5;
+                        color: $offWhiteColor;
                         font-size: 16px;
-                        color: #f8f1e5;
+                        color: $offWhiteColor;
                         font-weight: 600;
                         line-height: 1.5em;
 
                         &:hover {
-                            color: #468a8e;
+                            color: $midGreenColor;
                             text-decoration-line: underline;
                         }
 
                         &.active-link {
-                            color: #111111;
+                            color: $midGreenColor;
                             text-decoration-line: underline;
                         }
                     }
@@ -69,7 +71,7 @@
 
                 .heading,
                 .sub_heading {
-                    color: #f8f1e5;
+                    color: $offWhiteColor;
                 }
             }
 
