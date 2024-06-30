@@ -7,22 +7,26 @@ import { PatientsComponent } from '../pages/patients/patients.component';
 import { PricingComponent } from '../pages/pricing/pricing.component';
 import { ProvidersComponent } from '../pages/providers/providers.component';
 import { LayoutComponent } from './layout.component';
+import { PrivacyComponent } from '../pages/privacy/privacy.component';
+import { TermsOfServiceComponent } from '../pages/terms-of-service/terms-of-service.component';
 
 const routes: Routes = [
-  {
-    path: APP_ROUTES._, component: LayoutComponent,
-    children: [
-      { path: APP_ROUTES._, component: HomeComponent },
-      { path: APP_ROUTES.about, component: AboutUsComponent },
-      { path: APP_ROUTES.patients, component: PatientsComponent },
-      { path: APP_ROUTES.pricing, component: PricingComponent },
-      { path: APP_ROUTES.providers, component: ProvidersComponent },
-    ]
-  },
+    {
+        path: APP_ROUTES._, component: LayoutComponent,
+        children: [
+            { path: APP_ROUTES._, component: HomeComponent },
+            { path: APP_ROUTES.about, component: AboutUsComponent },
+            { path: APP_ROUTES.patients, component: PatientsComponent },
+            { path: APP_ROUTES.pricing, component: PricingComponent },
+            { path: APP_ROUTES.providers, component: ProvidersComponent },
+            { path: APP_ROUTES.privacy, component: PrivacyComponent },
+            { path: APP_ROUTES.termsOfService, component: TermsOfServiceComponent },
+        ]
+    },
 ];
 
 @NgModule({
-  imports: [RouterModule.forChild(routes)],
-  exports: [RouterModule]
+    imports: [RouterModule.forChild(routes)],
+    exports: [RouterModule]
 })
 export class LayoutRoutingModule { }
