@@ -17,7 +17,7 @@ export class DatePickerComponent implements OnInit {
   selectedYear: number = this.dateToday.getFullYear();
   currentMonth: number = this.dateToday.getMonth();
   currentYear: number = this.dateToday.getFullYear();
-  @Output() onDatePicked = new EventEmitter<any>();
+  @Output() onDatePicked = new EventEmitter<number>();
   yearsArray: number[] = [];
   daysArray: (number | null)[] = [];
   weekNames = ['S', 'M', 'T', 'W', 'T', 'F', 'S'];

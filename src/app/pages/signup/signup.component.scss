@@ -7,7 +7,6 @@
     align-items: center;
     flex-direction: column;
     gap: 2rem;
-    // padding: 2rem;
     padding: 2rem;
 
     &.small_header_active {
@@ -21,7 +20,6 @@
         flex-direction: column;
 
         &.small_header {
-            // border: 1px solid red;
             width: 100%;
             display: flex;
             align-items: center;
@@ -86,7 +84,6 @@
     }
 
     .form_container {
-        // width: 50%;
         width: 100%;
         display: flex;
         align-items: center;
@@ -148,23 +145,22 @@
                 margin: 0.5rem 0;
                 flex-direction: column;
 
-                .options{
+                .options {
                     display: flex;
                     justify-content: space-between;
                     flex-direction: row;
                     align-items: center;
-                    
-                    >img{
+
+                    > img {
                         padding: 0.5rem;
                         cursor: pointer;
 
-                        &:hover{
+                        &:hover {
                             transition: background-color 0.2s ease;
                             background-color: rgba(0, 0, 0, 0.233);
                             border-radius: 50%;
                         }
                     }
-                    
                 }
 
                 .medication_info {
@@ -246,16 +242,14 @@
     }
 }
 
-.modal_content{
-    background-color: #F6E5E2;
-    border-radius: 12px;
-    position: relative;
+.modal_content {
+    background-color: $brandExtraLightPrimaryColor;
+    border-radius: 35px;
+    display: flex;
+    padding: 1rem;
+    // flex-direction: column;
 
-    .date_picker{
-        top: 0;
-        left: 0;
-        border: 5rem solid yellow;
-        position: absolute;
+    .date_picker {
     }
 }
 
