@@ -1,7 +1,7 @@
 import { Component } from '@angular/core';
 import { SectionBannerComponent } from '../_shared/components/section-banner/section-banner.component';
 import { HowItWorksComponent, StepsType } from '../_shared/components/how-it-works/how-it-works.component';
-import { SpecificationSectionComponent } from '../_shared/components/specification-section/specification-section.component';
+import { Specifications, SpecificationSectionComponent } from '../_shared/components/specification-section/specification-section.component';
 import { FAQSectionComponent } from '../_shared/components/faq-section/faq-section.component';
 
 @Component({
@@ -55,5 +55,16 @@ export class ProvidersComponent {
         {
             normalText: 'Patients only pay once we\'ve found their medication and have shared the pharmacy info with your practice.',
         }
+    ]
+
+    public specificationsArray: Specifications[] = [
+        {
+            imagePath: "assets/images/svg/phone-disabled-icon.svg",
+            caption: "No more calling around to find in stock pharmacies"
+        },
+        {
+            imagePath: "assets/images/svg/money-off-icon.svg",
+            caption: "No additional cost for your practice"
+        },
     ]
 }
