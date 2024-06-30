@@ -1,0 +1,23 @@
+<div class="infinit_scroll_container">
+  @for (section of [1,2]; track $index) {
+  <section id="infinite_scroll_section">
+    @for (item of infiniteSlideArray; track $index) {
+    <div class="card_container">
+      <div class="profile_and_name">
+        <div class="img_container">
+          <img [src]="item.imageSrc" alt="" />
+        </div>
+        <span>{{ item.name }}</span>
+      </div>
+      <div class="rating_container">
+        <img src="assets/images/png/stars-icon.png" alt="" />
+      </div>
+      <div class="review">
+        <div class="heading">{{ item.title }}</div>
+        <div class="content">{{ item.description }}</div>
+      </div>
+    </div>
+    }
+  </section>
+  }
+</div>

@@ -1,81 +1,10 @@
 .main_container {
-    #infinite_scroll_section {
-        width: max-content;
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        width: 100%;
-        gap: 20px;
-        overflow-x: hidden;
-        padding: 20px 0;
-
-        .card_container {
-            flex-shrink: 0;
-            height: 360px;
-            max-width: 447px;
-            padding: 30px;
-            box-shadow:
-                0 0.7961918735236395px 2.3885756205709185px -0.625px #0000000d,
-                0 2.414506143104518px 7.2435184293135535px -1.25px #0000000d,
-                0 6.382653521484461px 19.147960564453385px -1.875px #0000000d,
-                0 20px 60px -2.5px #0000000d;
-            border-radius: 20px;
-
-            .profile_and_name {
-                display: flex;
-                align-items: center;
-                justify-content: flex;
-
-                .img_container {
-                    border-radius: 50px;
-                    overflow: hidden;
-                    display: flex;
-                    align-items: center;
-                    justify-content: center;
-
-                    img {
-                        height: 50px;
-                        width: 50px;
-                    }
-                }
-
-                span {
-                    margin-left: 15px;
-                    font-size: 20px;
-                    font-weight: 600;
-                    letter-spacing: -0.5px;
-                    line-height: 1.4em;
-                    color: #001122;
-                }
-            }
-        }
-
-        .rating_container {
-            img {
-                height: 41px;
-                margin-left: -5px;
-            }
-        }
-
-        .review {
-            .heading {
-                color: #132f4e;
-                font-size: 19px;
-                font-weight: 700;
-                line-height: 1.6em;
-            }
-
-            .content {
-                font-size: 16px;
-                font-weight: 500;
-                line-height: 1.6em;
-                color: #666666;
-            }
-        }
-    }
+   
 }
 
 @media screen and (max-width: 800px) {
     .main_container {
     }
 }
+
+

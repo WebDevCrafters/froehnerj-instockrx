@@ -5,11 +5,12 @@ import { HowItWorksComponent, StepsType } from '../_shared/components/how-it-wor
 import { SpecificationSectionComponent } from '../_shared/components/specification-section/specification-section.component';
 import { CommonModule } from '@angular/common';
 import { FAQSectionComponent } from '../_shared/components/faq-section/faq-section.component';
+import { InfiniteSliderComponent } from '../_shared/components/infinite-slider/infinite-slider.component';
 
 @Component({
     selector: 'app-home',
     standalone: true,
-    imports: [ButtonComponent, SectionBannerComponent, HowItWorksComponent, SpecificationSectionComponent, FAQSectionComponent, CommonModule],
+    imports: [ButtonComponent, SectionBannerComponent,InfiniteSliderComponent, HowItWorksComponent, SpecificationSectionComponent, FAQSectionComponent, CommonModule],
     templateUrl: './home.component.html',
     styleUrl: './home.component.scss'
 })
