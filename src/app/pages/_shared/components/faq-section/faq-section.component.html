@@ -1,0 +1,25 @@
+<section id="main_container">
+  <h1 class="heading">{{ heading }}</h1>
+  <div class="faq_container">
+    @for(faq of faqs; track faqs;let idx = $index) {
+    <div class="faq_item">
+      <div class="toggle_container">
+        <span
+          class="faq_toggle"
+          [ngClass]="{ isOpen: faq.isOpen }"
+          (click)="toggleAnswer(idx)"
+          >+</span
+        >
+        <div class="text_container">
+          <div class="faq_question" (click)="toggleAnswer(idx)">
+            {{ faq.question }}
+          </div>
+          <div class="faq_answer" [ngClass]="{ isOpen: faq.isOpen }">
+            {{ faq.answer }}
+          </div>
+        </div>
+      </div>
+    </div>
+    }
+  </div>
+</section>
