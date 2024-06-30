@@ -1,6 +1,68 @@
 <div class="main_container">
-    <app-section-banner [title]="'About Us'"
-        [subHeading]="'We believe that everyone deserves access to the medications they need, and we\'re striving to make that a reality.'" />
+  <app-section-banner
+    [title]="'About Us'"
+    [subHeading]="
+      'At InStockRx, We  believe that everyone deserves timely access to the medications they need.'
+    "
+  />
 
-    <app-section-banner [title]="'Stop searching for your medications today'" [primaryBtnText]="'Find my meds'" />
+  <section id="about_ceo">
+    <div class="heading">We're a small team on a big mission:</div>
+    <div class="sub_heading">
+      To give everyone access to the medications they need
+    </div>
+    <div class="card_container">
+      <div class="card">
+        <div class="img_container">
+          <img src="assets/images/png/CEO-profile-picture.png" alt="" />
+        </div>
+        <div class="description">
+          <div class="name">JEREMY FROEHNER</div>
+          <div class="designation">Co-Founder & CTO</div>
+        </div>
+        <div class="footer">
+          <img src="assets/images/svg/linkedln-icon.svg" alt="" />
+          <img src="assets/images/svg/mail-icon.svg" alt="" />
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section id="details">
+    <div class="heading">Our Mission</div>
+    <div class="content">
+      We are committed to improving patient outcomes by optimizing the
+      distribution of medications across our network. Our innovative AI-powered
+      platform connects pharmacies, reducing inefficiencies and enhancing the
+      availability of essential medications. By partnering with healthcare
+      providers, pharmacies, and government institutions, we strive to make a
+      significant impact on the healthcare landscape.
+    </div>
+  </section>
+
+  <section id="details">
+    <div class="heading">Our Story</div>
+    <div class="content">
+      The journey of InStockRx began with a simple, yet profound realization:
+      too many patients suffer due to medication shortages and waste. Our
+      founders experienced this challenge firsthand and set out to create a
+      solution that bridges the gap between surplus and need. Today, we are
+      proud to support millions across the U.S., ensuring that critical
+      medications are always within reach.
+    </div>
+  </section>
+
+  <section id="details">
+    <div class="heading">Join Us</div>
+    <div class="content">
+      Stop searching for medications in vain. Join InStockRx and be part of a
+      community dedicated to transforming the pharmacy supply chain for better
+      health outcomes.
+    </div>
+  </section>
+
+  <app-section-banner
+    [title]="'Stop searching for your medications today'"
+    [primaryBtnText]="'Find my meds'"
+  />
 </div>

@@ -1,7 +1,158 @@
 .main_container {
+    #about_ceo {
+        min-height: 80vh;
+        width: 100%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        flex-direction: column;
+        gap: 20px;
+        padding: 100px 30px;
+
+        .heading {
+            font-size: 51px;
+            font-weight: 500;
+            color: #001122;
+            text-align: center;
+            letter-spacing: -0.7px;
+            margin-bottom: -20px;
+        }
+
+        .sub_heading {
+            font-size: 60px;
+            font-weight: 700;
+            color: #001122;
+            text-align: center;
+            letter-spacing: -2.8px;
+            width: 80%;
+        }
+
+        .card_container {
+            padding-top: 80px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            width: 100%;
+
+            .card {
+                width: 320px;
+                height: 365px;
+                box-shadow:
+                    0 0.7961918735236395px 2.3885756205709185px -0.625px #0000000d,
+                    0 2.414506143104518px 7.2435184293135535px -1.25px #0000000d,
+                    0 6.382653521484461px 19.147960564453385px -1.875px #0000000d,
+                    0 20px 60px -2.5px #0000000d;
+                border-radius: 20px;
+                padding: 20px;
+                display: flex;
+                align-items: center;
+                justify-content: space-between;
+                flex-direction: column;
+
+                .img_container {
+                    display: flex;
+                    align-items: center;
+                    justify-content: center;
+                    font-size: 100px;
+                    color: #ff6b6b;
+                    font-weight: 700;
+                    border-radius: 50%;
+                    border: 10px solid #ff6b6c;
+
+                    img {
+                        background: radial-gradient(circle, #ffffff 0%, #ffabab 100%);
+                        border-radius: 50%;
+                        width: 150px;
+                    }
+                }
+
+                .description {
+                    .name,
+                    .designation {
+                        font-size: 22px;
+                        color: #132f4e;
+                        text-align: center;
+                        font-weight: 600;
+                        letter-spacing: -0.5px;
+                        line-height: 1.4em;
+                    }
+                }
+
+                .footer {
+                    display: flex;
+                    align-items: center;
+                    justify-content: center;
+                    gap: 20px;
+
+                    img {
+                        cursor: pointer;
+                        height: 32px;
+                        width: 32px;
+                    }
+                }
+            }
+        }
+    }
+
+    #details {
+        min-height: 80vh;
+        width: 100%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        flex-direction: column;
+        gap: 20px;
+        padding: 100px 30px;
+
+        .heading {
+            font-size: 76px;
+            font-weight: 700;
+            color: #001122;
+            text-align: center;
+            letter-spacing: -2.8px;
+            line-height: 1.2em;
+            width: 80%;
+        }
+
+        .content {
+            padding-top: 40px;
+            width: 80%;
+            font-size: 24px;
+            font-weight: 500;
+            color: #888888;
+            letter-spacing: -0.7px;
+            line-height: 1.5em;
+        }
+    }
 }
 
 @media screen and (max-width: 800px) {
     .main_container {
+        #about_ceo {
+            padding: 100px 10px;
+            .heading {
+                font-size: 35px;
+            }
+
+            .sub_heading {
+                font-size: 40px;
+            }
+
+            .card_container {
+                padding-top: 30px;
+            }
+        }
+        #details {
+            padding: 100px 10px;
+            .heading {
+                width: 100%;
+                font-size: 40px;
+            }
+
+            .content {
+                padding-top: 10px;
+                font-size: 18px;
+            }
+        }
     }
 }
