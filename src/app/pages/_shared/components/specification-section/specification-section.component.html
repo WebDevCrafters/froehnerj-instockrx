@@ -1,5 +1,5 @@
 <section id="main_container">
-  <div class="heading">Never worry about finding your meds again</div>
+  <div class="heading">{{ title }}</div>
   <div class="feature_container">
     <div class="card">
       <div class="img_container">
@@ -8,15 +8,13 @@
       </div>
       <div class="caption">Success rate finding medications</div>
     </div>
+    @for (item of specificationsArray; track $index) {
     <div class="card">
-      <img src="assets/images/svg/phone-disabled-icon.svg" alt="" />
+      <img [src]="item.imagePath" alt="" />
       <div class="caption">
-        No more calling around to find in stock pharmacies
+        {{ item.caption }}
       </div>
     </div>
-    <div class="card">
-      <img src="assets/images/svg/check-icon.svg" alt="" />
-      <div class="caption">We'll find your meds or refund your search</div>
-    </div>
+    }
   </div>
 </section>

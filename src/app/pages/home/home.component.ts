@@ -2,7 +2,7 @@ import { Component, OnDestroy, OnInit } from '@angular/core';
 import { ButtonComponent } from '../../_shared/components/button/button.component';
 import { SectionBannerComponent } from '../_shared/components/section-banner/section-banner.component';
 import { HowItWorksComponent, StepsType } from '../_shared/components/how-it-works/how-it-works.component';
-import { SpecificationSectionComponent } from '../_shared/components/specification-section/specification-section.component';
+import { Specifications, SpecificationSectionComponent } from '../_shared/components/specification-section/specification-section.component';
 import { CommonModule } from '@angular/common';
 import { FAQSectionComponent } from '../_shared/components/faq-section/faq-section.component';
 import { InfiniteSliderComponent } from '../_shared/components/infinite-slider/infinite-slider.component';
@@ -10,7 +10,7 @@ import { InfiniteSliderComponent } from '../_shared/components/infinite-slider/i
 @Component({
     selector: 'app-home',
     standalone: true,
-    imports: [ButtonComponent, SectionBannerComponent,InfiniteSliderComponent, HowItWorksComponent, SpecificationSectionComponent, FAQSectionComponent, CommonModule],
+    imports: [ButtonComponent, SectionBannerComponent, InfiniteSliderComponent, HowItWorksComponent, SpecificationSectionComponent, FAQSectionComponent, CommonModule],
     templateUrl: './home.component.html',
     styleUrl: './home.component.scss'
 })
@@ -69,5 +69,16 @@ export class HomeComponent {
         {
             normalText: 'Send your doctor the pharmacy info and pick up your script!',
         }
+    ]
+
+    public specificationsArray: Specifications[] = [
+        {
+            imagePath: "assets/images/svg/phone-disabled-icon.svg",
+            caption: "No more calling around to find in stock pharmacies"
+        },
+        {
+            imagePath: "assets/images/svg/check-icon.svg",
+            caption: "We'll find your meds or refund your search"
+        },
     ]
 }

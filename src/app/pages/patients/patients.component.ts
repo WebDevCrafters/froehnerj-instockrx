@@ -1,7 +1,7 @@
 import { Component } from '@angular/core';
 import { SectionBannerComponent } from '../_shared/components/section-banner/section-banner.component';
 import { HowItWorksComponent, StepsType } from '../_shared/components/how-it-works/how-it-works.component';
-import { SpecificationSectionComponent } from '../_shared/components/specification-section/specification-section.component';
+import { Specifications, SpecificationSectionComponent } from '../_shared/components/specification-section/specification-section.component';
 import { FAQSectionComponent } from '../_shared/components/faq-section/faq-section.component';
 
 @Component({
@@ -66,5 +66,16 @@ export class PatientsComponent {
         {
             normalText: 'Send your doctor the pharmacy info and pick up your script!',
         }
+    ]
+
+    public specificationsArray: Specifications[] = [
+        {
+            imagePath: "assets/images/svg/phone-disabled-icon.svg",
+            caption: "No more calling around to find in stock pharmacies"
+        },
+        {
+            imagePath: "assets/images/svg/check-icon.svg",
+            caption: "We'll find your meds or refund your search"
+        },
     ]
 }
