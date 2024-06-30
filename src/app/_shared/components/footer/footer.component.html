@@ -26,9 +26,25 @@
       </ul>
       <ul>
         <h1 class="header">Company</h1>
-        <li>Privacy</li>
-        <li>Terms of Service</li>
-        <li>Contact Us</li>
+        <li>
+          <a
+            [routerLink]="APP_ROUTES.privacy"
+            target="_blank"
+            routerLinkActive="active-link"
+            >Privacy
+          </a>
+        </li>
+        <li>
+          <a
+            [routerLink]="APP_ROUTES.termsOfService"
+            target="_blank"
+            routerLinkActive="active-link"
+            >Terms of Service
+          </a>
+        </li>
+        <li>
+          <a routerLinkActive="active-link">Contact Us </a>
+        </li>
       </ul>
     </div>
     <hr class="vr" />

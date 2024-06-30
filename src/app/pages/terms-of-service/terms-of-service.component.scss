@@ -1,0 +1,98 @@
+.main_container {
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+
+    .title {
+        text-align: center;
+        font-size: 40px;
+        font-weight: 700;
+        color: #333333;
+        letter-spacing: -0.8px;
+        line-height: 1.2em;
+        width: 80%;
+        padding: 20px 30px;
+    }
+
+    .sub_heading {
+        text-align: center;
+        padding: 0 30px;
+        width: 80%;
+        font-size: 22px;
+        font-weight: 600;
+        color: #333333;
+        letter-spacing: 0;
+        line-height: 2em;
+        padding-bottom: 30px;
+    }
+
+    #section {
+        width: 100%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        flex-direction: column;
+        gap: 15px;
+        padding: 20px 30px;
+
+        .heading {
+            font-size: 28px;
+            font-weight: 700;
+            color: #333333;
+            letter-spacing: -0.8px;
+            line-height: 1.2em;
+            width: 80%;
+        }
+
+        .content {
+            width: 80%;
+            font-size: 18px;
+            font-weight: 500;
+            color: #333333;
+            letter-spacing: 0;
+            line-height: 2em;
+
+            .imp_text {
+                padding: 10px 0;
+                width: 100%;
+                text-align: center;
+            }
+
+            ol {
+                li {
+                    padding: 10px 0;
+                }
+            }
+        }
+    }
+}
+
+@media screen and (max-width: 800px) {
+    .main_container {
+        .title {
+            font-size: 30px;
+            padding: 20px 10px;
+        }
+
+        .sub_heading {
+            padding: 0 10px;
+            font-size: 18px;
+            padding-bottom: 20px;
+        }
+
+        #section {
+            padding: 20px 10px;
+
+            .heading {
+                font-size: 24px;
+            }
+
+            .content {
+                padding-top: 10px;
+                font-size: 16px;
+            }
+        }
+    }
+}

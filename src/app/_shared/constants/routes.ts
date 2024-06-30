@@ -4,8 +4,10 @@ const APP_ROUTES = {
     patients: "patients",
     providers: "providers",
     about: "about",
-    findMyMeds:"find-my-meds",
-    signup:"signup"
+    findMyMeds: "find-my-meds",
+    signup: "signup",
+    privacy: "privacy",
+    termsOfService: "InStockRxTerms"
 }
 
 export default APP_ROUTES;
