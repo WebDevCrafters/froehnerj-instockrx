@@ -246,10 +246,24 @@
     background-color: $brandExtraLightPrimaryColor;
     border-radius: 35px;
     display: flex;
-    padding: 1rem;
+    width: 35rem;
     // flex-direction: column;
-
+    
     .date_picker {
+        padding: 1rem;
+        border-left: 1px solid $darkGreyColor;
+    }
+    
+    .content{
+        padding: 1rem;
+        display: flex;
+        gap: 1.5rem;
+        flex-direction: column;
+        color: $offBlackColor;
+        width: 10rem;
+        >span{
+            font-size: 2rem;
+        }
     }
 }
 
@@ -260,5 +274,10 @@
                 width: 100%;
             }
         }
+    }
+
+    .modal_content{
+        flex-direction: column;
+        width: unset;
     }
 }
