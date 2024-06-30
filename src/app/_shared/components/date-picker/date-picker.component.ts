@@ -1,22 +1,24 @@
 import { Component, OnInit } from '@angular/core';
-import {
-  getDaysInMonth,
-  getNextMonthStartDates,
-  getPreviousMonthLastDates,
-  getStartDayOfMonth,
-} from '../../utils/dateTime';
+import { getDaysInMonth, getStartDayOfMonth } from '../../utils/dateTime';
+import { CommonModule } from '@angular/common';
 
 @Component({
   selector: 'app-date-picker',
   standalone: true,
-  imports: [],
+  imports: [CommonModule],
   templateUrl: './date-picker.component.html',
   styleUrl: './date-picker.component.scss',
 })
 export class DatePickerComponent implements OnInit {
-  month: number = 6; // June
-  year: number = 2024; // Default year
-  weekArr = ['Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat'];
+  yearSelectionActive: boolean = false;
+  dateToday = new Date();
+  selectedDay: number = this.dateToday.getDate();
+  selectedMonth: number = this.dateToday.getMonth();
+  selectedYear: number = this.dateToday.getFullYear();
+  currentMonth: number = this.dateToday.getMonth();
+  currentYear: number = this.dateToday.getFullYear();
+  yearsArray: number[] = [];
+  weekNames = ['S', 'M', 'T', 'W', 'T', 'F', 'S'];
   monthNames: string[] = [
     'January',
     'February',
@@ -36,15 +38,21 @@ export class DatePickerComponent implements OnInit {
   constructor() {}
 
   ngOnInit(): void {
-    this.generateCalendar(this.year, this.month);
+    this.generateCalendar(this.currentYear, this.currentMonth);
+    this.generateYearArray();
+  }
+
+  generateYearArray() {
+    for (let i = this.currentYear; i < this.currentYear + 100; i++) {
+      this.yearsArray.push(i);
+    }
   }
 
   generateCalendar(year: number, month: number): void {
-    console.log(year, month);
-    const startDay = getStartDayOfMonth(year, month); // Day of the week the month starts on (0-6, Monday = 0)
-    const daysInMonth = getDaysInMonth(year, month); // Number of days in the month
-
-    console.log({ startDay }, this.weekArr[startDay]);
+    this.daysArray = [];
+    const startDay = getStartDayOfMonth(year, month);
+    const daysInMonth = getDaysInMonth(year, month);
+    console.log(month, daysInMonth);
     for (let i = 0; i < startDay; i++) {
       this.daysArray.push(null);
     }
@@ -55,16 +63,68 @@ export class DatePickerComponent implements OnInit {
   }
 
   previousMonth() {
-    const newMonth = this.month - 1;
-    this.month = newMonth;
-    this.daysArray = [];
-    this.generateCalendar(this.year, newMonth);
+    let newMonth = this.currentMonth - 1;
+    if (newMonth === -1) {
+      newMonth = 11;
+      this.currentYear -= 1;
+    }
+    this.currentMonth = newMonth;
+    this.generateCalendar(this.currentYear, newMonth);
   }
 
   nextMonth() {
-    const newMonth = this.month + 1;
-    this.month = newMonth;
-    this.daysArray = [];
-    this.generateCalendar(this.year, newMonth);
+    const newMonth = (this.currentMonth + 1) % 12;
+    if (newMonth === 0) {
+      this.currentYear += 1;
+    }
+    this.currentMonth = newMonth;
+    this.generateCalendar(this.currentYear, newMonth);
+  }
+
+  toggleYearSelection() {
+    this.yearSelectionActive = !this.yearSelectionActive;
+  }
+
+  onSelectYear(newYear: number) {
+    this.currentYear = newYear;
+    this.generateCalendar(newYear, this.currentMonth);
+    this.toggleYearSelection();
+  }
+
+  getTimestamp(year: number, month: number, day: number) {
+    const date = new Date(year, month, day);
+    return date.getTime();
+  }
+
+  checkIfPastDay(day: number | null): boolean {
+    if (!day) return true;
+    const inputDate = new Date(this.currentYear, this.currentMonth, day);
+    const startOfToday = new Date(
+      this.dateToday.getFullYear(),
+      this.dateToday.getMonth(),
+      this.dateToday.getDate()
+    );
+    return inputDate.getTime() < startOfToday.getTime();
+  }
+
+  checkIfSelectedDay(day: number | null) {
+    if (!day) return false;
+    if (
+      this.currentYear === this.selectedYear &&
+      this.currentMonth === this.selectedMonth &&
+      day === this.selectedDay
+    ) {
+      return true;
+    }
+    return false;
+  }
+
+  onSelectDay(day: number | null) {
+    if (!day) return;
+    if (this.checkIfPastDay(day)) return;
+    
+    this.selectedDay = day;
+    this.selectedMonth = this.currentMonth;
+    this.selectedYear = this.currentYear;
   }
 }

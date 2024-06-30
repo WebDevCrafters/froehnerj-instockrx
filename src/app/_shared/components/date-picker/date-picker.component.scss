@@ -1,65 +1,125 @@
 /* src/app/calendar/calendar.component.css */
 .calendar-container {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    padding: 20px;
-    background-color: white;
-    border-radius: 10px;
-    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-    width: 25rem;
-  }
-  
-  .header {
-    display: flex;
-    justify-content: space-between;
-    width: 100%;
-    align-items: center;
-  }
-  
-  .header h2 {
-    font-size: 18px;
-    font-weight: bold;
-  }
-  
-  .dropdown {
-    display: flex;
-    align-items: center;
-  }
-  
-  .dropdown button {
-    background: none;
-    border: none;
-    font-size: 16px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 20px;
+  background-color: white;
+  border-radius: 10px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  width: 25rem;
+}
+
+.header {
+  display: flex;
+  justify-content: space-between;
+  width: 100%;
+  align-items: center;
+
+  > span {
     cursor: pointer;
   }
-  
-  .calendar {
-    margin-top: 20px;
-    width: 100%;
+}
+
+.header h2 {
+  font-size: 18px;
+  font-weight: bold;
+}
+
+.dropdown {
+  display: flex;
+  align-items: center;
+}
+
+.dropdown button {
+  background: none;
+  border: none;
+  font-size: 16px;
+  cursor: pointer;
+}
+
+.calendar {
+  margin-top: 20px;
+  width: 100%;
+
+  &.yearSelectionActive {
+    height: 17rem;
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    // row-gap: 2rem;
+    overflow-y: scroll;
+    padding-top: 1rem;
+
+    span {
+      text-align: center;
+      padding: 1.5rem;
+      transition: all 0.3s ease;
+      border-radius: 24px;
+
+      &.selected {
+        background-color: green;
+      }
+
+      &:hover {
+        background-color: rgba(0, 0, 0, 0.212);
+        cursor: pointer;
+      }
+    }
   }
-  
-  .days-of-week {
-    display: flex;
-    justify-content: space-around;
-  }
-  
-  .days-of-week span {
-    width: 14%;
+}
+
+.days-of-week {
+  display: flex;
+  span {
     text-align: center;
     font-weight: bold;
-  }
-  
-  .days {
-    display: flex;
-    flex-wrap: wrap;
-  }
-  
-  .days span {
     width: 14%;
     height: 40px;
     display: flex;
     justify-content: center;
     align-items: center;
   }
-  
+}
+
+.days {
+  display: flex;
+  flex-wrap: wrap;
+  > span {
+    cursor: pointer;
+    width: 14%;
+    height: 40px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    &.selected {
+      background-color: green;
+    }
+
+    &.inactive {
+      cursor: default;
+      color: rgb(210, 210, 210);
+    }
+  }
+}
+
+::-webkit-scrollbar {
+  width: 10px;
+}
+
+/* Track */
+::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+/* Handle */
+::-webkit-scrollbar-thumb {
+  transition: all 0.5s ease;
+  background: transparent;
+  border-radius: 24px;
+}
+
+/* Handle on hover */
+::-webkit-scrollbar-thumb:hover {
+  background: #cecece;
+}
