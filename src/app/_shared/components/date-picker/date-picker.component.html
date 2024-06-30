@@ -1,16 +1,29 @@
 <!-- src/app/calendar/calendar.component.html -->
 <div class="calendar-container">
   <div class="header">
-    <span>{{ monthNames[month-1] }}, {{ year }}</span>
+    <span (click)="toggleYearSelection()"
+      >{{ monthNames[selectedMonth] }} {{ selectedYear }}</span
+    >
     <div>
-        <span (click)="previousMonth()"><</span>
-        <span (click)="nextMonth()">></span>
+      <span (click)="previousMonth()"><</span>
+      <span (click)="nextMonth()">></span>
     </div>
   </div>
-  
-  <div class="calendar">
+
+  <div
+    class="calendar"
+    [ngClass]="{ yearSelectionActive: yearSelectionActive }"
+  >
+    @if (yearSelectionActive) { @for (year of yearsArray; track $index) {
+    <span
+      (click)="onSelectYear(year)"
+      [ngClass]="{ selected: selectedYear === year }"
+      >{{ year }}</span
+    >
+    } } @else{
+
     <div class="days-of-week">
-      @for ( day of weekArr; track $index) {
+      @for ( day of weekNames; track $index) {
       <span>{{ day }}</span>
       }
     </div>
@@ -20,5 +33,6 @@
 
       }
     </div>
+    }
   </div>
 </div>

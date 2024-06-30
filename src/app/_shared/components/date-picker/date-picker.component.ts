@@ -5,18 +5,22 @@ import {
   getPreviousMonthLastDates,
   getStartDayOfMonth,
 } from '../../utils/dateTime';
+import { CommonModule } from '@angular/common';
 
 @Component({
   selector: 'app-date-picker',
   standalone: true,
-  imports: [],
+  imports: [CommonModule],
   templateUrl: './date-picker.component.html',
   styleUrl: './date-picker.component.scss',
 })
 export class DatePickerComponent implements OnInit {
-  month: number = 6; // June
-  year: number = 2024; // Default year
-  weekArr = ['Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat'];
+  yearSelectionActive: boolean = false;
+  dateToday = new Date();
+  selectedMonth: number = this.dateToday.getMonth();
+  selectedYear: number = this.dateToday.getFullYear();
+  yearsArray: number[] = [];
+  weekNames = ['Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat'];
   monthNames: string[] = [
     'January',
     'February',
@@ -36,15 +40,24 @@ export class DatePickerComponent implements OnInit {
   constructor() {}
 
   ngOnInit(): void {
-    this.generateCalendar(this.year, this.month);
+    console.log(0);
+    this.generateCalendar(this.selectedYear, this.selectedMonth);
+    this.generateYearArray();
   }
 
+  generateYearArray() {
+    for (let i = this.selectedYear; i < this.selectedYear + 100; i++) {
+      this.yearsArray.push(i);
+    }
+    console.log(this.yearsArray);
+  }
+  
   generateCalendar(year: number, month: number): void {
-    console.log(year, month);
+    this.daysArray = [];
     const startDay = getStartDayOfMonth(year, month); // Day of the week the month starts on (0-6, Monday = 0)
     const daysInMonth = getDaysInMonth(year, month); // Number of days in the month
 
-    console.log({ startDay }, this.weekArr[startDay]);
+    console.log({ startDay }, this.weekNames[startDay]);
     for (let i = 0; i < startDay; i++) {
       this.daysArray.push(null);
     }
@@ -55,16 +68,24 @@ export class DatePickerComponent implements OnInit {
   }
 
   previousMonth() {
-    const newMonth = this.month - 1;
-    this.month = newMonth;
-    this.daysArray = [];
-    this.generateCalendar(this.year, newMonth);
+    const newMonth = this.selectedMonth - 1;
+    this.selectedMonth = newMonth;
+    this.generateCalendar(this.selectedYear, newMonth);
   }
 
   nextMonth() {
-    const newMonth = this.month + 1;
-    this.month = newMonth;
-    this.daysArray = [];
-    this.generateCalendar(this.year, newMonth);
+    const newMonth = this.selectedMonth + 1;
+    this.selectedMonth = newMonth;
+    this.generateCalendar(this.selectedYear, newMonth);
+  }
+
+  toggleYearSelection() {
+    this.yearSelectionActive = !this.yearSelectionActive;
+  }
+
+  onSelectYear(newYear: number){
+    this.selectedYear = newYear;
+    this.generateCalendar(newYear, this.selectedMonth)
+    this.toggleYearSelection();
   }
 }
