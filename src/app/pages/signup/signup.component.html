@@ -180,7 +180,7 @@
       </div>
       <div class="button_container" (click)="openDateChooserModal()">
         <app-button
-          title="Wed, June 6"
+          [title]="selectedDate"
           type="small_secondary"
           shape="square"
           [formButtonType]="'button'"
@@ -236,10 +236,8 @@
 >
   <div class="modal_content">
     <div class="content">Select date</div>
-    <mat-form-field>
-      <input matInput [matDatepicker]="picker" placeholder="Choose a date">
-      <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
-      <mat-datepicker #picker [opened]="true"></mat-datepicker>
-    </mat-form-field>
+    <div class="date_picker">
+      <app-date-picker (onDatePicked)="onDatePicked($event)" />
+    </div>
   </div>
 </app-modal>

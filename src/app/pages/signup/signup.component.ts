@@ -16,13 +16,10 @@ import {
   emailValidator,
   requiredValidator,
 } from '../../_shared/utils/Validators';
-import { checkPrime } from 'crypto';
 import { CheckboxComponent } from '../../_shared/components/checkbox/checkbox.component';
 import { ModalComponent } from '../../_shared/components/modal/modal.component';
-import { MatDatepickerModule } from '@angular/material/datepicker';
-import { MatInputModule } from '@angular/material/input';
-import { MatNativeDateModule } from '@angular/material/core';
-import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { DatePickerComponent } from '../../_shared/components/date-picker/date-picker.component';
+import { formatTimestamp } from '../../_shared/utils/dateTime';
 
 @Component({
   selector: 'app-signup',
@@ -34,9 +31,7 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
     ReactiveFormsModule,
     CheckboxComponent,
     ModalComponent,
-    MatDatepickerModule, 
-    MatNativeDateModule,  
-    MatInputModule, 
+    DatePickerComponent,
   ],
   templateUrl: './signup.component.html',
   styleUrl: './signup.component.scss',
@@ -45,7 +40,7 @@ export class SignupComponent {
   stepNumber: number = 2;
   modalVisible: boolean = false;
   selectedPackage: string = '2';
-  selectedDate: Date = new Date();
+  selectedDate: string = formatTimestamp(new Date().getTime());
   packageOptions = [
     {
       id: '1',
@@ -109,7 +104,7 @@ export class SignupComponent {
         brand: new FormControl(''),
       }),
     ]),
-    // pickupDate: new FormControl('', [Validators.required]),
+    pickupDate: new FormControl(new Date().getTime(), [Validators.required]),
   });
 
   createPrescribedMedicationFormGroup(): FormGroup {
@@ -199,11 +194,16 @@ export class SignupComponent {
     return medicationFormGroup.get(formControlName) as FormControl;
   }
 
-  openDateChooserModal(){
+  openDateChooserModal() {
     this.modalVisible = true;
   }
 
   closeDateChooserModal(): void {
     this.modalVisible = false;
+  }
+
+  onDatePicked(timestamp: number) {
+    this.selectedDate = formatTimestamp(timestamp);
+    this.additionalInfoForm.controls.pickupDate.setValue(timestamp);
   }
 }
