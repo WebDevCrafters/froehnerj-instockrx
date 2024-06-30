@@ -4,10 +4,12 @@
     <span (click)="toggleYearSelection()"
       >{{ monthNames[selectedMonth] }} {{ selectedYear }}</span
     >
+    @if (!yearSelectionActive) {
     <div>
       <span (click)="previousMonth()"><</span>
       <span (click)="nextMonth()">></span>
     </div>
+    }
   </div>
 
   <div
@@ -29,7 +31,13 @@
     </div>
     <div class="days">
       @for ( day of daysArray; track $index) {
-      <span>{{ day }}</span>
+      <span
+        [ngClass]="{
+          inactive:
+            checkIfPastDay(selectedYear, selectedMonth, day || 1)
+        }"
+        >{{ day }}</span
+      >
 
       }
     </div>

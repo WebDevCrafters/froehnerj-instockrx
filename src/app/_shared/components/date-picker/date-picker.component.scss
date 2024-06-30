@@ -56,11 +56,11 @@
       transition: all 0.3s ease;
       border-radius: 24px;
 
-      &.selected{
+      &.selected {
         background-color: green;
       }
 
-      &:hover{
+      &:hover {
         background-color: rgba(0, 0, 0, 0.212);
         cursor: pointer;
       }
@@ -82,6 +82,13 @@
 .days {
   display: flex;
   flex-wrap: wrap;
+  > span {
+    cursor: pointer;
+    &.inactive {
+      cursor: default;
+      color: rgb(210, 210, 210);
+    }
+  }
 }
 
 .days span {
