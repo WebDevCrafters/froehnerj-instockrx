@@ -1,3 +1,5 @@
+@import "variables";
+
 .main_container {
     #search_pricing_container {
         min-height: 80vh;
@@ -12,7 +14,7 @@
         .heading {
             font-size: 76px;
             font-weight: 700;
-            color: #001122;
+            color: $globalBlackColor;
             text-align: center;
             letter-spacing: -2.8px;
             line-height: 1.2em;
@@ -86,7 +88,7 @@
                     font-size: 20px;
                     font-weight: 600;
                     line-height: 1.5em;
-                    color: #666666;
+                    color: $darkGreyColor;
                 }
 
                 .button_container {

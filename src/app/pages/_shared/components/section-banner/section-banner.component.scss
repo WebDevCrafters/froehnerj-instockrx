@@ -1,3 +1,5 @@
+@import "variables";
+
 #main_container {
     min-height: 80vh;
     width: 100%;
@@ -11,7 +13,7 @@
     .heading {
         font-size: 76px;
         font-weight: 700;
-        color: #001122;
+        color: $globalBlackColor;
         text-align: center;
         letter-spacing: -2.8px;
         line-height: 1.2em;
@@ -21,7 +23,7 @@
     .sub_heading {
         font-size: 24px;
         font-weight: 500;
-        color: #888888;
+        color: $darkGreyColor;
         text-align: center;
         letter-spacing: -0.7px;
         line-height: 1.5em;
