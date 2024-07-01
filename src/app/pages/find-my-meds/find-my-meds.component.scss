@@ -1,1 +1,248 @@
 @import "variables";
+
+.main_container {
+    min-height: 100vh;
+    display: flex;
+    align-items: flex;
+    justify-content: flex-start;
+    flex-direction: column;
+    padding: 18px 24px;
+    background-color: $globalWhiteColor;
+
+    .logo_and_name_container {
+        height: max-content;
+        a {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-decoration: none;
+            color: $midBlueColor;
+
+            > img {
+                height: 28px;
+            }
+
+            .name_container {
+                margin-left: 5px;
+
+                .heading {
+                    font-size: 15px;
+                    font-weight: 500;
+                    font-family: "Unbounded", sans-serif;
+                }
+                .sub_heading {
+                    font-size: 10px;
+                    font-family: "Unbounded", sans-serif;
+                    font-weight: 600;
+                }
+            }
+        }
+    }
+
+    #howItWorks {
+        width: 100%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        flex-direction: column;
+        gap: 20px;
+        padding: 30px 50px 100px 50px;
+
+        .heading {
+            font-size: 34px;
+            font-weight: 500;
+            color: $darkGreyColor;
+            text-align: center;
+            letter-spacing: -0.7px;
+            line-height: 1.5em;
+        }
+
+        .sub_heading {
+            font-size: 76px;
+            font-weight: 700;
+            color: $globalBlackColor;
+            text-align: center;
+            letter-spacing: -2.8px;
+            line-height: 1.2em;
+            width: 80%;
+        }
+
+        .content {
+            display: flex;
+            align-items: flex-start;
+            justify-content: center;
+            flex-direction: column;
+            margin-top: 20px;
+            width: 60%;
+
+            hr {
+                margin-left: 35px;
+                margin-top: 10px;
+                width: 5px;
+                height: 40px;
+                color: $brandPrimaryColor;
+                background-color: $brandPrimaryColor;
+                border: 3px solid $brandPrimaryColor;
+            }
+
+            .card {
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                margin-top: 10px;
+
+                .img_container {
+                    display: flex;
+                    align-items: center;
+                    justify-content: center;
+                    background-color: $brandPrimaryColor;
+                    border-radius: 40px;
+                    margin-right: 20px;
+                    padding: 15px;
+
+                    img {
+                        height: 50px;
+                        width: 50px;
+                    }
+                }
+
+                .caption {
+                    font-size: 28px;
+                    font-weight: 700;
+                    line-height: 1.5em;
+                    color: $darkBlueColor;
+                }
+            }
+
+            .btn_and_text_container {
+                width: 100%;
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                flex-direction: column;
+
+                .button_container {
+                    margin-top: 40px;
+                    width: 300px;
+                }
+
+                .footer {
+                    margin-top: 20px;
+                    font-size: 28px;
+                    line-height: 1.5em;
+                    color: $darkBlueColor;
+                }
+            }
+        }
+    }
+}
+
+@media screen and (max-width: 1000px) {
+    .main_container {
+        #howItWorks {
+            .heading {
+                font-size: 22px;
+            }
+
+            .sub_heading {
+                font-size: 44px;
+            }
+
+            .content {
+                width: 90%;
+
+                hr {
+                    margin-left: 23px;
+                    margin-top: 10px;
+                    width: 5px;
+                    height: 40px;
+                }
+
+                .card {
+                    margin-top: 10px;
+
+                    .img_container {
+                        padding: 15px;
+
+                        img {
+                            height: 20px;
+                            width: 20px;
+                        }
+                    }
+
+                    .caption {
+                        font-size: 18px;
+                    }
+                }
+
+                .btn_and_text_container {
+                    width: 100%;
+
+                    .button_container {
+                        width: 100%;
+                    }
+
+                    .footer {
+                        font-size: 18px;
+                    }
+                }
+            }
+        }
+    }
+}
+
+@media screen and (max-width: 800px) {
+    .main_container {
+        #howItWorks {
+            padding: 30px 0px;
+            .heading {
+                font-size: 20px;
+            }
+
+            .sub_heading {
+                font-size: 40px;
+            }
+
+            .content {
+                margin-top: 20px;
+                width: 90%;
+
+                hr {
+                    margin-left: 23px;
+                    margin-top: 10px;
+                    width: 5px;
+                    height: 40px;
+                }
+
+                .card {
+                    margin-top: 10px;
+
+                    .img_container {
+                        padding: 15px;
+
+                        img {
+                            height: 20px;
+                            width: 20px;
+                        }
+                    }
+
+                    .caption {
+                        font-size: 16px;
+                    }
+                }
+
+                .btn_and_text_container {
+                    width: 100%;
+
+                    .button_container {
+                        width: 100%;
+                    }
+
+                    .footer {
+                        font-size: 16px;
+                    }
+                }
+            }
+        }
+    }
+}
