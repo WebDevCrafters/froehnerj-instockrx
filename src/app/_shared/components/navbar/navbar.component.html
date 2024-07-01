@@ -52,12 +52,11 @@
           >About Us</a
         >
       </li>
-      <li><a>Login</a></li>
       <div class="button_container">
         <app-button
           [title]="'Find my meds'"
           [type]="'small_primary'"
-          (click)="openFindMyMeds()"
+          (clickEvent)="openFindMyMeds($event)"
         ></app-button>
       </div>
     </ul>

@@ -1,24 +1,30 @@
 <section id="main_container">
-    <h1 class="heading">
-        {{ title }}
-    </h1>
-    @if(subHeading) {
-    <h2 class="sub_heading">
-        {{ subHeading }}
-    </h2>
-    }
-    @if(primaryBtnText.length >0 || secondaryBtnText.length >0) {
-    <div class="button_container">
-        @if(primaryBtnText.length >0) {
-        <div class="primary_btn_container">
-            <app-button [title]="primaryBtnText" [type]="primaryBtnType"></app-button>
-        </div>
-        }
-        @if(secondaryBtnText.length >0) {
-        <div class="secondary_btn_container">
-            <app-button [title]="secondaryBtnText" [type]="secondaryBtnType"></app-button>
-        </div>
-        }
+  <h1 class="heading">
+    {{ title }}
+  </h1>
+  @if(subHeading) {
+  <h2 class="sub_heading">
+    {{ subHeading }}
+  </h2>
+  } @if(primaryBtnText.length >0 || secondaryBtnText.length >0) {
+  <div class="button_container">
+    @if(primaryBtnText.length >0) {
+    <div class="primary_btn_container">
+      <app-button
+        [title]="primaryBtnText"
+        [type]="primaryBtnType"
+        (clickEvent)="openFindMyMeds($event)"
+      ></app-button>
+    </div>
+    } @if(secondaryBtnText.length >0) {
+    <div class="secondary_btn_container">
+      <app-button
+        [title]="secondaryBtnText"
+        [type]="secondaryBtnType"
+        (clickEvent)="openSignUpPage($event)"
+      ></app-button>
     </div>
     }
+  </div>
+  }
 </section>
