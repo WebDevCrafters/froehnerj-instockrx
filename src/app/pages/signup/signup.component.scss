@@ -248,8 +248,10 @@
     display: flex;
     // width: 33rem;
     // flex-direction: column;
-
+    transition: all 1s ease;
+    
     .date_picker {
+        transition: all 1s ease;
         padding: 1rem;
         border-left: 1px solid $darkGreyColor;
         display: flex;

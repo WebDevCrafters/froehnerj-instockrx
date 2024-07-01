@@ -41,7 +41,7 @@ export class SignupComponent {
   modalVisible: boolean = false;
   isDateInputActive: boolean = false;
   selectedPackage: string = '2';
-  selectedDate: string = formatTimestamp(new Date().getTime());
+  selectedDate:number = new Date().getTime();
   packageOptions = [
     {
       id: '1',
@@ -204,7 +204,20 @@ export class SignupComponent {
   }
 
   onDatePicked(timestamp: number) {
-    this.selectedDate = formatTimestamp(timestamp);
-    this.additionalInfoForm.controls.pickupDate.setValue(timestamp);
+    this.selectedDate = timestamp;
+  }
+  
+  toggleDateInput() {
+    this.isDateInputActive = !this.isDateInputActive;
+  }
+
+  formatTimestamp(timestamp: number | null) {
+    if (!timestamp) return '';
+    return formatTimestamp(timestamp);
+  }
+
+  onPositivePress(){
+    this.additionalInfoForm.controls.pickupDate.setValue(this.selectedDate);
+    this.closeDateChooserModal()
   }
 }

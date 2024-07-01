@@ -180,7 +180,7 @@
       </div>
       <div class="button_container" (click)="openDateChooserModal()">
         <app-button
-          [title]="selectedDate"
+          [title]="formatTimestamp(additionalInfoForm.controls.pickupDate.value)"
           type="small_secondary"
           shape="square"
           [formButtonType]="'button'"
@@ -239,14 +239,20 @@
       <div class="details">
         <p>Select date</p>
         <span [ngClass]="{ dateInputActive: isDateInputActive }">
-          {{ selectedDate }}
+          {{ formatTimestamp(selectedDate) }}
         </span>
       </div>
-      @if (isDateInputActive) {
-      <img src="assets/images/svg/calendar-icon.svg" alt="" srcset="" />
-      } @else {
-      <img src="assets/images/svg/edit-icon.svg" alt="" srcset="" />
-      }
+      <div (click)="toggleDateInput()">
+        @if (isDateInputActive) {
+        <img src="assets/images/svg/calendar-icon.svg" alt="" srcset="" />
+        } @else {
+        <img
+          src="assets/images/svg/edit-icon.svg"
+          alt=""
+          srcset=""
+        />
+        }
+      </div>
     </div>
     <div class="date_picker">
       @if (isDateInputActive) {
@@ -255,8 +261,8 @@
       <app-date-picker (onDatePicked)="onDatePicked($event)" />
       }
       <div class="picker_options">
-        <span class="options">Cancel</span>
-        <span class="options">OK</span>
+        <span class="options" (click)="closeDateChooserModal()">Cancel</span>
+        <span class="options" (click)="onPositivePress()">OK</span>
       </div>
     </div>
   </div>
