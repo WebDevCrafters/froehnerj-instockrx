@@ -22,64 +22,10 @@
   </div>
   <div class="form_container">
     @if (stepNumber===1) {
-    <form
-      class="form"
-      [formGroup]="personalInfoForm"
-      (ngSubmit)="onPersonalInfoSubmit()"
-    >
-      <app-input
-        [control]="personalInfoForm.controls.fullName"
-        id="fullName"
-        label="Full Name"
-      />
-      <app-input
-        [control]="personalInfoForm.controls.phoneNumber"
-        id="phoneNumber"
-        label="Phone Number"
-        [type]="'phoneNumber'"
-      />
-      <app-input
-        [control]="personalInfoForm.controls.email"
-        id="email"
-        label="Email"
-      />
-      <div class="terms_container">
-        <div class="terms">
-          <div>
-            <app-checkbox [control]="termsControl" />
-          </div>
-          <span>
-            I have read and agree to the
-            <a href="#"> privacy policy </a>
-            and
-            <a href="#"> terms of service. </a>
-            {{
-              "\nI also agree to recieve SMS messages from FindMyMed by InStockRx regarding search status" +
-                "updates" +
-                "and marketting. Reply STOP to opt out, HELP for assistance. Standard message and data rates amay" +
-                "apply." +
-                "The tests are non-recurring."
-            }}
-          </span>
-        </div>
-        @if (termsControl.dirty && termsControl.touched && termsControl.invalid)
-        {
-        <span class="error_message">
-          <img src="assets/images/svg/exclamation.svg" alt="" />
-          Please agree to terms and conditions and privacy policy</span
-        >
-        }
-      </div>
-      <div class="continue_button_container">
-        <div>
-          <app-button
-            [title]="'Continue'"
-            [type]="'small_primary'"
-            [shape]="'rounded'"
-          />
-        </div>
-      </div>
-    </form>
+    <app-personal-info
+      [personalInfoForm]="personalInfoForm"
+      (onPersonalInfoSubmit)="onPersonalInfoSubmit()"
+    />
     } @else if(stepNumber===2){
     <form
       class="form"

@@ -24,6 +24,7 @@ import {
   formatTimestampToMMDDYYYY,
   mmddyyToTimestamp,
 } from '../../_shared/utils/dateTime';
+import { PersonalInfoComponent } from './personal-info/personal-info.component';
 
 @Component({
   selector: 'app-signup',
@@ -36,6 +37,7 @@ import {
     CheckboxComponent,
     ModalComponent,
     DatePickerComponent,
+    PersonalInfoComponent
   ],
   templateUrl: './signup.component.html',
   styleUrl: './signup.component.scss',
@@ -146,6 +148,7 @@ export class SignupComponent {
   }
 
   onPersonalInfoSubmit() {
+    console.log(this.personalInfoForm.valid)
     if (this.personalInfoForm.valid) {
       console.log(this.personalInfoForm.value);
       this.stepNumber += 1;
