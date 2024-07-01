@@ -1,6 +1,8 @@
 import { Component, Input } from '@angular/core';
 import { ButtonComponent } from '../../../../_shared/components/button/button.component';
 import { ButtonType } from '../../../../_shared/dataTypes/ButtonType';
+import { Router } from '@angular/router';
+import APP_ROUTES from '../../../../_shared/constants/routes';
 
 @Component({
     selector: 'app-section-banner',
@@ -16,4 +18,18 @@ export class SectionBannerComponent {
     @Input() secondaryBtnText: string = '';
     @Input() primaryBtnType: ButtonType = 'default_primary';
     @Input() secondaryBtnType: ButtonType = 'default_secondary';
+
+    APP_ROUTES = APP_ROUTES;
+
+    constructor(private router: Router) { }
+
+    openFindMyMeds(event: MouseEvent) {
+        const url = this.router.serializeUrl(this.router.createUrlTree([APP_ROUTES.findMyMeds]));
+        window.open(url, '_blank');
+    }
+
+    openSignUpPage(event: MouseEvent) {
+        const url = this.router.serializeUrl(this.router.createUrlTree([APP_ROUTES.signup]));
+        window.open(url, '_blank');
+    }
 }

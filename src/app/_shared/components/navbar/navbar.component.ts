@@ -4,37 +4,37 @@ import APP_ROUTES from '../../constants/routes';
 import { ButtonComponent } from '../button/button.component';
 
 @Component({
-  selector: 'app-navbar',
-  templateUrl: './navbar.component.html',
-  styleUrls: ['./navbar.component.scss']
+    selector: 'app-navbar',
+    templateUrl: './navbar.component.html',
+    styleUrls: ['./navbar.component.scss']
 })
 export class NavbarComponent {
-  APP_ROUTES = APP_ROUTES;
-  menuOpen = false;
+    APP_ROUTES = APP_ROUTES;
+    menuOpen = false;
 
-  constructor(private router: Router) { }
+    constructor(private router: Router) { }
 
-  @HostListener('window:resize', ['$event'])
-  onResize(event: Event) {
-    this.checkScreenWidth();
-  }
-
-  private checkScreenWidth() {
-    if (window.innerWidth > 800) {
-      this.menuOpen = false;
+    @HostListener('window:resize', ['$event'])
+    onResize(event: Event) {
+        this.checkScreenWidth();
     }
-  }
 
-  toggleMenu() {
-    this.menuOpen = !this.menuOpen;
-  }
+    private checkScreenWidth() {
+        if (window.innerWidth > 800) {
+            this.menuOpen = false;
+        }
+    }
 
-  closeMenu() {
-    this.menuOpen = false;
-  }
+    toggleMenu() {
+        this.menuOpen = !this.menuOpen;
+    }
 
-  openFindMyMeds() {
-    const url = this.router.serializeUrl(this.router.createUrlTree([APP_ROUTES.findMyMeds]));
-    window.open(url, '_blank');
-  }
+    closeMenu() {
+        this.menuOpen = false;
+    }
+
+    openFindMyMeds(event: MouseEvent) {
+        const url = this.router.serializeUrl(this.router.createUrlTree([APP_ROUTES.findMyMeds]));
+        window.open(url, '_blank');
+    }
 }
