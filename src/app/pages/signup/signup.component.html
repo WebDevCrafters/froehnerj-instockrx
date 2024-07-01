@@ -29,37 +29,8 @@
     } @else if(stepNumber===2){
       <app-additional-info [additionalInfoForm]="additionalInfoForm" (onAdditionalInfoSubmit)="onAdditionalInfoSubmit()"/>
     } @else if(stepNumber===3){
+      <app-select-package (onSelectPackageSubmit)="onSelectPackageSubmit($event)"/>
 
-    <div class="select_package_conatiner">
-      <p class="package_heading">Choose a package</p>
-
-      <div class="packages">
-        @for (package of packageOptions; track $index) {
-        <div
-          class="package_card"
-          [ngClass]="{ selected_card: selectedPackage === package.id }"
-          (click)="selectPackage(package.id)"
-        >
-          <p class="heading">
-            {{ package.title }}
-          </p>
-          <p class="cost">${{ package.cost }}</p>
-          <p class="desc">
-            {{ package.description }}
-          </p>
-        </div>
-        }
-      </div>
-
-      <div>
-        <app-button
-          [title]="'Select Package'"
-          type="small_primary"
-          shape="rounded"
-          (clickEvent)="onSelectPackageSubmit()"
-        />
-      </div>
-    </div>
     } @else if(stepNumber===4){
     <div class="payment">
       <div class="package_desc">

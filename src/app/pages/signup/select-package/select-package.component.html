@@ -1,0 +1,31 @@
+
+<div class="select_package_conatiner">
+  <p class="package_heading">Choose a package</p>
+
+  <div class="packages">
+    @for (package of packageOptions; track $index) {
+    <div
+      class="package_card"
+      [ngClass]="{ selected_card: selectedPackageId === package.id }"
+      (click)="selectPackage(package.id)"
+    >
+      <p class="heading">
+        {{ package.title }}
+      </p>
+      <p class="cost">${{ package.cost }}</p>
+      <p class="desc">
+        {{ package.description }}
+      </p>
+    </div>
+    }
+  </div>
+
+  <div>
+    <app-button
+      [title]="'Select Package'"
+      type="small_primary"
+      shape="rounded"
+      (clickEvent)="onSubmit()"
+    />
+  </div>
+</div>

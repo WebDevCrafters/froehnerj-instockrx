@@ -27,50 +27,23 @@ import {
 import { PersonalInfoComponent } from './personal-info/personal-info.component';
 import { markAllAsDirty } from '../../_shared/utils/formUtils';
 import { AdditionalInfoComponent } from './additional-info/additional-info.component';
+import { SelectPackageComponent } from './select-package/select-package.component';
 
 @Component({
   selector: 'app-signup',
   standalone: true,
   imports: [
-    InputComponent,
-    ButtonComponent,
     CommonModule,
-    ReactiveFormsModule,
-    CheckboxComponent,
-    ModalComponent,
-    DatePickerComponent,
     PersonalInfoComponent,
     AdditionalInfoComponent,
+    SelectPackageComponent,
   ],
   templateUrl: './signup.component.html',
   styleUrl: './signup.component.scss',
 })
 export class SignupComponent {
-  stepNumber: number = 2;
-  selectedPackage: string = '2';
-  packageOptions = [
-    {
-      id: '1',
-      title: 'One Med Search',
-      cost: 50,
-      description:
-        "$50 per successfull search.\nGet a full refund if we don't find your medication!",
-    },
-    {
-      id: '2',
-      title: 'Three Med Searches',
-      cost: 120,
-      description:
-        '$40 per successfull search.\nMost popular package. Use remaining searches anytime in the future for any medications.',
-    },
-    {
-      id: '3',
-      title: 'Six Med Searches',
-      cost: 180,
-      description:
-        '$30 per successfull search.\nBest value! Use remaining searches any time in the future, for any medication.',
-    },
-  ];
+  stepNumber: number = 3;
+  selectedPackageId: string = '2';
 
   personalInfoForm = new FormGroup({
     fullName: new FormControl(
@@ -116,10 +89,6 @@ export class SignupComponent {
     pickupDate: new FormControl(new Date().getTime(), [Validators.required]),
   });
 
-  selectPackage(selectedPackageId: string) {
-    this.selectedPackage = selectedPackageId;
-  }
-
   onPersonalInfoSubmit() {
     console.log(this.personalInfoForm.valid);
     if (this.personalInfoForm.valid) {
@@ -144,7 +113,9 @@ export class SignupComponent {
     }
   }
 
-  onSelectPackageSubmit() {
+  onSelectPackageSubmit(packageId: string) {
+    this.selectedPackageId = packageId;
     this.stepNumber += 1;
+    console.log("got", packageId)
   }
 }
