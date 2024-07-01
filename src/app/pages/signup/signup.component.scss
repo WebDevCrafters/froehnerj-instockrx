@@ -287,13 +287,13 @@
             flex-direction: column;
             > span {
                 font-size: 2rem;
-                &.dateInputActive{
+                &.dateInputActive {
                     font-size: 1.3rem;
                 }
             }
         }
 
-        img{
+        img {
             height: 1.5rem;
             cursor: pointer;
         }
@@ -312,5 +312,9 @@
     .modal_content {
         flex-direction: column;
         width: unset;
+
+        .content {
+            width: unset;
+        }
     }
 }
