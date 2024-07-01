@@ -41,10 +41,11 @@
       </div>
 
       <div class="btn_and_text_container">
-        <div class="button_container" (click)="signup()">
+        <div class="button_container">
           <app-button
             [title]="'Get started'"
             [type]="'default_primary'"
+            (click)="openSignup($event)"
           ></app-button>
         </div>
         <div class="footer">
