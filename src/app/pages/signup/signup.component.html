@@ -27,25 +27,16 @@
       (onPersonalInfoSubmit)="onPersonalInfoSubmit()"
     />
     } @else if(stepNumber===2){
-      <app-additional-info [additionalInfoForm]="additionalInfoForm" (onAdditionalInfoSubmit)="onAdditionalInfoSubmit()"/>
+    <app-additional-info
+      [additionalInfoForm]="additionalInfoForm"
+      (onAdditionalInfoSubmit)="onAdditionalInfoSubmit()"
+    />
     } @else if(stepNumber===3){
-      <app-select-package (onSelectPackageSubmit)="onSelectPackageSubmit($event)"/>
-
+    <app-select-package
+      (onSelectPackageSubmit)="onSelectPackageSubmit($event)"
+    />
     } @else if(stepNumber===4){
-    <div class="payment">
-      <div class="package_desc">
-        <span class="cost"> $120 </span>
-        <span class="searches"> 3 searches </span>
-        <span class="desc">
-          You can use your remaining searches any time in the future for any
-          medication
-        </span>
-      </div>
-
-      <div class="payment_gateway">Placeholder for payment gateway</div>
-    </div>
-
+    <app-payment />
     }
   </div>
 </div>
-

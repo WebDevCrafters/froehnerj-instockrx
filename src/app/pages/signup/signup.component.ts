@@ -1,5 +1,4 @@
 import { Component } from '@angular/core';
-import { InputComponent } from '../../_shared/components/input/input.component';
 import {
   FormArray,
   FormBuilder,
@@ -8,7 +7,6 @@ import {
   ReactiveFormsModule,
   Validators,
 } from '@angular/forms';
-import { ButtonComponent } from '../../_shared/components/button/button.component';
 import { CommonModule } from '@angular/common';
 import {
   charLimitValidator,
@@ -16,18 +14,12 @@ import {
   emailValidator,
   requiredValidator,
 } from '../../_shared/utils/Validators';
-import { CheckboxComponent } from '../../_shared/components/checkbox/checkbox.component';
-import { ModalComponent } from '../../_shared/components/modal/modal.component';
-import { DatePickerComponent } from '../../_shared/components/date-picker/date-picker.component';
-import {
-  formatTimestamp,
-  formatTimestampToMMDDYYYY,
-  mmddyyToTimestamp,
-} from '../../_shared/utils/dateTime';
+
 import { PersonalInfoComponent } from './personal-info/personal-info.component';
 import { markAllAsDirty } from '../../_shared/utils/formUtils';
 import { AdditionalInfoComponent } from './additional-info/additional-info.component';
 import { SelectPackageComponent } from './select-package/select-package.component';
+import { PaymentComponent } from './payment/payment.component';
 
 @Component({
   selector: 'app-signup',
@@ -37,12 +29,13 @@ import { SelectPackageComponent } from './select-package/select-package.componen
     PersonalInfoComponent,
     AdditionalInfoComponent,
     SelectPackageComponent,
+    PaymentComponent,
   ],
   templateUrl: './signup.component.html',
   styleUrl: './signup.component.scss',
 })
 export class SignupComponent {
-  stepNumber: number = 3;
+  stepNumber: number = 1;
   selectedPackageId: string = '2';
 
   personalInfoForm = new FormGroup({
@@ -53,7 +46,7 @@ export class SignupComponent {
     phoneNumber: new FormControl('', [
       requiredValidator("Patient's phone number cannot be empty"),
       charLimitValidator(
-        10 + 4, //inclusing () and -
+        10 + 4, // Including '()' and '-'
         "Patient's phone must be 10 digits. (Only US phone numbers are supported at this time.)"
       ),
     ]),
@@ -116,6 +109,6 @@ export class SignupComponent {
   onSelectPackageSubmit(packageId: string) {
     this.selectedPackageId = packageId;
     this.stepNumber += 1;
-    console.log("got", packageId)
+    console.log('got', packageId);
   }
 }
