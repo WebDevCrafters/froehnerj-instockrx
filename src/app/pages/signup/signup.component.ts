@@ -26,6 +26,7 @@ import {
 } from '../../_shared/utils/dateTime';
 import { PersonalInfoComponent } from './personal-info/personal-info.component';
 import { markAllAsDirty } from '../../_shared/utils/formUtils';
+import { AdditionalInfoComponent } from './additional-info/additional-info.component';
 
 @Component({
   selector: 'app-signup',
@@ -38,21 +39,15 @@ import { markAllAsDirty } from '../../_shared/utils/formUtils';
     CheckboxComponent,
     ModalComponent,
     DatePickerComponent,
-    PersonalInfoComponent
+    PersonalInfoComponent,
+    AdditionalInfoComponent,
   ],
   templateUrl: './signup.component.html',
   styleUrl: './signup.component.scss',
 })
 export class SignupComponent {
-  stepNumber: number = 1;
-  modalVisible: boolean = false;
-  isDateInputActive: boolean = false;
+  stepNumber: number = 2;
   selectedPackage: string = '2';
-  selectedDate: number = new Date().getTime();
-  dateFormControl = new FormControl(
-    formatTimestampToMMDDYYYY(this.selectedDate),
-    dateValidator('Invalid format')
-  );
   packageOptions = [
     {
       id: '1',
@@ -85,7 +80,7 @@ export class SignupComponent {
     phoneNumber: new FormControl('', [
       requiredValidator("Patient's phone number cannot be empty"),
       charLimitValidator(
-        10+4, //inclusing () and -
+        10 + 4, //inclusing () and -
         "Patient's phone must be 10 digits. (Only US phone numbers are supported at this time.)"
       ),
     ]),
@@ -121,34 +116,12 @@ export class SignupComponent {
     pickupDate: new FormControl(new Date().getTime(), [Validators.required]),
   });
 
-  createPrescribedMedicationFormGroup(): FormGroup {
-    return new FormGroup({
-      name: new FormControl(''),
-      dose: new FormControl(''),
-      quantity: new FormControl(''),
-      brand: new FormControl(''),
-    });
-  }
-
-  get prescribedMedication(): FormArray {
-    return this.additionalInfoForm.get('prescribedMedication') as FormArray;
-  }
-
-  addMedication() {
-    console.log('adding');
-    this.prescribedMedication.push(this.createPrescribedMedicationFormGroup());
-  }
-
-  removeMedication(index: number) {
-    this.prescribedMedication.removeAt(index);
-  }
-
   selectPackage(selectedPackageId: string) {
     this.selectedPackage = selectedPackageId;
   }
 
   onPersonalInfoSubmit() {
-    console.log(this.personalInfoForm.valid)
+    console.log(this.personalInfoForm.valid);
     if (this.personalInfoForm.valid) {
       console.log(this.personalInfoForm.value);
       this.stepNumber += 1;
@@ -173,46 +146,5 @@ export class SignupComponent {
 
   onSelectPackageSubmit() {
     this.stepNumber += 1;
-  }
-
-  getControl(formArrayIndex: number, formControlName: string): FormControl {
-    const medicationFormGroup =
-      this.additionalInfoForm.controls.prescribedMedication.at(
-        formArrayIndex
-      ) as FormGroup;
-    return medicationFormGroup.get(formControlName) as FormControl;
-  }
-
-  openDateChooserModal() {
-    this.modalVisible = true;
-  }
-
-  closeDateChooserModal(): void {
-    this.modalVisible = false;
-  }
-
-  onDatePicked(timestamp: number) {
-    this.selectedDate = timestamp;
-  }
-
-  toggleDateInput() {
-    this.isDateInputActive = !this.isDateInputActive;
-  }
-
-  formatTimestamp(timestamp: number | null) {
-    if (!timestamp) return '';
-    return formatTimestamp(timestamp);
-  }
-
-  onPositivePress() {
-    let pickupTimestamp = 0;
-    if (this.isDateInputActive && this.dateFormControl.value) {
-      if (!this.dateFormControl.valid) return;
-      pickupTimestamp = mmddyyToTimestamp(this.dateFormControl.value);
-    } else {
-      pickupTimestamp = this.selectedDate;
-    }
-    this.additionalInfoForm.controls.pickupDate.setValue(pickupTimestamp);
-    this.closeDateChooserModal();
   }
 }
