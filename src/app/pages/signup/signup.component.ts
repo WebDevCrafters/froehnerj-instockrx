@@ -25,6 +25,7 @@ import {
   mmddyyToTimestamp,
 } from '../../_shared/utils/dateTime';
 import { PersonalInfoComponent } from './personal-info/personal-info.component';
+import { markAllAsDirty } from '../../_shared/utils/formUtils';
 
 @Component({
   selector: 'app-signup',
@@ -95,7 +96,6 @@ export class SignupComponent {
     terms: new FormControl(false, requiredValidator('Please accept')),
   });
 
-  termsControl: FormControl = this.personalInfoForm.controls.terms;
   additionalInfoForm = new FormGroup({
     dob: new FormControl('', [
       requiredValidator("Patient's date of birth cannot be empty"),
@@ -154,7 +154,7 @@ export class SignupComponent {
       this.stepNumber += 1;
     } else {
       this.personalInfoForm.markAllAsTouched();
-      this.markAllAsDirty(this.personalInfoForm);
+      markAllAsDirty(this.personalInfoForm);
       console.log(this.personalInfoForm.value);
     }
   }
@@ -166,39 +166,13 @@ export class SignupComponent {
       console.log('step was added');
     } else {
       this.additionalInfoForm.markAllAsTouched();
-      this.markAllAsDirty(this.additionalInfoForm);
+      markAllAsDirty(this.additionalInfoForm);
       console.log(this.additionalInfoForm);
     }
   }
 
   onSelectPackageSubmit() {
     this.stepNumber += 1;
-  }
-
-  markAllAsDirty(formGroup: FormGroup) {
-    Object.keys(formGroup.controls).forEach((key) => {
-      const control = formGroup.get(key);
-
-      if (control instanceof FormGroup) {
-        this.markAllAsDirty(control); // Recursively mark nested FormGroups as dirty
-      } else if (control instanceof FormArray) {
-        this.markAllAsDirtyInArray(control); // Handle FormArray
-      } else {
-        control?.markAsDirty();
-      }
-    });
-  }
-
-  markAllAsDirtyInArray(formArray: FormArray) {
-    formArray.controls.forEach((control) => {
-      if (control instanceof FormGroup) {
-        this.markAllAsDirty(control); // Recursively mark nested FormGroups in the array as dirty
-      } else if (control instanceof FormArray) {
-        this.markAllAsDirtyInArray(control); // Handle nested FormArrays
-      } else {
-        control.markAsDirty();
-      }
-    });
   }
 
   getControl(formArrayIndex: number, formControlName: string): FormControl {
