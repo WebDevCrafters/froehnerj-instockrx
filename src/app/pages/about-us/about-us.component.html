@@ -7,24 +7,30 @@
   />
 
   <section id="about_ceo">
-    <div class="heading">We're a small team on a big mission:</div>
+    <!-- <div class="heading">We're a small team on a big mission:</div> -->
     <div class="sub_heading">
-      To give everyone access to the medications they need
+      <span> THE </span>
+      FUTURE OF PHARMACY
+      <span> AND DISTRIBUTION </span>
     </div>
     <div class="card_container">
+      @for (member of team; track $index) {
       <div class="card">
         <div class="img_container">
-          <img src="assets/images/png/CEO-profile-picture.png" alt="" />
+          <img [src]="member.imagePath" alt="" />
         </div>
         <div class="description">
-          <div class="name">JEREMY FROEHNER</div>
-          <div class="designation">Co-Founder & CTO</div>
+          <div class="name">{{ member.name }}</div>
+          <div class="designation">
+            {{ member.designation }}
+          </div>
         </div>
         <div class="footer">
           <img src="assets/images/svg/linkedln-icon.svg" alt="" />
           <img src="assets/images/svg/mail-icon.svg" alt="" />
         </div>
       </div>
+      }
     </div>
   </section>
 

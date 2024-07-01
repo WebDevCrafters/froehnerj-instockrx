@@ -21,23 +21,27 @@
         }
 
         .sub_heading {
-            font-size: 60px;
+            font-size: 50px;
             font-weight: 700;
-            color: $globalBlackColor;
+            color: $brandSecondaryColor;
             text-align: center;
             letter-spacing: -2.8px;
-            width: 80%;
+            width: 90%;
+
+            span {
+                color: $brandPrimaryColor;
+            }
         }
 
         .card_container {
-            padding-top: 80px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            width: 100%;
+            padding-top: 40px;
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+            gap: 40px;
+            width: 75%;
 
             .card {
-                width: 320px;
+                width: 100%;
                 height: 365px;
                 box-shadow:
                     0 0.7961918735236395px 2.3885756205709185px -0.625px #0000000d,
@@ -60,11 +64,15 @@
                     font-weight: 700;
                     border-radius: 50%;
                     border: 10px solid $brandPrimaryColor;
+                    width: 150px;
+                    height: 150px;
 
                     img {
                         background: radial-gradient(circle, $globalWhiteColor 0%, $brandLightPrimaryColor 100%);
                         border-radius: 50%;
-                        width: 150px;
+                        height: 100%;
+                        width: 100%;
+                        object-fit: cover; /* Add this line */
                     }
                 }
 
@@ -142,6 +150,8 @@
 
             .card_container {
                 padding-top: 30px;
+                grid-template-columns: 1fr;
+                width: 100%;
             }
         }
         #details {
