@@ -79,10 +79,13 @@ export class SignupComponent {
       '',
       requiredValidator("Patient's Name cannot be empty")
     ),
-    phoneNumber: new FormControl(
-      '',
-      requiredValidator("Patient's phone number cannot be empty")
-    ),
+    phoneNumber: new FormControl('', [
+      requiredValidator("Patient's phone number cannot be empty"),
+      charLimitValidator(
+        10+4, //inclusing () and -
+        "Patient's phone must be 10 digits. (Only US phone numbers are supported at this time.)"
+      ),
+    ]),
     email: new FormControl('', [
       requiredValidator("Patient's email cannot be empty"),
       emailValidator('Please enter a valid email'),

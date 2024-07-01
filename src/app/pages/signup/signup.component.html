@@ -164,13 +164,14 @@
         </div>
       </div>
 
-      <div class="button_container" (click)="addMedication()">
+      <div class="button_container">
         <app-button
           title="Add alternative"
           type="small_secondary"
           shape="rounded"
           [src]="'assets/images/svg/plus-icon.svg'"
           [formButtonType]="'button'"
+          (clickEvent)="addMedication()"
         />
       </div>
 
@@ -178,7 +179,7 @@
         <p>When will you be ready to pick up your meds?</p>
         <span>Your meds may be found on or after this date.</span>
       </div>
-      <div class="button_container" (click)="openDateChooserModal()">
+      <div class="button_container">
         <app-button
           [title]="
             formatTimestamp(additionalInfoForm.controls.pickupDate.value)
@@ -188,6 +189,7 @@
           [formButtonType]="'button'"
           iconAlignment="vertical"
           src="assets/images/svg/calendar-icon.svg"
+          (clickEvent)="openDateChooserModal()"
         />
       </div>
 
@@ -220,11 +222,12 @@
         }
       </div>
 
-      <div (click)="onSelectPackageSubmit()">
+      <div>
         <app-button
           [title]="'Select Package'"
           type="small_primary"
           shape="rounded"
+          (clickEvent)="onSelectPackageSubmit()"
         />
       </div>
     </div>
@@ -239,9 +242,7 @@
         </span>
       </div>
 
-      <div class="payment_gateway">
-        Placeholder for payment gateway
-      </div>
+      <div class="payment_gateway">Placeholder for payment gateway</div>
     </div>
 
     }
