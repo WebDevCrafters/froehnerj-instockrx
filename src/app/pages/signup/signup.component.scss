@@ -199,10 +199,11 @@
             }
 
             .packages {
+                width: 80%;
                 display: grid;
                 row-gap: 2rem;
                 column-gap: 2rem;
-                grid-template-columns: 1fr 1fr 1fr;
+                grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
 
                 .package_card {
                     background-color: $globalWhiteColor;
@@ -249,7 +250,7 @@
     // width: 33rem;
     // flex-direction: column;
     transition: all 1s ease;
-    
+
     .date_picker {
         transition: all 1s ease;
         padding: 1rem;
@@ -315,6 +316,37 @@
 
         .content {
             width: unset;
+        }
+    }
+}
+
+@media screen and (max-width: 800px) {
+    .signup_container {
+        .form_container {
+            .select_package_conatiner {
+                width: 80%;
+                padding: 5rem 0rem;
+
+                .package_heading {
+                    width: 100%;
+                    font-size: 1.5rem;
+                    font-weight: 100;
+                    text-align: center;
+                }
+
+                .packages {
+                    width: 100%;
+                    .package_card {
+                        .heading {
+                            font-size: 1.2rem;
+                        }
+
+                        .cost {
+                            font-size: 1.5rem;
+                        }
+                    }
+                }
+            }
         }
     }
 }
