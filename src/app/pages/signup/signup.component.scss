@@ -217,10 +217,10 @@
                     cursor: pointer;
 
                     &.selected_card {
-                        background-color: #ff6a6a;
+                        background-color: $brandPrimaryColor;
                         color: $globalWhiteColor;
                         box-shadow: 0 8px 18px -10px #000000;
-                        border-color: #ff6a6a;
+                        border-color: $brandPrimaryColor;
                     }
 
                     .heading {
