@@ -33,3 +33,28 @@ export function formatTimestamp(timestamp: number) {
 
   return `${dayName}, ${monthName} ${dayNumber}`;
 }
+
+export function formatTimestampToMMDDYYYY(timestamp: number) {
+  const date = new Date(timestamp);
+
+  const month = (date.getMonth() + 1).toString().padStart(2, '0'); // getMonth() returns 0-11, so add 1 and pad with zero if needed
+  const day = date.getDate().toString().padStart(2, '0'); // pad with zero if needed
+  const year = date.getFullYear();
+
+  return `${month}/${day}/${year}`;
+}
+
+export function mmddyyToTimestamp(dateString: string) {
+  const parts = dateString.split('/');
+
+  if (parts.length !== 3) {
+    throw new Error('Invalid date format. Please use MM/DD/YY.');
+  }
+
+  const month = parseInt(parts[0], 10) - 1;
+  const day = parseInt(parts[1], 10);
+
+  const year = parseInt(parts[2], 10) + (parts[2].length < 4 ? 2000 : 0);
+
+  return new Date(year, month, day).getTime();
+}

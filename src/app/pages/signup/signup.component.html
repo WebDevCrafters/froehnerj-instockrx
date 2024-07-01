@@ -256,7 +256,7 @@
     </div>
     <div class="date_picker">
       @if (isDateInputActive) {
-      <app-input type="dates" label="Enter date" bg="#fae7e0" />
+      <app-input type="dates" label="Enter date" bg="#fae7e0" [control]="dateFormControl"/>
       } @else {
       <app-date-picker (onDatePicked)="onDatePicked($event)" />
       }

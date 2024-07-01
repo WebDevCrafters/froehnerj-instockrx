@@ -19,7 +19,11 @@ import {
 import { CheckboxComponent } from '../../_shared/components/checkbox/checkbox.component';
 import { ModalComponent } from '../../_shared/components/modal/modal.component';
 import { DatePickerComponent } from '../../_shared/components/date-picker/date-picker.component';
-import { formatTimestamp } from '../../_shared/utils/dateTime';
+import {
+  formatTimestamp,
+  formatTimestampToMMDDYYYY,
+  mmddyyToTimestamp,
+} from '../../_shared/utils/dateTime';
 
 @Component({
   selector: 'app-signup',
@@ -41,7 +45,11 @@ export class SignupComponent {
   modalVisible: boolean = false;
   isDateInputActive: boolean = false;
   selectedPackage: string = '2';
-  selectedDate:number = new Date().getTime();
+  selectedDate: number = new Date().getTime();
+  dateFormControl = new FormControl(
+    formatTimestampToMMDDYYYY(this.selectedDate),
+    dateValidator('Invalid format')
+  );
   packageOptions = [
     {
       id: '1',
@@ -206,7 +214,7 @@ export class SignupComponent {
   onDatePicked(timestamp: number) {
     this.selectedDate = timestamp;
   }
-  
+
   toggleDateInput() {
     this.isDateInputActive = !this.isDateInputActive;
   }
@@ -216,8 +224,15 @@ export class SignupComponent {
     return formatTimestamp(timestamp);
   }
 
-  onPositivePress(){
-    this.additionalInfoForm.controls.pickupDate.setValue(this.selectedDate);
-    this.closeDateChooserModal()
+  onPositivePress() {
+    let pickupTimestamp = 0;
+    if (this.isDateInputActive && this.dateFormControl.value) {
+      if (!this.dateFormControl.valid) return;
+      pickupTimestamp = mmddyyToTimestamp(this.dateFormControl.value);
+    } else {
+      pickupTimestamp = this.selectedDate;
+    }
+    this.additionalInfoForm.controls.pickupDate.setValue(pickupTimestamp);
+    this.closeDateChooserModal();
   }
 }
