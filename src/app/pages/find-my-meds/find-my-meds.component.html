@@ -1,1 +1,58 @@
-<button (click)="signup()">Signup</button>
+<!-- <button (click)="signup()">Signup</button> -->
+
+<div class="main_container">
+  <div class="logo_and_name_container">
+    <a [routerLink]="APP_ROUTES._">
+      <img src="assets/images/png/pill-logo.png" alt="logo" />
+      <div class="name_container">
+        <div class="heading">FindMyMed</div>
+        <div class="sub_heading">by InStockRx</div>
+      </div>
+    </a>
+  </div>
+
+  <section id="howItWorks">
+    <div class="heading">Never search for your meds again.</div>
+    <div class="sub_heading">How it works</div>
+    <div class="content">
+      <div class="card">
+        <div class="img_container">
+          <img src="assets/images/svg/check-outlined-icon.svg" alt="" />
+        </div>
+        <div class="caption">Sign up and select your plan</div>
+      </div>
+      <hr />
+      <div class="card">
+        <div class="img_container">
+          <img src="assets/images/svg/call-icon.svg" alt="" />
+        </div>
+        <div class="caption">
+          We'll contact pharmacies & find your medications
+        </div>
+      </div>
+      <hr />
+      <div class="card">
+        <div class="img_container">
+          <img src="assets/images/svg/chat-icon.svg" alt="" />
+        </div>
+        <div class="caption">
+          We'll text you when we find your meds in stock
+        </div>
+      </div>
+
+      <div class="btn_and_text_container">
+        <div class="button_container" (click)="signup()">
+          <app-button
+            [title]="'Get started'"
+            [type]="'default_primary'"
+          ></app-button>
+        </div>
+        <div class="footer">
+          <b>Questions?</b> Text or call us at (617) 631-8894
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <app-infinite-slider />
+</div>
