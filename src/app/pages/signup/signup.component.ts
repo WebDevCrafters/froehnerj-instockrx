@@ -41,7 +41,7 @@ import {
   styleUrl: './signup.component.scss',
 })
 export class SignupComponent {
-  stepNumber: number = 2;
+  stepNumber: number = 1;
   modalVisible: boolean = false;
   isDateInputActive: boolean = false;
   selectedPackage: string = '2';
