@@ -1,0 +1,152 @@
+<form class="form" [formGroup]="additionalInfoForm" (ngSubmit)="onFormSubmit()">
+  <app-input
+    [control]="additionalInfoForm.controls.dob"
+    id="dates"
+    label="Date of Birth"
+    placeholder="MM/DD/YYYY"
+    type="dates"
+  />
+  <app-input
+    [control]="additionalInfoForm.controls.zipCode"
+    id="zipCode"
+    label="Zip Code"
+    type="numbers"
+    placeholder="12345"
+  />
+  <app-input
+    [control]="additionalInfoForm.controls.prescriber"
+    id="presciber"
+    label="Presciber"
+    placeholder="Dr. John Doe"
+  />
+  <div class="field-info">
+    <p>Medication to be found</p>
+    <span
+      >Add as many alternatives as you would like in the order of
+      preference.</span
+    >
+  </div>
+  <div
+    class="prescribed_medication"
+    *ngFor="let medication of prescribedMedication.controls; let i = index"
+  >
+    <div class="prescribed_medication">
+      <div class="options">
+        <p>Option {{ i + 1 }}</p>
+        @if (i!==0) {
+        <img
+          src="assets/images/svg/delete-icon.svg"
+          alt="Delete"
+          (click)="removeMedication(i)"
+        />
+        }
+      </div>
+
+      <app-input
+        [control]="getControl(i, 'name')"
+        id="prescribedMedication"
+        label="Medication Name"
+        placeholder="Adderall XR"
+      />
+      <div class="medication_info">
+        <span>
+          <app-input
+            [control]="getControl(i, 'dose')"
+            id="dose"
+            label="Dose"
+            placeholder="10 mg"
+          />
+        </span>
+        <span>
+          <app-input
+            [control]="getControl(i, 'quantity')"
+            id="quantity"
+            label="Quantity"
+            placeholder="30"
+          />
+        </span>
+        <span>
+          <app-input
+            [control]="getControl(i, 'brand')"
+            id="brandName"
+            label="Brand Name"
+            placeholder="Preffered Brand"
+          />
+        </span>
+      </div>
+    </div>
+  </div>
+
+  <div class="button_container">
+    <app-button
+      title="Add alternative"
+      type="small_secondary"
+      shape="rounded"
+      [src]="'assets/images/svg/plus-icon.svg'"
+      [formButtonType]="'button'"
+      (clickEvent)="addMedication()"
+    />
+  </div>
+
+  <div class="field-info">
+    <p>When will you be ready to pick up your meds?</p>
+    <span>Your meds may be found on or after this date.</span>
+  </div>
+  <div class="button_container">
+    <app-button
+      [title]="formatTimestamp(additionalInfoForm.controls.pickupDate.value)"
+      type="small_secondary"
+      shape="square"
+      [formButtonType]="'button'"
+      iconAlignment="vertical"
+      src="assets/images/svg/calendar-icon.svg"
+      (clickEvent)="openDateChooserModal()"
+    />
+  </div>
+
+  <div class="continue_button_container">
+    <div>
+      <app-button title="Continue" type="small_primary" shape="rounded" />
+    </div>
+  </div>
+</form>
+
+<app-modal
+  [title]="'Example Modal'"
+  [isVisible]="modalVisible"
+  (closeModal)="closeDateChooserModal()"
+>
+  <div class="modal_content">
+    <div class="content">
+      <div class="details">
+        <p>Select date</p>
+        <span [ngClass]="{ dateInputActive: isDateInputActive }">
+          {{ formatTimestamp(selectedDate) }}
+        </span>
+      </div>
+      <div (click)="toggleDateInput()">
+        @if (isDateInputActive) {
+        <img src="assets/images/svg/calendar-icon.svg" alt="" srcset="" />
+        } @else {
+        <img src="assets/images/svg/edit-icon.svg" alt="" srcset="" />
+        }
+      </div>
+    </div>
+    <div class="date_picker">
+      @if (isDateInputActive) {
+      <app-input
+        type="dates"
+        label="Enter date"
+        bg="#fae7e0"
+        [control]="dateFormControl"
+      />
+      } @else {
+      <app-date-picker (onDatePicked)="onDatePicked($event)" />
+      }
+      <div class="picker_options">
+        <span class="options" (click)="closeDateChooserModal()">Cancel</span>
+        <span class="options" (click)="onPositivePress()">OK</span>
+      </div>
+    </div>
+  </div>
+</app-modal>
