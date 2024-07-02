@@ -3,7 +3,7 @@ import { ModalComponent } from '../../../_shared/components/modal/modal.componen
 import { ButtonComponent } from '../../../_shared/components/button/button.component';
 import { CommonModule } from '@angular/common';
 import { Package } from '../../../_shared/dataTypes/Package';
-import { packageOptions } from '../../../_shared/constants/data';
+import { defaultPackage, packageOptions } from '../../../_shared/constants/data';
 
 @Component({
   selector: 'app-select-package',
@@ -14,7 +14,7 @@ import { packageOptions } from '../../../_shared/constants/data';
 })
 export class SelectPackageComponent {
   @Output() onSelectPackageSubmit = new EventEmitter<Package>();
-  @Input() selectedPackage = packageOptions[1];
+  @Input() selectedPackage = defaultPackage;
   packageOptions = packageOptions;
 
   selectPackage(selectedPackage: Package) {

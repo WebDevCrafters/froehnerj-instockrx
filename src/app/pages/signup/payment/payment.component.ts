@@ -1,4 +1,6 @@
-import { Component } from '@angular/core';
+import { Component, Input } from '@angular/core';
+import { Package } from '../../../_shared/dataTypes/Package';
+import { defaultPackage } from '../../../_shared/constants/data';
 
 @Component({
   selector: 'app-payment',
@@ -8,5 +10,5 @@ import { Component } from '@angular/core';
   styleUrl: './payment.component.scss'
 })
 export class PaymentComponent {
-
+  @Input() selectedPackage: Package = defaultPackage;
 }
