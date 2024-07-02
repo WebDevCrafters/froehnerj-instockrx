@@ -4,6 +4,8 @@ import { ButtonComponent } from '../../../_shared/components/button/button.compo
 import { CommonModule } from '@angular/common';
 import { FormControl, FormGroup, ReactiveFormsModule } from '@angular/forms';
 import { CheckboxComponent } from '../../../_shared/components/checkbox/checkbox.component';
+import APP_ROUTES from '../../../_shared/constants/routes';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-personal-info',
@@ -27,8 +29,24 @@ export class PersonalInfoComponent {
     terms: new FormControl(false),
   });
 
+  constructor(private router: Router) {}
+
   onFormSubmit() {
     console.log(this.personalInfoForm.controls.terms.value, 'hrewe');
     this.onPersonalInfoSubmit.emit();
+  }
+
+  openPrivacy() {
+    const url = this.router.serializeUrl(
+      this.router.createUrlTree([APP_ROUTES.privacy])
+    );
+    window.open(url, '_blank');
+  }
+
+  openTermsOfService() {
+    const url = this.router.serializeUrl(
+      this.router.createUrlTree([APP_ROUTES.termsOfService])
+    );
+    window.open(url, '_blank');
   }
 }

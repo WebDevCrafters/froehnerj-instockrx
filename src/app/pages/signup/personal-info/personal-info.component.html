@@ -22,11 +22,19 @@
       </div>
       <span>
         I have read and agree to the
-        <a href="#"> privacy policy </a>
+        <a
+          (click)="openPrivacy()"
+        >
+          privacy policy
+        </a>
         and
-        <a href="#"> terms of service. </a>
+        <a
+         (click)="openTermsOfService()"
+        >
+          terms of service.
+        </a>
         {{
-          "\nI also agree to recieve SMS messages from FindMyMed by InStockRx regarding search status" +
+          "\nI also agree to recieve SMS messages from FindMyMeds by InStockRx regarding search status" +
             "updates" +
             "and marketting. Reply STOP to opt out, HELP for assistance. Standard message and data rates amay" +
             "apply." +

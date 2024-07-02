@@ -18,7 +18,7 @@ export class HomeComponent {
     public faqs = [
         {
             question: 'How does it work?',
-            answer: 'FindMyMed is a service provided by InStockRx to help you find your medications.',
+            answer: 'FindMyMeds is a service provided by InStockRx to help you find your medications.',
             isOpen: false
         },
         {
