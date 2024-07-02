@@ -35,7 +35,7 @@ import { defaultPackage } from '../../_shared/constants/data';
   styleUrl: './signup.component.scss',
 })
 export class SignupComponent {
-  stepNumber: number = 3;
+  stepNumber: number = 1;
   selectedPackage: Package = defaultPackage;
 
   personalInfoForm = new FormGroup({
