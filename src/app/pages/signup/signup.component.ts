@@ -1,10 +1,8 @@
 import { Component } from '@angular/core';
 import {
   FormArray,
-  FormBuilder,
   FormControl,
   FormGroup,
-  ReactiveFormsModule,
   Validators,
 } from '@angular/forms';
 import { CommonModule } from '@angular/common';
@@ -20,6 +18,8 @@ import { markAllAsDirty } from '../../_shared/utils/formUtils';
 import { AdditionalInfoComponent } from './additional-info/additional-info.component';
 import { SelectPackageComponent } from './select-package/select-package.component';
 import { PaymentComponent } from './payment/payment.component';
+import { Package } from '../../_shared/dataTypes/Package';
+import { defaultPackage } from '../../_shared/constants/data';
 
 @Component({
   selector: 'app-signup',
@@ -36,7 +36,7 @@ import { PaymentComponent } from './payment/payment.component';
 })
 export class SignupComponent {
   stepNumber: number = 1;
-  selectedPackageId: string = '2';
+  selectedPackage: Package = defaultPackage;
 
   personalInfoForm = new FormGroup({
     fullName: new FormControl(
@@ -106,9 +106,9 @@ export class SignupComponent {
     }
   }
 
-  onSelectPackageSubmit(packageId: string) {
-    this.selectedPackageId = packageId;
+  onSelectPackageSubmit(packageSelected: Package) {
+    this.selectedPackage = packageSelected;
     this.stepNumber += 1;
-    console.log('got', packageId);
+    console.log('got', this.selectedPackage);
   }
 }

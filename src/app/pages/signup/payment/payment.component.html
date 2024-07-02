@@ -1,12 +1,14 @@
 <div class="payment">
-    <div class="package_desc">
-      <span class="cost"> $120 </span>
-      <span class="searches"> 3 searches </span>
-      <span class="desc">
-        You can use your remaining searches any time in the future for any
-        medication
-      </span>
-    </div>
-
-    <div class="payment_gateway">Placeholder for payment gateway</div>
+  <div class="package_desc">
+    <span class="cost"> ${{ selectedPackage.cost }}</span>
+    <span class="searches">
+      {{ selectedPackage.searches }}
+      {{ selectedPackage.searches === 1 ? "search" : "searches" }}
+    </span>
+    <span class="desc">
+      {{ selectedPackage.description }}
+    </span>
   </div>
+
+  <div class="payment_gateway">Placeholder for payment gateway</div>
+</div>
