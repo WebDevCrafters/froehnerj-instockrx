@@ -1,6 +1,6 @@
 @import "variables";
 
-:host{
+:host {
     width: 100%;
     display: flex;
     align-items: center;
@@ -27,8 +27,9 @@
         display: grid;
         row-gap: 2rem;
         column-gap: 2rem;
-        grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-        
+        margin: auto;
+        grid-template-columns: 1fr 1fr 1fr;
+
         .package_card {
             background-color: $globalWhiteColor;
             border: 1px solid rgb(209, 208, 208);
@@ -65,16 +66,27 @@
     }
 }
 
-@media screen and (max-width: 800px) {
+@media screen and (max-width: 1300px) {
     .select_package_conatiner {
-        width: 80%;
-        padding: 5rem 0rem;
+        width: unset;
+        padding: 1rem;
+        .packages {
+            grid-template-columns: 1fr 1fr;
+        }
 
         .package_heading {
             width: 100%;
             font-size: 1.5rem;
             font-weight: 100;
             text-align: center;
+        }
+    }
+}
+
+@media screen and (max-width: 800px) {
+    .select_package_conatiner {
+        .packages {
+            grid-template-columns: 1fr;
         }
     }
 }
