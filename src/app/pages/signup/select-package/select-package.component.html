@@ -6,8 +6,8 @@
     @for (package of packageOptions; track $index) {
     <div
       class="package_card"
-      [ngClass]="{ selected_card: selectedPackageId === package.id }"
-      (click)="selectPackage(package.id)"
+      [ngClass]="{ selected_card: selectedPackage.id === package.id }"
+      (click)="selectPackage(package)"
     >
       <p class="heading">
         {{ package.title }}

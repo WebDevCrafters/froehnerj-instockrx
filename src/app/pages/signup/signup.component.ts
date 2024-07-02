@@ -20,6 +20,8 @@ import { markAllAsDirty } from '../../_shared/utils/formUtils';
 import { AdditionalInfoComponent } from './additional-info/additional-info.component';
 import { SelectPackageComponent } from './select-package/select-package.component';
 import { PaymentComponent } from './payment/payment.component';
+import { Package } from '../../_shared/dataTypes/Package';
+import { packageOptions } from '../../_shared/constants/data';
 
 @Component({
   selector: 'app-signup',
@@ -35,8 +37,8 @@ import { PaymentComponent } from './payment/payment.component';
   styleUrl: './signup.component.scss',
 })
 export class SignupComponent {
-  stepNumber: number = 1;
-  selectedPackageId: string = '2';
+  stepNumber: number = 3;
+  selectedPackage: Package = packageOptions[1];
 
   personalInfoForm = new FormGroup({
     fullName: new FormControl(
@@ -106,9 +108,9 @@ export class SignupComponent {
     }
   }
 
-  onSelectPackageSubmit(packageId: string) {
-    this.selectedPackageId = packageId;
+  onSelectPackageSubmit(packageSelected: Package) {
+    this.selectedPackage = packageSelected;
     this.stepNumber += 1;
-    console.log('got', packageId);
+    console.log('got', this.selectedPackage);
   }
 }
