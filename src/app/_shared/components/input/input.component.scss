@@ -22,6 +22,15 @@
     }
 
     &:focus-within {
+
+        &.flat{
+            &:not(:hover) {
+                label{
+                    color: $brandPrimaryColor;
+                }
+            }
+        }
+
         label {
             font-size: 12px;
             top: -0.5rem;
@@ -33,15 +42,18 @@
         position: absolute;
         background-color: $globalWhiteColor;
         padding: 0 3px;
-        transition:
-            top 0.2s ease,
-            left 0.2s ease,
-            font-size 0.2s ease;
+        transition: all 0.2s ease;
 
         font-size: 0.9rem;
         top: 0.9rem;
         left: 0.5rem;
         cursor: text;
+    }
+
+    &.flat{
+        label{
+            color: $darkBrownColor
+        }
     }
 
     input {
@@ -71,6 +83,12 @@
 
         &:hover {
             border-color: $globalBlackColor;
+        }
+
+        &.flat{
+            border: none;
+            border-radius: unset;
+            border-bottom: 1.5px solid $darkBrownColor;
         }
     }
 
