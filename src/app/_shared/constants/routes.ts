@@ -6,6 +6,7 @@ const APP_ROUTES = {
     about: "about",
     findMyMeds: "find-my-meds",
     signup: "signup",
+    dashboard: "dashboard",
     privacy: "privacy",
     termsOfService: "InStockRxTerms"
 }
