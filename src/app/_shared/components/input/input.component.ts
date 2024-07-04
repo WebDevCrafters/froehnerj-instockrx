@@ -7,6 +7,8 @@ import {
   SimpleChanges,
 } from '@angular/core';
 import { FormControl, ReactiveFormsModule } from '@angular/forms';
+import { InputType } from 'zlib';
+import { InputShape } from '../../dataTypes/InputSHape';
 
 @Component({
   selector: 'app-input',
@@ -21,9 +23,10 @@ export class InputComponent implements OnInit {
   @Input() id: string = '';
   @Input() placeholder: string = '';
   @Input() bg: string = '';
-  @Input() type: 'text' | 'checkbox' | 'phoneNumber' | 'dates' | "numbers"= 'text';
+  @Input() type: InputType = 'text';
+  @Input() shape: InputShape = "rounded";
   isFocused = false;
-  errorMessage: string = ""
+  errorMessage: string = '';
 
   ngOnInit() {
     this.control.statusChanges.subscribe(() => {
@@ -37,13 +40,11 @@ export class InputComponent implements OnInit {
     if (this.type === 'checkbox') {
       const input = event.target as HTMLInputElement;
       this.control.setValue(input.checked);
-    } else if (this.type === "phoneNumber") {
+    } else if (this.type === 'phoneNumber') {
       this.formatPhoneNumber();
-    }
-    else if(this.type==="dates"){
+    } else if (this.type === 'dates') {
       this.formatDate();
-    }
-    else if(this.type==='numbers'){
+    } else if (this.type === 'numbers') {
       this.formatNumber();
     }
   }
@@ -54,17 +55,17 @@ export class InputComponent implements OnInit {
       if (value.length > 3 && value.length <= 6) {
         value = `(${value.slice(0, 3)}) ${value.slice(3)}`;
       } else if (value.length > 6) {
-        value = `(${value.slice(0, 3)}) ${value.slice(
-          3,
-          6
-        )}-${value.slice(6, 10)}`;
+        value = `(${value.slice(0, 3)}) ${value.slice(3, 6)}-${value.slice(
+          6,
+          10
+        )}`;
       }
       this.control.setValue(value, { emitEvent: false });
     }
   }
 
   formatDate(): void {
-    let value = this.control.value.replace(/\D/g, ''); 
+    let value = this.control.value.replace(/\D/g, '');
     if (value.length > 2 && value.length <= 4) {
       value = `${value.slice(0, 2)}/${value.slice(2)}`;
     } else if (value.length > 4) {
@@ -72,9 +73,9 @@ export class InputComponent implements OnInit {
     }
     this.control.setValue(value, { emitEvent: false });
   }
-  
-  formatNumber(){
-    let value = this.control.value.replace(/\D/g, ''); 
+
+  formatNumber() {
+    let value = this.control.value.replace(/\D/g, '');
     this.control.setValue(value, { emitEvent: false });
   }
 

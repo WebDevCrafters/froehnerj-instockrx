@@ -1,4 +1,4 @@
-<div class="input_container">
+<div class="input_container" [ngClass]="{ flat: shape === 'flat' }">
   @if (label) {
   <label
     [for]="id"
@@ -21,6 +21,7 @@
     (input)="handleChange($event)"
     [attr.maxlength]="type === 'phoneNumber' ? 14 : null"
     [style.background-color]="bg"
+    [ngClass]="{ flat: shape === 'flat' }"
   />
 
   <span

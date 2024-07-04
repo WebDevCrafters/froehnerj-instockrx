@@ -1,0 +1,1 @@
+export type InputType = 'text' | 'checkbox' | 'phoneNumber' | 'dates' | "numbers";
