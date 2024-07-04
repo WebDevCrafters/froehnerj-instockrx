@@ -8,7 +8,7 @@ import {
 } from '@angular/core';
 import { FormControl, ReactiveFormsModule } from '@angular/forms';
 import { InputType } from 'zlib';
-import { InputShape } from '../../dataTypes/InputSHape';
+import { InputShape } from '../../dataTypes/InputShape';
 
 @Component({
   selector: 'app-input',
