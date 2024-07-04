@@ -7,7 +7,8 @@ const APP_ROUTES = {
     findMyMeds: "find-my-meds",
     signup: "signup",
     privacy: "privacy",
-    termsOfService: "InStockRxTerms"
+    termsOfService: "InStockRxTerms",
+    signin: "signin"
 }
 
 export default APP_ROUTES;
