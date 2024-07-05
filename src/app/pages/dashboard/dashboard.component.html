@@ -1,0 +1,57 @@
+<div class="dashboard_container">
+  <app-header />
+  <div class="dashboard_content">
+    <div class="all_info">
+      <span class="welcome_message">Welcome, A</span>
+      <div class="my_package">
+        <p class="heading">My Package</p>
+        <span>Three Med Searches</span>
+      </div>
+      <div class="active_search_container">
+        <span class="heading">Active Search</span>
+        <div class="form_container">
+          <p class="label">
+            Medication Options
+            <br />
+            (We will search for the first option first then the alternative if
+            necessary)
+          </p>
+
+          <div class="all_medications">
+            <div class="medication">
+              <div>1:</div>
+              <div>
+                <p>Medication Name Dose</p>
+                <p class="label">Quatity: Quantity, Any Brand</p>
+              </div>
+              <div class="img_container">
+                <img src="assets/images/svg/edit-icon.svg" alt="Edit" />
+              </div>
+            </div>
+          </div>
+
+          <app-button
+            shape="rounded"
+            type="small_secondary"
+            title="Add alternative"
+            src="assets/images/svg/plus-icon.svg"
+          />
+
+          <div class="pickup_date">
+            <div class="label">Earlist pick up date</div>
+            <div class="button_container">
+              <app-button
+                title="Thu, July 4"
+                src="assets/images/svg/calendar-icon.svg"
+                type="small_secondary"
+                [iconAlignment]="'vertical'"
+              />
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="previous_search_container"></div>
+    </div>
+    <div class="my_profile">My Profile</div>
+  </div>
+</div>

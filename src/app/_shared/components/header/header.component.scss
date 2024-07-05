@@ -1,0 +1,32 @@
+@import "variables";
+
+.header {
+    display: flex;
+    justify-content: center;
+    padding: 0.5rem;
+    border-bottom: 1px solid $normalGrey;
+
+    .brand {
+        display: flex;
+        gap: 0.5rem;
+        align-items: center;
+        > img {
+            height: 3rem;
+        }
+
+        .brand_name {
+            color: $offBlackColor;
+
+            .heading {
+                font-size: 1rem;
+                font-weight: 500;
+                font-family: "Unbounded", sans-serif;
+            }
+            .sub_heading {
+                font-size: 0.8rem;
+                font-family: "Unbounded", sans-serif;
+                font-weight: 600;
+            }
+        }
+    }
+}
