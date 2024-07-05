@@ -4,8 +4,8 @@ import { ButtonComponent } from '../../../_shared/components/button/button.compo
 import { CommonModule } from '@angular/common';
 import { FormControl, FormGroup, ReactiveFormsModule } from '@angular/forms';
 import { CheckboxComponent } from '../../../_shared/components/checkbox/checkbox.component';
-import APP_ROUTES from '../../../_shared/constants/routes';
 import { Router } from '@angular/router';
+import APP_ROUTES from '../../../_shared/constants/routes';
 
 @Component({
   selector: 'app-personal-info',
@@ -38,14 +38,14 @@ export class PersonalInfoComponent {
 
   openPrivacy() {
     const url = this.router.serializeUrl(
-      this.router.createUrlTree([APP_ROUTES.privacy])
+      this.router.createUrlTree([APP_ROUTES.webpage.privacy])
     );
     window.open(url, '_blank');
   }
 
   openTermsOfService() {
     const url = this.router.serializeUrl(
-      this.router.createUrlTree([APP_ROUTES.termsOfService])
+      this.router.createUrlTree([APP_ROUTES.webpage.termsOfService])
     );
     window.open(url, '_blank');
   }

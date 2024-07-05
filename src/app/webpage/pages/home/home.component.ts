@@ -1,5 +1,5 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
-import { ButtonComponent } from '../../_shared/components/button/button.component';
+import { ButtonComponent } from '../../../_shared/components/button/button.component';
 import { SectionBannerComponent } from '../_shared/components/section-banner/section-banner.component';
 import { HowItWorksComponent, StepsType } from '../_shared/components/how-it-works/how-it-works.component';
 import { Specifications, SpecificationSectionComponent } from '../_shared/components/specification-section/specification-section.component';

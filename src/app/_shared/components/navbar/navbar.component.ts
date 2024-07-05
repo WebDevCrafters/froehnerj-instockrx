@@ -34,7 +34,7 @@ export class NavbarComponent {
     }
 
     openFindMyMeds(event: MouseEvent) {
-        const url = this.router.serializeUrl(this.router.createUrlTree([APP_ROUTES.signin]));
+        const url = this.router.serializeUrl(this.router.createUrlTree([APP_ROUTES.product.app]));
         window.open(url, '_blank');
     }
 }

@@ -1,15 +1,22 @@
 const APP_ROUTES = {
-    _: "",
-    pricing: "pricing",
-    patients: "patients",
-    providers: "providers",
-    about: "about",
-    findMyMeds: "find-my-meds",
-    selfService: "self-service",
-    dashboard: "dashboard",
-    privacy: "privacy",
-    termsOfService: "InStockRxTerms",
-    signin: "signin"
-}
+  webpage: {
+    _: '',
+    pricing: 'pricing',
+    patients: 'patients',
+    providers: 'providers',
+    about: 'about',
+    findMyMeds: 'find-my-meds',
+    dashboard: 'dashboard',
+    privacy: 'privacy',
+    termsOfService: 'InStockRxTerms', 
+  },
+  product: {
+    _:"",
+    app: 'app',
+    auth: 'auth',
+    selfService: 'self-service',
+    dashboard: 'dashboard',
+  },
+};
 
 export default APP_ROUTES;

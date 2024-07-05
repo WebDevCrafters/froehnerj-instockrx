@@ -1,8 +1,8 @@
 import { Component } from '@angular/core';
 import { SectionBannerComponent } from '../_shared/components/section-banner/section-banner.component';
-import { ButtonComponent } from '../../_shared/components/button/button.component';
+import { ButtonComponent } from '../../../_shared/components/button/button.component';
 import { FAQSectionComponent } from '../_shared/components/faq-section/faq-section.component';
-import APP_ROUTES from '../../_shared/constants/routes';
+import APP_ROUTES from '../../../_shared/constants/routes';
 import { Router } from '@angular/router';
 
 @Component({
@@ -62,7 +62,7 @@ export class PricingComponent {
 
 
     openFindMyMeds(event: MouseEvent) {
-        const url = this.router.serializeUrl(this.router.createUrlTree([APP_ROUTES.findMyMeds]));
+        const url = this.router.serializeUrl(this.router.createUrlTree([APP_ROUTES.webpage.findMyMeds]));
         window.open(url, '_blank');
     }
 
