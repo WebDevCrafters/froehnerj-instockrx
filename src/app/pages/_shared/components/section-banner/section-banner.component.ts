@@ -29,7 +29,7 @@ export class SectionBannerComponent {
     }
 
     openSignUpPage(event: MouseEvent) {
-        const url = this.router.serializeUrl(this.router.createUrlTree([APP_ROUTES.signup]));
+        const url = this.router.serializeUrl(this.router.createUrlTree([APP_ROUTES.selfService]));
         window.open(url, '_blank');
     }
 }
