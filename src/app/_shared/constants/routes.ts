@@ -8,7 +8,8 @@ const APP_ROUTES = {
     selfService: "self-service",
     dashboard: "dashboard",
     privacy: "privacy",
-    termsOfService: "InStockRxTerms"
+    termsOfService: "InStockRxTerms",
+    signin: "signin"
 }
 
 export default APP_ROUTES;

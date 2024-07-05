@@ -1,0 +1,78 @@
+<div class="main_container">
+  <div class="box_container">
+    <div class="scroll_container">
+      <div class="header">
+        <div class="brand">
+          <img src="assets/images/png/pill-logo.png" alt="" />
+          <div class="brand_name">
+            <div class="heading">FindMyMeds</div>
+            <div class="sub_heading">by InStockRx</div>
+          </div>
+        </div>
+      </div>
+      <div class="title_container">
+        <div class="title">Clinician portal</div>
+        <div class="sub_heading">
+          If you are a patient searching for meds, please
+        </div>
+        <div class="signup_container">signup here instead.</div>
+      </div>
+      <div class="form_container">
+        <div class="input_containers">
+          <app-input
+            [control]="personalInfoForm.controls.firstName"
+            id="firstName"
+            label="First Name"
+            [type]="'text'"
+            [shape]="'flat'"
+          />
+          <app-input
+            [control]="personalInfoForm.controls.lastName"
+            id="lastName"
+            label="Last Name"
+            [type]="'text'"
+            [shape]="'flat'"
+          />
+          <app-input
+            [control]="personalInfoForm.controls.email"
+            id="email"
+            label="Email"
+            [type]="'email'"
+            [shape]="'flat'"
+          />
+          <app-input
+            [control]="personalInfoForm.controls.phoneNumber"
+            id="phoneNumber"
+            label="Phone number"
+            [type]="'text'"
+            [shape]="'flat'"
+          />
+          <app-input
+            [control]="personalInfoForm.controls.password"
+            id="password"
+            label="Password"
+            [type]="'password'"
+            [shape]="'flat'"
+          />
+        </div>
+        <div class="button_container">
+          <app-button
+            [shape]="'rounded'"
+            [title]="'Create account'"
+            [type]="'small_primary'"
+          ></app-button>
+        </div>
+        <div class="footer">
+          <span>
+            By creating an account you agree to our
+            <a>privacy-policy</a> and
+            <a>terms of service and business associated agreements.</a>
+          </span>
+          <div class="signin">
+            Already have an account? <a class="signIn_tag">Sign In</a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
