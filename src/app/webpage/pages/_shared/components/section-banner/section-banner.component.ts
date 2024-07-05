@@ -5,31 +5,37 @@ import { Router } from '@angular/router';
 import APP_ROUTES from '../../../../../_shared/constants/routes';
 
 @Component({
-    selector: 'app-section-banner',
-    standalone: true,
-    imports: [ButtonComponent],
-    templateUrl: './section-banner.component.html',
-    styleUrl: './section-banner.component.scss'
+  selector: 'app-section-banner',
+  standalone: true,
+  imports: [ButtonComponent],
+  templateUrl: './section-banner.component.html',
+  styleUrl: './section-banner.component.scss',
 })
 export class SectionBannerComponent {
-    @Input() title: string = '';
-    @Input() subHeading: string = '';
-    @Input() primaryBtnText: string = '';
-    @Input() secondaryBtnText: string = '';
-    @Input() primaryBtnType: ButtonType = 'default_primary';
-    @Input() secondaryBtnType: ButtonType = 'default_secondary';
+  @Input() title: string = '';
+  @Input() subHeading: string = '';
+  @Input() primaryBtnText: string = '';
+  @Input() secondaryBtnText: string = '';
+  @Input() primaryBtnType: ButtonType = 'default_primary';
+  @Input() secondaryBtnType: ButtonType = 'default_secondary';
 
-    APP_ROUTES = APP_ROUTES;
+  APP_ROUTES = APP_ROUTES;
 
-    constructor(private router: Router) { }
+  constructor(private router: Router) {}
 
-    openFindMyMeds(event: MouseEvent) {
-        const url = this.router.serializeUrl(this.router.createUrlTree([APP_ROUTES.webpage.findMyMeds]));
-        window.open(url, '_blank');
-    }
+  openFindMyMeds(event: MouseEvent) {
+    const url = this.router.serializeUrl(
+      this.router.createUrlTree([APP_ROUTES.webpage.findMyMeds])
+    );
+    window.open(url, '_blank');
+  }
 
-    openSignUpPage(event: MouseEvent) {
-        const url = this.router.serializeUrl(this.router.createUrlTree([APP_ROUTES.product.selfService]));
-        window.open(url, '_blank');
-    }
+  openSignUpPage(event: MouseEvent) {
+    const url = this.router.serializeUrl(
+      this.router.createUrlTree([
+        `${APP_ROUTES.product.app}/${APP_ROUTES.product.selfService}`,
+      ])
+    );
+    window.open(url, '_blank');
+  }
 }
