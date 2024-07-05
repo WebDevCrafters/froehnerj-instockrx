@@ -1,10 +1,10 @@
 import { Component, EventEmitter, Input, Output } from '@angular/core';
-import { InputComponent } from '../../../_shared/components/input/input.component';
-import { ButtonComponent } from '../../../_shared/components/button/button.component';
+import { InputComponent } from '../../../../_shared/components/input/input.component';
+import { ButtonComponent } from '../../../../_shared/components/button/button.component';
 import { CommonModule } from '@angular/common';
 import { FormControl, FormGroup, ReactiveFormsModule } from '@angular/forms';
-import { CheckboxComponent } from '../../../_shared/components/checkbox/checkbox.component';
-import APP_ROUTES from '../../../_shared/constants/routes';
+import { CheckboxComponent } from '../../../../_shared/components/checkbox/checkbox.component';
+import APP_ROUTES from '../../../../_shared/constants/routes';
 import { Router } from '@angular/router';
 
 @Component({

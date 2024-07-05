@@ -1,9 +1,9 @@
 import { Component } from '@angular/core';
-import { InputComponent } from '../../_shared/components/input/input.component';
+import { InputComponent } from '../../../_shared/components/input/input.component';
 import { Router, RouterLink } from '@angular/router';
-import APP_ROUTES from '../../_shared/constants/routes';
+import APP_ROUTES from '../../../_shared/constants/routes';
 import { InfiniteSliderComponent } from '../_shared/components/infinite-slider/infinite-slider.component';
-import { ButtonComponent } from '../../_shared/components/button/button.component';
+import { ButtonComponent } from '../../../_shared/components/button/button.component';
 
 @Component({
     selector: 'app-find-my-meds',

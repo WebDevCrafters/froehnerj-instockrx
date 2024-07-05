@@ -1,20 +1,22 @@
-import { Component, OnDestroy, OnInit } from '@angular/core';
-import { ButtonComponent } from '../../_shared/components/button/button.component';
+import { Component } from '@angular/core';
 import { SectionBannerComponent } from '../_shared/components/section-banner/section-banner.component';
-import { HowItWorksComponent, StepsType } from '../_shared/components/how-it-works/how-it-works.component';
-import { Specifications, SpecificationSectionComponent } from '../_shared/components/specification-section/specification-section.component';
-import { CommonModule } from '@angular/common';
+import { ButtonComponent } from '../../../_shared/components/button/button.component';
 import { FAQSectionComponent } from '../_shared/components/faq-section/faq-section.component';
-import { InfiniteSliderComponent } from '../_shared/components/infinite-slider/infinite-slider.component';
+import APP_ROUTES from '../../../_shared/constants/routes';
+import { Router } from '@angular/router';
 
 @Component({
-    selector: 'app-home',
+    selector: 'app-pricing',
     standalone: true,
-    imports: [ButtonComponent, SectionBannerComponent, InfiniteSliderComponent, HowItWorksComponent, SpecificationSectionComponent, FAQSectionComponent, CommonModule],
-    templateUrl: './home.component.html',
-    styleUrl: './home.component.scss'
+    imports: [ButtonComponent, SectionBannerComponent, FAQSectionComponent],
+    templateUrl: './pricing.component.html',
+    styleUrl: './pricing.component.scss'
 })
-export class HomeComponent {
+export class PricingComponent {
+    APP_ROUTES = APP_ROUTES;
+
+    constructor(private router: Router) { }
+
     public faqs = [
         {
             question: 'How does it work?',
@@ -58,27 +60,10 @@ export class HomeComponent {
         }
     ];
 
-    public stepsArray: StepsType[] = [
-        {
-            highlightedText: 'Sign up online',
-            normalText: 'and enter your information.',
-        },
-        {
-            normalText: 'We find your script at a pharmacy in your area.',
-        },
-        {
-            normalText: 'Send your doctor the pharmacy info and pick up your script!',
-        }
-    ]
 
-    public specificationsArray: Specifications[] = [
-        {
-            imagePath: "assets/images/svg/phone-disabled-icon.svg",
-            caption: "No more calling around to find in stock pharmacies"
-        },
-        {
-            imagePath: "assets/images/svg/check-icon.svg",
-            caption: "We'll find your meds or refund your search"
-        },
-    ]
+    openFindMyMeds(event: MouseEvent) {
+        const url = this.router.serializeUrl(this.router.createUrlTree([APP_ROUTES.findMyMeds]));
+        window.open(url, '_blank');
+    }
+
 }

@@ -1,6 +1,4 @@
 import { Component, EventEmitter, Input, Output } from '@angular/core';
-import { InputComponent } from '../../../_shared/components/input/input.component';
-import { ButtonComponent } from '../../../_shared/components/button/button.component';
 import { CommonModule } from '@angular/common';
 import {
   FormArray,
@@ -8,15 +6,14 @@ import {
   FormGroup,
   ReactiveFormsModule,
 } from '@angular/forms';
-import { ModalComponent } from '../../../_shared/components/modal/modal.component';
-import { DatePickerComponent } from '../../../_shared/components/date-picker/date-picker.component';
 import { PersonalInfoComponent } from '../personal-info/personal-info.component';
-import {
-  formatTimestamp,
-  formatTimestampToMMDDYYYY,
-  mmddyyToTimestamp,
-} from '../../../_shared/utils/dateTime';
-import { dateValidator } from '../../../_shared/utils/Validators';
+import { InputComponent } from '../../../../_shared/components/input/input.component';
+import { ButtonComponent } from '../../../../_shared/components/button/button.component';
+import { ModalComponent } from '../../../../_shared/components/modal/modal.component';
+import { DatePickerComponent } from '../../../../_shared/components/date-picker/date-picker.component';
+import { formatTimestamp, formatTimestampToMMDDYYYY, mmddyyToTimestamp } from '../../../../_shared/utils/dateTime';
+import { dateValidator } from '../../../../_shared/utils/Validators';
+
 
 @Component({
   selector: 'app-additional-info',

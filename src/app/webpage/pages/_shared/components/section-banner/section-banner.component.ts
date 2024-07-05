@@ -1,8 +1,8 @@
 import { Component, Input } from '@angular/core';
-import { ButtonComponent } from '../../../../_shared/components/button/button.component';
-import { ButtonType } from '../../../../_shared/dataTypes/ButtonType';
+import { ButtonComponent } from '../../../../../_shared/components/button/button.component';
+import { ButtonType } from '../../../../../_shared/dataTypes/ButtonType';
 import { Router } from '@angular/router';
-import APP_ROUTES from '../../../../_shared/constants/routes';
+import APP_ROUTES from '../../../../../_shared/constants/routes';
 
 @Component({
     selector: 'app-section-banner',
