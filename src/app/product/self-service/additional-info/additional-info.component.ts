@@ -7,12 +7,12 @@ import {
   ReactiveFormsModule,
 } from '@angular/forms';
 import { PersonalInfoComponent } from '../personal-info/personal-info.component';
-import { InputComponent } from '../../../../_shared/components/input/input.component';
-import { ButtonComponent } from '../../../../_shared/components/button/button.component';
-import { ModalComponent } from '../../../../_shared/components/modal/modal.component';
-import { DatePickerComponent } from '../../../../_shared/components/date-picker/date-picker.component';
-import { formatTimestamp, formatTimestampToMMDDYYYY, mmddyyToTimestamp } from '../../../../_shared/utils/dateTime';
-import { dateValidator } from '../../../../_shared/utils/Validators';
+import { InputComponent } from '../../../_shared/components/input/input.component';
+import { ButtonComponent } from '../../../_shared/components/button/button.component';
+import { ModalComponent } from '../../../_shared/components/modal/modal.component';
+import { DatePickerComponent } from '../../../_shared/components/date-picker/date-picker.component';
+import { formatTimestamp, formatTimestampToMMDDYYYY, mmddyyToTimestamp } from '../../../_shared/utils/dateTime';
+import { dateValidator } from '../../../_shared/utils/Validators';
 
 
 @Component({

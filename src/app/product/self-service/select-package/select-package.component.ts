@@ -1,9 +1,9 @@
 import { Component, EventEmitter, Input, Output } from '@angular/core';
-import { ModalComponent } from '../../../../_shared/components/modal/modal.component';
-import { ButtonComponent } from '../../../../_shared/components/button/button.component';
+import { ModalComponent } from '../../../_shared/components/modal/modal.component';
+import { ButtonComponent } from '../../../_shared/components/button/button.component';
 import { CommonModule } from '@angular/common';
-import { Package } from '../../../../_shared/dataTypes/Package';
-import { defaultPackage, packageOptions } from '../../../../_shared/constants/data';
+import { Package } from '../../../_shared/dataTypes/Package';
+import { defaultPackage, packageOptions } from '../../../_shared/constants/data';
 
 @Component({
   selector: 'app-select-package',

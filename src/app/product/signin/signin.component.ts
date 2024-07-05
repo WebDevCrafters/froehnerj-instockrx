@@ -1,7 +1,7 @@
 import { Component } from '@angular/core';
 import { FormControl, FormGroup } from '@angular/forms';
-import { InputComponent } from '../../../_shared/components/input/input.component';
-import { ButtonComponent } from '../../../_shared/components/button/button.component';
+import { InputComponent } from '../../_shared/components/input/input.component';
+import { ButtonComponent } from '../../_shared/components/button/button.component';
 
 @Component({
     selector: 'app-signin',
