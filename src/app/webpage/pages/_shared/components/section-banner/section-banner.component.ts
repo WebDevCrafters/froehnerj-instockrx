@@ -24,12 +24,12 @@ export class SectionBannerComponent {
     constructor(private router: Router) { }
 
     openFindMyMeds(event: MouseEvent) {
-        const url = this.router.serializeUrl(this.router.createUrlTree([APP_ROUTES.findMyMeds]));
+        const url = this.router.serializeUrl(this.router.createUrlTree([APP_ROUTES._.findMyMeds]));
         window.open(url, '_blank');
     }
 
     openSignUpPage(event: MouseEvent) {
-        const url = this.router.serializeUrl(this.router.createUrlTree([APP_ROUTES.selfService]));
+        const url = this.router.serializeUrl(this.router.createUrlTree([APP_ROUTES._.selfService]));
         window.open(url, '_blank');
     }
 }

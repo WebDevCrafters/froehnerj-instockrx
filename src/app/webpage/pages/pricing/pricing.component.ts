@@ -62,7 +62,7 @@ export class PricingComponent {
 
 
     openFindMyMeds(event: MouseEvent) {
-        const url = this.router.serializeUrl(this.router.createUrlTree([APP_ROUTES.findMyMeds]));
+        const url = this.router.serializeUrl(this.router.createUrlTree([APP_ROUTES._.findMyMeds]));
         window.open(url, '_blank');
     }
 

@@ -1,7 +1,7 @@
 <div class="main_container">
   <div class="logo_and_toggle_icon">
     <div class="logo_and_name_container">
-      <a [routerLink]="APP_ROUTES._" (click)="closeMenu()">
+      <a [routerLink]="APP_ROUTES._._" (click)="closeMenu()">
         <img src="assets/images/png/pill-logo.png" alt="logo" />
         <div class="name_container">
           <div class="heading">FindMyMeds</div>
@@ -22,7 +22,7 @@
     <ul class="route_list">
       <li>
         <a
-          [routerLink]="APP_ROUTES.pricing"
+          [routerLink]="APP_ROUTES._.pricing"
           routerLinkActive="active-link"
           (click)="closeMenu()"
           >Pricing</a
@@ -30,7 +30,7 @@
       </li>
       <li>
         <a
-          [routerLink]="APP_ROUTES.patients"
+          [routerLink]="APP_ROUTES._.patients"
           routerLinkActive="active-link"
           (click)="closeMenu()"
           >Patients</a
@@ -38,7 +38,7 @@
       </li>
       <li>
         <a
-          [routerLink]="APP_ROUTES.providers"
+          [routerLink]="APP_ROUTES._.providers"
           routerLinkActive="active-link"
           (click)="closeMenu()"
           >Providers</a
@@ -46,7 +46,7 @@
       </li>
       <li>
         <a
-          [routerLink]="APP_ROUTES.about"
+          [routerLink]="APP_ROUTES._.about"
           routerLinkActive="active-link"
           (click)="closeMenu()"
           >About Us</a

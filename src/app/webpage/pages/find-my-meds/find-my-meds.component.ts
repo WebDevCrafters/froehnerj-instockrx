@@ -18,6 +18,6 @@ export class FindMyMedsComponent {
     constructor(private router: Router) { }
 
     openSignup(event: MouseEvent) {
-        this.router.navigate([APP_ROUTES.selfService])
+        this.router.navigate([APP_ROUTES._.selfService])
     }
 }
