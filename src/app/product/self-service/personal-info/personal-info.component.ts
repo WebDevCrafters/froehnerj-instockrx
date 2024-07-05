@@ -38,14 +38,14 @@ export class PersonalInfoComponent {
 
   openPrivacy() {
     const url = this.router.serializeUrl(
-      this.router.createUrlTree([APP_ROUTES._.privacy])
+      this.router.createUrlTree([APP_ROUTES.webpage.privacy])
     );
     window.open(url, '_blank');
   }
 
   openTermsOfService() {
     const url = this.router.serializeUrl(
-      this.router.createUrlTree([APP_ROUTES._.termsOfService])
+      this.router.createUrlTree([APP_ROUTES.webpage.termsOfService])
     );
     window.open(url, '_blank');
   }

@@ -1,5 +1,5 @@
 const APP_ROUTES = {
-  _: {
+  webpage: {
     _: '',
     pricing: 'pricing',
     patients: 'patients',
@@ -9,11 +9,11 @@ const APP_ROUTES = {
     selfService: 'self-service',
     dashboard: 'dashboard',
     privacy: 'privacy',
-    termsOfService: 'InStockRxTerms',
+    termsOfService: 'InStockRxTerms', 
     signin: 'signin', 
   },
-  app: {
-    _: 'app',
+  product: {
+    app: 'app',
     auth: 'auth',
     dashboard: 'dashboard',
   },

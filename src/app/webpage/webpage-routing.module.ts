@@ -13,17 +13,17 @@ import { TermsOfServiceComponent } from './pages/terms-of-service/terms-of-servi
 
 const routes: Routes = [
   {
-    path: APP_ROUTES._._,
+    path: APP_ROUTES.webpage._,
     component: WebpageComponent,
     children: [
-      { path: APP_ROUTES._._, component: HomeComponent },
-      { path: APP_ROUTES._.about, component: AboutUsComponent },
-      { path: APP_ROUTES._.patients, component: PatientsComponent },
-      { path: APP_ROUTES._.pricing, component: PricingComponent },
-      { path: APP_ROUTES._.providers, component: ProvidersComponent },
-      { path: APP_ROUTES._.privacy, component: PrivacyComponent },
-      { path: APP_ROUTES._.termsOfService, component: TermsOfServiceComponent },
-      { path: APP_ROUTES._.findMyMeds, component: FindMyMedsComponent },
+      { path: APP_ROUTES.webpage._, component: HomeComponent },
+      { path: APP_ROUTES.webpage.about, component: AboutUsComponent },
+      { path: APP_ROUTES.webpage.patients, component: PatientsComponent },
+      { path: APP_ROUTES.webpage.pricing, component: PricingComponent },
+      { path: APP_ROUTES.webpage.providers, component: ProvidersComponent },
+      { path: APP_ROUTES.webpage.privacy, component: PrivacyComponent },
+      { path: APP_ROUTES.webpage.termsOfService, component: TermsOfServiceComponent },
+      { path: APP_ROUTES.webpage.findMyMeds, component: FindMyMedsComponent },
     ],
   },
 ];
