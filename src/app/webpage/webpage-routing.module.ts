@@ -6,7 +6,7 @@ import { AboutUsComponent } from '../pages/about-us/about-us.component';
 import { PatientsComponent } from '../pages/patients/patients.component';
 import { PricingComponent } from '../pages/pricing/pricing.component';
 import { ProvidersComponent } from '../pages/providers/providers.component';
-import { LayoutComponent } from './layout.component';
+import { WebpageComponent } from './webpage.component';
 import { PrivacyComponent } from '../pages/privacy/privacy.component';
 import { TermsOfServiceComponent } from '../pages/terms-of-service/terms-of-service.component';
 import { FindMyMedsComponent } from '../pages/find-my-meds/find-my-meds.component';
@@ -14,7 +14,7 @@ import { FindMyMedsComponent } from '../pages/find-my-meds/find-my-meds.componen
 const routes: Routes = [
   {
     path: APP_ROUTES._,
-    component: LayoutComponent,
+    component: WebpageComponent,
     children: [
       { path: APP_ROUTES._, component: HomeComponent },
       { path: APP_ROUTES.about, component: AboutUsComponent },
@@ -32,4 +32,4 @@ const routes: Routes = [
   imports: [RouterModule.forChild(routes)],
   exports: [RouterModule],
 })
-export class LayoutRoutingModule {}
+export class WebpageRoutingModule {}

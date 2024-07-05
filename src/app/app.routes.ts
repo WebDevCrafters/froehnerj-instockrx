@@ -5,7 +5,7 @@ import { DashboardComponent } from './pages/dashboard/dashboard.component';
 import { SelfServiceComponent } from './pages/self-service/self-service.component';
 import { SigninComponent } from './pages/signin/signin.component';
 export const routes: Routes = [
-    { path: APP_ROUTES._, loadChildren: () => import("./layout/layout.module").then(m => m.LayoutModule) },
+    { path: APP_ROUTES._, loadChildren: () => import("./webpage/webpage.module").then(m => m.WebpageModule) },
 
     { path: APP_ROUTES.selfService, component: SelfServiceComponent },
     { path: APP_ROUTES.dashboard, component: DashboardComponent },
