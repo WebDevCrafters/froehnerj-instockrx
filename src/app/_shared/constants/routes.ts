@@ -11,6 +11,7 @@ const APP_ROUTES = {
     termsOfService: 'InStockRxTerms', 
   },
   product: {
+    _:"",
     app: 'app',
     auth: 'auth',
     selfService: 'self-service',
