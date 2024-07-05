@@ -7,7 +7,7 @@ import { SigninComponent } from './product/signin/signin.component';
 export const routes: Routes = [
     { path: APP_ROUTES.webpage._, loadChildren: () => import("./webpage/webpage.module").then(m => m.WebpageModule) },
 
-    { path: APP_ROUTES.webpage.selfService, component: SelfServiceComponent },
+    { path: APP_ROUTES.product.selfService, component: SelfServiceComponent },
     { path: APP_ROUTES.product.dashboard, component: DashboardComponent },
     { path: APP_ROUTES.product.auth, component: SigninComponent }
 ];
