@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
-import { HeaderComponent } from '../../../_shared/components/header/header.component';
-import { ButtonComponent } from '../../../_shared/components/button/button.component';
+import { HeaderComponent } from '../../_shared/components/header/header.component';
+import { ButtonComponent } from '../../_shared/components/button/button.component';
 
 @Component({
   selector: 'app-dashboard',

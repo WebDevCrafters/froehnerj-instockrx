@@ -2,8 +2,7 @@ import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import APP_ROUTES from '../_shared/constants/routes';
 import { SelfServiceComponent } from './self-service/self-service.component';
-import { DashboardComponent } from '../webpage/pages/dashboard/dashboard.component';
-import { SigninComponent } from './signin/signin.component';
+import { DashboardComponent } from './dashboard/dashboard.component';
 import { ProductComponent } from './product.component';
 import { AuthComponent } from './auth/auth.component';
 
