@@ -64,6 +64,40 @@
                                 }
                             }
                         }
+
+                        .prescribed_medication {
+                            display: flex;
+                            gap: 1rem;
+                            margin: 0.5rem 0;
+                            flex-direction: column;
+
+                            .options {
+                                display: flex;
+                                flex-direction: row;
+                                align-items: center;
+                                gap: 1rem;
+
+                                > img {
+                                    padding: 0.5rem;
+                                    cursor: pointer;
+
+                                    &:hover {
+                                        transition: background-color 0.2s ease;
+                                        background-color: rgba(0, 0, 0, 0.233);
+                                        border-radius: 50%;
+                                    }
+                                }
+                            }
+
+                            .medication_info {
+                                display: flex;
+                                gap: 1rem;
+
+                                >div{
+                                    width: 100%;
+                                }
+                            }
+                        }
                     }
 
                     .button_container {

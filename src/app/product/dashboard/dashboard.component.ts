@@ -9,7 +9,10 @@ import {
 } from '../../_shared/utils/Validators';
 import { activeSearchData } from '../../_shared/constants/data';
 import { ActiveSearch } from '../../_shared/dataTypes/ActiveSearch';
-import { formatTimestamp, mmddyyToTimestamp } from '../../_shared/utils/dateTime';
+import {
+  formatTimestamp,
+  mmddyyToTimestamp,
+} from '../../_shared/utils/dateTime';
 import { DatePickerComponent } from '../../_shared/components/date-picker/date-picker.component';
 import { InputComponent } from '../../_shared/components/input/input.component';
 import { ModalComponent } from '../../_shared/components/modal/modal.component';
@@ -80,5 +83,36 @@ export class DashboardComponent {
     }
     this.activeSearchForm.controls.pickupDate.setValue(pickupTimestamp);
     this.closeDateChooserModal();
+  }
+
+  createPrescribedMedicationFormGroup(): FormGroup {
+    return new FormGroup({
+      name: new FormControl(''),
+      dose: new FormControl(''),
+      quantity: new FormControl(''),
+      brand: new FormControl(''),
+    });
+  }
+
+  addMedication() {
+    this.activeSearchForm.controls.prescribedMedication.push(
+      this.createPrescribedMedicationFormGroup()
+    );
+  }
+
+  removeMedication(index: number) {
+    this.activeSearchForm.controls.prescribedMedication.removeAt(index);
+  }
+
+  getControl(formArrayIndex: number, formControlName: string): FormControl {
+    const medicationFormGroup =
+      this.activeSearchForm.controls.prescribedMedication.at(
+        formArrayIndex
+      ) as FormGroup;
+    return medicationFormGroup.get(formControlName) as FormControl;
+  }
+
+  get prescribedMedication(): FormArray {
+    return this.activeSearchForm.get('prescribedMedication') as FormArray;
   }
 }

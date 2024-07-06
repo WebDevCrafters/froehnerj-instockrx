@@ -19,7 +19,13 @@
             necessary)
           </p>
 
-          <div class="all_medications">
+          <div
+            class="all_medications"
+            *ngFor="
+              let medication of prescribedMedication.controls;
+              let i = index
+            "
+          >
             <div class="medication">
               <div>1:</div>
               <div>
@@ -30,6 +36,50 @@
                 <img src="assets/images/svg/edit-icon.svg" alt="Edit" />
               </div>
             </div>
+
+            <div class="prescribed_medication">
+              <div class="options">
+                <p>Option {{ i + 1 }}</p>
+                @if (i!==-1) {
+                <img
+                  src="assets/images/svg/delete-icon.svg"
+                  alt="Delete"
+                  (click)="removeMedication(i)"
+                />
+                }
+              </div>
+
+              <app-input
+                [control]="getControl(i, 'name')"
+                id="prescribedMedication"
+                label="Medication Name"
+                placeholder="Adderall XR"
+              />
+              <div class="medication_info">
+                <div>
+                  <app-input
+                    [control]="getControl(i, 'dose')"
+                    id="dose"
+                    label="Dose"
+                    placeholder="10 mg"
+                  />
+                </div>
+                <div>
+                  <app-input
+                    [control]="getControl(i, 'quantity')"
+                    id="quantity"
+                    label="Quantity"
+                    placeholder="30"
+                  />
+                </div>
+              </div>
+              <app-input
+                [control]="getControl(i, 'brand')"
+                id="brandName"
+                label="Brand Name"
+                placeholder="Preffered Brand"
+              />
+            </div>
           </div>
 
           <app-button
@@ -37,13 +87,16 @@
             type="small_secondary"
             title="Add alternative"
             src="assets/images/svg/plus-icon.svg"
+            (clickEvent)="addMedication()"
           />
 
           <div class="pickup_date">
             <div class="label">Earlist pick up date</div>
             <div class="button_container">
               <app-button
-                [title]="formatTimestamp(activeSearchForm.controls.pickupDate.value)"
+                [title]="
+                  formatTimestamp(activeSearchForm.controls.pickupDate.value)
+                "
                 src="assets/images/svg/calendar-icon.svg"
                 type="small_secondary"
                 [iconAlignment]="'vertical'"
@@ -73,7 +126,9 @@
           </div>
 
           @if (!activeSearchData.paymentCompleted) {
-          <div class="label not_complete">Please complete payment to start your search</div>
+          <div class="label not_complete">
+            Please complete payment to start your search
+          </div>
           <div class="button_container">
             <app-button
               title="Complete Payment"
@@ -82,7 +137,6 @@
             />
           </div>
           }
-
         </div>
       </div>
 
@@ -143,7 +197,6 @@
     </div>
   </div>
 </div>
-
 
 <app-modal
   [title]="'Example Modal'"
