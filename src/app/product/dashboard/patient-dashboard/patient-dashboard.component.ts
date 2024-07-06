@@ -40,9 +40,10 @@ export class PatientDashboardComponent {
   activeSearchData: ActiveSearch = activeSearchData;
   modalVisible: boolean = false;
   isDateInputActive: boolean = false;
-  isProfileEditable: boolean = true;
+  isProfileEditable: boolean = false;
   selectedDate: number = activeSearchData.pickupDate;
   dateFormControl: FormControl = new FormControl('');
+  profileBackup: any = null;
 
   activeSearchForm = new FormGroup({
     prescribedMedication: new FormArray([
@@ -177,14 +178,21 @@ export class PatientDashboardComponent {
 
   toggleEditProfile() {
     this.isProfileEditable = !this.isProfileEditable;
+    if (this.isProfileEditable) {
+      this.profileBackup = this.profileForm.value;
+    }
   }
 
-  saveEditProfile(){
-    
+  saveEditProfile() {
+    this.isProfileEditable = false;
+    this.profileBackup = null;
   }
 
-  cancelEditProfile(){
-
+  cancelEditProfile() {
+    if (this.profileBackup) {
+      this.profileForm.setValue(this.profileBackup);
+    }
+    this.isProfileEditable = false;
+    this.profileBackup = null;
   }
-
 }

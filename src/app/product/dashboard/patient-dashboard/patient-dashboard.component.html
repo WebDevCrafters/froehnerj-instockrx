@@ -180,11 +180,13 @@
   <div class="my_profile">
     <div class="header_container">
       <p class="heading">My Profile</p>
+      @if (!isProfileEditable) {
       <img
         src="assets/images/svg/edit-icon.svg"
         alt="Edit"
         (click)="toggleEditProfile()"
       />
+      }
     </div>
     @if (isProfileEditable) {
     <form class="edit_profile_form">
@@ -193,8 +195,9 @@
       <app-input
         label="Phone Number"
         [control]="profileForm.controls.phoneNumber"
+        type="phoneNumber"
       />
-      <app-input label="Date of Birth" [control]="profileForm.controls.dob" />
+      <app-input label="Date of Birth" [control]="profileForm.controls.dob" type="dates"/>
       <app-input label="Zip Code" [control]="profileForm.controls.zipCode" />
       <app-input
         label="Presciber"
