@@ -17,6 +17,7 @@ const APP_ROUTES = {
     auth: 'auth',
     selfService: 'self-service',
     dashboard: 'dashboard',
+    resetPassword: 'reset-password',
   },
 };
 

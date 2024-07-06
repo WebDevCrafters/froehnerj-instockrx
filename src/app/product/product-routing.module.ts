@@ -7,6 +7,7 @@ import { ProductComponent } from './product.component';
 import { AuthComponent } from './auth/auth.component';
 import { authPreventGuard } from '../_core/guards/auth-prevent.guard';
 import { authGuard } from '../_core/guards/auth.guard';
+import { ResetPasswordComponent } from './reset-password/reset-password.component';
 
 const routes: Routes = [
   {
@@ -21,6 +22,7 @@ const routes: Routes = [
       { path: APP_ROUTES.product.auth, component: AuthComponent, canActivate: [authPreventGuard] },
       { path: APP_ROUTES.product.selfService, component: SelfServiceComponent, canActivate: [authGuard] },
       { path: APP_ROUTES.product.dashboard, component: DashboardComponent, canActivate: [authGuard] },
+      { path: APP_ROUTES.product.resetPassword, component: ResetPasswordComponent, canActivate: [authGuard] },
     ],
   },
 ];
