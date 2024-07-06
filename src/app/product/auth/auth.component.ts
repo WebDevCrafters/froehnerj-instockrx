@@ -4,6 +4,10 @@ import { InputComponent } from '../../_shared/components/input/input.component';
 import { ButtonComponent } from '../../_shared/components/button/button.component';
 import { CommonModule } from '@angular/common';
 import { CustomSearchDropdownComponent } from './custom-search-dropdown/custom-search-dropdown.component';
+import { AuthService } from '../../_core/services/auth.service';
+import { User } from '../../_shared/dataTypes/User';
+import { Route, Router } from '@angular/router';
+import APP_ROUTES from '../../_shared/constants/routes';
 
 @Component({
     selector: 'app-auth',
@@ -18,6 +22,10 @@ export class AuthComponent {
     isSignInScreenVisible: boolean = true;
     isForgotPasswordScreenVisible: boolean = false;
     isEmailLoginInOptionSelected: boolean = true;
+
+    constructor(private authService: AuthService, private router: Router){
+
+    }
 
     public personalInfoForm = new FormGroup({
         firstName: new FormControl(''),
@@ -51,5 +59,16 @@ export class AuthComponent {
 
     public markPasswordOptionAsSelected() {
         this.isEmailLoginInOptionSelected = false;
+    }
+
+    public signin(){
+        const user: User = {
+            email:"dummyEmail@email.com",
+            firstName:"John",
+            lastName:"Doe",
+            phoneNumber:"+1134567892"
+        }
+        this.authService.signIn(user);
+        this.router.navigate([`${APP_ROUTES.product.app}/${APP_ROUTES.product.dashboard}`], {replaceUrl:true})
     }
 }

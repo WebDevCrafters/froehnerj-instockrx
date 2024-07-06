@@ -180,43 +180,90 @@
   <div class="my_profile">
     <div class="header_container">
       <p class="heading">My Profile</p>
-      <img src="assets/images/svg/edit-icon.svg" alt="" />
+      @if (!isProfileEditable) {
+      <img
+        src="assets/images/svg/edit-icon.svg"
+        alt="Edit"
+        (click)="toggleEditProfile()"
+      />
+      }
     </div>
+    @if (isProfileEditable) {
+    <form class="edit_profile_form">
+      <app-input label="Full Name" [control]="profileForm.controls.name" />
+      <app-input label="Email" [control]="profileForm.controls.email" />
+      <app-input
+        label="Phone Number"
+        [control]="profileForm.controls.phoneNumber"
+        type="phoneNumber"
+      />
+      <app-input label="Date of Birth" [control]="profileForm.controls.dob" type="dates"/>
+      <app-input label="Zip Code" [control]="profileForm.controls.zipCode" />
+      <app-input
+        label="Presciber"
+        [control]="profileForm.controls.doctorName"
+      />
+      <app-input
+        label="Doctor's Email"
+        [control]="profileForm.controls.doctorEmail"
+      />
+      <div class="actions">
+        <div>
+          <app-button
+            (clickEvent)="saveEditProfile()"
+            title="Save"
+            type="small_primary"
+            shape="rounded"
+          />
+        </div>
+        <div>
+          <app-button
+            (clickEvent)="cancelEditProfile()"
+            title="Cancel"
+            type="small_secondary"
+            shape="rounded"
+          />
+        </div>
+      </div>
+    </form>
+
+    } @else {
 
     <div class="info">
       <p class="label">Name</p>
-      <p>Patient Lal</p>
+      <p>{{ profileForm.controls["name"].value }}</p>
     </div>
 
     <div class="info">
       <p class="label">Email</p>
-      <p>patientsomething.com</p>
+      <p>{{ profileForm.controls["email"].value }}</p>
     </div>
 
     <div class="info">
       <p class="label">Phone Number</p>
-      <p>(123) 456-7890</p>
+      <p>{{ profileForm.controls["phoneNumber"].value }}</p>
     </div>
 
     <div class="info">
       <p class="label">Date of birth</p>
-      <p>10/10/2020</p>
+      <p>{{ profileForm.controls["dob"].value }}</p>
     </div>
 
     <div class="info">
       <p class="label">Zip Code</p>
-      <p>12345</p>
+      <p>{{ profileForm.controls["zipCode"].value }}</p>
     </div>
 
     <div class="info">
       <p class="label">Doctor's Name</p>
-      <p>John</p>
+      <p>{{ profileForm.controls["doctorName"].value }}</p>
     </div>
 
     <div class="info">
       <p class="label">Doctor's Email</p>
-      <p>doctoreail.com</p>
+      <p>{{ profileForm.controls["doctorEmail"].value }}</p>
     </div>
+    }
   </div>
 </div>
 
