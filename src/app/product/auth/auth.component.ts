@@ -11,19 +11,22 @@ import APP_ROUTES from '../../_shared/constants/routes';
 import { SigninComponent } from '../signin/signin.component';
 import { SignupComponent } from '../signup/signup.component';
 import { ForgotPasswordComponent } from '../forgot-password/forgot-password.component';
+import { VerificationCodeComponent } from '../verification-code/verification-code.component';
+import { emailValidator } from '../../_shared/utils/Validators';
 
 @Component({
     selector: 'app-auth',
     standalone: true,
-    imports: [InputComponent, ButtonComponent, CommonModule, CustomSearchDropdownComponent, SigninComponent, SignupComponent, ForgotPasswordComponent],
+    imports: [InputComponent, ButtonComponent, CommonModule, CustomSearchDropdownComponent, SigninComponent, SignupComponent, ForgotPasswordComponent, VerificationCodeComponent],
     templateUrl: './auth.component.html',
     styleUrl: './auth.component.scss'
 })
 export class AuthComponent implements OnInit {
     public isSignUpScreenVisible: boolean = false;
-    public isSignInScreenVisible: boolean = true;
+    public isSignInScreenVisible: boolean = false;
     public isForgotPasswordScreenVisible: boolean = false;
     public isEmailLoginInOptionSelected: boolean = true;
+    public isVerificationScreenVisible: boolean = true;
     public patientSignUp: boolean = false;
 
     constructor(private authService: AuthService, private router: Router) { }
@@ -32,7 +35,7 @@ export class AuthComponent implements OnInit {
         // console.log("Implement router input here");
     }
 
-    public personalInfoForm = new FormGroup({
+    public signInInfoForm = new FormGroup({
         firstName: new FormControl(''),
         lastName: new FormControl(''),
         email: new FormControl(''),
@@ -40,22 +43,47 @@ export class AuthComponent implements OnInit {
         password: new FormControl(''),
     });
 
+    public signUpInfoForm = new FormGroup({
+        firstName: new FormControl(''),
+        lastName: new FormControl(''),
+        email: new FormControl(''),
+        phoneNumber: new FormControl(''),
+        password: new FormControl(''),
+    });
+
+    public verificationCodeInfo = new FormGroup({
+        email: new FormControl('',
+            emailValidator('Username/client id combination not found')),
+        phoneNumber: new FormControl('',
+            emailValidator('Username/client id combination not found')),
+    });
+
+    public forgotPasswordInfo = new FormGroup({
+        email: new FormControl('',
+            emailValidator('Username/client id combination not found')),
+        phoneNumber: new FormControl('',
+            emailValidator('Username/client id combination not found')),
+    });
+
     public openSignInScreen() {
         this.isSignInScreenVisible = true;
         this.isSignUpScreenVisible = false;
         this.isForgotPasswordScreenVisible = false;
+        this.isVerificationScreenVisible = false;
     }
 
     public openSignUpScreen() {
         this.isSignInScreenVisible = false;
         this.isSignUpScreenVisible = true;
         this.isForgotPasswordScreenVisible = false;
+        this.isVerificationScreenVisible = false;
     }
 
     public openForgotPasswordScreen() {
         this.isSignInScreenVisible = false;
         this.isSignUpScreenVisible = false;
         this.isForgotPasswordScreenVisible = true;
+        this.isVerificationScreenVisible = false;
     }
 
     public markEmailOptionAsSelected() {

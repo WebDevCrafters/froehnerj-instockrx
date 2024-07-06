@@ -1,0 +1,34 @@
+<form class="form_container" (submit)="onSucces()">
+  <div class="input_containers">
+    <app-input
+      [control]="verificationCodeInfo.controls.email"
+      id="email"
+      label="Email"
+      [type]="'email'"
+      [shape]="'flat'"
+    />
+    <app-input
+      [control]="verificationCodeInfo.controls.phoneNumber"
+      id="text"
+      label="Verification Code"
+      [type]="'text'"
+      [shape]="'flat'"
+    />
+    <div class="send_code">
+      <div>Lost your code?</div>
+      <div class="send">Send code</div>
+    </div>
+  </div>
+  <div class="button_container">
+    <app-button
+      [shape]="'rounded'"
+      [title]="'Confirm'"
+      [type]="'small_primary'"
+    ></app-button>
+  </div>
+  <div class="footer">
+    <div class="signin">
+      <a class="signIn_tag" (click)="openSignInScreen()">Back to Sign In?</a>
+    </div>
+  </div>
+</form>

@@ -1,0 +1,22 @@
+.main_container {
+    height: calc(100vh - 3.5rem);
+    padding: 2rem 4rem;
+
+    .header {
+        font-size: 28px;
+    }
+
+    .content {
+        width: 100%;
+        margin: 75px 25px;
+
+        table {
+            width: 100%;
+
+            td {
+                font-size: 16px;
+                font-weight: 500;
+            }
+        }
+    }
+}
