@@ -20,6 +20,7 @@ export class ButtonComponent {
     @Input() public iconAlignment: "vertical" | "horizontal" = 'horizontal';
     @Input() public isLoading: boolean = false;
     @Input() public isDisabled: boolean = false;
+    @Input() public isShadowVisible: boolean = false;
     @Input({ alias: 'left-image-src' }) public leftImageSrc: string = '';
     @Input({ alias: 'right-image-src' }) public rightImageSrc: string = '';
 
