@@ -6,6 +6,7 @@
     padding: 0.5rem;
     border-bottom: 1px solid $normalGrey;
     position: relative;
+    height: 3.5rem;
 
     .brand {
         display: flex;
@@ -76,33 +77,33 @@
         padding: 1rem;
     }
 
-    .deletion{
+    .deletion {
         color: $dangerColor;
         padding: 0.5rem;
         text-align: center;
         font-size: 0.8rem;
-        
-        .button{
+
+        .button {
             padding: 0.5rem;
             transition: all 0.5s ease;
             cursor: pointer;
             border-radius: 24px;
 
-            &:hover{
+            &:hover {
                 background-color: $brandExtraLightPrimaryColor;
             }
         }
     }
 
-    .reset_pass_container{
+    .reset_pass_container {
         display: flex;
         justify-content: center;
     }
 }
 
-@media screen and (max-width:430px) {
-    .settings_container{
-        .user_info{
+@media screen and (max-width: 430px) {
+    .settings_container {
+        .user_info {
             flex-direction: column;
         }
     }
