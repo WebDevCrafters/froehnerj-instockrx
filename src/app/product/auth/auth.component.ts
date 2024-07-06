@@ -23,10 +23,10 @@ import { emailValidator } from '../../_shared/utils/Validators';
 })
 export class AuthComponent implements OnInit {
     public isSignUpScreenVisible: boolean = false;
-    public isSignInScreenVisible: boolean = false;
+    public isSignInScreenVisible: boolean = true;
     public isForgotPasswordScreenVisible: boolean = false;
     public isEmailLoginInOptionSelected: boolean = true;
-    public isVerificationScreenVisible: boolean = true;
+    public isVerificationScreenVisible: boolean = false;
     public patientSignUp: boolean = false;
 
     constructor(private authService: AuthService, private router: Router) { }
