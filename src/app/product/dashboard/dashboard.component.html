@@ -43,33 +43,37 @@
             <div class="label">Earlist pick up date</div>
             <div class="button_container">
               <app-button
-                title="Thu, July 4"
+                [title]="formatTimestamp(activeSearchForm.controls.pickupDate.value)"
                 src="assets/images/svg/calendar-icon.svg"
                 type="small_secondary"
                 [iconAlignment]="'vertical'"
+                (clickEvent)="openDateChooserModal()"
               />
             </div>
           </div>
 
           <div class="status_container">
             <div class="label">Status</div>
-            <div class="status" [ngClass]="{ started: paymentCompleted }">
+            <div
+              class="status"
+              [ngClass]="{ started: activeSearchData.paymentCompleted }"
+            >
               <img
                 [src]="
-                  paymentCompleted
+                  activeSearchData.paymentCompleted
                     ? 'assets/images/svg/tick-icon.svg'
                     : 'assets/images/svg/exclamation.svg'
                 "
                 alt=""
               />
-              <div>@if (!paymentCompleted) { Not } Started</div>
+              <div>
+                @if (!activeSearchData.paymentCompleted) { Not } Started
+              </div>
             </div>
           </div>
 
-          <div class="label" [ngClass]="{ not_complete: !paymentCompleted }">
-            Please complete payment to start your search
-          </div>
-
+          @if (!activeSearchData.paymentCompleted) {
+          <div class="label not_complete">Please complete payment to start your search</div>
           <div class="button_container">
             <app-button
               title="Complete Payment"
@@ -77,6 +81,8 @@
               shape="rounded"
             />
           </div>
+          }
+
         </div>
       </div>
 
@@ -95,7 +101,6 @@
       <div class="previous_search_container"></div>
     </div>
     <div class="my_profile">
-
       <div class="header_container">
         <p class="heading">My Profile</p>
         <img src="assets/images/svg/edit-icon.svg" alt="" />
@@ -135,7 +140,47 @@
         <p class="label">Doctor's Email</p>
         <p>doctoreail.com</p>
       </div>
-
     </div>
   </div>
 </div>
+
+
+<app-modal
+  [title]="'Example Modal'"
+  [isVisible]="modalVisible"
+  (closeModal)="closeDateChooserModal()"
+>
+  <div class="modal_content">
+    <div class="content">
+      <div class="details">
+        <p>Select date</p>
+        <span [ngClass]="{ dateInputActive: isDateInputActive }">
+          {{ formatTimestamp(selectedDate) }}
+        </span>
+      </div>
+      <div (click)="toggleDateInput()">
+        @if (isDateInputActive) {
+        <img src="assets/images/svg/calendar-icon.svg" alt="" srcset="" />
+        } @else {
+        <img src="assets/images/svg/edit-icon.svg" alt="" srcset="" />
+        }
+      </div>
+    </div>
+    <div class="date_picker">
+      @if (isDateInputActive) {
+      <app-input
+        type="dates"
+        label="Enter date"
+        bg="#fae7e0"
+        [control]="dateFormControl"
+      />
+      } @else {
+      <app-date-picker (onDatePicked)="onDatePicked($event)" />
+      }
+      <div class="picker_options">
+        <span class="options" (click)="closeDateChooserModal()">Cancel</span>
+        <span class="options" (click)="onPositivePress()">OK</span>
+      </div>
+    </div>
+  </div>
+</app-modal>
