@@ -189,7 +189,7 @@
       }
     </div>
     @if (isProfileEditable) {
-    <form class="edit_profile_form">
+    <form class="edit_profile_form" (submit)="saveEditProfile()">
       <app-input label="Full Name" [control]="profileForm.controls.name" />
       <app-input label="Email" [control]="profileForm.controls.email" />
       <app-input
@@ -214,6 +214,7 @@
             title="Save"
             type="small_primary"
             shape="rounded"
+            formButtonType="submit"
           />
         </div>
         <div>
@@ -222,6 +223,7 @@
             title="Cancel"
             type="small_secondary"
             shape="rounded"
+            formButtonType="button"
           />
         </div>
       </div>

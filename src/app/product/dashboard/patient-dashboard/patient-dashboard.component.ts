@@ -8,7 +8,9 @@ import {
   Validators,
 } from '@angular/forms';
 import {
+  charLimitValidator,
   dateValidator,
+  emailValidator,
   requiredValidator,
 } from '../../../_shared/utils/Validators';
 import { activeSearchData } from '../../../_shared/constants/data';
@@ -32,6 +34,7 @@ import { CommonModule } from '@angular/common';
     ModalComponent,
     ButtonComponent,
     CommonModule,
+    FormsModule
   ],
   templateUrl: './patient-dashboard.component.html',
   styleUrl: './patient-dashboard.component.scss',
@@ -60,13 +63,36 @@ export class PatientDashboardComponent {
   });
 
   profileForm = new FormGroup({
-    name: new FormControl('Patient Bal'),
-    email: new FormControl('patientsomething.com'),
-    phoneNumber: new FormControl('(123) 456-7890'),
-    dob: new FormControl('2020-10-10'),
-    zipCode: new FormControl('12345'),
-    doctorName: new FormControl('John'),
-    doctorEmail: new FormControl('doctoreail.com'),
+    name: new FormControl('Patient Bal', [
+      requiredValidator("Patient's Name cannot be empty"),
+    ]),
+    email: new FormControl('patientsomething.com', [
+      requiredValidator("Patient's email cannot be empty"),
+      emailValidator('Please enter a valid email'),
+    ]),
+    phoneNumber: new FormControl('(123) 456-7890', [
+      requiredValidator("Patient's phone number cannot be empty"),
+      charLimitValidator(
+        10 + 4, // Including '()' and '-'
+        "Patient's phone must be 10 digits. (Only US phone numbers are supported at this time.)"
+      ),
+    ]),
+    dob: new FormControl('2020-10-10', [
+      requiredValidator("Patient's date of birth cannot be empty"),
+      dateValidator('Please enter a valid date'),
+    ]),
+    zipCode: new FormControl('12345', [
+      requiredValidator('Zip code must not be empty'),
+      charLimitValidator(5, 'Zip code must be 5 digits'),
+    ]),
+    doctorName: new FormControl('John', [
+      requiredValidator('Zip code must not be empty'),
+      charLimitValidator(5, 'Zip code must be 5 digits'),
+    ]),
+    doctorEmail: new FormControl('doctoreail.com', [
+      requiredValidator("Patient's email cannot be empty"),
+      emailValidator('Please enter a valid email'),
+    ]),
   });
 
   editableStates: boolean[] = Array(activeSearchData.medications.length).fill(
@@ -184,6 +210,7 @@ export class PatientDashboardComponent {
   }
 
   saveEditProfile() {
+    if(!this.profileForm.valid) return;
     this.isProfileEditable = false;
     this.profileBackup = null;
   }
