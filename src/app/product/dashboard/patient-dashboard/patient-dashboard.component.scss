@@ -153,6 +153,17 @@
             gap: 0.5rem;
             flex-direction: column;
         }
+
+        .edit_profile_form{
+            display: flex;
+            gap: 1rem;
+            flex-direction: column;
+
+            .actions{
+                display: flex;
+                gap: 1rem;
+            }
+        }
     }
 }
 

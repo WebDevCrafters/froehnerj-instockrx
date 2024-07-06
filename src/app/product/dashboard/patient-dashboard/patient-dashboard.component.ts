@@ -1,5 +1,12 @@
 import { Component } from '@angular/core';
-import { FormArray, FormControl, FormGroup, Validators } from '@angular/forms';
+import {
+  FormArray,
+  FormControl,
+  FormGroup,
+  FormsModule,
+  ReactiveFormsModule,
+  Validators,
+} from '@angular/forms';
 import {
   dateValidator,
   requiredValidator,
@@ -19,7 +26,13 @@ import { CommonModule } from '@angular/common';
 @Component({
   selector: 'app-patient-dashboard',
   standalone: true,
-  imports: [DatePickerComponent, InputComponent, ModalComponent, ButtonComponent, CommonModule],
+  imports: [
+    DatePickerComponent,
+    InputComponent,
+    ModalComponent,
+    ButtonComponent,
+    CommonModule,
+  ],
   templateUrl: './patient-dashboard.component.html',
   styleUrl: './patient-dashboard.component.scss',
 })
@@ -27,6 +40,7 @@ export class PatientDashboardComponent {
   activeSearchData: ActiveSearch = activeSearchData;
   modalVisible: boolean = false;
   isDateInputActive: boolean = false;
+  isProfileEditable: boolean = true;
   selectedDate: number = activeSearchData.pickupDate;
   dateFormControl: FormControl = new FormControl('');
 
@@ -42,6 +56,16 @@ export class PatientDashboardComponent {
       }),
     ]),
     pickupDate: new FormControl(new Date().getTime(), [Validators.required]),
+  });
+
+  profileForm = new FormGroup({
+    name: new FormControl('Patient Bal'),
+    email: new FormControl('patientsomething.com'),
+    phoneNumber: new FormControl('(123) 456-7890'),
+    dob: new FormControl('2020-10-10'),
+    zipCode: new FormControl('12345'),
+    doctorName: new FormControl('John'),
+    doctorEmail: new FormControl('doctoreail.com'),
   });
 
   editableStates: boolean[] = Array(activeSearchData.medications.length).fill(
@@ -142,4 +166,25 @@ export class PatientDashboardComponent {
     this.editableStates[index] = false;
     this.backups[index] = null;
   }
+
+  onSubmit(): void {
+    if (this.profileForm.valid) {
+      console.log(this.profileForm.value);
+    } else {
+      console.log('Form is invalid');
+    }
+  }
+
+  toggleEditProfile() {
+    this.isProfileEditable = !this.isProfileEditable;
+  }
+
+  saveEditProfile(){
+    
+  }
+
+  cancelEditProfile(){
+
+  }
+
 }
