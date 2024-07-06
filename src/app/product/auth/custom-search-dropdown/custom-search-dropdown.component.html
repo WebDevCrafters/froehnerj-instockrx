@@ -1,0 +1,19 @@
+<div class="dropdown-container" (click)="toggleDropdown()">
+  <div>{{ selectedItem.code }}</div>
+  <div class="dropdown" [class.open]="isOpen">
+    <input
+      type="text"
+      [(ngModel)]="searchTerm"
+      placeholder="Select your country dial code"
+      (input)="filterItems()"
+      (keydown.enter)="selectItem({ name: searchTerm, code: '' })"
+      (click)="stopPropagation($event)"
+    />
+    <ul>
+      <li *ngFor="let item of filteredItems" (click)="selectItem(item)">
+        <div class="country">{{ item.name }}</div>
+        <div class="code">{{ item.code }}</div>
+      </li>
+    </ul>
+  </div>
+</div>
