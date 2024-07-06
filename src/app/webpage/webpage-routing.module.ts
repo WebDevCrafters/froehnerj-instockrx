@@ -10,26 +10,28 @@ import { WebpageComponent } from './webpage.component';
 import { PrivacyComponent } from './pages/privacy/privacy.component';
 import { FindMyMedsComponent } from './pages/find-my-meds/find-my-meds.component';
 import { TermsOfServiceComponent } from './pages/terms-of-service/terms-of-service.component';
+import { DemoComponent } from './pages/demo/demo.component';
 
 const routes: Routes = [
-  {
-    path: APP_ROUTES.webpage._,
-    component: WebpageComponent,
-    children: [
-      { path: APP_ROUTES.webpage._, component: HomeComponent },
-      { path: APP_ROUTES.webpage.about, component: AboutUsComponent },
-      { path: APP_ROUTES.webpage.patients, component: PatientsComponent },
-      { path: APP_ROUTES.webpage.pricing, component: PricingComponent },
-      { path: APP_ROUTES.webpage.providers, component: ProvidersComponent },
-      { path: APP_ROUTES.webpage.privacy, component: PrivacyComponent },
-      { path: APP_ROUTES.webpage.termsOfService, component: TermsOfServiceComponent },
-      { path: APP_ROUTES.webpage.findMyMeds, component: FindMyMedsComponent },
-    ],
-  },
+    {
+        path: APP_ROUTES.webpage._,
+        component: WebpageComponent,
+        children: [
+            { path: APP_ROUTES.webpage._, component: HomeComponent },
+            { path: APP_ROUTES.webpage.about, component: AboutUsComponent },
+            { path: APP_ROUTES.webpage.demo, component: DemoComponent },
+            { path: APP_ROUTES.webpage.patients, component: PatientsComponent },
+            { path: APP_ROUTES.webpage.pricing, component: PricingComponent },
+            { path: APP_ROUTES.webpage.providers, component: ProvidersComponent },
+            { path: APP_ROUTES.webpage.privacy, component: PrivacyComponent },
+            { path: APP_ROUTES.webpage.termsOfService, component: TermsOfServiceComponent },
+            { path: APP_ROUTES.webpage.findMyMeds, component: FindMyMedsComponent },
+        ],
+    },
 ];
 
 @NgModule({
-  imports: [RouterModule.forChild(routes)],
-  exports: [RouterModule],
+    imports: [RouterModule.forChild(routes)],
+    exports: [RouterModule],
 })
-export class WebpageRoutingModule {}
+export class WebpageRoutingModule { }
