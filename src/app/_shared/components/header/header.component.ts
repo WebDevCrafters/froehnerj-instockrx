@@ -2,6 +2,9 @@ import { Component, OnInit } from '@angular/core';
 import { ModalComponent } from '../modal/modal.component';
 import { AuthService } from '../../../_core/services/auth.service';
 import { ButtonComponent } from '../button/button.component';
+import { User } from '../../dataTypes/User';
+import { Router } from '@angular/router';
+import APP_ROUTES from '../../constants/routes';
 
 @Component({
   selector: 'app-header',
@@ -11,11 +14,10 @@ import { ButtonComponent } from '../button/button.component';
   styleUrl: './header.component.scss',
 })
 export class HeaderComponent implements OnInit {
-  constructor(private authService: AuthService) {}
+  constructor(private authService: AuthService, private router: Router) {}
 
   modalVisible: boolean = false;
-  userEmail: string = '';
-  userType: string = 'patient';
+  user: User | null = null;
 
   ngOnInit(): void {
     this.getUserEmail();
@@ -24,14 +26,20 @@ export class HeaderComponent implements OnInit {
   getUserEmail() {
     const user = this.authService.getUserData();
     if (!user) return;
-    this.userEmail = user.email;
+    this.user = user;
   }
 
   toggleSettings() {
     this.modalVisible = !this.modalVisible;
   }
 
-  requestAccountDeletion(){
-    
+  requestAccountDeletion() {}
+
+  signout() {
+    this.authService.signOut();
+    this.router.navigate(
+      [`${APP_ROUTES.product.app}/${APP_ROUTES.product.auth}`],
+      { replaceUrl: true }
+    );
   }
 }
