@@ -3,11 +3,12 @@ import { FormControl, FormGroup } from '@angular/forms';
 import { InputComponent } from '../../_shared/components/input/input.component';
 import { ButtonComponent } from '../../_shared/components/button/button.component';
 import { CommonModule } from '@angular/common';
+import { CustomSearchDropdownComponent } from './custom-search-dropdown/custom-search-dropdown.component';
 
 @Component({
     selector: 'app-auth',
     standalone: true,
-    imports: [InputComponent, ButtonComponent, CommonModule],
+    imports: [InputComponent, ButtonComponent, CommonModule, CustomSearchDropdownComponent],
     templateUrl: './auth.component.html',
     styleUrl: './auth.component.scss'
 })
@@ -44,7 +45,11 @@ export class AuthComponent {
         this.isForgotPasswordScreenVisible = true;
     }
 
-    public toggleLogInOption() {
-        this.isEmailLoginInOptionSelected = !this.isEmailLoginInOptionSelected;
+    public markEmailOptionAsSelected() {
+        this.isEmailLoginInOptionSelected = true;
+    }
+
+    public markPasswordOptionAsSelected() {
+        this.isEmailLoginInOptionSelected = false;
     }
 }

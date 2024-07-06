@@ -24,14 +24,14 @@
           <div class="option_container">
             <div
               class="email_section"
-              (click)="toggleLogInOption()"
+              (click)="markEmailOptionAsSelected()"
               [ngClass]="{ active: isEmailLoginInOptionSelected }"
             >
               Email
             </div>
             <div
               class="number_section"
-              (click)="toggleLogInOption()"
+              (click)="markPasswordOptionAsSelected()"
               [ngClass]="{ active: !isEmailLoginInOptionSelected }"
             >
               Phone Number
@@ -48,13 +48,16 @@
             [shape]="'flat'"
           />
           } @else {
-          <app-input
-            [control]="personalInfoForm.controls.phoneNumber"
-            id="phoneNumber"
-            label="Phone number"
-            [type]="'text'"
-            [shape]="'flat'"
-          />
+          <div class="phoneNumber_container">
+            <app-custom-search-dropdown></app-custom-search-dropdown>
+            <app-input
+              [control]="personalInfoForm.controls.phoneNumber"
+              id="phoneNumber"
+              label="Phone number"
+              [type]="'text'"
+              [shape]="'flat'"
+            />
+          </div>
           }
           <app-input
             [control]="personalInfoForm.controls.password"
@@ -85,25 +88,6 @@
       </div>
       } @else if(isSignUpScreenVisible) {
       <div class="form_container">
-        <div class="log_option_container">
-          <div class="title">Log in using:</div>
-          <div class="option_container">
-            <div
-              class="email_section"
-              (click)="toggleLogInOption()"
-              [ngClass]="{ active: isEmailLoginInOptionSelected }"
-            >
-              Email
-            </div>
-            <div
-              class="number_section"
-              (click)="toggleLogInOption()"
-              [ngClass]="{ active: !isEmailLoginInOptionSelected }"
-            >
-              Phone Number
-            </div>
-          </div>
-        </div>
         <div class="input_containers">
           <app-input
             [control]="personalInfoForm.controls.firstName"
@@ -126,13 +110,16 @@
             [type]="'email'"
             [shape]="'flat'"
           />
-          <app-input
-            [control]="personalInfoForm.controls.phoneNumber"
-            id="phoneNumber"
-            label="Phone number"
-            [type]="'text'"
-            [shape]="'flat'"
-          />
+          <div class="phoneNumber_container">
+            <app-custom-search-dropdown></app-custom-search-dropdown>
+            <app-input
+              [control]="personalInfoForm.controls.phoneNumber"
+              id="phoneNumber"
+              label="Phone number"
+              [type]="'text'"
+              [shape]="'flat'"
+            />
+          </div>
           <app-input
             [control]="personalInfoForm.controls.password"
             id="password"
@@ -167,14 +154,14 @@
           <div class="option_container">
             <div
               class="email_section"
-              (click)="toggleLogInOption()"
+              (click)="markEmailOptionAsSelected()"
               [ngClass]="{ active: isEmailLoginInOptionSelected }"
             >
               Email
             </div>
             <div
               class="number_section"
-              (click)="toggleLogInOption()"
+              (click)="markPasswordOptionAsSelected()"
               [ngClass]="{ active: !isEmailLoginInOptionSelected }"
             >
               Phone Number
@@ -192,13 +179,16 @@
             [shape]="'flat'"
           />
           } @else {
-          <app-input
-            [control]="personalInfoForm.controls.phoneNumber"
-            id="phoneNumber"
-            label="Phone number"
-            [type]="'text'"
-            [shape]="'flat'"
-          />
+            <div class="phoneNumber_container">
+                <app-custom-search-dropdown></app-custom-search-dropdown>
+                <app-input
+                  [control]="personalInfoForm.controls.phoneNumber"
+                  id="phoneNumber"
+                  label="Phone number"
+                  [type]="'text'"
+                  [shape]="'flat'"
+                />
+              </div>
           }
         </div>
         <div class="button_container">
