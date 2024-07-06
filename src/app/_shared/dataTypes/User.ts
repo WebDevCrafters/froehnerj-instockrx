@@ -3,4 +3,5 @@ export type User = {
     lastName: string;
     email: string;
     phoneNumber: string;
+    type: "patient" | "clinician"
 }

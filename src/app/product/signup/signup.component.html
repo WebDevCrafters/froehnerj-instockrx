@@ -1,0 +1,67 @@
+<form class="form_container">
+  <div class="input_containers">
+    <app-input
+      [control]="personalInfoForm.controls.firstName"
+      id="firstName"
+      label="First Name"
+      [type]="'text'"
+      [shape]="'flat'"
+    />
+    <app-input
+      [control]="personalInfoForm.controls.lastName"
+      id="lastName"
+      label="Last Name"
+      [type]="'text'"
+      [shape]="'flat'"
+    />
+    <app-input
+      [control]="personalInfoForm.controls.email"
+      id="email"
+      label="Email"
+      [type]="'email'"
+      [shape]="'flat'"
+    />
+    <div class="phoneNumber_container">
+      <app-custom-search-dropdown></app-custom-search-dropdown>
+      <app-input
+        [control]="personalInfoForm.controls.phoneNumber"
+        id="phoneNumber"
+        label="Phone number"
+        [type]="'text'"
+        [shape]="'flat'"
+      />
+    </div>
+    <app-input
+      [control]="personalInfoForm.controls.password"
+      id="password"
+      label="Password"
+      [type]="'password'"
+      [shape]="'flat'"
+    />
+  </div>
+  <div class="button_container">
+    <app-button
+      [shape]="'rounded'"
+      [title]="'Create account'"
+      [type]="'small_primary'"
+    ></app-button>
+  </div>
+  <div class="footer">
+    <span>
+      By creating an account you agree to our
+      <a>privacy-policy</a> and
+      <a>terms of service and business associated agreements.</a>
+    </span>
+    @if(patientSignUp && isSignUpScreenVisible) {
+    <div class="patient_footer">
+      You also agree to recieve SMS messages from insito health regarding search
+      status updates & marketing. Reply STOP to opt out, HELP for assistance.
+      Standard message & data rates may apply. These texts are non-recurring.
+    </div>
+    }
+    <div class="signin">
+      Already have an account?
+      <a class="signIn_tag" (click)="openSignInScreen()">Sign In</a>
+    </div>
+  </div>
+</form>
