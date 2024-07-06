@@ -33,7 +33,9 @@
         [isSignUpScreenVisible]="isSignUpScreenVisible"
         [isEmailLoginInOptionSelected]="isEmailLoginInOptionSelected"
         [isForgotPasswordScreenVisible]="isForgotPasswordScreenVisible"
+        [isVerificationScreenVisible]="isVerificationScreenVisible"
         (stateChange)="updateStates($event)"
+        [signInInfoForm]="signInInfoForm"
       ></app-signin>
       } @else if(isSignUpScreenVisible) {
       <app-signup
@@ -41,17 +43,32 @@
         [isSignUpScreenVisible]="isSignUpScreenVisible"
         [isEmailLoginInOptionSelected]="isEmailLoginInOptionSelected"
         [isForgotPasswordScreenVisible]="isForgotPasswordScreenVisible"
+        [isVerificationScreenVisible]="isVerificationScreenVisible"
         (stateChange)="updateStates($event)"
         [patientSignUp]="patientSignUp"
+        [signUpInfoForm]="signUpInfoForm"
       ></app-signup>
-      } @else {
+      } @else if(isForgotPasswordScreenVisible){
       <app-forgot-password
         [isSignInScreenVisible]="isSignInScreenVisible"
         [isSignUpScreenVisible]="isSignUpScreenVisible"
         [isEmailLoginInOptionSelected]="isEmailLoginInOptionSelected"
         [isForgotPasswordScreenVisible]="isForgotPasswordScreenVisible"
+        [isVerificationScreenVisible]="isVerificationScreenVisible"
         (stateChange)="updateStates($event)"
+        [forgotPasswordInfo]="forgotPasswordInfo"
       ></app-forgot-password>
+      } @else {
+      <app-verification-code
+        [isSignInScreenVisible]="isSignInScreenVisible"
+        [isSignUpScreenVisible]="isSignUpScreenVisible"
+        [isEmailLoginInOptionSelected]="isEmailLoginInOptionSelected"
+        [isForgotPasswordScreenVisible]="isForgotPasswordScreenVisible"
+        [isVerificationScreenVisible]="isVerificationScreenVisible"
+        (stateChange)="updateStates($event)"
+        [verificationCodeInfo]="verificationCodeInfo"
+        [userEmail]="signUpInfoForm.controls.email"
+      ></app-verification-code>
       }
     </div>
   </div>

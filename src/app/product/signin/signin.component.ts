@@ -21,12 +21,8 @@ export class SigninComponent {
     @Input() public isSignInScreenVisible: boolean = true;
     @Input() public isForgotPasswordScreenVisible: boolean = false;
     @Input() public isEmailLoginInOptionSelected: boolean = true;
-
-    @Output() public stateChange = new EventEmitter<{ isSignUpScreenVisible: boolean, isSignInScreenVisible: boolean, isForgotPasswordScreenVisible: boolean, isEmailLoginInOptionSelected: boolean }>();
-
-    constructor(private authService: AuthService, private router: Router) { }
-
-    public signInInfoForm = new FormGroup({
+    @Input() public isVerificationScreenVisible: boolean = false;
+    @Input() public signInInfoForm = new FormGroup({
         firstName: new FormControl(''),
         lastName: new FormControl(''),
         email: new FormControl(''),
@@ -34,10 +30,15 @@ export class SigninComponent {
         password: new FormControl(''),
     });
 
+    @Output() public stateChange = new EventEmitter<{ isSignUpScreenVisible: boolean, isSignInScreenVisible: boolean, isForgotPasswordScreenVisible: boolean, isEmailLoginInOptionSelected: boolean, isVerificationScreenVisible: boolean }>();
+
+    constructor(private authService: AuthService, private router: Router) { }
+
     public openSignInScreen() {
         this.isSignInScreenVisible = true;
         this.isSignUpScreenVisible = false;
         this.isForgotPasswordScreenVisible = false;
+        this.isVerificationScreenVisible = false;
         this.emitStateChange();
     }
 
@@ -45,6 +46,7 @@ export class SigninComponent {
         this.isSignInScreenVisible = false;
         this.isSignUpScreenVisible = true;
         this.isForgotPasswordScreenVisible = false;
+        this.isVerificationScreenVisible = false;
         this.emitStateChange();
     }
 
@@ -52,6 +54,7 @@ export class SigninComponent {
         this.isSignInScreenVisible = false;
         this.isSignUpScreenVisible = false;
         this.isForgotPasswordScreenVisible = true;
+        this.isVerificationScreenVisible = false;
         this.emitStateChange();
     }
 
@@ -82,7 +85,8 @@ export class SigninComponent {
             isSignUpScreenVisible: this.isSignUpScreenVisible,
             isSignInScreenVisible: this.isSignInScreenVisible,
             isForgotPasswordScreenVisible: this.isForgotPasswordScreenVisible,
-            isEmailLoginInOptionSelected: this.isEmailLoginInOptionSelected
+            isEmailLoginInOptionSelected: this.isEmailLoginInOptionSelected,
+            isVerificationScreenVisible: this.isVerificationScreenVisible
         });
     }
 
