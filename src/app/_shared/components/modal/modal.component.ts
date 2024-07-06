@@ -10,6 +10,7 @@ import { Component, EventEmitter, Input, Output } from '@angular/core';
 })
 export class ModalComponent {
   @Input() title: string = '';
+  @Input() bg: string = 'rgba(0, 0, 0, 0.5)';
   @Input() isVisible: boolean = false;
   @Output() closeModal: EventEmitter<void> = new EventEmitter<void>();
   closing: boolean = false;
