@@ -36,19 +36,7 @@ export const activeSearchData = {
       dose: "10",
       quantity:"100",
       brand:"Generic Brand"
-    },
-    {
-      name: "Dawa ka naam",
-      dose: "10",
-      quantity:"100",
-      brand:"Generic Brand"
-    },
-    {
-      name: "Dawa ka naam",
-      dose: "10",
-      quantity:"100",
-      brand:"Generic Brand"
-    },
+    }
   ],
   pickupDate: new Date().getTime(),
   paymentCompleted: false 
