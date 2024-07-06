@@ -97,6 +97,15 @@
                                     width: 100%;
                                 }
                             }
+
+                            .decisions{
+                                display: flex;
+                                justify-content: space-evenly;
+
+                                >div{
+                                   width: 10rem;
+                                }
+                            }
                         }
                     }
 

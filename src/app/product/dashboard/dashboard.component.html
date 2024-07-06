@@ -30,7 +30,7 @@
             <div class="prescribed_medication">
               <div class="options">
                 <p>Option {{ i + 1 }}</p>
-                @if (i!==-1) {
+                @if (i!==0) {
                 <img
                   src="assets/images/svg/delete-icon.svg"
                   alt="Delete"
@@ -69,13 +69,34 @@
                 label="Brand Name"
                 placeholder="Preffered Brand"
               />
+              <div class="decisions">
+                <div>
+                  <app-button
+                    title="Save"
+                    type="small_primary"
+                    shape="rounded"
+                    (clickEvent)="saveMedication(i)"
+                    />
+                  </div>
+                  <div>
+                    <app-button
+                    title="Cancel"
+                    type="small_secondary"
+                    shape="rounded"
+                    (clickEvent)="cancelMedication(i)"
+                  />
+                </div>
+              </div>
             </div>
             } @else {
             <div class="medication">
-              <div>{{i+1}}:</div>
+              <div>{{ i + 1 }}:</div>
               <div>
-                <p>{{medication.value.name}} {{medication.value.dose}}</p>
-                <p class="label">Quatity: {{medication.value.quantity}}, {{medication.value.brand}}</p>
+                <p>{{ medication.value.name }} {{ medication.value.dose }}</p>
+                <p class="label">
+                  Quatity: {{ medication.value.quantity }},
+                  {{ medication.value.brand }}
+                </p>
               </div>
               <div class="img_container">
                 <img

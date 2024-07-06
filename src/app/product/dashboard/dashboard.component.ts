@@ -36,7 +36,7 @@ export class DashboardComponent {
   modalVisible: boolean = false;
   isDateInputActive: boolean = false;
   selectedDate: number = activeSearchData.pickupDate;
-  dateFormControl: FormControl = new FormControl(this.selectedDate);
+  dateFormControl: FormControl = new FormControl("");
 
   activeSearchForm = new FormGroup({
     prescribedMedication: new FormArray([
@@ -52,7 +52,8 @@ export class DashboardComponent {
     pickupDate: new FormControl(new Date().getTime(), [Validators.required]),
   });
 
-  editableStates: boolean[] = Array(activeSearchData.medications.length).fill(false); 
+  editableStates: boolean[] = Array(activeSearchData.medications.length).fill(false);
+  backups: any[] = [];
 
   formatTimestamp(timestamp: number | null) {
     if (!timestamp) return '';
@@ -100,15 +101,21 @@ export class DashboardComponent {
     this.activeSearchForm.controls.prescribedMedication.push(
       this.createPrescribedMedicationFormGroup()
     );
-    this.editableStates.push(true); 
+    this.editableStates.push(true);
+    this.backups.push(null);
   }
 
   removeMedication(index: number) {
     this.activeSearchForm.controls.prescribedMedication.removeAt(index);
     this.editableStates.splice(index, 1);
+    this.backups.splice(index, 1);
   }
 
   toggleEditable(index: number) {
+    if (!this.editableStates[index]) {
+      const medicationFormGroup = this.activeSearchForm.controls.prescribedMedication.at(index) as FormGroup;
+      this.backups[index] = medicationFormGroup.value;
+    }
     this.editableStates[index] = !this.editableStates[index];
   }
 
@@ -122,5 +129,17 @@ export class DashboardComponent {
 
   get prescribedMedication(): FormArray {
     return this.activeSearchForm.get('prescribedMedication') as FormArray;
+  }
+
+  saveMedication(index: number) {
+    this.editableStates[index] = false;
+    this.backups[index] = null;
+  }
+
+  cancelMedication(index: number) {
+    const medicationFormGroup = this.activeSearchForm.controls.prescribedMedication.at(index) as FormGroup;
+    medicationFormGroup.setValue(this.backups[index]);
+    this.editableStates[index] = false;
+    this.backups[index] = null;
   }
 }
