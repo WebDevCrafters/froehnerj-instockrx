@@ -17,7 +17,7 @@ export class AuthComponent {
     isSignUpScreenVisible: boolean = false;
     isSignInScreenVisible: boolean = true;
     isForgotPasswordScreenVisible: boolean = false;
-    isEmailLoginInOptionSelected: boolean = false;
+    isEmailLoginInOptionSelected: boolean = true;
 
     public personalInfoForm = new FormGroup({
         firstName: new FormControl(''),
