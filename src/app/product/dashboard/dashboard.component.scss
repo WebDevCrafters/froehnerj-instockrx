@@ -7,7 +7,7 @@
     .dashboard_content {
         padding: 2rem;
         display: flex;
-        gap: 1rem;
+        gap: 3rem;
         
         .heading {
             font-size: 1.5rem;
@@ -103,7 +103,20 @@
 
         .my_profile{
             width: 100%;
-            // background-color: yellow;
+            display: flex;
+            gap: 1rem;
+            flex-direction: column;
+            
+            .header_container{
+                display: flex;
+                gap: 1.5rem;
+            }
+
+            .info{
+                display: flex;
+                gap: 0.5rem;
+                flex-direction: column;
+            }
         }
     }
 }
