@@ -88,25 +88,6 @@
       </div>
       } @else if(isSignUpScreenVisible) {
       <div class="form_container">
-        <div class="log_option_container">
-          <div class="title">Log in using:</div>
-          <div class="option_container">
-            <div
-              class="email_section"
-              (click)="markEmailOptionAsSelected()"
-              [ngClass]="{ active: isEmailLoginInOptionSelected }"
-            >
-              Email
-            </div>
-            <div
-              class="number_section"
-              (click)="markPasswordOptionAsSelected()"
-              [ngClass]="{ active: !isEmailLoginInOptionSelected }"
-            >
-              Phone Number
-            </div>
-          </div>
-        </div>
         <div class="input_containers">
           <app-input
             [control]="personalInfoForm.controls.firstName"
