@@ -171,8 +171,6 @@
     background-color: $brandExtraLightPrimaryColor;
     border-radius: 30px;
     display: flex;
-    // width: 33rem;
-    // flex-direction: column;
     transition: all 1s ease;
 
     .date_picker {
@@ -222,6 +220,12 @@
             height: 1.5rem;
             cursor: pointer;
         }
+    }
+}
+
+@media screen and (max-width: 950px) {
+    .dashboard_content{
+        flex-direction: column;
     }
 }
 
