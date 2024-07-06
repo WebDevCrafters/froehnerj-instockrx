@@ -1,5 +1,5 @@
 @if (isVisible) {
-<div class="modal closing" [ngClass]="{ closing: closing===true }" (click)="closeWithAnimation()">
+<div class="modal closing" [style.backgroundColor]="bg" [ngClass]="{ closing: closing===true }" (click)="closeWithAnimation()">
   <div (click)="onContentClick($event)">
     <ng-content></ng-content>
   </div>

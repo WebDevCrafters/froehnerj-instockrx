@@ -6,7 +6,32 @@
       <div class="sub_heading">by InStockRx</div>
     </div>
   </div>
-  <div class="settings_icon_container">
-    <img src="assets/images/svg/settings-icon.svg" alt="">
+  <div class="settings_icon_container" (click)="toggleSettings()">
+    <img src="assets/images/svg/settings-icon.svg" alt="" />
   </div>
 </div>
+
+<app-modal [isVisible]="modalVisible" bg="transparent" (closeModal)="toggleSettings()">
+  <div class="settings_container">
+    <p>Account</p>
+    <div class="user_info">
+      <p>
+        {{ userEmail }}
+        <br />
+        {{ userType }}
+      </p>
+      <app-button title="Sign out" type="small_primary" shape="rounded" />
+    </div>
+    <hr />
+    <div class="theme_container">
+      <p>Theme</p>
+      <p>light</p>
+    </div>
+    <hr />
+    <div class="deletion">
+      <p class="button" (click)="requestAccountDeletion()">
+        Request account deletion
+      </p>
+    </div>
+  </div>
+</app-modal>
