@@ -14,6 +14,7 @@
         [title]="primaryBtnText"
         [type]="primaryBtnType"
         (clickEvent)="openFindMyMeds($event)"
+        [isShadowVisible]="true"
       ></app-button>
     </div>
     } @if(secondaryBtnText.length >0) {
@@ -22,6 +23,7 @@
         [title]="secondaryBtnText"
         [type]="secondaryBtnType"
         (clickEvent)="openSignUpPage($event)"
+        [isShadowVisible]="true"
       ></app-button>
     </div>
     }

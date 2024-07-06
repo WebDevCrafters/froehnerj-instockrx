@@ -52,6 +52,14 @@
           >About Us</a
         >
       </li>
+      <li>
+        <a
+          [routerLink]="APP_ROUTES.product.auth"
+          routerLinkActive="active-link"
+          (click)="closeMenu()"
+          >Login</a
+        >
+      </li>
       <div class="button_container">
         <app-button
           [title]="'Find my meds'"
