@@ -3,20 +3,17 @@ import { User } from '../../_shared/dataTypes/User';
 import { KEYS } from '../../_shared/constants/localStorageKeys';
 
 @Injectable({
-  providedIn: 'root'
+  providedIn: 'root',
 })
 export class AuthService {
-
   isSignedIn: boolean = false;
 
-  constructor() {
-
-  }
+  constructor() {}
 
   checkIfSignedIn(): boolean {
     if (typeof window !== 'undefined' && localStorage) {
       const isSignedIn = localStorage.getItem(KEYS.isSignedIn);
-      this.isSignedIn = isSignedIn === "true";
+      this.isSignedIn = isSignedIn === 'true';
     }
     return this.isSignedIn;
   }
@@ -35,13 +32,20 @@ export class AuthService {
     this.removeUserData();
     this.isSignedIn = false;
   }
-  
-  storeUserData(user: User){
-    localStorage.setItem(KEYS.isSignedIn, "true");
+
+  storeUserData(user: User) {
+    localStorage.setItem(KEYS.isSignedIn, 'true');
     localStorage.setItem(KEYS.userData, JSON.stringify(user));
   }
 
-  removeUserData(){
+  removeUserData() {
     localStorage.clear();
+  }
+
+  getUserData(): User | null {
+    const user = localStorage.getItem(KEYS.userData);
+    if (!user) return null;
+
+    return JSON.parse(user);
   }
 }
