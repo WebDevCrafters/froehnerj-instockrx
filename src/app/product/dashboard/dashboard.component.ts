@@ -5,6 +5,7 @@ import { CommonModule } from '@angular/common';
 import { ModalComponent } from '../../_shared/components/modal/modal.component';
 import { PatientDashboardComponent } from './patient-dashboard/patient-dashboard.component';
 import { InputComponent } from '../../_shared/components/input/input.component';
+import { ClinicianDashboardComponent } from './clinician-dashboard/clinician-dashboard.component';
 
 
 @Component({
@@ -16,10 +17,11 @@ import { InputComponent } from '../../_shared/components/input/input.component';
     CommonModule,
     ModalComponent,
     PatientDashboardComponent,
+    ClinicianDashboardComponent
   ],
   templateUrl: './dashboard.component.html',
   styleUrl: './dashboard.component.scss',
 })
 export class DashboardComponent {
-
+  userType: "patient" | "clinician" = "patient"
 }
