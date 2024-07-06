@@ -1,0 +1,130 @@
+@import "variables";
+
+.form_container {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+    width: 100%;
+
+    .log_option_container {
+        width: 95%;
+        margin-bottom: 35px;
+
+        .title {
+            font-size: 17px;
+            font-weight: 500;
+            margin-bottom: 10px;
+        }
+        .option_container {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            width: 100%;
+            border: 1px solid $normalGrey;
+
+            .email_section,
+            .number_section {
+                width: 50%;
+                padding: 10px 0;
+                text-align: center;
+                cursor: pointer;
+
+                &:hover {
+                    background-color: $lightGreyColor;
+                }
+
+                &.active {
+                    color: $brandPrimaryColor;
+                    background-color: #f5784a41;
+                }
+            }
+        }
+    }
+
+    .input_containers {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        flex-direction: column;
+        gap: 20px;
+        width: 80%;
+        scale: 1.2;
+        margin-bottom: 40px;
+
+        .phoneNumber_container {
+            width: 100%;
+            display: flex;
+            align-items: flex-start;
+            justify-content: flex-start;
+        }
+    }
+
+    .button_container {
+        margin: 30px 0 20px 0;
+        width: 100%;
+    }
+
+    .footer {
+        width: 80%;
+        color: $darkGreyColor;
+        line-height: 22px;
+
+        a {
+            cursor: pointer;
+            text-decoration: underline;
+            color: rgba(0, 0, 255, 0.783);
+        }
+
+        .patient_footer {
+            margin: 10px 0;
+        }
+
+        .signin {
+            color: $darkBlueColor;
+            margin: 20px 0 0 0;
+            width: 100%;
+            text-align: center;
+
+            .signIn_tag {
+                text-decoration: none;
+                cursor: pointer;
+                padding: 8px 10px;
+                color: $brandPrimaryColor;
+                border-radius: 16px;
+
+                &:hover {
+                    background-color: #f5784a41;
+                }
+            }
+        }
+    }
+}
+
+@media screen and (max-width: 500px) {
+    @import "variables";
+
+    .form_container {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        flex-direction: column;
+        width: 100%;
+
+        .input_containers {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            flex-direction: column;
+            gap: 20px;
+            width: 80%;
+            scale: 1.2;
+            margin-bottom: 40px;
+        }
+
+        .button_container {
+            margin: 30px 0 20px 0;
+            width: 100%;
+        }
+    }
+}

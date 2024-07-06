@@ -8,15 +8,16 @@ import APP_ROUTES from '../../_shared/constants/routes';
 import { User } from '../../_shared/dataTypes/User';
 import { CustomSearchDropdownComponent } from '../auth/custom-search-dropdown/custom-search-dropdown.component';
 import { CommonModule } from '@angular/common';
+import { emailValidator } from '../../_shared/utils/Validators';
 
 @Component({
-    selector: 'app-signin',
+    selector: 'app-forgot-password',
     standalone: true,
     imports: [InputComponent, ButtonComponent, CustomSearchDropdownComponent, FormsModule, CommonModule],
-    templateUrl: './signin.component.html',
-    styleUrl: './signin.component.scss'
+    templateUrl: './forgot-password.component.html',
+    styleUrl: './forgot-password.component.scss'
 })
-export class SigninComponent {
+export class ForgotPasswordComponent {
     @Input() public isSignUpScreenVisible: boolean = false;
     @Input() public isSignInScreenVisible: boolean = true;
     @Input() public isForgotPasswordScreenVisible: boolean = false;
@@ -26,12 +27,11 @@ export class SigninComponent {
 
     constructor(private authService: AuthService, private router: Router) { }
 
-    public signInInfoForm = new FormGroup({
-        firstName: new FormControl(''),
-        lastName: new FormControl(''),
-        email: new FormControl(''),
-        phoneNumber: new FormControl(''),
-        password: new FormControl(''),
+    public forgotPasswordInfo = new FormGroup({
+        email: new FormControl('',
+            emailValidator('Username/client id combination not found')),
+        phoneNumber: new FormControl('',
+            emailValidator('Username/client id combination not found')),
     });
 
     public openSignInScreen() {
@@ -87,6 +87,7 @@ export class SigninComponent {
     }
 
     public onSucces() {
-        if (!this.signInInfoForm.valid) return;
+        console.log("Something");
+        if (!this.forgotPasswordInfo.controls.email.valid || !this.forgotPasswordInfo.controls.phoneNumber.valid) return;
     }
 }

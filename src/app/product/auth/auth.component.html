@@ -11,202 +11,47 @@
         </div>
       </div>
       <div class="title_container">
-        <div class="title">Clinician portal</div>
+        <div class="title">
+          {{ patientSignUp ? "Patient portal" : "Clinician portal" }}
+        </div>
+        @if(patientSignUp && isSignUpScreenVisible) {
+        <div class="patient_sub_heading">Never Search for Your Meds Again</div>
+        <div class="footer">
+          <div class="text">Let us find your meds for you!</div>
+          <div class="text">We just need some info to start</div>
+        </div>
+        } @else {
         <div class="sub_heading">
           If you are a patient searching for meds, please
         </div>
         <div class="signup_container">signup here instead.</div>
+        }
       </div>
       @if(isSignInScreenVisible) {
-      <div class="form_container">
-        <div class="log_option_container">
-          <div class="title">Log in using:</div>
-          <div class="option_container">
-            <div
-              class="email_section"
-              (click)="markEmailOptionAsSelected()"
-              [ngClass]="{ active: isEmailLoginInOptionSelected }"
-            >
-              Email
-            </div>
-            <div
-              class="number_section"
-              (click)="markPasswordOptionAsSelected()"
-              [ngClass]="{ active: !isEmailLoginInOptionSelected }"
-            >
-              Phone Number
-            </div>
-          </div>
-        </div>
-        <div class="input_containers">
-          @if(isEmailLoginInOptionSelected) {
-          <app-input
-            [control]="personalInfoForm.controls.email"
-            id="email"
-            label="Email"
-            [type]="'email'"
-            [shape]="'flat'"
-          />
-          } @else {
-          <div class="phoneNumber_container">
-            <app-custom-search-dropdown></app-custom-search-dropdown>
-            <app-input
-              [control]="personalInfoForm.controls.phoneNumber"
-              id="phoneNumber"
-              label="Phone number"
-              [type]="'text'"
-              [shape]="'flat'"
-            />
-          </div>
-          }
-          <app-input
-            [control]="personalInfoForm.controls.password"
-            id="password"
-            label="Password"
-            [type]="'password'"
-            [shape]="'flat'"
-          />
-        </div>
-        <div class="button_container">
-          <app-button
-            [shape]="'rounded'"
-            [title]="'Sign In'"
-            [type]="'small_primary'"
-            (clickEvent)="signin()"
-          ></app-button>
-        </div>
-        <div class="footer">
-          <div class="signin">
-            <a class="signIn_tag" (click)="openForgotPasswordScreen()"
-              >Forgot your password?</a
-            >
-          </div>
-          <div class="signin">
-            New clnician?
-            <a class="signIn_tag" (click)="openSignUpScreen()">Sign Up</a>
-          </div>
-        </div>
-      </div>
+      <app-signin
+        [isSignInScreenVisible]="isSignInScreenVisible"
+        [isSignUpScreenVisible]="isSignUpScreenVisible"
+        [isEmailLoginInOptionSelected]="isEmailLoginInOptionSelected"
+        [isForgotPasswordScreenVisible]="isForgotPasswordScreenVisible"
+        (stateChange)="updateStates($event)"
+      ></app-signin>
       } @else if(isSignUpScreenVisible) {
-      <div class="form_container">
-        <div class="input_containers">
-          <app-input
-            [control]="personalInfoForm.controls.firstName"
-            id="firstName"
-            label="First Name"
-            [type]="'text'"
-            [shape]="'flat'"
-          />
-          <app-input
-            [control]="personalInfoForm.controls.lastName"
-            id="lastName"
-            label="Last Name"
-            [type]="'text'"
-            [shape]="'flat'"
-          />
-          <app-input
-            [control]="personalInfoForm.controls.email"
-            id="email"
-            label="Email"
-            [type]="'email'"
-            [shape]="'flat'"
-          />
-          <div class="phoneNumber_container">
-            <app-custom-search-dropdown></app-custom-search-dropdown>
-            <app-input
-              [control]="personalInfoForm.controls.phoneNumber"
-              id="phoneNumber"
-              label="Phone number"
-              [type]="'text'"
-              [shape]="'flat'"
-            />
-          </div>
-          <app-input
-            [control]="personalInfoForm.controls.password"
-            id="password"
-            label="Password"
-            [type]="'password'"
-            [shape]="'flat'"
-          />
-        </div>
-        <div class="button_container">
-          <app-button
-            [shape]="'rounded'"
-            [title]="'Create account'"
-            [type]="'small_primary'"
-          ></app-button>
-        </div>
-        <div class="footer">
-          <span>
-            By creating an account you agree to our
-            <a>privacy-policy</a> and
-            <a>terms of service and business associated agreements.</a>
-          </span>
-          <div class="signin">
-            Already have an account?
-            <a class="signIn_tag" (click)="openSignInScreen()">Sign In</a>
-          </div>
-        </div>
-      </div>
+      <app-signup
+        [isSignInScreenVisible]="isSignInScreenVisible"
+        [isSignUpScreenVisible]="isSignUpScreenVisible"
+        [isEmailLoginInOptionSelected]="isEmailLoginInOptionSelected"
+        [isForgotPasswordScreenVisible]="isForgotPasswordScreenVisible"
+        (stateChange)="updateStates($event)"
+        [patientSignUp]="patientSignUp"
+      ></app-signup>
       } @else {
-      <div class="form_container">
-        <div class="log_option_container">
-          <div class="title">Log in using:</div>
-          <div class="option_container">
-            <div
-              class="email_section"
-              (click)="markEmailOptionAsSelected()"
-              [ngClass]="{ active: isEmailLoginInOptionSelected }"
-            >
-              Email
-            </div>
-            <div
-              class="number_section"
-              (click)="markPasswordOptionAsSelected()"
-              [ngClass]="{ active: !isEmailLoginInOptionSelected }"
-            >
-              Phone Number
-            </div>
-          </div>
-        </div>
-
-        <div class="input_containers">
-          @if(isEmailLoginInOptionSelected) {
-          <app-input
-            [control]="personalInfoForm.controls.email"
-            id="email"
-            label="Email"
-            [type]="'email'"
-            [shape]="'flat'"
-          />
-          } @else {
-            <div class="phoneNumber_container">
-                <app-custom-search-dropdown></app-custom-search-dropdown>
-                <app-input
-                  [control]="personalInfoForm.controls.phoneNumber"
-                  id="phoneNumber"
-                  label="Phone number"
-                  [type]="'text'"
-                  [shape]="'flat'"
-                />
-              </div>
-          }
-        </div>
-        <div class="button_container">
-          <app-button
-            [shape]="'rounded'"
-            [title]="'Submit'"
-            [type]="'small_primary'"
-          ></app-button>
-        </div>
-        <div class="footer">
-          <div class="signin">
-            <a class="signIn_tag" (click)="openSignInScreen()"
-              >Back to Sign In?</a
-            >
-          </div>
-        </div>
-      </div>
+      <app-forgot-password
+        [isSignInScreenVisible]="isSignInScreenVisible"
+        [isSignUpScreenVisible]="isSignUpScreenVisible"
+        [isEmailLoginInOptionSelected]="isEmailLoginInOptionSelected"
+        [isForgotPasswordScreenVisible]="isForgotPasswordScreenVisible"
+        (stateChange)="updateStates($event)"
+      ></app-forgot-password>
       }
     </div>
   </div>
