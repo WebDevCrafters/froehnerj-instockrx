@@ -26,17 +26,7 @@
               let i = index
             "
           >
-            <div class="medication">
-              <div>1:</div>
-              <div>
-                <p>Medication Name Dose</p>
-                <p class="label">Quatity: Quantity, Any Brand</p>
-              </div>
-              <div class="img_container">
-                <img src="assets/images/svg/edit-icon.svg" alt="Edit" />
-              </div>
-            </div>
-
+            @if (editableStates[i]) {
             <div class="prescribed_medication">
               <div class="options">
                 <p>Option {{ i + 1 }}</p>
@@ -80,6 +70,22 @@
                 placeholder="Preffered Brand"
               />
             </div>
+            } @else {
+            <div class="medication">
+              <div>{{i+1}}:</div>
+              <div>
+                <p>{{medication.value.name}} {{medication.value.dose}}</p>
+                <p class="label">Quatity: {{medication.value.quantity}}, {{medication.value.brand}}</p>
+              </div>
+              <div class="img_container">
+                <img
+                  src="assets/images/svg/edit-icon.svg"
+                  alt="Edit"
+                  (click)="toggleEditable(i)"
+                />
+              </div>
+            </div>
+            }
           </div>
 
           <app-button

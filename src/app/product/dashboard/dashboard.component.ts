@@ -41,16 +41,18 @@ export class DashboardComponent {
   activeSearchForm = new FormGroup({
     prescribedMedication: new FormArray([
       new FormGroup({
-        name: new FormControl('', [
+        name: new FormControl('Eissa', [
           requiredValidator('Medication option 1 cannot be empty'),
         ]),
-        dose: new FormControl(''),
-        quantity: new FormControl(''),
-        brand: new FormControl(''),
+        dose: new FormControl('Dose'),
+        quantity: new FormControl('QQU'),
+        brand: new FormControl('Bra'),
       }),
     ]),
     pickupDate: new FormControl(new Date().getTime(), [Validators.required]),
   });
+
+  editableStates: boolean[] = Array(activeSearchData.medications.length).fill(false); 
 
   formatTimestamp(timestamp: number | null) {
     if (!timestamp) return '';
@@ -98,10 +100,16 @@ export class DashboardComponent {
     this.activeSearchForm.controls.prescribedMedication.push(
       this.createPrescribedMedicationFormGroup()
     );
+    this.editableStates.push(true); 
   }
 
   removeMedication(index: number) {
     this.activeSearchForm.controls.prescribedMedication.removeAt(index);
+    this.editableStates.splice(index, 1);
+  }
+
+  toggleEditable(index: number) {
+    this.editableStates[index] = !this.editableStates[index];
   }
 
   getControl(formArrayIndex: number, formControlName: string): FormControl {
