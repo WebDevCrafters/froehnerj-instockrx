@@ -11,22 +11,43 @@
   </div>
 </div>
 
-<app-modal [isVisible]="modalVisible" bg="transparent" (closeModal)="toggleSettings()">
+<app-modal
+  [isVisible]="modalVisible"
+  bg="transparent"
+  (closeModal)="toggleSettings()"
+>
   <div class="settings_container">
     <p>Account</p>
     <div class="user_info">
       <p>
-        {{ userEmail }}
+        {{ user?.email }}
         <br />
-        {{ userType }}
+        {{ user?.type }}
       </p>
-      <app-button title="Sign out" type="small_primary" shape="rounded" />
+      <app-button
+        title="Sign out"
+        type="small_primary"
+        shape="rounded"
+        (clickEvent)="signout()"
+      />
     </div>
     <hr />
     <div class="theme_container">
       <p>Theme</p>
       <p>light</p>
     </div>
+    <hr />
+    @if (user?.type!=="clinician") {
+    <div class="reset_pass_container">
+      <div>
+        <app-button
+          title="Reset Password"
+          type="small_primary"
+          shape="rounded"
+        />
+      </div>
+    </div>
+    }
     <hr />
     <div class="deletion">
       <p class="button" (click)="requestAccountDeletion()">
