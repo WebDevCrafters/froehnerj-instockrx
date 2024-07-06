@@ -3,6 +3,7 @@ import { SectionBannerComponent } from '../_shared/components/section-banner/sec
 import { HowItWorksComponent, StepsType } from '../_shared/components/how-it-works/how-it-works.component';
 import { Specifications, SpecificationSectionComponent } from '../_shared/components/specification-section/specification-section.component';
 import { FAQSectionComponent } from '../_shared/components/faq-section/faq-section.component';
+import APP_ROUTES from '../../../_shared/constants/routes';
 
 @Component({
     selector: 'app-providers',
@@ -12,6 +13,9 @@ import { FAQSectionComponent } from '../_shared/components/faq-section/faq-secti
     styleUrl: './providers.component.scss'
 })
 export class ProvidersComponent {
+
+    APP_ROUTES = APP_ROUTES
+
     public faqs = [
         {
             question: 'What is instockrx findmymeds?',

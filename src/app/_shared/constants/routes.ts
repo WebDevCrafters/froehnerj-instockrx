@@ -5,6 +5,7 @@ const APP_ROUTES = {
     patients: 'patients',
     providers: 'providers',
     about: 'about',
+    demo: 'demo',
     findMyMeds: 'find-my-meds',
     dashboard: 'dashboard',
     privacy: 'privacy',
