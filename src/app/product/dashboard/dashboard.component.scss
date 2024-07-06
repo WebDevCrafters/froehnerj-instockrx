@@ -2,7 +2,6 @@
 
 .dashboard_container {
     background-color: $offWhiteColor;
-    min-height: 200vh;
     color: $offBlackColor;
 
     .dashboard_content {
@@ -14,13 +13,20 @@
             font-size: 1.5rem;
         }
         
+        .label {
+            font-size: 0.8rem;
+
+            &.not_complete{
+                color: $dangerColor;
+            }
+        }
+
         .all_info {
             width: 100%;
             display: flex;
             gap: 2.5rem;
             flex-direction: column;
-            // background-color: red;
-
+            
             .welcome_message {
                 font-size: 1.8rem;
             }
@@ -44,9 +50,6 @@
                     flex-direction: column;
                     gap: 1rem;
 
-                    .label {
-                        font-size: 0.8rem;
-                    }
 
                     .all_medications{
 
@@ -75,7 +78,26 @@
                         gap: 0.5rem;
                         flex-direction: column;
                     }
+
+                    .status_container{
+                        .status{
+                            display: flex;
+                            align-items: center;
+                            gap: 0.5rem;
+                            color: $dangerColor;
+
+                            &.started{
+                                color: $green;
+                            }
+                        }
+                    }
                 }
+            }
+
+            .previous_searches_container{
+                display: flex;
+                gap: 1rem;
+                flex-direction: column;
             }
         }
 

@@ -3,10 +3,12 @@
   <div class="dashboard_content">
     <div class="all_info">
       <span class="welcome_message">Welcome, A</span>
+
       <div class="my_package">
         <p class="heading">My Package</p>
         <span>Three Med Searches</span>
       </div>
+
       <div class="active_search_container">
         <span class="heading">Active Search</span>
         <div class="form_container">
@@ -48,8 +50,48 @@
               />
             </div>
           </div>
+
+          <div class="status_container">
+            <div class="label">Status</div>
+            <div class="status" [ngClass]="{ started: paymentCompleted }">
+              <img
+                [src]="
+                  paymentCompleted
+                    ? 'assets/images/svg/tick-icon.svg'
+                    : 'assets/images/svg/exclamation.svg'
+                "
+                alt=""
+              />
+              <div>@if (!paymentCompleted) { Not } Started</div>
+            </div>
+          </div>
+
+          <div class="label" [ngClass]="{ not_complete: !paymentCompleted }">
+            Please complete payment to start your search
+          </div>
+
+          <div class="button_container">
+            <app-button
+              title="Complete Payment"
+              type="small_primary"
+              shape="rounded"
+            />
+          </div>
         </div>
       </div>
+
+      <app-button
+        title="Contact Support"
+        src="assets/images/svg/contact-icon.svg"
+        type="small_secondary"
+        shape="rounded"
+      />
+
+      <div class="previous_searches_container">
+        <p class="heading">Previous Searches</p>
+        <div class="label">You don't have any search history</div>
+      </div>
+
       <div class="previous_search_container"></div>
     </div>
     <div class="my_profile">My Profile</div>
