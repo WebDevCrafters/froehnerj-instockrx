@@ -5,6 +5,8 @@ import { SelfServiceComponent } from './self-service/self-service.component';
 import { DashboardComponent } from './dashboard/dashboard.component';
 import { ProductComponent } from './product.component';
 import { AuthComponent } from './auth/auth.component';
+import { authPreventGuard } from '../_core/guards/auth-prevent.guard';
+import { authGuard } from '../_core/guards/auth.guard';
 
 const routes: Routes = [
   {
@@ -16,9 +18,9 @@ const routes: Routes = [
         redirectTo: APP_ROUTES.product.auth,
         pathMatch: 'full',
       },
-      { path: APP_ROUTES.product.auth, component: AuthComponent },
-      { path: APP_ROUTES.product.selfService, component: SelfServiceComponent },
-      { path: APP_ROUTES.product.dashboard, component: DashboardComponent },
+      { path: APP_ROUTES.product.auth, component: AuthComponent, canActivate: [authPreventGuard] },
+      { path: APP_ROUTES.product.selfService, component: SelfServiceComponent, canActivate: [authGuard] },
+      { path: APP_ROUTES.product.dashboard, component: DashboardComponent, canActivate: [authGuard] },
     ],
   },
 ];
