@@ -1,0 +1,77 @@
+@import "variables";
+
+.dropdown-container {
+    position: relative;
+    border-bottom: 1.5px solid $darkBrownColor;
+    height: 100%;
+    padding: 11px 0;
+    display: inline-block;
+    z-index: 1000;
+    width: 50px;
+}
+
+.dropdown {
+    display: none;
+    position: absolute;
+    border: 1px solid #ccc;
+    z-index: 100;
+    top: -10px;
+    width: 250px;
+}
+
+.dropdown.open {
+    display: block;
+    border-radius: 12px;
+    padding: 4px;
+    background-color: #fcddd1;
+}
+
+.dropdown input {
+    width: 100%;
+    box-sizing: border-box;
+    border: none;
+    outline: none;
+    border-bottom: 1px solid $darkBrownColor;
+    padding: 10px;
+    border-top-left-radius: 12px;
+    border-top-right-radius: 12px;
+    background-color: #fcddd1;
+}
+
+.dropdown ul {
+    list-style-type: none;
+    margin: 0;
+    padding: 0;
+    max-height: 100px;
+    overflow-y: auto;
+}
+
+.dropdown li {
+    padding: 8px;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    width: 100%;
+    font-size: 13px;
+}
+
+::-webkit-scrollbar {
+    width: 4px;
+}
+
+/* Track */
+::-webkit-scrollbar-track {
+    // background: #f1f1f1;
+}
+
+/* Handle */
+::-webkit-scrollbar-thumb {
+    background: transparent;
+    // background: #b2b2b2a7;
+}
+
+/* Handle on hover */
+::-webkit-scrollbar-thumb:hover {
+    background: transparent;
+}
