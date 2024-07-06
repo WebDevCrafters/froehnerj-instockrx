@@ -2,11 +2,13 @@
   <app-header />
   <div class="dashboard_content">
     <div class="all_info">
-      <span class="welcome_message">Welcome, A</span>
+      <span class="welcome_message">Welcome, Patient</span>
+
       <div class="my_package">
         <p class="heading">My Package</p>
         <span>Three Med Searches</span>
       </div>
+
       <div class="active_search_container">
         <span class="heading">Active Search</span>
         <div class="form_container">
@@ -41,17 +43,144 @@
             <div class="label">Earlist pick up date</div>
             <div class="button_container">
               <app-button
-                title="Thu, July 4"
+                [title]="formatTimestamp(activeSearchForm.controls.pickupDate.value)"
                 src="assets/images/svg/calendar-icon.svg"
                 type="small_secondary"
                 [iconAlignment]="'vertical'"
+                (clickEvent)="openDateChooserModal()"
               />
             </div>
           </div>
+
+          <div class="status_container">
+            <div class="label">Status</div>
+            <div
+              class="status"
+              [ngClass]="{ started: activeSearchData.paymentCompleted }"
+            >
+              <img
+                [src]="
+                  activeSearchData.paymentCompleted
+                    ? 'assets/images/svg/tick-icon.svg'
+                    : 'assets/images/svg/exclamation.svg'
+                "
+                alt=""
+              />
+              <div>
+                @if (!activeSearchData.paymentCompleted) { Not } Started
+              </div>
+            </div>
+          </div>
+
+          @if (!activeSearchData.paymentCompleted) {
+          <div class="label not_complete">Please complete payment to start your search</div>
+          <div class="button_container">
+            <app-button
+              title="Complete Payment"
+              type="small_primary"
+              shape="rounded"
+            />
+          </div>
+          }
+
         </div>
       </div>
+
+      <app-button
+        title="Contact Support"
+        src="assets/images/svg/contact-icon.svg"
+        type="small_secondary"
+        shape="rounded"
+      />
+
+      <div class="previous_searches_container">
+        <p class="heading">Previous Searches</p>
+        <div class="label">You don't have any search history</div>
+      </div>
+
       <div class="previous_search_container"></div>
     </div>
-    <div class="my_profile">My Profile</div>
+    <div class="my_profile">
+      <div class="header_container">
+        <p class="heading">My Profile</p>
+        <img src="assets/images/svg/edit-icon.svg" alt="" />
+      </div>
+
+      <div class="info">
+        <p class="label">Name</p>
+        <p>Patient Lal</p>
+      </div>
+
+      <div class="info">
+        <p class="label">Email</p>
+        <p>patientsomething.com</p>
+      </div>
+
+      <div class="info">
+        <p class="label">Phone Number</p>
+        <p>(123) 456-7890</p>
+      </div>
+
+      <div class="info">
+        <p class="label">Date of birth</p>
+        <p>10/10/2020</p>
+      </div>
+
+      <div class="info">
+        <p class="label">Zip Code</p>
+        <p>12345</p>
+      </div>
+
+      <div class="info">
+        <p class="label">Doctor's Name</p>
+        <p>John</p>
+      </div>
+
+      <div class="info">
+        <p class="label">Doctor's Email</p>
+        <p>doctoreail.com</p>
+      </div>
+    </div>
   </div>
 </div>
+
+
+<app-modal
+  [title]="'Example Modal'"
+  [isVisible]="modalVisible"
+  (closeModal)="closeDateChooserModal()"
+>
+  <div class="modal_content">
+    <div class="content">
+      <div class="details">
+        <p>Select date</p>
+        <span [ngClass]="{ dateInputActive: isDateInputActive }">
+          {{ formatTimestamp(selectedDate) }}
+        </span>
+      </div>
+      <div (click)="toggleDateInput()">
+        @if (isDateInputActive) {
+        <img src="assets/images/svg/calendar-icon.svg" alt="" srcset="" />
+        } @else {
+        <img src="assets/images/svg/edit-icon.svg" alt="" srcset="" />
+        }
+      </div>
+    </div>
+    <div class="date_picker">
+      @if (isDateInputActive) {
+      <app-input
+        type="dates"
+        label="Enter date"
+        bg="#fae7e0"
+        [control]="dateFormControl"
+      />
+      } @else {
+      <app-date-picker (onDatePicked)="onDatePicked($event)" />
+      }
+      <div class="picker_options">
+        <span class="options" (click)="closeDateChooserModal()">Cancel</span>
+        <span class="options" (click)="onPositivePress()">OK</span>
+      </div>
+    </div>
+  </div>
+</app-modal>
