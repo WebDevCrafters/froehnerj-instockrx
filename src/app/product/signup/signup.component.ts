@@ -62,6 +62,25 @@ export class SignupComponent {
         });
     }
 
+    signup(){
+        const user:User = {
+            email: this.signUpInfoForm.controls.email.value || "",
+            firstName: this.signUpInfoForm.controls.firstName.value || "",
+            lastName:this.signUpInfoForm.controls.lastName.value || "",
+            phoneNumber:this.signUpInfoForm.controls.email.value || "",
+            type:this.patientSignUp?"patient":"clinician"
+        }
+        this.authService.signUp(user);
+        console.log("here")
+        this.router.navigate(
+            [`${APP_ROUTES.product.app}/${APP_ROUTES.product.selfService}`],
+            {
+                replaceUrl: true,
+                queryParams: { stepNumber: JSON.stringify(2) }
+            },
+        );
+    }
+
     public onSuccess() {
         this.signUpInfoForm.markAllAsTouched();
         markAllAsDirty(this.signUpInfoForm);
@@ -69,7 +88,13 @@ export class SignupComponent {
         this.isSignInScreenVisible = false;
         this.isSignUpScreenVisible = false;
         this.isForgotPasswordScreenVisible = false;
-        this.isVerificationScreenVisible = true;
-        this.emitStateChange();
+
+        if(this.patientSignUp){
+            this.signup();
+        }
+        else{
+            this.isVerificationScreenVisible = true;
+            this.emitStateChange();
+        }
     }
 }
