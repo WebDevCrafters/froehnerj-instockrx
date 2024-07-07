@@ -40,7 +40,7 @@ export class SigninComponent {
         this.isSignUpScreenVisible = true;
         this.isForgotPasswordScreenVisible = false;
         this.isVerificationScreenVisible = false;
-        this.patientSignUp = false;
+        this.patientSignUp = this.patientSignUp;
         this.emitStateChange();
     }
 
@@ -49,7 +49,7 @@ export class SigninComponent {
         this.isSignUpScreenVisible = false;
         this.isForgotPasswordScreenVisible = true;
         this.isVerificationScreenVisible = false;
-        this.patientSignUp = false;
+        this.patientSignUp = this.patientSignUp;
         this.emitStateChange();
     }
 
