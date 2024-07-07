@@ -26,6 +26,7 @@ import { ButtonComponent } from '../../../_shared/components/button/button.compo
 import { CommonModule } from '@angular/common';
 import { Router } from '@angular/router';
 import APP_ROUTES from '../../../_shared/constants/routes';
+import { markAllAsDirty } from '../../../_shared/utils/formUtils';
 
 @Component({
   selector: 'app-patient-dashboard',
@@ -87,14 +88,8 @@ export class PatientDashboardComponent {
       requiredValidator('Zip code must not be empty'),
       charLimitValidator(5, 'Zip code must be 5 digits'),
     ]),
-    doctorName: new FormControl('John', [
-      requiredValidator('Zip code must not be empty'),
-      charLimitValidator(5, 'Zip code must be 5 digits'),
-    ]),
-    doctorEmail: new FormControl('doctoreail.com', [
-      requiredValidator("Patient's email cannot be empty"),
-      emailValidator('Please enter a valid email'),
-    ]),
+    doctorName: new FormControl('John', []),
+    doctorEmail: new FormControl('doctoreail.com', []),
   });
 
   editableStates: boolean[] = Array(activeSearchData.medications.length).fill(
@@ -214,6 +209,8 @@ export class PatientDashboardComponent {
   }
 
   saveEditProfile() {
+    this.profileForm.markAllAsTouched();
+    markAllAsDirty(this.profileForm);
     if (!this.profileForm.valid) return;
     this.isProfileEditable = false;
     this.profileBackup = null;
