@@ -92,9 +92,9 @@ export class AuthComponent implements OnInit {
 
     public forgotPasswordInfo = new FormGroup({
         email: new FormControl('',
-            emailValidator('Username/client id combination not found')),
+            requiredValidator('Email cannot be empty.')),
         phoneNumber: new FormControl('',
-            emailValidator('Username/client id combination not found')),
+            requiredValidator('Phone number cannot be empty.')),
     });
 
     public updateStates(state: { isSignUpScreenVisible: boolean, isSignInScreenVisible: boolean, isForgotPasswordScreenVisible: boolean, isEmailLoginInOptionSelected: boolean, patientSignUp: boolean }) {
