@@ -65,10 +65,10 @@ export class SigninComponent {
 
     public signin() {
         const user: User = {
-            email: "dummyEmail@email.com",
-            firstName: "John",
-            lastName: "Doe",
-            phoneNumber: "+1134567892",
+            email: this.signInInfoForm.controls.email.value || "",
+            firstName: this.signInInfoForm.controls.firstName.value || "",
+            lastName: this.signInInfoForm.controls.lastName.value || "",
+            phoneNumber: this.signInInfoForm.controls.phoneNumber.value || "",
             type: this.patientSignUp? "patient" : "clinician"
         }
         this.authService.signIn(user);
