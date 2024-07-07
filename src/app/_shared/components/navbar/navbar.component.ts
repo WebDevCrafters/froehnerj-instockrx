@@ -37,4 +37,11 @@ export class NavbarComponent {
         const url = this.router.serializeUrl(this.router.createUrlTree([APP_ROUTES.product.app]));
         window.open(url, '_blank');
     }
+
+    openSignUpPage(event: MouseEvent) {
+        this.router.navigate(
+            [`${APP_ROUTES.product.app}/${APP_ROUTES.product.auth}`],
+            { queryParams: { patientSignUp: JSON.stringify(false) } }
+        );
+    }
 }
