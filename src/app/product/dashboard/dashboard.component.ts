@@ -23,5 +23,5 @@ import { ClinicianDashboardComponent } from './clinician-dashboard/clinician-das
   styleUrl: './dashboard.component.scss',
 })
 export class DashboardComponent {
-  userType: "patient" | "clinician" = "patient"
+  userType: "patient" | "clinician" = "clinician"
 }
