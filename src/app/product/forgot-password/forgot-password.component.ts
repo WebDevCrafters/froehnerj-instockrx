@@ -8,7 +8,8 @@ import APP_ROUTES from '../../_shared/constants/routes';
 import { User } from '../../_shared/dataTypes/User';
 import { CustomSearchDropdownComponent } from '../auth/custom-search-dropdown/custom-search-dropdown.component';
 import { CommonModule } from '@angular/common';
-import { emailValidator } from '../../_shared/utils/Validators';
+import { emailValidator, requiredValidator } from '../../_shared/utils/Validators';
+import { markAllAsDirty } from '../../_shared/utils/formUtils';
 
 @Component({
     selector: 'app-forgot-password',
@@ -25,10 +26,8 @@ export class ForgotPasswordComponent {
     @Input() public isEmailLoginInOptionSelected: boolean = true;
     @Input() public patientSignUp: boolean = false;
     @Input() public forgotPasswordInfo = new FormGroup({
-        email: new FormControl('',
-            emailValidator('Username/client id combination not found')),
-        phoneNumber: new FormControl('',
-            emailValidator('Username/client id combination not found')),
+        email: new FormControl(''),
+        phoneNumber: new FormControl(''),
     });
 
     @Output() public stateChange = new EventEmitter<{ isSignUpScreenVisible: boolean, isSignInScreenVisible: boolean, isForgotPasswordScreenVisible: boolean, isEmailLoginInOptionSelected: boolean, isVerificationScreenVisible: boolean, patientSignUp: boolean }>();
@@ -85,7 +84,8 @@ export class ForgotPasswordComponent {
     }
 
     public onSucces() {
-        console.log("Something");
-        if (!this.forgotPasswordInfo.controls.email.valid || !this.forgotPasswordInfo.controls.phoneNumber.valid) return;
+        this.forgotPasswordInfo.markAllAsTouched();
+        markAllAsDirty(this.forgotPasswordInfo);
+        if (this.forgotPasswordInfo.controls.email.valid === false && this.forgotPasswordInfo.controls.phoneNumber.valid === false) return;
     }
 }

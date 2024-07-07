@@ -51,18 +51,6 @@ export class SignupComponent {
         this.emitStateChange();
     }
 
-    public signUp() {
-        const user: User = {
-            email: this.signUpInfoForm.controls.email.value || "",
-            firstName: this.signUpInfoForm.controls.firstName.value || "",
-            lastName: this.signUpInfoForm.controls.lastName.value || "",
-            phoneNumber: this.signUpInfoForm.controls.phoneNumber.value || "",
-            type: this.patientSignUp ? "patient" : "clinician"
-        }
-        this.authService.signUp(user);
-        this.router.navigate([`${APP_ROUTES.product.app}/${APP_ROUTES.product.dashboard}`], { replaceUrl: true })
-    }
-
     private emitStateChange() {
         this.stateChange.emit({
             isSignUpScreenVisible: this.isSignUpScreenVisible,
@@ -83,6 +71,5 @@ export class SignupComponent {
         this.isForgotPasswordScreenVisible = false;
         this.isVerificationScreenVisible = true;
         this.emitStateChange();
-        this.signUp();
     }
 }

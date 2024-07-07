@@ -9,6 +9,7 @@ import { User } from '../../_shared/dataTypes/User';
 import { CustomSearchDropdownComponent } from '../auth/custom-search-dropdown/custom-search-dropdown.component';
 import { CommonModule } from '@angular/common';
 import { emailValidator } from '../../_shared/utils/Validators';
+import { markAllAsDirty } from '../../_shared/utils/formUtils';
 
 @Component({
     selector: 'app-verification-code',
@@ -26,10 +27,8 @@ export class VerificationCodeComponent implements OnInit {
     @Input() public patientSignUp: boolean = false;
     @Input() public userEmail = new FormControl('');
     @Input() public verificationCodeInfo = new FormGroup({
-        email: new FormControl(this.userEmail,
-            emailValidator('Username/client id combination not found')),
-        phoneNumber: new FormControl('',
-            emailValidator('Username/client id combination not found')),
+        email: new FormControl(this.userEmail),
+        code: new FormControl('')
     });
     @Output() public stateChange = new EventEmitter<{ isSignUpScreenVisible: boolean, isSignInScreenVisible: boolean, isForgotPasswordScreenVisible: boolean, isEmailLoginInOptionSelected: boolean, isVerificationScreenVisible: boolean, patientSignUp: boolean }>();
 
@@ -48,18 +47,6 @@ export class VerificationCodeComponent implements OnInit {
         this.emitStateChange();
     }
 
-    public signin() {
-        const user: User = {
-            email: "dummyEmail@email.com",
-            firstName: "John",
-            lastName: "Doe",
-            phoneNumber: "+1134567892",
-            type: "patient"
-        }
-        this.authService.signIn(user);
-        this.router.navigate([`${APP_ROUTES.product.app}/${APP_ROUTES.product.dashboard}`], { replaceUrl: true })
-    }
-
     private emitStateChange() {
         this.stateChange.emit({
             isSignUpScreenVisible: this.isSignUpScreenVisible,
@@ -71,5 +58,23 @@ export class VerificationCodeComponent implements OnInit {
         });
     }
 
-    public onSucces() { }
+    public signUp(){
+        const user: User = {
+            email: this.verificationCodeInfo.controls.email.value || "",
+            firstName: "John", //dummy values
+            lastName: "Doe",
+            phoneNumber: "(123) 456-7890",
+            type: this.patientSignUp? "patient" : "clinician"
+        }
+        this.router.navigate([`${APP_ROUTES.product.app}/${APP_ROUTES.product.dashboard}`], { replaceUrl: true })
+        this.authService.signUp(user);
+    }
+
+    public onSucces() {
+        this.verificationCodeInfo.markAllAsTouched();
+        markAllAsDirty(this.verificationCodeInfo);
+        console.log(this.verificationCodeInfo.controls)
+        if(this.verificationCodeInfo.invalid) return;
+        this.signUp();
+    }
 }
