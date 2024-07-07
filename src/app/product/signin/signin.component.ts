@@ -24,8 +24,6 @@ export class SigninComponent {
     @Input() public isVerificationScreenVisible: boolean = false;
     @Input() public patientSignUp: boolean = false;
     @Input() public signInInfoForm = new FormGroup({
-        firstName: new FormControl(''),
-        lastName: new FormControl(''),
         email: new FormControl(''),
         phoneNumber: new FormControl(''),
         password: new FormControl(''),
@@ -66,8 +64,8 @@ export class SigninComponent {
     public signin() {
         const user: User = {
             email: this.signInInfoForm.controls.email.value || "",
-            firstName: this.signInInfoForm.controls.firstName.value || "",
-            lastName: this.signInInfoForm.controls.lastName.value || "",
+            firstName: "John", //should fetch from server
+            lastName:  "Doe",
             phoneNumber: this.signInInfoForm.controls.phoneNumber.value || "",
             type: this.patientSignUp? "patient" : "clinician"
         }

@@ -46,11 +46,11 @@ export class SignupComponent {
 
     public signUp() {
         const user: User = {
-            email: "dummyEmail@email.com",
-            firstName: "John",
-            lastName: "Doe",
-            phoneNumber: "+1134567892",
-            type: this.patientSignUp ? "patient" : "clinician"
+            email: this.signUpInfoForm.controls.email.value || "",
+            firstName: this.signUpInfoForm.controls.firstName.value || "",
+            lastName: this.signUpInfoForm.controls.lastName.value || "",
+            phoneNumber: this.signUpInfoForm.controls.phoneNumber.value || "",
+            type: this.patientSignUp? "patient" : "clinician"
         }
         this.authService.signUp(user);
         this.router.navigate([`${APP_ROUTES.product.app}/${APP_ROUTES.product.dashboard}`], { replaceUrl: true })

@@ -53,8 +53,6 @@ export class AuthComponent implements OnInit {
     }
 
     public signInInfoForm = new FormGroup({
-        firstName: new FormControl(''),
-        lastName: new FormControl(''),
         email: new FormControl(''),
         phoneNumber: new FormControl(''),
         password: new FormControl(''),
