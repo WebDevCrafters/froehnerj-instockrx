@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, ElementRef, HostListener, OnInit, ViewChild } from '@angular/core';
 import {
     FormArray,
     FormControl,
@@ -54,6 +54,7 @@ export class PatientDashboardComponent implements OnInit {
     profileBackup: any = null;
     myPackage = defaultPackage;  //should come from server
     user: User | null = null;
+    @ViewChild('myProfileEleRef') myProfileEleRef: ElementRef | null = null;
 
     activeSearchForm = new FormGroup({
         prescribedMedication: new FormArray([
@@ -223,7 +224,8 @@ export class PatientDashboardComponent implements OnInit {
         }
     }
 
-    toggleEditProfile() {
+    toggleEditProfile(event: Event) {
+        event.stopPropagation()
         this.isProfileEditable = !this.isProfileEditable;
         if (this.isProfileEditable) {
             this.profileBackup = this.profileForm.value;
@@ -254,5 +256,14 @@ export class PatientDashboardComponent implements OnInit {
                 queryParams: { stepNumber: JSON.stringify(4) }
             },
         );
+    }
+
+    @HostListener('document:click', ['$event'])
+    onDocumentClick(event: MouseEvent): void {
+      const clickedInsideProfile = this.myProfileEleRef?.nativeElement.contains(event.target);
+      if (!clickedInsideProfile) {
+        this.cancelEditProfile();
+        console.log("putsie");
+      }
     }
 }

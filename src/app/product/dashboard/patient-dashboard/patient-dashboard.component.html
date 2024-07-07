@@ -178,14 +178,14 @@
 
     <div class="previous_search_container"></div>
   </div>
-  <div class="my_profile">
+  <div class="my_profile" #myProfileEleRef>
     <div class="header_container">
       <p class="heading">My Profile</p>
       @if (!isProfileEditable) {
       <img
         src="assets/images/svg/edit-icon.svg"
         alt="Edit"
-        (click)="toggleEditProfile()"
+        (click)="toggleEditProfile($event)"
         class="edit_icon"
       />
       }
