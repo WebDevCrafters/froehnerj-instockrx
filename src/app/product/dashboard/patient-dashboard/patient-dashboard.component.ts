@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import {
   FormArray,
   FormControl,
@@ -13,7 +13,7 @@ import {
   emailValidator,
   requiredValidator,
 } from '../../../_shared/utils/Validators';
-import { activeSearchData } from '../../../_shared/constants/data';
+import { activeSearchData, defaultPackage } from '../../../_shared/constants/data';
 import { ActiveSearch } from '../../../_shared/dataTypes/ActiveSearch';
 import {
   formatTimestamp,
@@ -27,6 +27,8 @@ import { CommonModule } from '@angular/common';
 import { Router } from '@angular/router';
 import APP_ROUTES from '../../../_shared/constants/routes';
 import { markAllAsDirty } from '../../../_shared/utils/formUtils';
+import { User } from '../../../_shared/dataTypes/User';
+import { AuthService } from '../../../_core/services/auth.service';
 
 @Component({
   selector: 'app-patient-dashboard',
@@ -42,7 +44,7 @@ import { markAllAsDirty } from '../../../_shared/utils/formUtils';
   templateUrl: './patient-dashboard.component.html',
   styleUrl: './patient-dashboard.component.scss',
 })
-export class PatientDashboardComponent {
+export class PatientDashboardComponent implements OnInit{
   activeSearchData: ActiveSearch = activeSearchData;
   modalVisible: boolean = false;
   isDateInputActive: boolean = false;
@@ -50,46 +52,48 @@ export class PatientDashboardComponent {
   selectedDate: number = activeSearchData.pickupDate;
   dateFormControl: FormControl = new FormControl('');
   profileBackup: any = null;
+  myPackage = defaultPackage;  //should come from server
+  user: User | null = null;
 
   activeSearchForm = new FormGroup({
     prescribedMedication: new FormArray([
       new FormGroup({
-        name: new FormControl('Eissa', [
+        name: new FormControl('Medication Name', [
           requiredValidator('Medication option 1 cannot be empty'),
         ]),
         dose: new FormControl('Dose'),
-        quantity: new FormControl('QQU'),
-        brand: new FormControl('Bra'),
+        quantity: new FormControl('Quantity'),
+        brand: new FormControl('Brand Name'),
       }),
     ]),
     pickupDate: new FormControl(new Date().getTime(), [Validators.required]),
   });
 
   profileForm = new FormGroup({
-    name: new FormControl('Patient Bal', [
+    name: new FormControl('', [
       requiredValidator("Patient's Name cannot be empty"),
     ]),
-    email: new FormControl('patientsomething.com', [
+    email: new FormControl('', [
       requiredValidator("Patient's email cannot be empty"),
       emailValidator('Please enter a valid email'),
     ]),
-    phoneNumber: new FormControl('(123) 456-7890', [
+    phoneNumber: new FormControl('', [
       requiredValidator("Patient's phone number cannot be empty"),
       charLimitValidator(
         10 + 4, // Including '()' and '-'
         "Patient's phone must be 10 digits. (Only US phone numbers are supported at this time.)"
       ),
     ]),
-    dob: new FormControl('2020-10-10', [
+    dob: new FormControl('', [
       requiredValidator("Patient's date of birth cannot be empty"),
       dateValidator('Please enter a valid date'),
     ]),
-    zipCode: new FormControl('12345', [
+    zipCode: new FormControl('', [
       requiredValidator('Zip code must not be empty'),
       charLimitValidator(5, 'Zip code must be 5 digits'),
     ]),
-    doctorName: new FormControl('John', []),
-    doctorEmail: new FormControl('doctoreail.com', []),
+    doctorName: new FormControl('', []),
+    doctorEmail: new FormControl('', []),
   });
 
   editableStates: boolean[] = Array(activeSearchData.medications.length).fill(
@@ -97,7 +101,25 @@ export class PatientDashboardComponent {
   );
   backups: any[] = [];
 
-  constructor(private router: Router) {}
+  constructor(private router: Router, private authService: AuthService) {}
+
+  ngOnInit(): void {
+    this.getUser();
+    this.setControls();
+  }
+
+  getUser(){
+    const user = this.authService.getUserData();
+    if(!user) return;
+    this.user = user;
+  }
+
+  setControls(){
+    // these values should come from server
+    this.profileForm.controls.name.setValue(`${this.user?.firstName} ${this.user?.lastName}`)
+    this.profileForm.controls.email.setValue(`${this?.user?.email}`)
+  }
+
 
   formatTimestamp(timestamp: number | null) {
     if (!timestamp) return '';
@@ -222,5 +244,13 @@ export class PatientDashboardComponent {
     }
     this.isProfileEditable = false;
     this.profileBackup = null;
+  }
+
+  completePayment(){
+    this.router.navigate(
+      [`${APP_ROUTES.product.app}/${APP_ROUTES.product.selfService}`],
+      { replaceUrl: true }
+      
+    );
   }
 }
