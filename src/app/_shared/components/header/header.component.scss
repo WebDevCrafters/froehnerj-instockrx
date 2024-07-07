@@ -2,10 +2,10 @@
 
 .header {
     display: flex;
-    justify-content: center;
-    padding: 0.5rem;
+    align-items: center;
+    justify-content: space-between;
+    padding: 0.5rem 1.5rem;
     border-bottom: 1px solid $normalGrey;
-    position: relative;
     height: 3.5rem;
 
     .brand {
@@ -33,10 +33,9 @@
     }
 
     .settings_icon_container {
-        position: absolute;
-        right: 0;
-        top: 50%;
-        transform: translate(-50%, -50%);
+        // right: 0;
+        // top: 50%;
+        // transform: translate(-50%, -50%);
 
         > img {
             cursor: pointer;
@@ -55,6 +54,7 @@
     gap: 1rem;
     flex-direction: column;
     padding: 1rem 0;
+    z-index: 10;
 
     > p {
         padding: 0rem 1rem;

@@ -14,6 +14,7 @@
         overflow-x: auto;
 
         table {
+            height: 500px;
             min-width: 800px;
             table-layout: fixed;
 
@@ -112,10 +113,11 @@
                     border-top: none;
                     border-right: none;
                     transform: translate(-50%, -50%) rotate(-45deg);
+                    z-index: 5;
                 }
             }
 
-            th {
+            .status_th {
                 position: relative;
                 z-index: 1;
 
