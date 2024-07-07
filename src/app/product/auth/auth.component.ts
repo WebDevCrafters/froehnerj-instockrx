@@ -33,16 +33,24 @@ export class AuthComponent implements OnInit {
         private authService: AuthService,
         private router: Router,
         private route: ActivatedRoute
-      ) {}
-    
-      ngOnInit(): void {
+    ) { }
+
+    ngOnInit(): void {
         this.route.queryParams.subscribe((params) => {
-          const serializedValue = params['patientSignUp'];
-          if (serializedValue) {
-            this.patientSignUp = JSON.parse(serializedValue);
-          }
+            const serializedValue = params['patientSignUp'];
+            if (serializedValue) {
+                this.patientSignUp = JSON.parse(serializedValue);
+            }
         });
-      }
+    }
+
+    public openPatientSignUpScreen() {
+        this.isSignInScreenVisible = false;
+        this.isSignUpScreenVisible = true;
+        this.isForgotPasswordScreenVisible = false;
+        this.isVerificationScreenVisible = false;
+        this.patientSignUp = true;
+    }
 
     public signInInfoForm = new FormGroup({
         firstName: new FormControl(''),
@@ -74,40 +82,12 @@ export class AuthComponent implements OnInit {
             emailValidator('Username/client id combination not found')),
     });
 
-    public openSignInScreen() {
-        this.isSignInScreenVisible = true;
-        this.isSignUpScreenVisible = false;
-        this.isForgotPasswordScreenVisible = false;
-        this.isVerificationScreenVisible = false;
-    }
-
-    public openSignUpScreen() {
-        this.isSignInScreenVisible = false;
-        this.isSignUpScreenVisible = true;
-        this.isForgotPasswordScreenVisible = false;
-        this.isVerificationScreenVisible = false;
-    }
-
-    public openForgotPasswordScreen() {
-        this.isSignInScreenVisible = false;
-        this.isSignUpScreenVisible = false;
-        this.isForgotPasswordScreenVisible = true;
-        this.isVerificationScreenVisible = false;
-    }
-
-    public markEmailOptionAsSelected() {
-        this.isEmailLoginInOptionSelected = true;
-    }
-
-    public markPasswordOptionAsSelected() {
-        this.isEmailLoginInOptionSelected = false;
-    }
-
-    public updateStates(state: { isSignUpScreenVisible: boolean, isSignInScreenVisible: boolean, isForgotPasswordScreenVisible: boolean, isEmailLoginInOptionSelected: boolean }) {
+    public updateStates(state: { isSignUpScreenVisible: boolean, isSignInScreenVisible: boolean, isForgotPasswordScreenVisible: boolean, isEmailLoginInOptionSelected: boolean, patientSignUp: boolean }) {
         this.isSignUpScreenVisible = state.isSignUpScreenVisible;
         this.isSignInScreenVisible = state.isSignInScreenVisible;
         this.isForgotPasswordScreenVisible = state.isForgotPasswordScreenVisible;
         this.isEmailLoginInOptionSelected = state.isEmailLoginInOptionSelected;
+        this.patientSignUp = state.patientSignUp;
     }
 
     public signin() {

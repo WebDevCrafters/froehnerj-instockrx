@@ -23,6 +23,7 @@ export class VerificationCodeComponent implements OnInit {
     @Input() public isForgotPasswordScreenVisible: boolean = false;
     @Input() public isEmailLoginInOptionSelected: boolean = true;
     @Input() public isVerificationScreenVisible: boolean = true;
+    @Input() public patientSignUp: boolean = false;
     @Input() public userEmail = new FormControl('');
     @Input() public verificationCodeInfo = new FormGroup({
         email: new FormControl(this.userEmail,
@@ -30,8 +31,7 @@ export class VerificationCodeComponent implements OnInit {
         phoneNumber: new FormControl('',
             emailValidator('Username/client id combination not found')),
     });
-
-    @Output() public stateChange = new EventEmitter<{ isSignUpScreenVisible: boolean, isSignInScreenVisible: boolean, isForgotPasswordScreenVisible: boolean, isEmailLoginInOptionSelected: boolean, isVerificationScreenVisible: boolean }>();
+    @Output() public stateChange = new EventEmitter<{ isSignUpScreenVisible: boolean, isSignInScreenVisible: boolean, isForgotPasswordScreenVisible: boolean, isEmailLoginInOptionSelected: boolean, isVerificationScreenVisible: boolean, patientSignUp: boolean }>();
 
     constructor(private authService: AuthService, private router: Router) {
     }
@@ -44,32 +44,7 @@ export class VerificationCodeComponent implements OnInit {
         this.isSignUpScreenVisible = false;
         this.isForgotPasswordScreenVisible = false;
         this.isVerificationScreenVisible = false;
-        this.emitStateChange();
-    }
-
-    public openSignUpScreen() {
-        this.isSignInScreenVisible = false;
-        this.isSignUpScreenVisible = true;
-        this.isForgotPasswordScreenVisible = false;
-        this.isVerificationScreenVisible = false;
-        this.emitStateChange();
-    }
-
-    public openForgotPasswordScreen() {
-        this.isSignInScreenVisible = false;
-        this.isSignUpScreenVisible = false;
-        this.isForgotPasswordScreenVisible = true;
-        this.isVerificationScreenVisible = false;
-        this.emitStateChange();
-    }
-
-    public markEmailOptionAsSelected() {
-        this.isEmailLoginInOptionSelected = true;
-        this.emitStateChange();
-    }
-
-    public markPasswordOptionAsSelected() {
-        this.isEmailLoginInOptionSelected = false;
+        this.patientSignUp = this.patientSignUp;
         this.emitStateChange();
     }
 
@@ -91,7 +66,8 @@ export class VerificationCodeComponent implements OnInit {
             isSignInScreenVisible: this.isSignInScreenVisible,
             isForgotPasswordScreenVisible: this.isForgotPasswordScreenVisible,
             isEmailLoginInOptionSelected: this.isEmailLoginInOptionSelected,
-            isVerificationScreenVisible: this.isVerificationScreenVisible
+            isVerificationScreenVisible: this.isVerificationScreenVisible,
+            patientSignUp: this.patientSignUp
         });
     }
 

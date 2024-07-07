@@ -56,7 +56,7 @@
         <a
           [routerLink]="APP_ROUTES.product.auth"
           routerLinkActive="active-link"
-          (click)="closeMenu()"
+          (click)="openSignUpPage($event); closeMenu()"
           >Login</a
         >
       </li>

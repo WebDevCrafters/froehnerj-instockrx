@@ -9,19 +9,19 @@ import { ClinicianDashboardComponent } from './clinician-dashboard/clinician-das
 
 
 @Component({
-  selector: 'app-dashboard',
-  standalone: true,
-  imports: [
-    HeaderComponent,
-    ButtonComponent,
-    CommonModule,
-    ModalComponent,
-    PatientDashboardComponent,
-    ClinicianDashboardComponent
-  ],
-  templateUrl: './dashboard.component.html',
-  styleUrl: './dashboard.component.scss',
+    selector: 'app-dashboard',
+    standalone: true,
+    imports: [
+        HeaderComponent,
+        ButtonComponent,
+        CommonModule,
+        ModalComponent,
+        PatientDashboardComponent,
+        ClinicianDashboardComponent
+    ],
+    templateUrl: './dashboard.component.html',
+    styleUrl: './dashboard.component.scss',
 })
 export class DashboardComponent {
-  userType: "patient" | "clinician" = "patient"
+    userType: "patient" | "clinician" = "patient"
 }

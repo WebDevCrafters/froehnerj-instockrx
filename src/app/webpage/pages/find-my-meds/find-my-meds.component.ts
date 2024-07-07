@@ -6,21 +6,20 @@ import { InfiniteSliderComponent } from '../_shared/components/infinite-slider/i
 import { ButtonComponent } from '../../../_shared/components/button/button.component';
 
 @Component({
-  selector: 'app-find-my-meds',
-  standalone: true,
-  imports: [RouterLink, InfiniteSliderComponent, ButtonComponent],
-  templateUrl: './find-my-meds.component.html',
-  styleUrl: './find-my-meds.component.scss',
+    selector: 'app-find-my-meds',
+    standalone: true,
+    imports: [RouterLink, InfiniteSliderComponent, ButtonComponent],
+    templateUrl: './find-my-meds.component.html',
+    styleUrl: './find-my-meds.component.scss',
 })
 export class FindMyMedsComponent {
-  APP_ROUTES = APP_ROUTES;
+    APP_ROUTES = APP_ROUTES;
 
-  constructor(private router: Router) {}
+    constructor(private router: Router) { }
 
-  openSignup(event: MouseEvent) {
-    this.router.navigate(
-      [`${APP_ROUTES.product.app}/${APP_ROUTES.product.auth}`],
-      { queryParams: { patientSignUp: JSON.stringify(true) } }
-    );
-  }
+    openSignup(event: MouseEvent) {
+        this.router.navigate(
+            [`${APP_ROUTES.product.app}/${APP_ROUTES.product.auth}`]
+        );
+    }
 }

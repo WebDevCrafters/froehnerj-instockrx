@@ -22,6 +22,7 @@ export class SigninComponent {
     @Input() public isForgotPasswordScreenVisible: boolean = false;
     @Input() public isEmailLoginInOptionSelected: boolean = true;
     @Input() public isVerificationScreenVisible: boolean = false;
+    @Input() public patientSignUp: boolean = false;
     @Input() public signInInfoForm = new FormGroup({
         firstName: new FormControl(''),
         lastName: new FormControl(''),
@@ -30,23 +31,16 @@ export class SigninComponent {
         password: new FormControl(''),
     });
 
-    @Output() public stateChange = new EventEmitter<{ isSignUpScreenVisible: boolean, isSignInScreenVisible: boolean, isForgotPasswordScreenVisible: boolean, isEmailLoginInOptionSelected: boolean, isVerificationScreenVisible: boolean }>();
+    @Output() public stateChange = new EventEmitter<{ isSignUpScreenVisible: boolean, isSignInScreenVisible: boolean, isForgotPasswordScreenVisible: boolean, isEmailLoginInOptionSelected: boolean, isVerificationScreenVisible: boolean, patientSignUp: boolean }>();
 
     constructor(private authService: AuthService, private router: Router) { }
-
-    public openSignInScreen() {
-        this.isSignInScreenVisible = true;
-        this.isSignUpScreenVisible = false;
-        this.isForgotPasswordScreenVisible = false;
-        this.isVerificationScreenVisible = false;
-        this.emitStateChange();
-    }
 
     public openSignUpScreen() {
         this.isSignInScreenVisible = false;
         this.isSignUpScreenVisible = true;
         this.isForgotPasswordScreenVisible = false;
         this.isVerificationScreenVisible = false;
+        this.patientSignUp = this.patientSignUp;
         this.emitStateChange();
     }
 
@@ -55,6 +49,7 @@ export class SigninComponent {
         this.isSignUpScreenVisible = false;
         this.isForgotPasswordScreenVisible = true;
         this.isVerificationScreenVisible = false;
+        this.patientSignUp = this.patientSignUp;
         this.emitStateChange();
     }
 
@@ -86,7 +81,8 @@ export class SigninComponent {
             isSignInScreenVisible: this.isSignInScreenVisible,
             isForgotPasswordScreenVisible: this.isForgotPasswordScreenVisible,
             isEmailLoginInOptionSelected: this.isEmailLoginInOptionSelected,
-            isVerificationScreenVisible: this.isVerificationScreenVisible
+            isVerificationScreenVisible: this.isVerificationScreenVisible,
+            patientSignUp: this.patientSignUp
         });
     }
 
