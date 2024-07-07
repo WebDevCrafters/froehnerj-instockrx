@@ -44,15 +44,15 @@ export class SignupComponent {
         this.emitStateChange();
     }
 
-    public signin() {
+    public signUp() {
         const user: User = {
             email: "dummyEmail@email.com",
             firstName: "John",
             lastName: "Doe",
             phoneNumber: "+1134567892",
-            type: "patient"
+            type: this.patientSignUp ? "patient" : "clinician"
         }
-        this.authService.signIn(user);
+        this.authService.signUp(user);
         this.router.navigate([`${APP_ROUTES.product.app}/${APP_ROUTES.product.dashboard}`], { replaceUrl: true })
     }
 
@@ -75,6 +75,6 @@ export class SignupComponent {
         this.isVerificationScreenVisible = true;
         this.emitStateChange();
 
-        console.log(this.signUpInfoForm.controls);
+        this.signUp();
     }
 }
