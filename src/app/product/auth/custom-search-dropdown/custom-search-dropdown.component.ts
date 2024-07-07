@@ -1,5 +1,5 @@
 import { CommonModule } from '@angular/common';
-import { Component, HostListener } from '@angular/core';
+import { Component, EventEmitter, HostListener, OnInit, Output } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 
 interface Country {
@@ -14,7 +14,8 @@ interface Country {
     templateUrl: './custom-search-dropdown.component.html',
     styleUrls: ['./custom-search-dropdown.component.scss']
 })
-export class CustomSearchDropdownComponent {
+export class CustomSearchDropdownComponent implements OnInit {
+
     isOpen = false;
     searchTerm = '';
     items: Country[] = [
@@ -214,8 +215,14 @@ export class CustomSearchDropdownComponent {
         { name: 'Zimbabwe', code: '+263' }
     ];
 
+    @Output() public countryCode: EventEmitter<string> = new EventEmitter<string>();
+
     filteredItems = [...this.items];
     selectedItem: Country = this.items[0];
+
+    ngOnInit(): void {
+        this.countryCode.emit(this.items[0].code);
+    }
 
     toggleDropdown() {
         this.isOpen = !this.isOpen;
@@ -234,6 +241,7 @@ export class CustomSearchDropdownComponent {
         this.filteredItems = [...this.items];
         this.isOpen = false;
         this.toggleDropdown()
+        this.countryCode.emit(item.code);
     }
 
     @HostListener('document:click', ['$event'])

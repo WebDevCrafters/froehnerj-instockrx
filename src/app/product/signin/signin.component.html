@@ -29,7 +29,9 @@
     />
     } @else {
     <div class="phoneNumber_container">
-      <app-custom-search-dropdown></app-custom-search-dropdown>
+      <app-custom-search-dropdown
+        (countryCode)="setCountryCode($event)"
+      ></app-custom-search-dropdown>
       <app-input
         [control]="signInInfoForm.controls.phoneNumber"
         id="phoneNumber"

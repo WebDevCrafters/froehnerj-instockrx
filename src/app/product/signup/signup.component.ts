@@ -32,9 +32,15 @@ export class SignupComponent {
         password: new FormControl(''),
     });
 
+    public countryCode: string = '';
+
     @Output() public stateChange = new EventEmitter<{ isSignUpScreenVisible: boolean, isSignInScreenVisible: boolean, isForgotPasswordScreenVisible: boolean, isEmailLoginInOptionSelected: boolean, isVerificationScreenVisible: boolean, patientSignUp: boolean }>();
 
     constructor(private authService: AuthService, private router: Router) { }
+
+    public setCountryCode(countryCode: string) {
+        this.countryCode = countryCode;
+    }
 
     public openSignInScreen() {
         this.isSignInScreenVisible = true;
