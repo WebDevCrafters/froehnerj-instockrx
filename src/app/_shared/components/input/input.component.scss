@@ -90,6 +90,10 @@
             border-radius: unset;
             border-bottom: 1.5px solid $darkBrownColor;
         }
+
+        &.disabled{
+            color: $normalGrey;
+        }
     }
 
     .error_message {

@@ -25,6 +25,7 @@ export class InputComponent implements OnInit {
   @Input() bg: string = '';
   @Input() type: InputType = 'text';
   @Input() shape: InputShape = "rounded";
+  @Input() isDisabled: boolean = false;
   isFocused = false;
   errorMessage: string = '';
 
