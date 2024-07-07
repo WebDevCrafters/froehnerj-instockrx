@@ -8,6 +8,8 @@ import APP_ROUTES from '../../_shared/constants/routes';
 import { User } from '../../_shared/dataTypes/User';
 import { CustomSearchDropdownComponent } from '../auth/custom-search-dropdown/custom-search-dropdown.component';
 import { CommonModule } from '@angular/common';
+import { emailValidator, requiredValidator } from '../../_shared/utils/Validators';
+import { markAllAsDirty } from '../../_shared/utils/formUtils';
 
 @Component({
     selector: 'app-signin',
@@ -85,6 +87,9 @@ export class SigninComponent {
     }
 
     public onSucces() {
-        if (!this.signInInfoForm.valid) return;
+        this.signInInfoForm.markAllAsTouched();
+        markAllAsDirty(this.signInInfoForm);
+        if (this.signInInfoForm.controls.email.valid===false && this.signInInfoForm.controls.phoneNumber.valid===false) return;
+        this.signin();
     }
 }

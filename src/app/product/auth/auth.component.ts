@@ -12,7 +12,7 @@ import { SigninComponent } from '../signin/signin.component';
 import { SignupComponent } from '../signup/signup.component';
 import { ForgotPasswordComponent } from '../forgot-password/forgot-password.component';
 import { VerificationCodeComponent } from '../verification-code/verification-code.component';
-import { emailValidator } from '../../_shared/utils/Validators';
+import { emailValidator, requiredValidator } from '../../_shared/utils/Validators';
 
 @Component({
     selector: 'app-auth',
@@ -53,9 +53,16 @@ export class AuthComponent implements OnInit {
     }
 
     public signInInfoForm = new FormGroup({
-        email: new FormControl(''),
-        phoneNumber: new FormControl(''),
-        password: new FormControl(''),
+        email: new FormControl('', [
+            requiredValidator("Email field must not be blank."),
+            emailValidator("Invalid email format.")
+        ]),
+        phoneNumber: new FormControl('', [
+            requiredValidator("Phone Number field must not be blank.")
+        ]),
+        password: new FormControl('', [
+            requiredValidator("Password field must not be blank.")
+        ]),
     });
 
     public signUpInfoForm = new FormGroup({
