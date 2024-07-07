@@ -40,7 +40,7 @@ export class SignupComponent {
         this.isSignUpScreenVisible = false;
         this.isForgotPasswordScreenVisible = false;
         this.isVerificationScreenVisible = false;
-        this.patientSignUp = false;
+        this.patientSignUp = this.patientSignUp;
         this.emitStateChange();
     }
 
