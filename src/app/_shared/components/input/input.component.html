@@ -10,7 +10,6 @@
   </label>
   }
   <input
-    [ngClass]="{ error_input: control.dirty && control.invalid }"
     [type]="type"
     [formControl]="control"
     [id]="id"
@@ -21,7 +20,8 @@
     (input)="handleChange($event)"
     [attr.maxlength]="type === 'phoneNumber' ? 14 : null"
     [style.background-color]="bg"
-    [ngClass]="{ flat: shape === 'flat' }"
+    [ngClass]="{ flat: shape === 'flat',  error_input: control.dirty && control.invalid, disabled: isDisabled }"
+    [readonly]="isDisabled"
   />
 
   <span
