@@ -8,6 +8,7 @@ import { Router } from '@angular/router';
 import { AuthService } from '../../_core/services/auth.service';
 import { User } from '../../_shared/dataTypes/User';
 import APP_ROUTES from '../../_shared/constants/routes';
+import { markAllAsDirty } from '../../_shared/utils/formUtils';
 
 @Component({
     selector: 'app-signup',
@@ -44,15 +45,15 @@ export class SignupComponent {
         this.emitStateChange();
     }
 
-    public signin() {
+    public signUp() {
         const user: User = {
-            email: "dummyEmail@email.com",
-            firstName: "John",
-            lastName: "Doe",
-            phoneNumber: "+1134567892",
-            type: "patient"
+            email: this.signUpInfoForm.controls.email.value || "",
+            firstName: this.signUpInfoForm.controls.firstName.value || "",
+            lastName: this.signUpInfoForm.controls.lastName.value || "",
+            phoneNumber: this.signUpInfoForm.controls.phoneNumber.value || "",
+            type: this.patientSignUp? "patient" : "clinician"
         }
-        this.authService.signIn(user);
+        this.authService.signUp(user);
         this.router.navigate([`${APP_ROUTES.product.app}/${APP_ROUTES.product.dashboard}`], { replaceUrl: true })
     }
 
@@ -68,13 +69,15 @@ export class SignupComponent {
     }
 
     public onSuccess() {
-        // if (!this.signUpInfoForm.valid) return;
+        this.signUpInfoForm.markAllAsTouched();
+        markAllAsDirty(this.signUpInfoForm);
+        if (!this.signUpInfoForm.valid) return;
         this.isSignInScreenVisible = false;
         this.isSignUpScreenVisible = false;
         this.isForgotPasswordScreenVisible = false;
         this.isVerificationScreenVisible = true;
         this.emitStateChange();
 
-        console.log(this.signUpInfoForm.controls);
+        this.signUp();
     }
 }

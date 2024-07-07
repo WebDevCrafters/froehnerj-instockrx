@@ -12,7 +12,7 @@ import { SigninComponent } from '../signin/signin.component';
 import { SignupComponent } from '../signup/signup.component';
 import { ForgotPasswordComponent } from '../forgot-password/forgot-password.component';
 import { VerificationCodeComponent } from '../verification-code/verification-code.component';
-import { emailValidator } from '../../_shared/utils/Validators';
+import { emailValidator, requiredValidator } from '../../_shared/utils/Validators';
 
 @Component({
     selector: 'app-auth',
@@ -53,19 +53,35 @@ export class AuthComponent implements OnInit {
     }
 
     public signInInfoForm = new FormGroup({
-        firstName: new FormControl(''),
-        lastName: new FormControl(''),
-        email: new FormControl(''),
-        phoneNumber: new FormControl(''),
-        password: new FormControl(''),
+        email: new FormControl('', [
+            requiredValidator("Email field must not be blank."),
+            emailValidator("Invalid email format.")
+        ]),
+        phoneNumber: new FormControl('', [
+            requiredValidator("Phone Number field must not be blank.")
+        ]),
+        password: new FormControl('', [
+            requiredValidator("Password field must not be blank.")
+        ]),
     });
 
     public signUpInfoForm = new FormGroup({
-        firstName: new FormControl(''),
-        lastName: new FormControl(''),
-        email: new FormControl(''),
-        phoneNumber: new FormControl(''),
-        password: new FormControl(''),
+        firstName: new FormControl('',[
+            requiredValidator("First name cannot be empty.")
+        ]),
+        lastName: new FormControl('',[
+            requiredValidator("Last name cannot be empty.")
+        ]),
+        email: new FormControl('',[
+            requiredValidator("Email cannot be empty."),
+            emailValidator("Invalid email format.")
+        ]),
+        phoneNumber: new FormControl('',[
+            requiredValidator("Phone number cannot be empty.")
+        ]),
+        password: new FormControl('',[
+            requiredValidator("Password cannot be empty.")
+        ]),
     });
 
     public verificationCodeInfo = new FormGroup({

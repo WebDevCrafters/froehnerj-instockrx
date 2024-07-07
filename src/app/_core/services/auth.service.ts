@@ -7,6 +7,7 @@ import { KEYS } from '../../_shared/constants/localStorageKeys';
 })
 export class AuthService {
   isSignedIn: boolean = false;
+  user: User | null = null;
 
   constructor() {}
 
@@ -43,9 +44,15 @@ export class AuthService {
   }
 
   getUserData(): User | null {
+
+    if(this.user){
+      return this.user;
+    }
+
     const user = localStorage.getItem(KEYS.userData);
     if (!user) return null;
-
-    return JSON.parse(user);
+    const userObj = JSON.parse(user);
+    this.user = userObj;
+    return userObj;
   }
 }

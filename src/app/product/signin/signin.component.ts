@@ -8,6 +8,8 @@ import APP_ROUTES from '../../_shared/constants/routes';
 import { User } from '../../_shared/dataTypes/User';
 import { CustomSearchDropdownComponent } from '../auth/custom-search-dropdown/custom-search-dropdown.component';
 import { CommonModule } from '@angular/common';
+import { emailValidator, requiredValidator } from '../../_shared/utils/Validators';
+import { markAllAsDirty } from '../../_shared/utils/formUtils';
 
 @Component({
     selector: 'app-signin',
@@ -24,8 +26,6 @@ export class SigninComponent {
     @Input() public isVerificationScreenVisible: boolean = false;
     @Input() public patientSignUp: boolean = false;
     @Input() public signInInfoForm = new FormGroup({
-        firstName: new FormControl(''),
-        lastName: new FormControl(''),
         email: new FormControl(''),
         phoneNumber: new FormControl(''),
         password: new FormControl(''),
@@ -65,11 +65,11 @@ export class SigninComponent {
 
     public signin() {
         const user: User = {
-            email: "dummyEmail@email.com",
-            firstName: "John",
-            lastName: "Doe",
-            phoneNumber: "+1134567892",
-            type: "patient"
+            email: this.signInInfoForm.controls.email.value || "",
+            firstName: "John", //should fetch from server
+            lastName:  "Doe",
+            phoneNumber: this.signInInfoForm.controls.phoneNumber.value || "",
+            type: this.patientSignUp? "patient" : "clinician"
         }
         this.authService.signIn(user);
         this.router.navigate([`${APP_ROUTES.product.app}/${APP_ROUTES.product.dashboard}`], { replaceUrl: true })
@@ -87,6 +87,9 @@ export class SigninComponent {
     }
 
     public onSucces() {
-        if (!this.signInInfoForm.valid) return;
+        this.signInInfoForm.markAllAsTouched();
+        markAllAsDirty(this.signInInfoForm);
+        if (this.signInInfoForm.controls.email.valid===false && this.signInInfoForm.controls.phoneNumber.valid===false) return;
+        this.signin();
     }
 }
