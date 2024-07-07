@@ -8,6 +8,7 @@ import { Router } from '@angular/router';
 import { AuthService } from '../../_core/services/auth.service';
 import { User } from '../../_shared/dataTypes/User';
 import APP_ROUTES from '../../_shared/constants/routes';
+import { markAllAsDirty } from '../../_shared/utils/formUtils';
 
 @Component({
     selector: 'app-signup',
@@ -68,7 +69,9 @@ export class SignupComponent {
     }
 
     public onSuccess() {
-        // if (!this.signUpInfoForm.valid) return;
+        this.signUpInfoForm.markAllAsTouched();
+        markAllAsDirty(this.signUpInfoForm);
+        if (!this.signUpInfoForm.valid) return;
         this.isSignInScreenVisible = false;
         this.isSignUpScreenVisible = false;
         this.isForgotPasswordScreenVisible = false;

@@ -66,11 +66,22 @@ export class AuthComponent implements OnInit {
     });
 
     public signUpInfoForm = new FormGroup({
-        firstName: new FormControl(''),
-        lastName: new FormControl(''),
-        email: new FormControl(''),
-        phoneNumber: new FormControl(''),
-        password: new FormControl(''),
+        firstName: new FormControl('',[
+            requiredValidator("First name cannot be empty.")
+        ]),
+        lastName: new FormControl('',[
+            requiredValidator("Last name cannot be empty.")
+        ]),
+        email: new FormControl('',[
+            requiredValidator("Email cannot be empty."),
+            emailValidator("Invalid email format.")
+        ]),
+        phoneNumber: new FormControl('',[
+            requiredValidator("Phone number cannot be empty.")
+        ]),
+        password: new FormControl('',[
+            requiredValidator("Password cannot be empty.")
+        ]),
     });
 
     public verificationCodeInfo = new FormGroup({
