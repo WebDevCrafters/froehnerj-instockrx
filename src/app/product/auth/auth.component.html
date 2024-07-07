@@ -12,7 +12,11 @@
       </div>
       <div class="title_container">
         <div class="title">
-          {{ patientSignUp && isSignUpScreenVisible ? "Patient portal" : "Clinician portal" }}
+          {{
+            patientSignUp && isSignUpScreenVisible
+              ? "Patient portal"
+              : "Clinician portal"
+          }}
         </div>
         @if(patientSignUp && isSignUpScreenVisible) {
         <div class="patient_sub_heading">Never Search for Your Meds Again</div>
@@ -24,7 +28,9 @@
         <div class="sub_heading">
           If you are a patient searching for meds, please
         </div>
-        <div class="signup_container">signup here instead.</div>
+        <div class="signup_container" (click)="openPatientSignUpScreen()">
+          signup here instead.
+        </div>
         }
       </div>
       @if(isSignInScreenVisible) {
@@ -34,6 +40,7 @@
         [isEmailLoginInOptionSelected]="isEmailLoginInOptionSelected"
         [isForgotPasswordScreenVisible]="isForgotPasswordScreenVisible"
         [isVerificationScreenVisible]="isVerificationScreenVisible"
+        [patientSignUp]="patientSignUp"
         (stateChange)="updateStates($event)"
         [signInInfoForm]="signInInfoForm"
       ></app-signin>
@@ -55,6 +62,7 @@
         [isEmailLoginInOptionSelected]="isEmailLoginInOptionSelected"
         [isForgotPasswordScreenVisible]="isForgotPasswordScreenVisible"
         [isVerificationScreenVisible]="isVerificationScreenVisible"
+        [patientSignUp]="patientSignUp"
         (stateChange)="updateStates($event)"
         [forgotPasswordInfo]="forgotPasswordInfo"
       ></app-forgot-password>
@@ -65,6 +73,7 @@
         [isEmailLoginInOptionSelected]="isEmailLoginInOptionSelected"
         [isForgotPasswordScreenVisible]="isForgotPasswordScreenVisible"
         [isVerificationScreenVisible]="isVerificationScreenVisible"
+        [patientSignUp]="patientSignUp"
         (stateChange)="updateStates($event)"
         [verificationCodeInfo]="verificationCodeInfo"
         [userEmail]="signUpInfoForm.controls.email"
