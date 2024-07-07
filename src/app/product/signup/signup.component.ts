@@ -32,9 +32,15 @@ export class SignupComponent {
         password: new FormControl(''),
     });
 
+    public countryCode: string = '';
+
     @Output() public stateChange = new EventEmitter<{ isSignUpScreenVisible: boolean, isSignInScreenVisible: boolean, isForgotPasswordScreenVisible: boolean, isEmailLoginInOptionSelected: boolean, isVerificationScreenVisible: boolean, patientSignUp: boolean }>();
 
     constructor(private authService: AuthService, private router: Router) { }
+
+    public setCountryCode(countryCode: string) {
+        this.countryCode = countryCode;
+    }
 
     public openSignInScreen() {
         this.isSignInScreenVisible = true;
@@ -51,7 +57,7 @@ export class SignupComponent {
             firstName: this.signUpInfoForm.controls.firstName.value || "",
             lastName: this.signUpInfoForm.controls.lastName.value || "",
             phoneNumber: this.signUpInfoForm.controls.phoneNumber.value || "",
-            type: this.patientSignUp? "patient" : "clinician"
+            type: this.patientSignUp ? "patient" : "clinician"
         }
         this.authService.signUp(user);
         this.router.navigate([`${APP_ROUTES.product.app}/${APP_ROUTES.product.dashboard}`], { replaceUrl: true })
@@ -77,7 +83,6 @@ export class SignupComponent {
         this.isForgotPasswordScreenVisible = false;
         this.isVerificationScreenVisible = true;
         this.emitStateChange();
-
         this.signUp();
     }
 }

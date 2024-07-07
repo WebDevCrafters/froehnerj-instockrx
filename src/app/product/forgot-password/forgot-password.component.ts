@@ -33,7 +33,14 @@ export class ForgotPasswordComponent {
 
     @Output() public stateChange = new EventEmitter<{ isSignUpScreenVisible: boolean, isSignInScreenVisible: boolean, isForgotPasswordScreenVisible: boolean, isEmailLoginInOptionSelected: boolean, isVerificationScreenVisible: boolean, patientSignUp: boolean }>();
 
+    public countryCode: string = '';
+
     constructor(private authService: AuthService, private router: Router) { }
+
+
+    public setCountryCode(countryCode: string) {
+        this.countryCode = countryCode;
+    }
 
     public openSignInScreen() {
         this.isSignInScreenVisible = true;

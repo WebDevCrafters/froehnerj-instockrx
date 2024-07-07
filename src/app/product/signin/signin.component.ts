@@ -33,7 +33,13 @@ export class SigninComponent {
 
     @Output() public stateChange = new EventEmitter<{ isSignUpScreenVisible: boolean, isSignInScreenVisible: boolean, isForgotPasswordScreenVisible: boolean, isEmailLoginInOptionSelected: boolean, isVerificationScreenVisible: boolean, patientSignUp: boolean }>();
 
+    public countryCode: string = '';
+
     constructor(private authService: AuthService, private router: Router) { }
+
+    public setCountryCode(countryCode: string) {
+        this.countryCode = countryCode;
+    }
 
     public openSignUpScreen() {
         this.isSignInScreenVisible = false;
@@ -67,9 +73,9 @@ export class SigninComponent {
         const user: User = {
             email: this.signInInfoForm.controls.email.value || "",
             firstName: "John", //should fetch from server
-            lastName:  "Doe",
+            lastName: "Doe",
             phoneNumber: this.signInInfoForm.controls.phoneNumber.value || "",
-            type: this.patientSignUp? "patient" : "clinician"
+            type: this.patientSignUp ? "patient" : "clinician"
         }
         this.authService.signIn(user);
         this.router.navigate([`${APP_ROUTES.product.app}/${APP_ROUTES.product.dashboard}`], { replaceUrl: true })
@@ -89,7 +95,7 @@ export class SigninComponent {
     public onSucces() {
         this.signInInfoForm.markAllAsTouched();
         markAllAsDirty(this.signInInfoForm);
-        if (this.signInInfoForm.controls.email.valid===false && this.signInInfoForm.controls.phoneNumber.valid===false) return;
+        if (this.signInInfoForm.controls.email.valid === false && this.signInInfoForm.controls.phoneNumber.valid === false) return;
         this.signin();
     }
 }
