@@ -42,4 +42,11 @@ export class HeaderComponent implements OnInit {
       { replaceUrl: true }
     );
   }
+
+  resetPassword() {
+    this.router.navigate(
+      [`${APP_ROUTES.product.app}/${APP_ROUTES.product.resetPassword}`],
+      { replaceUrl: true }
+    );
+  }
 }

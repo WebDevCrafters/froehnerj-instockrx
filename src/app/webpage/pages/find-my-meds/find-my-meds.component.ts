@@ -18,8 +18,9 @@ export class FindMyMedsComponent {
   constructor(private router: Router) {}
 
   openSignup(event: MouseEvent) {
-    this.router.navigate([
-      `${APP_ROUTES.product.app}/${APP_ROUTES.product.selfService}`,
-    ]);
+    this.router.navigate(
+      [`${APP_ROUTES.product.app}/${APP_ROUTES.product.auth}`],
+      { queryParams: { patientSignUp: JSON.stringify(true) } }
+    );
   }
 }

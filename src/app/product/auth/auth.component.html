@@ -12,7 +12,7 @@
       </div>
       <div class="title_container">
         <div class="title">
-          {{ patientSignUp ? "Patient portal" : "Clinician portal" }}
+          {{ patientSignUp && isSignUpScreenVisible ? "Patient portal" : "Clinician portal" }}
         </div>
         @if(patientSignUp && isSignUpScreenVisible) {
         <div class="patient_sub_heading">Never Search for Your Meds Again</div>

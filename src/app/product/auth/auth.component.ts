@@ -6,7 +6,7 @@ import { CommonModule } from '@angular/common';
 import { CustomSearchDropdownComponent } from './custom-search-dropdown/custom-search-dropdown.component';
 import { AuthService } from '../../_core/services/auth.service';
 import { User } from '../../_shared/dataTypes/User';
-import { Router } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import APP_ROUTES from '../../_shared/constants/routes';
 import { SigninComponent } from '../signin/signin.component';
 import { SignupComponent } from '../signup/signup.component';
@@ -22,18 +22,27 @@ import { emailValidator } from '../../_shared/utils/Validators';
     styleUrl: './auth.component.scss'
 })
 export class AuthComponent implements OnInit {
-    public isSignUpScreenVisible: boolean = false;
-    public isSignInScreenVisible: boolean = true;
+    public isSignUpScreenVisible: boolean = true;
+    public isSignInScreenVisible: boolean = false;
     public isForgotPasswordScreenVisible: boolean = false;
     public isEmailLoginInOptionSelected: boolean = true;
     public isVerificationScreenVisible: boolean = false;
     public patientSignUp: boolean = true;
 
-    constructor(private authService: AuthService, private router: Router) { }
-
-    ngOnInit(): void {
-        // console.log("Implement router input here");
-    }
+    constructor(
+        private authService: AuthService,
+        private router: Router,
+        private route: ActivatedRoute
+      ) {}
+    
+      ngOnInit(): void {
+        this.route.queryParams.subscribe((params) => {
+          const serializedValue = params['patientSignUp'];
+          if (serializedValue) {
+            this.patientSignUp = JSON.parse(serializedValue);
+          }
+        });
+      }
 
     public signInInfoForm = new FormGroup({
         firstName: new FormControl(''),

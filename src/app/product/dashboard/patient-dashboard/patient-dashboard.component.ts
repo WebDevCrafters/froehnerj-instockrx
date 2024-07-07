@@ -24,6 +24,9 @@ import { InputComponent } from '../../../_shared/components/input/input.componen
 import { ModalComponent } from '../../../_shared/components/modal/modal.component';
 import { ButtonComponent } from '../../../_shared/components/button/button.component';
 import { CommonModule } from '@angular/common';
+import { Router } from '@angular/router';
+import APP_ROUTES from '../../../_shared/constants/routes';
+import { markAllAsDirty } from '../../../_shared/utils/formUtils';
 
 @Component({
   selector: 'app-patient-dashboard',
@@ -34,7 +37,7 @@ import { CommonModule } from '@angular/common';
     ModalComponent,
     ButtonComponent,
     CommonModule,
-    FormsModule
+    FormsModule,
   ],
   templateUrl: './patient-dashboard.component.html',
   styleUrl: './patient-dashboard.component.scss',
@@ -85,20 +88,16 @@ export class PatientDashboardComponent {
       requiredValidator('Zip code must not be empty'),
       charLimitValidator(5, 'Zip code must be 5 digits'),
     ]),
-    doctorName: new FormControl('John', [
-      requiredValidator('Zip code must not be empty'),
-      charLimitValidator(5, 'Zip code must be 5 digits'),
-    ]),
-    doctorEmail: new FormControl('doctoreail.com', [
-      requiredValidator("Patient's email cannot be empty"),
-      emailValidator('Please enter a valid email'),
-    ]),
+    doctorName: new FormControl('John', []),
+    doctorEmail: new FormControl('doctoreail.com', []),
   });
 
   editableStates: boolean[] = Array(activeSearchData.medications.length).fill(
     false
   );
   backups: any[] = [];
+
+  constructor(private router: Router) {}
 
   formatTimestamp(timestamp: number | null) {
     if (!timestamp) return '';
@@ -210,7 +209,9 @@ export class PatientDashboardComponent {
   }
 
   saveEditProfile() {
-    if(!this.profileForm.valid) return;
+    this.profileForm.markAllAsTouched();
+    markAllAsDirty(this.profileForm);
+    if (!this.profileForm.valid) return;
     this.isProfileEditable = false;
     this.profileBackup = null;
   }
