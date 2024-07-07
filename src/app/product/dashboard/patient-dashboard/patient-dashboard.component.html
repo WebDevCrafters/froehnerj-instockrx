@@ -1,10 +1,10 @@
 <div class="dashboard_content">
   <div class="all_info">
-    <span class="welcome_message">Welcome, Patient</span>
+    <span class="welcome_message">Welcome, {{user?.firstName}}</span>
 
     <div class="my_package">
       <p class="heading">My Package</p>
-      <span>Three Med Searches</span>
+      <span>{{myPackage.title}}</span>
     </div>
 
     <div class="active_search_container">
@@ -157,6 +157,7 @@
             title="Complete Payment"
             type="small_primary"
             shape="rounded"
+            (clickEvent)="completePayment()"
           />
         </div>
         }
