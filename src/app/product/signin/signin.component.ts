@@ -69,7 +69,7 @@ export class SigninComponent {
             firstName: "John",
             lastName: "Doe",
             phoneNumber: "+1134567892",
-            type: "patient"
+            type: this.patientSignUp? "patient" : "clinician"
         }
         this.authService.signIn(user);
         this.router.navigate([`${APP_ROUTES.product.app}/${APP_ROUTES.product.dashboard}`], { replaceUrl: true })

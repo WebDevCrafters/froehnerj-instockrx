@@ -6,6 +6,7 @@ import { ModalComponent } from '../../_shared/components/modal/modal.component';
 import { PatientDashboardComponent } from './patient-dashboard/patient-dashboard.component';
 import { InputComponent } from '../../_shared/components/input/input.component';
 import { ClinicianDashboardComponent } from './clinician-dashboard/clinician-dashboard.component';
+import { AuthService } from '../../_core/services/auth.service';
 
 
 @Component({
@@ -22,6 +23,18 @@ import { ClinicianDashboardComponent } from './clinician-dashboard/clinician-das
     templateUrl: './dashboard.component.html',
     styleUrl: './dashboard.component.scss',
 })
-export class DashboardComponent {
+export class DashboardComponent implements OnInit{
     userType: "patient" | "clinician" = "patient"
+
+    constructor(private authService: AuthService){}
+
+    ngOnInit(): void {
+        this.getUserType();
+    }
+
+    getUserType(){
+        const user = this.authService.getUserData();
+        if(!user) return;
+        this.userType = user.type;
+    }
 }
