@@ -38,16 +38,22 @@ export class SectionBannerComponent {
         }
     }
 
-    openSignUpPage(event: MouseEvent) {
-        if (this.openOnNewPage) {
-            const url = this.router.serializeUrl(
-                this.router.createUrlTree([this.routeOnSecondaryBtnClick])
-            );
-            window.open(url, '_blank');
-        }
+    // openSignUpPage(event: MouseEvent) {
+    //     if (this.openOnNewPage) {
+    //         const url = this.router.serializeUrl(
+    //             this.router.createUrlTree([this.routeOnSecondaryBtnClick])
+    //         );
+    //         window.open(url, '_blank');
+    //     }
+    //     else {
+    //         this.router.navigate([this.routeOnSecondaryBtnClick]);
+    //     }
+    // }
 
-        else {
-            this.router.navigate([this.routeOnSecondaryBtnClick]);
-        }
+    openSignUpPage(event: MouseEvent) {
+        this.router.navigate(
+            [`${APP_ROUTES.product.app}/${APP_ROUTES.product.auth}`],
+            { queryParams: { patientSignUp: JSON.stringify(false) } }
+        );
     }
 }
