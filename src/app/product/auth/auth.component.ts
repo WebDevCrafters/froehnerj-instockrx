@@ -27,7 +27,7 @@ export class AuthComponent implements OnInit {
     public isForgotPasswordScreenVisible: boolean = false;
     public isEmailLoginInOptionSelected: boolean = true;
     public isVerificationScreenVisible: boolean = false;
-    public patientSignUp: boolean = false;
+    public patientSignUp: boolean = true;
 
     constructor(private authService: AuthService, private router: Router) { }
 
