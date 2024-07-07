@@ -33,7 +33,10 @@ export class HeaderComponent implements OnInit {
     this.modalVisible = !this.modalVisible;
   }
 
-  requestAccountDeletion() {}
+  requestAccountDeletion() {
+    const url = 'https://u4acjiu8lv3.typeform.com/to/WDj0hN0I';
+    window.open(url, '_blank');
+  }
 
   signout() {
     this.authService.signOut();
