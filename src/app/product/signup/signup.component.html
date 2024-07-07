@@ -51,8 +51,11 @@
   <div class="footer">
     <span>
       By creating an account you agree to our
-      <a>privacy-policy</a> and
-      <a>terms of service and business associated agreements.</a>
+      <a (click)="navigateToPrivacyPolicy()" target="_blank">privacy-policy</a>
+      and
+      <a (click)="navigateToTermsOfService()" target="_blank"
+        >terms of service and business associated agreements.</a
+      >
     </span>
     @if(patientSignUp && isSignUpScreenVisible) {
     <div class="patient_footer">

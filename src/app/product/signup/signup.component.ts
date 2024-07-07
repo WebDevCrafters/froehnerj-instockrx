@@ -62,13 +62,13 @@ export class SignupComponent {
         });
     }
 
-    signup(){
-        const user:User = {
+    signup() {
+        const user: User = {
             email: this.signUpInfoForm.controls.email.value || "",
             firstName: this.signUpInfoForm.controls.firstName.value || "",
-            lastName:this.signUpInfoForm.controls.lastName.value || "",
-            phoneNumber:this.signUpInfoForm.controls.email.value || "",
-            type:this.patientSignUp?"patient":"clinician"
+            lastName: this.signUpInfoForm.controls.lastName.value || "",
+            phoneNumber: this.signUpInfoForm.controls.email.value || "",
+            type: this.patientSignUp ? "patient" : "clinician"
         }
         this.authService.signUp(user);
         console.log("here")
@@ -89,12 +89,22 @@ export class SignupComponent {
         this.isSignUpScreenVisible = false;
         this.isForgotPasswordScreenVisible = false;
 
-        if(this.patientSignUp){
+        if (this.patientSignUp) {
             this.signup();
         }
-        else{
+        else {
             this.isVerificationScreenVisible = true;
             this.emitStateChange();
         }
+    }
+
+    navigateToPrivacyPolicy() {
+        const url = this.router.serializeUrl(this.router.createUrlTree([`${APP_ROUTES.webpage.privacy}`]));
+        window.open(url, '_blank');
+    }
+
+    navigateToTermsOfService() {
+        const url = this.router.serializeUrl(this.router.createUrlTree([`${APP_ROUTES.webpage.termsOfService}`]));
+        window.open(url, '_blank');
     }
 }
