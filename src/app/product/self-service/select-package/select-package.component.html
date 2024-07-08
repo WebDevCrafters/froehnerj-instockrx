@@ -14,7 +14,7 @@
       </p>
       <p class="cost">${{ package.cost }}</p>
       <p class="desc">
-       ${{package.cost/package.searches}} per successfull search. 
+       ${{(package.cost/package.searches).toFixed(2)}} per successfull search. 
        <br>
        {{ package.description }}
       </p>
