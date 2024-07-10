@@ -1,13 +1,13 @@
 <form class="form_container" (submit)="onSucces()">
   <div class="log_option_container">
-    <div class="title">Log in using:</div>
+    <div class="title">Welcome Back!</div>
     <div class="option_container">
       <div
         class="email_section"
         (click)="markEmailOptionAsSelected()"
         [ngClass]="{ active: isEmailLoginInOptionSelected }"
       >
-        Email
+        Email Address
       </div>
       <div
         class="number_section"
@@ -23,7 +23,7 @@
     <app-input
       [control]="signInInfoForm.controls.email"
       id="email"
-      label="Email"
+      label="Email Address:"
       [type]="'email'"
       [shape]="'flat'"
     />
@@ -44,7 +44,7 @@
     <app-input
       [control]="signInInfoForm.controls.password"
       id="password"
-      label="Password"
+      label="Password:"
       [type]="'password'"
       [shape]="'flat'"
     />
@@ -52,7 +52,7 @@
   <div class="button_container">
     <app-button
       [shape]="'rounded'"
-      [title]="'Sign In'"
+      [title]="'Login'"
       [type]="'small_primary'"
       formButtonType="submit"
     ></app-button>
