@@ -60,14 +60,14 @@ export class HomeComponent {
 
     public stepsArray: StepsType[] = [
         {
-            highlightedText: 'Sign up online',
-            normalText: 'and enter your information.',
+            highlightedText: 'Sign up',
+            normalText: '& Submit: Register and provide your prescription details.',
         },
         {
-            normalText: 'We find your script at a pharmacy in your area.',
+            normalText: 'We Search: Our team finds your medication at nearby pharmacies.',
         },
         {
-            normalText: 'Send your doctor the pharmacy info and pick up your script!',
+            normalText: 'Get Results: Receive timely updates. If we can\'t find it, your search is free or credited for future use.',
         }
     ]
 
