@@ -1,17 +1,7 @@
 <div class="main_container">
-  <app-section-banner
-    [title]="'About Us'"
-    [subHeading]="
-      'At InStockRx, We  believe that everyone deserves timely access to the medications they need.'
-    "
-  />
-
   <section id="about_ceo">
-    <!-- <div class="heading">We're a small team on a big mission:</div> -->
     <div class="sub_heading">
-      <span> THE </span>
-      FUTURE OF PHARMACY
-      <span> AND DISTRIBUTION </span>
+      <span> Our Team </span>
     </div>
     <div class="card_container">
       @for (member of team; track $index) {
@@ -69,6 +59,6 @@
 
   <app-section-banner
     [title]="'Stop searching for your medications today'"
-    [primaryBtnText]="'Find my meds'"
+    [primaryBtnText]="'Find My Meds'"
   />
 </div>

@@ -4,6 +4,11 @@
       <ul>
         <h1 class="header">General</h1>
         <li>
+          <a [routerLink]="APP_ROUTES.webpage._" routerLinkActive="active-link" [routerLinkActiveOptions]="{exact: true}"
+            >Home
+          </a>
+        </li>
+        <li>
           <a [routerLink]="APP_ROUTES.webpage.pricing" routerLinkActive="active-link"
             >Pricing
           </a>
@@ -52,10 +57,10 @@
       <div class="info_container">
         <div class="heading">
           {{
-            "Questions? Text (617) 631-8894 or email support@insitohealth.com"
+            "Questions? Text (901) 609-8315 or email info@instockrx.com"
           }}
         </div>
-        <div class="sub_heading">{{ "© 2024 insito health" }}</div>
+        <div class="sub_heading">{{ "© 2024 InStockRx" }}</div>
       </div>
       <div class="social_media_icons">
         <img src="assets/images/svg/twitter-icon.svg" alt="" />

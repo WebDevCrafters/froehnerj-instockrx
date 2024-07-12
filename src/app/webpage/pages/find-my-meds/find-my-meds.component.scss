@@ -10,7 +10,17 @@
     background-color: $globalWhiteColor;
 
     .logo_and_name_container {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
         height: max-content;
+
+        .back_icon {
+            img {
+                height: 30px;
+            }
+        }
+
         a {
             display: flex;
             align-items: center;

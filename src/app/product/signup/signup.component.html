@@ -3,21 +3,21 @@
     <app-input
       [control]="signUpInfoForm.controls.firstName"
       id="firstName"
-      label="First Name"
+      label="First Name:"
       [type]="'text'"
       [shape]="'flat'"
     />
     <app-input
       [control]="signUpInfoForm.controls.lastName"
       id="lastName"
-      label="Last Name"
+      label="Last Name:"
       [type]="'text'"
       [shape]="'flat'"
     />
     <app-input
       [control]="signUpInfoForm.controls.email"
       id="email"
-      label="Email"
+      label="Email Address:"
       [type]="'email'"
       [shape]="'flat'"
     />
@@ -28,7 +28,7 @@
       <app-input
         [control]="signUpInfoForm.controls.phoneNumber"
         id="phoneNumber"
-        label="Phone number"
+        label="Phone Number:"
         [type]="'text'"
         [shape]="'flat'"
       />
@@ -36,7 +36,7 @@
     <app-input
       [control]="signUpInfoForm.controls.password"
       id="password"
-      label="Password"
+      label="Password:"
       [type]="'password'"
       [shape]="'flat'"
     />
@@ -44,7 +44,7 @@
   <div class="button_container">
     <app-button
       [shape]="'rounded'"
-      [title]="'Create account'"
+      [title]="'Sign Up'"
       [type]="'small_primary'"
     ></app-button>
   </div>
@@ -59,7 +59,7 @@
     </span>
     @if(patientSignUp && isSignUpScreenVisible) {
     <div class="patient_footer">
-      You also agree to recieve SMS messages from insito health regarding search
+      You also agree to recieve SMS messages from InStockRx health regarding search
       status updates & marketing. Reply STOP to opt out, HELP for assistance.
       Standard message & data rates may apply. These texts are non-recurring.
     </div>

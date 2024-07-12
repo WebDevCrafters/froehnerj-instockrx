@@ -22,6 +22,15 @@
     <ul class="route_list">
       <li>
         <a
+          [routerLink]="APP_ROUTES.webpage._"
+          routerLinkActive="active-link"
+          [routerLinkActiveOptions]="{exact: true}"
+          (click)="closeMenu()"
+          >Home</a
+        >
+      </li>
+      <li>
+        <a
           [routerLink]="APP_ROUTES.webpage.pricing"
           routerLinkActive="active-link"
           (click)="closeMenu()"
@@ -62,7 +71,7 @@
       </li>
       <div class="button_container">
         <app-button
-          [title]="'Find my meds'"
+          [title]="'Find My Meds'"
           [type]="'small_primary'"
           (clickEvent)="openFindMyMeds($event)"
         ></app-button>
