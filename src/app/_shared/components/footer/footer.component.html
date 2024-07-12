@@ -4,6 +4,11 @@
       <ul>
         <h1 class="header">General</h1>
         <li>
+          <a [routerLink]="APP_ROUTES.webpage._" routerLinkActive="active-link" [routerLinkActiveOptions]="{exact: true}"
+            >Home
+          </a>
+        </li>
+        <li>
           <a [routerLink]="APP_ROUTES.webpage.pricing" routerLinkActive="active-link"
             >Pricing
           </a>
