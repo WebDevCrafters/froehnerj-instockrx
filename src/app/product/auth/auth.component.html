@@ -1,8 +1,11 @@
 <div class="main_container">
   <div class="box_container">
     <div class="scroll_container">
+      <div class="home_icon_container" (click)="gotoHomePage()">
+        <img src="assets/images/svg/home-icon.svg" alt="Home" class="home_icon" />
+      </div>
       <div class="header">
-        <div class="brand">
+        <div class="brand" (click)="gotoHomePage()">
           <img src="assets/images/png/pill-logo.png" alt="" />
           <div class="brand_name">
             <div class="heading">FindMyMeds</div>

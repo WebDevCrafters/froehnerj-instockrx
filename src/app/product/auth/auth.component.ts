@@ -116,4 +116,11 @@ export class AuthComponent implements OnInit {
         this.authService.signIn(user);
         this.router.navigate([`${APP_ROUTES.product.app}/${APP_ROUTES.product.dashboard}`], { replaceUrl: true })
     }
+
+    gotoHomePage(){
+        this.router.navigate(
+            [`${APP_ROUTES.webpage._}/${APP_ROUTES.webpage._}`],
+            { replaceUrl: true }
+          );
+    }
 }
