@@ -19,6 +19,7 @@ export class CustomSearchDropdownComponent implements OnInit {
     isOpen = false;
     searchTerm = '';
     items: Country[] = [
+        { name: 'USA', code: '+1' },
         { name: 'Afghanistan', code: '+93' },
         { name: 'Albania', code: '+355' },
         { name: 'Algeria', code: '+213' },
@@ -48,7 +49,6 @@ export class CustomSearchDropdownComponent implements OnInit {
         { name: 'Burundi', code: '+257' },
         { name: 'Cambodia', code: '+855' },
         { name: 'Cameroon', code: '+237' },
-        { name: 'Canada', code: '+1' },
         { name: 'Cape Verde', code: '+238' },
         { name: 'Central African Republic', code: '+236' },
         { name: 'Chad', code: '+235' },

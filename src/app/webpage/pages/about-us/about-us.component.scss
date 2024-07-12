@@ -23,14 +23,10 @@
         .sub_heading {
             font-size: 50px;
             font-weight: 700;
-            color: $brandSecondaryColor;
+            color: $globalBlackColor;
             text-align: center;
             letter-spacing: -2.8px;
             width: 90%;
-
-            span {
-                color: $brandPrimaryColor;
-            }
         }
 
         .card_container {
