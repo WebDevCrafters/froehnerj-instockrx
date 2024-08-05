@@ -39,9 +39,15 @@ export class NavbarComponent {
     }
 
     openSignUpPage(event: MouseEvent) {
-        this.router.navigate(
-            [`${APP_ROUTES.product.app}/${APP_ROUTES.product.auth}`],
-            { queryParams: { patientSignUp: JSON.stringify(false) } }
-        );
+        // this.router.navigate(
+        //     [`${APP_ROUTES.product.app}/${APP_ROUTES.product.auth}`],
+        //     { queryParams: { patientSignUp: JSON.stringify(false) } }
+        // );
+        this.router.navigate([
+            APP_ROUTES.product.app,
+            APP_ROUTES.product.auth,
+            APP_ROUTES.product.clinician,
+            APP_ROUTES.product.signIn
+        ]);
     }
 }

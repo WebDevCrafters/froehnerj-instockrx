@@ -6,28 +6,24 @@ import { CommonModule } from '@angular/common';
 import { CustomSearchDropdownComponent } from './custom-search-dropdown/custom-search-dropdown.component';
 import { AuthService } from '../../_core/services/auth.service';
 import { User } from '../../_shared/dataTypes/User';
-import { ActivatedRoute, Router } from '@angular/router';
+import { ActivatedRoute, Router, RouterOutlet } from '@angular/router';
 import APP_ROUTES from '../../_shared/constants/routes';
-import { SigninComponent } from '../signin/signin.component';
-import { SignupComponent } from '../signup/signup.component';
 import { ForgotPasswordComponent } from '../forgot-password/forgot-password.component';
 import { VerificationCodeComponent } from '../verification-code/verification-code.component';
 import { emailValidator, requiredValidator } from '../../_shared/utils/Validators';
+import { SignupComponent } from './signup/signup.component';
+import { SigninComponent } from './signin/signin.component';
 
 @Component({
     selector: 'app-auth',
     standalone: true,
-    imports: [InputComponent, ButtonComponent, CommonModule, CustomSearchDropdownComponent, SigninComponent, SignupComponent, ForgotPasswordComponent, VerificationCodeComponent],
+    imports: [InputComponent, ButtonComponent, CommonModule, CustomSearchDropdownComponent, SigninComponent, SignupComponent, ForgotPasswordComponent, VerificationCodeComponent, RouterOutlet],
     templateUrl: './auth.component.html',
-    styleUrl: './auth.component.scss'
+    styleUrls: ['./auth.component.scss']
 })
 export class AuthComponent implements OnInit {
-    public isSignUpScreenVisible: boolean = true;
-    public isSignInScreenVisible: boolean = false;
-    public isForgotPasswordScreenVisible: boolean = false;
-    public isEmailLoginInOptionSelected: boolean = true;
-    public isVerificationScreenVisible: boolean = false;
-    public patientSignUp: boolean = true;
+    isPatientRoute: boolean = false;
+    isSignUpPage: boolean = false;
 
     constructor(
         private authService: AuthService,
@@ -36,20 +32,12 @@ export class AuthComponent implements OnInit {
     ) { }
 
     ngOnInit(): void {
-        this.route.queryParams.subscribe((params) => {
-            const serializedValue = params['patientSignUp'];
-            if (serializedValue) {
-                this.patientSignUp = JSON.parse(serializedValue);
+        this.route.firstChild?.url.subscribe(url => {
+            if (url.length > 0) {
+                this.isPatientRoute = url[0].path === 'patient';
+                this.isSignUpPage = url[0].path === 'signup';
             }
         });
-    }
-
-    public openPatientSignUpScreen() {
-        this.isSignInScreenVisible = false;
-        this.isSignUpScreenVisible = true;
-        this.isForgotPasswordScreenVisible = false;
-        this.isVerificationScreenVisible = false;
-        this.patientSignUp = true;
     }
 
     public signInInfoForm = new FormGroup({
@@ -66,26 +54,26 @@ export class AuthComponent implements OnInit {
     });
 
     public signUpInfoForm = new FormGroup({
-        firstName: new FormControl('',[
+        firstName: new FormControl('', [
             requiredValidator("First name cannot be empty.")
         ]),
-        lastName: new FormControl('',[
+        lastName: new FormControl('', [
             requiredValidator("Last name cannot be empty.")
         ]),
-        email: new FormControl('',[
+        email: new FormControl('', [
             requiredValidator("Email cannot be empty."),
             emailValidator("Invalid email format.")
         ]),
-        phoneNumber: new FormControl('',[
+        phoneNumber: new FormControl('', [
             requiredValidator("Phone number cannot be empty.")
         ]),
-        password: new FormControl('',[
+        password: new FormControl('', [
             requiredValidator("Password cannot be empty.")
         ]),
     });
 
     public verificationCodeInfo = new FormGroup({
-      email: new FormControl(""),
+        email: new FormControl(""),
         code: new FormControl('',
             requiredValidator('Verification code cannot be empty.')),
     });
@@ -96,14 +84,6 @@ export class AuthComponent implements OnInit {
         phoneNumber: new FormControl('',
             requiredValidator('Phone number cannot be empty.')),
     });
-
-    public updateStates(state: { isSignUpScreenVisible: boolean, isSignInScreenVisible: boolean, isForgotPasswordScreenVisible: boolean, isEmailLoginInOptionSelected: boolean, patientSignUp: boolean }) {
-        this.isSignUpScreenVisible = state.isSignUpScreenVisible;
-        this.isSignInScreenVisible = state.isSignInScreenVisible;
-        this.isForgotPasswordScreenVisible = state.isForgotPasswordScreenVisible;
-        this.isEmailLoginInOptionSelected = state.isEmailLoginInOptionSelected;
-        this.patientSignUp = state.patientSignUp;
-    }
 
     public signin() {
         const user: User = {
@@ -117,10 +97,16 @@ export class AuthComponent implements OnInit {
         this.router.navigate([`${APP_ROUTES.product.app}/${APP_ROUTES.product.dashboard}`], { replaceUrl: true })
     }
 
-    gotoHomePage(){
+    gotoHomePage() {
         this.router.navigate(
             [`${APP_ROUTES.webpage._}/${APP_ROUTES.webpage._}`],
             { replaceUrl: true }
-          );
+        );
+    }
+
+    navigateToPatientSignUp() {
+        this.isPatientRoute = true;
+        this.isSignUpPage = true;
+        this.router.navigate([APP_ROUTES.product.app, APP_ROUTES.product.auth, APP_ROUTES.product.patient, APP_ROUTES.product.signUp]);
     }
 }

@@ -2,7 +2,11 @@
   <div class="box_container">
     <div class="scroll_container">
       <div class="home_icon_container" (click)="gotoHomePage()">
-        <img src="assets/images/svg/home-icon.svg" alt="Home" class="home_icon" />
+        <img
+          src="assets/images/svg/home-icon.svg"
+          alt="Home"
+          class="home_icon"
+        />
       </div>
       <div class="header">
         <div class="brand" (click)="gotoHomePage()">
@@ -15,69 +19,27 @@
       </div>
       <div class="title_container">
         <div class="title">
-          {{ patientSignUp ? "Patient portal" : "Clinician portal" }}
+          {{ isPatientRoute ? "Patient portal" : "Clinician portal" }}
         </div>
-        @if(patientSignUp && isSignUpScreenVisible) {
-        <div class="patient_sub_heading">Never Search for Your Meds Again</div>
-        <div class="footer">
+        <div *ngIf="isPatientRoute && isSignUpPage" class="patient_sub_heading">
+          Never Search for Your Meds Again
+        </div>
+        <div class="footer" *ngIf="isPatientRoute && isSignUpPage">
           <div class="text">Let us find your meds for you!</div>
           <div class="text">We just need some info to start</div>
         </div>
-        } @else if(!patientSignUp) {
-        <div class="sub_heading">
+        <div *ngIf="!isPatientRoute" class="sub_heading">
           If you are a patient searching for meds, please
         </div>
-        <div class="signup_container" (click)="openPatientSignUpScreen()">
+        <div
+          *ngIf="!isPatientRoute"
+          class="signup_container"
+          (click)="navigateToPatientSignUp()"
+        >
           signup here instead.
         </div>
-        }
       </div>
-      @if(isSignInScreenVisible) {
-      <app-signin
-        [isSignInScreenVisible]="isSignInScreenVisible"
-        [isSignUpScreenVisible]="isSignUpScreenVisible"
-        [isEmailLoginInOptionSelected]="isEmailLoginInOptionSelected"
-        [isForgotPasswordScreenVisible]="isForgotPasswordScreenVisible"
-        [isVerificationScreenVisible]="isVerificationScreenVisible"
-        [patientSignUp]="patientSignUp"
-        (stateChange)="updateStates($event)"
-        [signInInfoForm]="signInInfoForm"
-      ></app-signin>
-      } @else if(isSignUpScreenVisible) {
-      <app-signup
-        [isSignInScreenVisible]="isSignInScreenVisible"
-        [isSignUpScreenVisible]="isSignUpScreenVisible"
-        [isEmailLoginInOptionSelected]="isEmailLoginInOptionSelected"
-        [isForgotPasswordScreenVisible]="isForgotPasswordScreenVisible"
-        [isVerificationScreenVisible]="isVerificationScreenVisible"
-        (stateChange)="updateStates($event)"
-        [patientSignUp]="patientSignUp"
-        [signUpInfoForm]="signUpInfoForm"
-      ></app-signup>
-      } @else if(isForgotPasswordScreenVisible){
-      <app-forgot-password
-        [isSignInScreenVisible]="isSignInScreenVisible"
-        [isSignUpScreenVisible]="isSignUpScreenVisible"
-        [isEmailLoginInOptionSelected]="isEmailLoginInOptionSelected"
-        [isForgotPasswordScreenVisible]="isForgotPasswordScreenVisible"
-        [isVerificationScreenVisible]="isVerificationScreenVisible"
-        [patientSignUp]="patientSignUp"
-        (stateChange)="updateStates($event)"
-        [forgotPasswordInfo]="forgotPasswordInfo"
-      ></app-forgot-password>
-      } @else {
-      <app-verification-code
-        [isSignInScreenVisible]="isSignInScreenVisible"
-        [isSignUpScreenVisible]="isSignUpScreenVisible"
-        [isEmailLoginInOptionSelected]="isEmailLoginInOptionSelected"
-        [isForgotPasswordScreenVisible]="isForgotPasswordScreenVisible"
-        [isVerificationScreenVisible]="isVerificationScreenVisible"
-        [patientSignUp]="patientSignUp"
-        (stateChange)="updateStates($event)"
-        [verificationCodeInfo]="verificationCodeInfo"
-        [userEmail]="signUpInfoForm.controls.email"
-      ></app-verification-code>
-      }
+      <router-outlet></router-outlet>
     </div>
   </div>
 </div>
