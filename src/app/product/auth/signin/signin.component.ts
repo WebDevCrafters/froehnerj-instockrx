@@ -8,7 +8,7 @@ import { InputComponent } from '../../../_shared/components/input/input.componen
 import APP_ROUTES from '../../../_shared/constants/routes';
 import { User } from '../../../_shared/dataTypes/User';
 import { markAllAsDirty } from '../../../_shared/utils/formUtils';
-import { CustomSearchDropdownComponent } from '../custom-search-dropdown/custom-search-dropdown.component';
+import { CustomSearchDropdownComponent } from '../../../_shared/components/custom-search-dropdown/custom-search-dropdown.component';
 
 @Component({
     selector: 'app-signin',
@@ -49,7 +49,8 @@ export class SigninComponent implements OnInit {
     }
 
     public openForgotPasswordScreen() {
-        // Implementation for opening forgot password screen
+        const targetRoute = this.isPatientRoute ? APP_ROUTES.product.patient : APP_ROUTES.product.clinician;
+        this.router.navigate([APP_ROUTES.product.app, APP_ROUTES.product.auth, targetRoute, APP_ROUTES.product.forgotPassword]);
     }
 
     public markEmailOptionAsSelected() {

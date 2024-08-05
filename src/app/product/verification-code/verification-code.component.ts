@@ -6,7 +6,7 @@ import { AuthService } from '../../_core/services/auth.service';
 import { Router } from '@angular/router';
 import APP_ROUTES from '../../_shared/constants/routes';
 import { User } from '../../_shared/dataTypes/User';
-import { CustomSearchDropdownComponent } from '../auth/custom-search-dropdown/custom-search-dropdown.component';
+import { CustomSearchDropdownComponent } from '../../_shared/components/custom-search-dropdown/custom-search-dropdown.component';
 import { CommonModule } from '@angular/common';
 import { emailValidator } from '../../_shared/utils/Validators';
 import { markAllAsDirty } from '../../_shared/utils/formUtils';

@@ -3,16 +3,16 @@ import { FormControl, FormGroup } from '@angular/forms';
 import { InputComponent } from '../../_shared/components/input/input.component';
 import { ButtonComponent } from '../../_shared/components/button/button.component';
 import { CommonModule } from '@angular/common';
-import { CustomSearchDropdownComponent } from './custom-search-dropdown/custom-search-dropdown.component';
+import { CustomSearchDropdownComponent } from '../../_shared/components/custom-search-dropdown/custom-search-dropdown.component';
 import { AuthService } from '../../_core/services/auth.service';
 import { User } from '../../_shared/dataTypes/User';
 import { ActivatedRoute, Router, RouterOutlet } from '@angular/router';
 import APP_ROUTES from '../../_shared/constants/routes';
-import { ForgotPasswordComponent } from '../forgot-password/forgot-password.component';
 import { VerificationCodeComponent } from '../verification-code/verification-code.component';
 import { emailValidator, requiredValidator } from '../../_shared/utils/Validators';
 import { SignupComponent } from './signup/signup.component';
 import { SigninComponent } from './signin/signin.component';
+import { ForgotPasswordComponent } from './forgot-password/forgot-password.component';
 
 @Component({
     selector: 'app-auth',

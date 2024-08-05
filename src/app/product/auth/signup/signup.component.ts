@@ -8,7 +8,7 @@ import { InputComponent } from '../../../_shared/components/input/input.componen
 import APP_ROUTES from '../../../_shared/constants/routes';
 import { User } from '../../../_shared/dataTypes/User';
 import { markAllAsDirty } from '../../../_shared/utils/formUtils';
-import { CustomSearchDropdownComponent } from '../custom-search-dropdown/custom-search-dropdown.component';
+import { CustomSearchDropdownComponent } from '../../../_shared/components/custom-search-dropdown/custom-search-dropdown.component';
 
 @Component({
     selector: 'app-signup',

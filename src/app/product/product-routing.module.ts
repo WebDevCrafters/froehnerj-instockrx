@@ -12,6 +12,7 @@ import { PatientComponent } from './auth/patient/patient.component';
 import { ClinicianComponent } from './auth/clinician/clinician.component';
 import { SigninComponent } from './auth/signin/signin.component';
 import { SignupComponent } from './auth/signup/signup.component';
+import { ForgotPasswordComponent } from './auth/forgot-password/forgot-password.component';
 
 const routes: Routes = [
     {
@@ -45,6 +46,10 @@ const routes: Routes = [
                                 path: APP_ROUTES.product.signIn,
                                 component: SigninComponent,
                             },
+                            {
+                                path: APP_ROUTES.product.forgotPassword,
+                                component: ForgotPasswordComponent,
+                            },
                         ]
                     },
                     {
@@ -58,6 +63,10 @@ const routes: Routes = [
                             {
                                 path: APP_ROUTES.product.signIn,
                                 component: SigninComponent,
+                            },
+                            {
+                                path: APP_ROUTES.product.forgotPassword,
+                                component: ForgotPasswordComponent,
                             },
                         ]
                     },
