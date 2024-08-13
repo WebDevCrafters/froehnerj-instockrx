@@ -1,51 +1,179 @@
 <div class="main_container">
   <div class="header">Clusters of patients</div>
-  <div class="content">
-    <table>
+  <div class="table-container">
+    <table class="responsive-table">
       <thead>
         <tr>
-          <th>Cluster Info</th>
-          <th class="status_th">
-            <div class="title_img_container">
-              Status
-              <img
-                (click)="toggleDropdown()"
-                class="dropdown-toggle"
-                src="assets/images/svg/filter-icon.svg"
-                alt=""
-              />
-            </div>
-            <div
-              *ngIf="dropdownOpen"
-              class="dropdown-content"
-              (clickOutside)="closeDropdown()"
-            >
-              <label class="dropdown-option header_option">
-                ALL
-                <input
-                  type="checkbox"
-                  [(ngModel)]="allSelected"
-                  (change)="toggleAllOptions()"
-                  class="custom-checkbox"
-                />
-              </label>
-              <label *ngFor="let option of options" class="dropdown-option">
-                {{ option.label }}
-                <input
-                  type="checkbox"
-                  [(ngModel)]="option.checked"
-                  (change)="updateAllSelected()"
-                  class="custom-checkbox"
-                />
-              </label>
-            </div>
-          </th>
-          <th>Medications</th>
-          <th>Latest Comment</th>
+          <th>Medication Name</th>
+          <th>Alternative</th>
+          <th>Dose</th>
+          <th>Availability</th>
+          <th>User Details</th>
         </tr>
       </thead>
       <tbody>
-        <!-- Table rows go here -->
+        <tr>
+          <td>Data 1</td>
+          <td>Data 2</td>
+          <td>Data 3</td>
+          <td>Data 4</td>
+          <td>
+            <div class="userDetails">User Details</div>
+          </td>
+        </tr>
+        <tr>
+          <td>Data 1</td>
+          <td>Data 2</td>
+          <td>Data 3</td>
+          <td>Data 4</td>
+          <td>
+            <div class="userDetails">User Details</div>
+          </td>
+        </tr>
+        <tr>
+          <td>Data 1</td>
+          <td>Data 2</td>
+          <td>Data 3</td>
+          <td>Data 4</td>
+          <td>
+            <div class="userDetails">User Details</div>
+          </td>
+        </tr>
+        <tr>
+          <td>Data 1</td>
+          <td>Data 2</td>
+          <td>Data 3</td>
+          <td>Data 4</td>
+          <td>
+            <div class="userDetails">User Details</div>
+          </td>
+        </tr>
+        <tr>
+          <td>Data 1</td>
+          <td>Data 2</td>
+          <td>Data 3</td>
+          <td>Data 4</td>
+          <td>
+            <div class="userDetails">User Details</div>
+          </td>
+        </tr>
+        <tr>
+          <td>Data 1</td>
+          <td>Data 2</td>
+          <td>Data 3</td>
+          <td>Data 4</td>
+          <td>
+            <div class="userDetails">User Details</div>
+          </td>
+        </tr>
+        <tr>
+          <td>Data 1</td>
+          <td>Data 2</td>
+          <td>Data 3</td>
+          <td>Data 4</td>
+          <td>
+            <div class="userDetails">User Details</div>
+          </td>
+        </tr>
+        <tr>
+          <td>Data 1</td>
+          <td>Data 2</td>
+          <td>Data 3</td>
+          <td>Data 4</td>
+          <td>
+            <div class="userDetails">User Details</div>
+          </td>
+        </tr>
+        <tr>
+          <td>Data 1</td>
+          <td>Data 2</td>
+          <td>Data 3</td>
+          <td>Data 4</td>
+          <td>
+            <div class="userDetails">User Details</div>
+          </td>
+        </tr>
+        <tr>
+          <td>Data 1</td>
+          <td>Data 2</td>
+          <td>Data 3</td>
+          <td>Data 4</td>
+          <td>
+            <div class="userDetails">User Details</div>
+          </td>
+        </tr>
+        <tr>
+          <td>Data 1</td>
+          <td>Data 2</td>
+          <td>Data 3</td>
+          <td>Data 4</td>
+          <td>
+            <div class="userDetails">User Details</div>
+          </td>
+        </tr>
+        <tr>
+          <td>Data 1</td>
+          <td>Data 2</td>
+          <td>Data 3</td>
+          <td>Data 4</td>
+          <td>
+            <div class="userDetails">User Details</div>
+          </td>
+        </tr>
+        <tr>
+          <td>Data 1</td>
+          <td>Data 2</td>
+          <td>Data 3</td>
+          <td>Data 4</td>
+          <td>
+            <div class="userDetails">User Details</div>
+          </td>
+        </tr>
+        <tr>
+          <td>Data 1</td>
+          <td>Data 2</td>
+          <td>Data 3</td>
+          <td>Data 4</td>
+          <td>
+            <div class="userDetails">User Details</div>
+          </td>
+        </tr>
+        <tr>
+          <td>Data 1</td>
+          <td>Data 2</td>
+          <td>Data 3</td>
+          <td>Data 4</td>
+          <td>
+            <div class="userDetails">User Details</div>
+          </td>
+        </tr>
+        <tr>
+          <td>Data 1</td>
+          <td>Data 2</td>
+          <td>Data 3</td>
+          <td>Data 4</td>
+          <td>
+            <div class="userDetails">User Details</div>
+          </td>
+        </tr>
+        <tr>
+          <td>Data 1</td>
+          <td>Data 2</td>
+          <td>Data 3</td>
+          <td>Data 4</td>
+          <td>
+            <div class="userDetails">User Details</div>
+          </td>
+        </tr>
+        <tr>
+          <td>Data 1</td>
+          <td>Data 2</td>
+          <td>Data 3</td>
+          <td>Data 4</td>
+          <td>
+            <div class="userDetails">User Details</div>
+          </td>
+        </tr>
       </tbody>
     </table>
   </div>

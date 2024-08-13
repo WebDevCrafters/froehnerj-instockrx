@@ -1,136 +1,95 @@
 @import "variables";
 
+$table-bg-color: #f9f9f9;
+$table-header-bg-color: #007bff;
+$table-header-text-color: #fff;
+$table-border-color: #ddd;
+$table-row-hover-color: #f1f1f1;
+$button-bg-color: #28a745;
+$button-text-color: #fff;
+$button-hover-bg-color: #218838;
+
 .main_container {
     height: calc(100vh - 3.5rem);
     padding: 2rem 4rem;
 
     .header {
+        height: 20%;
         font-size: 28px;
     }
 
-    .content {
+    .table-container {
         width: 100%;
-        margin: 75px 0;
         overflow-x: auto;
+        margin-bottom: 20px;
+        height: 80%;
+        max-height: 80%;
+        overflow-y: auto;
 
-        table {
-            height: 500px;
-            min-width: 800px;
-            table-layout: fixed;
+        .responsive-table {
+            width: 100%;
+            border-collapse: collapse;
+            min-width: 600px;
 
-            td {
-                font-size: 16px;
-                font-weight: 400;
-                padding: 12px;
+            thead {
+                background-color: $table-header-bg-color;
+                color: $table-header-text-color;
+
+                th {
+                    padding: 12px 15px;
+                    text-align: left;
+                    font-weight: bold;
+                    border-bottom: 2px solid $table-border-color;
+                    white-space: nowrap;
+                }
             }
 
-            .title_img_container {
-                display: flex;
-                align-items: center;
-                justify-content: center;
-                gap: 10px;
-            }
-
-            .dropdown-toggle {
-                background: none;
-                border: none;
-                cursor: pointer;
-                font-size: 16px;
-            }
-
-            .dropdown-content {
-                display: none;
-                position: absolute;
-                background-color: #f9f9f9;
-                box-shadow: 0px 8px 16px 0px rgba(0, 0, 0, 0.2);
-                border-radius: 16px;
-                z-index: 1;
-                width: 300px;
-                left: 90px;
-                top: 30px;
-
-                .dropdown-option {
-                    display: flex;
-                    justify-content: space-between;
-                    align-items: center;
-                    padding: 12px 20px;
-                    cursor: pointer;
-                    font-weight: 400;
-
-                    &.header_option {
-                        border-bottom: 1px solid $normalGrey;
-                        border-top-left-radius: 16px;
-                        border-top-right-radius: 16px;
-                    }
-
-                    &:nth-child(2) {
-                        color: $brandPrimaryColor;
-                    }
-
-                    &:nth-child(3) {
-                        color: #7e4631;
-                    }
-
-                    &:nth-child(4) {
-                        color: #fdae39;
-                    }
-
-                    &:last-child {
-                        border-bottom-left-radius: 16px;
-                        border-bottom-right-radius: 16px;
-                        color: #4caf50;
-                    }
-
+            tbody {
+                tr {
                     &:hover {
-                        background-color: $normalGrey;
+                        background-color: $table-row-hover-color;
                     }
-                }
 
-                .custom-checkbox {
-                    appearance: none;
-                    width: 20px;
-                    height: 20px;
-                    border: 2px solid #000;
-                    border-radius: 3px;
-                    position: relative;
-                    cursor: pointer;
-                    outline: none;
-                }
+                    td {
+                        padding: 12px 15px;
+                        border-bottom: 1px solid $table-border-color;
+                        white-space: nowrap;
 
-                .custom-checkbox:checked {
-                    background-color: $brandPrimaryColor;
-                    border-color: $brandPrimaryColor;
-                }
+                        &:first-child {
+                            border-left: 2px solid $table-border-color;
+                        }
 
-                .custom-checkbox:checked::before {
-                    content: "";
-                    position: absolute;
-                    top: 50%;
-                    left: 50%;
-                    width: 10px;
-                    height: 5px;
-                    border: 2px solid #fff;
-                    border-top: none;
-                    border-right: none;
-                    transform: translate(-50%, -50%) rotate(-45deg);
-                    z-index: 5;
-                }
-            }
+                        &:last-child {
+                            border-right: 2px solid $table-border-color;
+                        }
 
-            .status_th {
-                position: relative;
-                z-index: 1;
+                        .userDetails {
+                            padding: 8px 16px;
+                            cursor: pointer;
+                            background-color: $button-bg-color;
+                            color: $button-text-color;
+                            border-radius: 5px;
+                            display: inline-block;
+                            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+                            text-align: center;
+                            transition:
+                                background-color 0.3s ease,
+                                transform 0.2s ease;
+                            font-size: 14px;
 
-                & .dropdown-content {
-                    display: block;
+                            &:hover {
+                                background-color: $button-hover-bg-color;
+                                transform: translateY(-2px);
+                            }
+
+                            &:active {
+                                background-color: darken($button-bg-color, 5%);
+                                transform: translateY(0);
+                            }
+                        }
+                    }
                 }
             }
         }
-    }
-}
-
-@media screen and (max-width: 800px) {
-    .main_container {
-        padding: 2rem 1rem;
     }
 }
