@@ -3,6 +3,15 @@
 .dashboard_container {
     background-color: $offWhiteColor;
     color: $offBlackColor;
+    height: 100vh;
+
+    .header_container {
+        height: 10%;
+        width: 100%;
+    }
+
+    .content_container {
+        height: 90%;
+        width: 100%;
+    }
 }
-
-

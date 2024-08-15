@@ -137,39 +137,6 @@
             flex-direction: column;
         }
     }
-
-    .my_profile {
-        width: 100%;
-        display: flex;
-        gap: 1rem;
-        flex-direction: column;
-
-        .header_container {
-            display: flex;
-            gap: 1.5rem;
-        }
-
-        .edit_icon{
-            cursor: pointer;
-        }
-
-        .info {
-            display: flex;
-            gap: 0.5rem;
-            flex-direction: column;
-        }
-
-        .edit_profile_form{
-            display: flex;
-            gap: 1rem;
-            flex-direction: column;
-
-            .actions{
-                display: flex;
-                gap: 1rem;
-            }
-        }
-    }
 }
 
 .modal_content {
@@ -229,7 +196,7 @@
 }
 
 @media screen and (max-width: 950px) {
-    .dashboard_content{
+    .dashboard_content {
         flex-direction: column;
     }
 }

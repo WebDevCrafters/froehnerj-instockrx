@@ -6,12 +6,20 @@
     justify-content: space-between;
     padding: 0.5rem 1.5rem;
     border-bottom: 1px solid $normalGrey;
-    height: 3.5rem;
+    height: 100%;
 
     .brand {
         display: flex;
         gap: 0.5rem;
         align-items: center;
+
+        .back_icon {
+            cursor: pointer;
+            img {
+                height: 30px;
+            }
+        }
+
         > img {
             height: 3rem;
         }

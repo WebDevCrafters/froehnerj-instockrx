@@ -5,6 +5,7 @@ import { ButtonComponent } from '../button/button.component';
 import { User } from '../../dataTypes/User';
 import { Router } from '@angular/router';
 import APP_ROUTES from '../../constants/routes';
+import { Location } from '@angular/common';
 
 @Component({
     selector: 'app-header',
@@ -14,7 +15,7 @@ import APP_ROUTES from '../../constants/routes';
     styleUrl: './header.component.scss',
 })
 export class HeaderComponent implements OnInit {
-    constructor(private authService: AuthService, private router: Router) { }
+    constructor(private authService: AuthService, private router: Router, private location: Location) { }
 
     modalVisible: boolean = false;
     user: User | null = null;
@@ -61,5 +62,9 @@ export class HeaderComponent implements OnInit {
             APP_ROUTES.product.editPatientsProfile
         ]);
         this.toggleSettings();
+    }
+
+    goBack() {
+        this.location.back();
     }
 }
