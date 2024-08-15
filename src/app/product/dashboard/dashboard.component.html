@@ -1,9 +1,4 @@
 <div class="dashboard_container">
   <app-header />
-  @if (userType==="patient") {
-  <app-patient-dashboard />
-}
-@else {
-    <app-clinician-dashboard/>
-  }
+  <router-outlet></router-outlet>
 </div>

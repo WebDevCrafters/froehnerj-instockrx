@@ -23,6 +23,9 @@ const APP_ROUTES = {
         selfService: 'self-service',
         dashboard: 'dashboard',
         resetPassword: 'reset-password',
+        editPatientsProfile: 'edit-patients-profile',
+        searchInfo: 'search-info',
+        searchStatus: 'search-status',
     },
 };
 

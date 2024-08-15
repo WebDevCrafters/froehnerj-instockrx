@@ -13,6 +13,10 @@ import { ClinicianComponent } from './auth/clinician/clinician.component';
 import { SigninComponent } from './auth/signin/signin.component';
 import { SignupComponent } from './auth/signup/signup.component';
 import { ForgotPasswordComponent } from './auth/forgot-password/forgot-password.component';
+import { PatientDashboardComponent } from './dashboard/patient-dashboard/patient-dashboard.component';
+import { ClinicianDashboardComponent } from './dashboard/clinician-dashboard/clinician-dashboard.component';
+import { SearchInfoComponent } from './dashboard/patient-dashboard/search-info/search-info.component';
+import { EditPatientProfileComponent } from './dashboard/patient-dashboard/edit-patient-profile/edit-patient-profile.component';
 
 const routes: Routes = [
     {
@@ -81,6 +85,36 @@ const routes: Routes = [
                 path: APP_ROUTES.product.dashboard,
                 component: DashboardComponent,
                 canActivate: [authGuard],
+                children: [
+                    {
+                        path: '',
+                        redirectTo: APP_ROUTES.product.patient,
+                        pathMatch: 'full',
+                    },
+                    {
+                        path: APP_ROUTES.product.patient,
+                        component: PatientDashboardComponent,
+                        children: [
+                            {
+                                path: '',
+                                redirectTo: APP_ROUTES.product.searchInfo,
+                                pathMatch: 'full',
+                            },
+                            {
+                                path: APP_ROUTES.product.searchInfo,
+                                component: SearchInfoComponent,
+                            },
+                            {
+                                path: APP_ROUTES.product.editPatientsProfile,
+                                component: EditPatientProfileComponent,
+                            },
+                        ]
+                    },
+                    {
+                        path: APP_ROUTES.product.clinician,
+                        component: ClinicianDashboardComponent,
+                    },
+                ],
             },
             {
                 path: APP_ROUTES.product.resetPassword,
