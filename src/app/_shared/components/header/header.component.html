@@ -7,49 +7,50 @@
       <div class="sub_heading">by InStockRx</div>
     </div>
   </div>
-  <div class="settings_icon_container" (click)="toggleSettings()">
+  <div class="icon_container">
     <img src="assets/images/svg/settings-icon.svg" alt="" />
+    <img
+      class="profile_icon"
+      src="assets/images/svg/profile-icon.svg"
+      alt=""
+      (click)="toggleSettings()"
+    />
   </div>
 </div>
 
-<app-modal
-  [isVisible]="modalVisible"
-  bg="transparent"
-  (closeModal)="toggleSettings()"
->
+<app-modal [isVisible]="modalVisible" bg="transparent" (closeModal)="toggleSettings()">
   <div class="settings_container">
-    <p>Account</p>
-    <div class="user_info">
-      <p>
-        {{ user?.email }}
-        <br />
-        {{ user?.type }}
-      </p>
+    <div class="profile_section">
+      <img
+        class="profile_icon"
+        src="assets/images/svg/profile-icon.svg"
+        alt=""
+      />
+      <div class="user_info">
+        <div class="type">{{ user?.type }}</div>
+        <div class="email">{{ user?.email }}</div>
+      </div>
+    </div>
+    <hr />
+    <div class="option">Search Status</div>
+    <hr />
+    <div class="option" (click)="navigateToEditProfile()">Edit Profile</div>
+    <hr />
+    <div class="option" (click)="requestAccountDeletion()">
+      Request Account Deletion
+    </div>
+    <hr />
+    @if (user?.type!=="clinician") {
+    <div class="option" (click)="resetPassword()">Reset Password</div>
+    <hr />
+    }
+    <div class="sign_out">
       <app-button
         title="Sign out"
         type="small_primary"
         shape="rounded"
         (clickEvent)="signout()"
       />
-    </div>
-    @if (user?.type!=="clinician") {
-    <hr />
-    <div class="reset_pass_container">
-      <div>
-        <app-button
-          title="Reset Password"
-          type="small_primary"
-          shape="rounded"
-          (clickEvent)="resetPassword()"
-        />
-      </div>
-    </div>
-    }
-    <hr />
-    <div class="deletion">
-      <p class="button" (click)="requestAccountDeletion()">
-        Request account deletion
-      </p>
     </div>
   </div>
 </app-modal>

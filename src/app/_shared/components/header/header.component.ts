@@ -7,49 +7,59 @@ import { Router } from '@angular/router';
 import APP_ROUTES from '../../constants/routes';
 
 @Component({
-  selector: 'app-header',
-  standalone: true,
-  imports: [ModalComponent, ButtonComponent],
-  templateUrl: './header.component.html',
-  styleUrl: './header.component.scss',
+    selector: 'app-header',
+    standalone: true,
+    imports: [ModalComponent, ButtonComponent],
+    templateUrl: './header.component.html',
+    styleUrl: './header.component.scss',
 })
 export class HeaderComponent implements OnInit {
-  constructor(private authService: AuthService, private router: Router) {}
+    constructor(private authService: AuthService, private router: Router) { }
 
-  modalVisible: boolean = false;
-  user: User | null = null;
+    modalVisible: boolean = false;
+    user: User | null = null;
 
-  ngOnInit(): void {
-    this.getUserEmail();
-  }
+    ngOnInit(): void {
+        this.getUserEmail();
+    }
 
-  getUserEmail() {
-    const user = this.authService.getUserData();
-    if (!user) return;
-    this.user = user;
-  }
+    getUserEmail() {
+        const user = this.authService.getUserData();
+        if (!user) return;
+        this.user = user;
+    }
 
-  toggleSettings() {
-    this.modalVisible = !this.modalVisible;
-  }
+    toggleSettings() {
+        this.modalVisible = !this.modalVisible;
+    }
 
-  requestAccountDeletion() {
-    const url = 'https://u4acjiu8lv3.typeform.com/to/WDj0hN0I';
-    window.open(url, '_blank');
-  }
+    requestAccountDeletion() {
+        const url = 'https://u4acjiu8lv3.typeform.com/to/WDj0hN0I';
+        window.open(url, '_blank');
+    }
 
-  signout() {
-    this.authService.signOut();
-    this.router.navigate(
-      [`${APP_ROUTES.product.app}/${APP_ROUTES.product.auth}`],
-      { replaceUrl: true }
-    );
-  }
+    signout() {
+        this.authService.signOut();
+        this.router.navigate(
+            [`${APP_ROUTES.product.app}/${APP_ROUTES.product.auth}`],
+            { replaceUrl: true }
+        );
+    }
 
-  resetPassword() {
-    this.router.navigate(
-      [`${APP_ROUTES.product.app}/${APP_ROUTES.product.resetPassword}`],
-      { replaceUrl: true }
-    );
-  }
+    resetPassword() {
+        this.router.navigate(
+            [`${APP_ROUTES.product.app}/${APP_ROUTES.product.resetPassword}`],
+            { replaceUrl: true }
+        );
+    }
+
+    navigateToEditProfile() {
+        this.router.navigate([
+            APP_ROUTES.product.app,
+            APP_ROUTES.product.dashboard,
+            APP_ROUTES.product.patient,
+            APP_ROUTES.product.editPatientsProfile
+        ]);
+        this.toggleSettings();
+    }
 }
