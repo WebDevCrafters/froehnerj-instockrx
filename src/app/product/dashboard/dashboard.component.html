@@ -1,8 +1,54 @@
 <div class="dashboard_container">
   <div class="header_container">
-    <app-header />
+    <app-header (toggleSidebar)="toggleSidebar()" />
   </div>
-  <div class="content_container">
-    <router-outlet></router-outlet>
+  <div class="content_container" [ngClass]="{ isExpanded: isSidebarExpanded }">
+    <div class="sidebar_container">
+      <ul>
+        <li>
+          <div class="img_and_tag">
+            <div class="img">
+              <img src="assets/images/svg/plus-black-icon.svg" alt="" />
+            </div>
+            <span> New Search </span>
+          </div>
+        </li>
+        <li>
+          <div class="img_and_tag">
+            <div class="img">
+              <img src="assets/images/svg/active-search-icon.svg" alt="" />
+            </div>
+            <span> Active Search </span>
+          </div>
+        </li>
+        <li>
+          <div class="img_and_tag">
+            <div class="img">
+              <img src="assets/images/svg/previous-icon.svg" alt="" />
+            </div>
+            <span> Previous Search </span>
+          </div>
+        </li>
+        <li>
+          <div class="img_and_tag">
+            <div class="img">
+              <img src="assets/images/svg/profile-icon.svg" alt="" />
+            </div>
+            <span> Profile </span>
+          </div>
+        </li>
+        <li>
+          <div class="img_and_tag">
+            <div class="img">
+              <img src="assets/images/svg/payment-icon.svg" alt="" />
+            </div>
+            <span> Payments </span>
+          </div>
+        </li>
+      </ul>
+    </div>
+    <div class="right_container">
+      <router-outlet></router-outlet>
+    </div>
   </div>
 </div>

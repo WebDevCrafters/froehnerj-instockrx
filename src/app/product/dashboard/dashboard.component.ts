@@ -27,6 +27,7 @@ import { RouterOutlet } from '@angular/router';
 })
 export class DashboardComponent implements OnInit {
     userType: "patient" | "clinician" = "patient"
+    public isSidebarExpanded: boolean = false;
 
     constructor(private authService: AuthService) { }
 
@@ -38,5 +39,9 @@ export class DashboardComponent implements OnInit {
         const user = this.authService.getUserData();
         if (!user) return;
         this.userType = user.type;
+    }
+
+    toggleSidebar() {
+        this.isSidebarExpanded = !this.isSidebarExpanded
     }
 }

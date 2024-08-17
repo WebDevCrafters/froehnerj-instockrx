@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, EventEmitter, OnInit, Output } from '@angular/core';
 import { ModalComponent } from '../modal/modal.component';
 import { AuthService } from '../../../_core/services/auth.service';
 import { ButtonComponent } from '../button/button.component';
@@ -15,6 +15,8 @@ import { Location } from '@angular/common';
     styleUrl: './header.component.scss',
 })
 export class HeaderComponent implements OnInit {
+    @Output() toggleSidebar = new EventEmitter<void>();
+
     constructor(private authService: AuthService, private router: Router, private location: Location) { }
 
     modalVisible: boolean = false;
@@ -62,6 +64,10 @@ export class HeaderComponent implements OnInit {
             APP_ROUTES.product.editPatientsProfile
         ]);
         this.toggleSettings();
+    }
+
+    onMenuClick() {
+        this.toggleSidebar.emit();
     }
 
     goBack() {
