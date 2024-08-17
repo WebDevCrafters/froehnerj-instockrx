@@ -46,25 +46,6 @@ export class SelfServiceComponent implements OnInit {
         });
     }
 
-    personalInfoForm = new FormGroup({
-        fullName: new FormControl(
-            '',
-            requiredValidator("Patient's Name cannot be empty")
-        ),
-        phoneNumber: new FormControl('', [
-            requiredValidator("Patient's phone number cannot be empty"),
-            charLimitValidator(
-                10 + 4, // Including '()' and '-'
-                "Patient's phone must be 10 digits. (Only US phone numbers are supported at this time.)"
-            ),
-        ]),
-        email: new FormControl('', [
-            requiredValidator("Patient's email cannot be empty"),
-            emailValidator('Please enter a valid email'),
-        ]),
-        terms: new FormControl(false, requiredValidator('Please accept')),
-    });
-
     additionalInfoForm = new FormGroup({
         dob: new FormControl('', [
             requiredValidator("Patient's date of birth cannot be empty"),
@@ -89,18 +70,6 @@ export class SelfServiceComponent implements OnInit {
         ]),
         pickupDate: new FormControl(new Date().getTime(), [Validators.required]),
     });
-
-    onPersonalInfoSubmit() {
-        console.log(this.personalInfoForm.valid);
-        if (this.personalInfoForm.valid) {
-            console.log(this.personalInfoForm.value);
-            this.stepNumber += 1;
-        } else {
-            this.personalInfoForm.markAllAsTouched();
-            markAllAsDirty(this.personalInfoForm);
-            console.log(this.personalInfoForm.value);
-        }
-    }
 
     onAdditionalInfoSubmit() {
         if (this.additionalInfoForm.valid) {

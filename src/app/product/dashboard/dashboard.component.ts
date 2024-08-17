@@ -7,7 +7,8 @@ import { PatientDashboardComponent } from './patient-dashboard/patient-dashboard
 import { InputComponent } from '../../_shared/components/input/input.component';
 import { ClinicianDashboardComponent } from './clinician-dashboard/clinician-dashboard.component';
 import { AuthService } from '../../_core/services/auth.service';
-import { RouterOutlet } from '@angular/router';
+import { RouterLink, RouterLinkActive, RouterOutlet } from '@angular/router';
+import APP_ROUTES from '../../_shared/constants/routes';
 
 
 @Component({
@@ -20,14 +21,17 @@ import { RouterOutlet } from '@angular/router';
         ModalComponent,
         PatientDashboardComponent,
         ClinicianDashboardComponent,
-        RouterOutlet
+        RouterOutlet,
+        RouterLink,
+        RouterLinkActive
     ],
     templateUrl: './dashboard.component.html',
     styleUrl: './dashboard.component.scss',
 })
 export class DashboardComponent implements OnInit {
+    APP_ROUTES = APP_ROUTES;
     userType: "patient" | "clinician" = "patient"
-    public isSidebarExpanded: boolean = false;
+    public isSidebarExpanded: boolean = true;
 
     constructor(private authService: AuthService) { }
 

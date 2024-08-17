@@ -97,12 +97,12 @@ const routes: Routes = [
                         children: [
                             {
                                 path: '',
-                                redirectTo: APP_ROUTES.product.searchInfo,
+                                redirectTo: APP_ROUTES.product.newSearch,
                                 pathMatch: 'full',
                             },
                             {
-                                path: APP_ROUTES.product.searchInfo,
-                                component: SearchInfoComponent,
+                                path: APP_ROUTES.product.newSearch,
+                                component: SelfServiceComponent,
                             },
                             {
                                 path: APP_ROUTES.product.editPatientsProfile,

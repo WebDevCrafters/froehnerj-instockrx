@@ -46,9 +46,9 @@
         .sidebar_container {
             width: 70px;
             background-color: $offWhiteColor;
-            box-shadow: 2px 0 10px rgba(0, 0, 0, 0.1);
             transition: width 0.3s ease-in-out;
             overflow: hidden;
+            border-right: 1px solid $normalGrey;
 
             ul {
                 list-style: none;
@@ -59,12 +59,14 @@
                     font-size: 1rem;
                     color: $darkGreyColor;
                     margin-bottom: 1.5rem;
+                    color: $brandPrimaryColor;
 
                     .img_and_tag {
                         display: flex;
                         align-items: center;
                         justify-content: flex-start;
                         gap: 8px;
+                        text-decoration: none;
 
                         .img {
                             display: flex;
@@ -77,6 +79,13 @@
                             display: none;
                             transition: opacity 0.3s ease-in-out;
                             white-space: nowrap;
+                            color: $offBlackColor;
+                        }
+
+                        &.active-link {
+                            span {
+                                color: $brandPrimaryColor;
+                            }
                         }
                     }
 
@@ -110,8 +119,9 @@
                             align-items: center;
                             justify-content: center;
                             flex-direction: column;
-                            padding: 4rem 0;
+                            padding: 2rem 0;
                             width: 100%;
+
                             .img_and_tag {
                                 width: 150px;
                             }
@@ -120,17 +130,20 @@
                 }
 
                 .right_container {
-                    width: 0%;
-                }
-            }
-            .sidebar_container {
-                width: 0%;
-                ul {
                     display: none;
                 }
             }
-            .right_container {
-                width: 100%;
+
+            &:not(.isExpanded) {
+                .sidebar_container {
+                    display: none;
+                    width: 0;
+                }
+
+                .right_container {
+                    display: block;
+                    width: 100%;
+                }
             }
         }
     }

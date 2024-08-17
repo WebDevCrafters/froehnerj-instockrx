@@ -21,6 +21,7 @@ const APP_ROUTES = {
         signUp: 'sign-up',
         forgotPassword: 'forgot-password',
         selfService: 'self-service',
+        newSearch: 'new-search',
         dashboard: 'dashboard',
         resetPassword: 'reset-password',
         editPatientsProfile: 'edit-patients-profile',
