@@ -16,6 +16,8 @@ import { PatientDashboardComponent } from './dashboard/patient-dashboard/patient
 import { ClinicianDashboardComponent } from './dashboard/clinician-dashboard/clinician-dashboard.component';
 import { EditPatientProfileComponent } from './dashboard/patient-dashboard/edit-patient-profile/edit-patient-profile.component';
 import { NewSearchComponent } from './dashboard/patient-dashboard/new-search/new-search.component';
+import { ActiveSearchesComponent } from './dashboard/patient-dashboard/active-searches/active-searches.component';
+import { PreviousSearchesComponent } from './dashboard/patient-dashboard/previous-searches/previous-searches.component';
 
 const routes: Routes = [
     {
@@ -104,8 +106,12 @@ const routes: Routes = [
                                 component: NewSearchComponent,
                             },
                             {
-                                path: APP_ROUTES.product.activeSearch,
-                                component: NewSearchComponent,
+                                path: APP_ROUTES.product.activeSearches,
+                                component: ActiveSearchesComponent,
+                            },
+                            {
+                                path: APP_ROUTES.product.previousSearches,
+                                component: PreviousSearchesComponent,
                             },
                             {
                                 path: APP_ROUTES.product.editPatientsProfile,

@@ -24,7 +24,9 @@
           <a
             class="img_and_tag"
             [routerLink]="[
-              APP_ROUTES.product.patient + '/' + APP_ROUTES.product.activeSearch
+              APP_ROUTES.product.patient +
+                '/' +
+                APP_ROUTES.product.activeSearches
             ]"
             routerLinkActive="active-link"
             [routerLinkActiveOptions]="{ exact: true }"
@@ -38,7 +40,11 @@
         <li>
           <a
             class="img_and_tag"
-            [routerLink]="APP_ROUTES.product.newSearch"
+            [routerLink]="[
+              APP_ROUTES.product.patient +
+                '/' +
+                APP_ROUTES.product.previousSearches
+            ]"
             routerLinkActive="active-link"
             [routerLinkActiveOptions]="{ exact: true }"
           >
