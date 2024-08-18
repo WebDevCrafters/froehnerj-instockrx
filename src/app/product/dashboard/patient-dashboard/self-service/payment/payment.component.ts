@@ -1,6 +1,6 @@
 import { Component, Input } from '@angular/core';
-import { Package } from '../../../_shared/dataTypes/Package';
-import { defaultPackage } from '../../../_shared/constants/data';
+import { defaultPackage } from '../../../../../_shared/constants/data';
+import { Package } from '../../../../../_shared/dataTypes/Package';
 
 @Component({
   selector: 'app-payment',

@@ -1,20 +1,15 @@
 import { Component, OnInit } from '@angular/core';
-import { Package } from '../../_shared/dataTypes/Package';
 import { FormArray, FormControl, FormGroup, Validators } from '@angular/forms';
-import {
-    charLimitValidator,
-    dateValidator,
-    emailValidator,
-    requiredValidator,
-} from '../../_shared/utils/Validators';
-import { markAllAsDirty } from '../../_shared/utils/formUtils';
-import { defaultPackage } from '../../_shared/constants/data';
 import { CommonModule } from '@angular/common';
 import { PersonalInfoComponent } from './personal-info/personal-info.component';
 import { SelectPackageComponent } from './select-package/select-package.component';
 import { PaymentComponent } from './payment/payment.component';
 import { AdditionalInfoComponent } from './additional-info/additional-info.component';
 import { ActivatedRoute } from '@angular/router';
+import { defaultPackage } from '../../../../_shared/constants/data';
+import { Package } from '../../../../_shared/dataTypes/Package';
+import { markAllAsDirty } from '../../../../_shared/utils/formUtils';
+import { requiredValidator, dateValidator, charLimitValidator } from '../../../../_shared/utils/Validators';
 
 @Component({
     selector: 'app-self-service',

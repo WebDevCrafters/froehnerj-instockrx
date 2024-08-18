@@ -1,7 +1,6 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import APP_ROUTES from '../_shared/constants/routes';
-import { SelfServiceComponent } from './self-service/self-service.component';
 import { DashboardComponent } from './dashboard/dashboard.component';
 import { ProductComponent } from './product.component';
 import { AuthComponent } from './auth/auth.component';
@@ -16,6 +15,7 @@ import { ForgotPasswordComponent } from './auth/forgot-password/forgot-password.
 import { PatientDashboardComponent } from './dashboard/patient-dashboard/patient-dashboard.component';
 import { ClinicianDashboardComponent } from './dashboard/clinician-dashboard/clinician-dashboard.component';
 import { EditPatientProfileComponent } from './dashboard/patient-dashboard/edit-patient-profile/edit-patient-profile.component';
+import { SelfServiceComponent } from './dashboard/patient-dashboard/self-service/self-service.component';
 
 const routes: Routes = [
     {
