@@ -250,5 +250,26 @@ export class EditPatientProfileComponent implements OnInit {
             console.log("putsie");
         }
     }
+
+
+    requestAccountDeletion() {
+        const url = 'https://u4acjiu8lv3.typeform.com/to/WDj0hN0I';
+        window.open(url, '_blank');
+    }
+
+    signout() {
+        this.authService.signOut();
+        this.router.navigate(
+            [`${APP_ROUTES.product.app}/${APP_ROUTES.product.auth}`],
+            { replaceUrl: true }
+        );
+    }
+
+    resetPassword() {
+        this.router.navigate(
+            [`${APP_ROUTES.product.app}/${APP_ROUTES.product.resetPassword}`],
+            { replaceUrl: true }
+        );
+    }
 }
 
