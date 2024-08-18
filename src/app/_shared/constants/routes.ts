@@ -20,7 +20,6 @@ const APP_ROUTES = {
         signIn: 'sign-in',
         signUp: 'sign-up',
         forgotPassword: 'forgot-password',
-        selfService: 'self-service',
         newSearch: 'new-search',
         activeSearch: 'active-search',
         dashboard: 'dashboard',

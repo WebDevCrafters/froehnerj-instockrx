@@ -15,7 +15,7 @@ import { ForgotPasswordComponent } from './auth/forgot-password/forgot-password.
 import { PatientDashboardComponent } from './dashboard/patient-dashboard/patient-dashboard.component';
 import { ClinicianDashboardComponent } from './dashboard/clinician-dashboard/clinician-dashboard.component';
 import { EditPatientProfileComponent } from './dashboard/patient-dashboard/edit-patient-profile/edit-patient-profile.component';
-import { SelfServiceComponent } from './dashboard/patient-dashboard/self-service/self-service.component';
+import { NewSearchComponent } from './dashboard/patient-dashboard/new-search/new-search.component';
 
 const routes: Routes = [
     {
@@ -76,8 +76,8 @@ const routes: Routes = [
                 ],
             },
             {
-                path: APP_ROUTES.product.selfService,
-                component: SelfServiceComponent,
+                path: APP_ROUTES.product.newSearch,
+                component: NewSearchComponent,
                 canActivate: [authGuard],
             },
             {
@@ -101,11 +101,11 @@ const routes: Routes = [
                             },
                             {
                                 path: APP_ROUTES.product.newSearch,
-                                component: SelfServiceComponent,
+                                component: NewSearchComponent,
                             },
                             {
                                 path: APP_ROUTES.product.activeSearch,
-                                component: SelfServiceComponent,
+                                component: NewSearchComponent,
                             },
                             {
                                 path: APP_ROUTES.product.editPatientsProfile,

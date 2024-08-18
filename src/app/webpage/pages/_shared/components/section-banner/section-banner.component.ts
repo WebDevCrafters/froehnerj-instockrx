@@ -19,7 +19,7 @@ export class SectionBannerComponent {
     @Input() primaryBtnType: ButtonType = 'default_primary';
     @Input() secondaryBtnType: ButtonType = 'default_secondary';
     @Input() routeOnPrimaryBtnClick: string = APP_ROUTES.webpage.findMyMeds;
-    @Input() routeOnSecondaryBtnClick: string = `${APP_ROUTES.product.app}/${APP_ROUTES.product.selfService}`;
+    @Input() routeOnSecondaryBtnClick: string = `${APP_ROUTES.product.app}/${APP_ROUTES.product.newSearch}`;
     @Input() openOnNewPage: boolean = true;
 
     APP_ROUTES = APP_ROUTES;

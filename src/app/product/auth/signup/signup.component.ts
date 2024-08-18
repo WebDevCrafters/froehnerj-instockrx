@@ -77,7 +77,7 @@ export class SignupComponent implements OnInit {
         };
         this.authService.signUp(user);
         this.router.navigate(
-            [`${APP_ROUTES.product.app}/${APP_ROUTES.product.selfService}`],
+            [`${APP_ROUTES.product.app}/${APP_ROUTES.product.newSearch}`],
             {
                 replaceUrl: true,
                 queryParams: { stepNumber: JSON.stringify(2) }

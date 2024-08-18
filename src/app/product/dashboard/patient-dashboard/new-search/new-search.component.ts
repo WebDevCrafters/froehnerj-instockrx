@@ -12,7 +12,7 @@ import { markAllAsDirty } from '../../../../_shared/utils/formUtils';
 import { requiredValidator, dateValidator, charLimitValidator } from '../../../../_shared/utils/Validators';
 
 @Component({
-    selector: 'app-self-service',
+    selector: 'app-new-search',
     standalone: true,
     imports: [
         CommonModule,
@@ -21,10 +21,10 @@ import { requiredValidator, dateValidator, charLimitValidator } from '../../../.
         SelectPackageComponent,
         PaymentComponent,
     ],
-    templateUrl: './self-service.component.html',
-    styleUrl: './self-service.component.scss',
+    templateUrl: './new-search.component.html',
+    styleUrl: './new-search.component.scss',
 })
-export class SelfServiceComponent implements OnInit {
+export class NewSearchComponent implements OnInit {
     stepNumber: number = 1;
     selectedPackage: Package = defaultPackage;
 
