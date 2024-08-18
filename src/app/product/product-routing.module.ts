@@ -15,7 +15,6 @@ import { SignupComponent } from './auth/signup/signup.component';
 import { ForgotPasswordComponent } from './auth/forgot-password/forgot-password.component';
 import { PatientDashboardComponent } from './dashboard/patient-dashboard/patient-dashboard.component';
 import { ClinicianDashboardComponent } from './dashboard/clinician-dashboard/clinician-dashboard.component';
-import { SearchInfoComponent } from './dashboard/patient-dashboard/search-info/search-info.component';
 import { EditPatientProfileComponent } from './dashboard/patient-dashboard/edit-patient-profile/edit-patient-profile.component';
 
 const routes: Routes = [
@@ -102,6 +101,10 @@ const routes: Routes = [
                             },
                             {
                                 path: APP_ROUTES.product.newSearch,
+                                component: SelfServiceComponent,
+                            },
+                            {
+                                path: APP_ROUTES.product.activeSearch,
                                 component: SelfServiceComponent,
                             },
                             {

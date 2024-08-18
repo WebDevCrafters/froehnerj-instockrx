@@ -23,7 +23,9 @@
         <li>
           <a
             class="img_and_tag"
-            [routerLink]="APP_ROUTES.product.clinician"
+            [routerLink]="[
+              APP_ROUTES.product.patient + '/' + APP_ROUTES.product.activeSearch
+            ]"
             routerLinkActive="active-link"
             [routerLinkActiveOptions]="{ exact: true }"
           >
