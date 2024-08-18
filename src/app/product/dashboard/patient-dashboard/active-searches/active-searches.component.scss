@@ -1,0 +1,104 @@
+@import "variables";
+
+$table-bg-color: #f9f9f9;
+$table-header-bg-color: #007bff;
+$table-header-text-color: #fff;
+$table-border-color: #ddd;
+$table-row-hover-color: #f1f1f1;
+$button-bg-color: #28a745;
+$button-text-color: #fff;
+$button-hover-bg-color: #218838;
+
+.main_container {
+    height: 100%;
+
+    .header {
+        display: flex;
+        align-items: center;
+        justify-content: flex-start;
+        height: 10%;
+        font-size: 25px;
+        font-weight: 600;
+        padding: 0 1rem;
+    }
+
+    .content {
+        height: 90%;
+        padding: 1rem;
+
+        .empty_container {
+            width: 100%;
+            height: 100%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 30px;
+            font-weight: 500;
+        }
+
+        table {
+            width: 100%;
+            height: max-content;
+            border-collapse: collapse;
+
+            thead {
+                background-color: $normalGrey;
+                color: black;
+
+                th {
+                    padding: 12px 15px;
+                    text-align: left;
+                    font-weight: bold;
+                    white-space: nowrap;
+                }
+            }
+
+            tbody {
+                tr {
+                    &:hover {
+                        background-color: $table-row-hover-color;
+                    }
+
+                    td {
+                        padding: 12px 15px;
+                        border-bottom: 1px solid $table-border-color;
+                        white-space: nowrap;
+
+                        &:first-child {
+                            border-left: 2px solid $table-border-color;
+                        }
+
+                        &:last-child {
+                            border-right: 2px solid $table-border-color;
+                        }
+
+                        .view_btn {
+                            padding: 8px 16px;
+                            cursor: pointer;
+                            background-color: $button-bg-color;
+                            color: $button-text-color;
+                            border-radius: 5px;
+                            display: inline-block;
+                            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+                            text-align: center;
+                            transition:
+                                background-color 0.3s ease,
+                                transform 0.2s ease;
+                            font-size: 14px;
+
+                            &:hover {
+                                background-color: $button-hover-bg-color;
+                                transform: translateY(-2px);
+                            }
+
+                            &:active {
+                                background-color: darken($button-bg-color, 5%);
+                                transform: translateY(0);
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    }
+}
