@@ -5,12 +5,12 @@ import { ButtonComponent } from '../button/button.component';
 import { User } from '../../dataTypes/User';
 import { Router } from '@angular/router';
 import APP_ROUTES from '../../constants/routes';
-import { Location } from '@angular/common';
+import { CommonModule, Location } from '@angular/common';
 
 @Component({
     selector: 'app-header',
     standalone: true,
-    imports: [ModalComponent, ButtonComponent],
+    imports: [ModalComponent, ButtonComponent, CommonModule],
     templateUrl: './header.component.html',
     styleUrl: './header.component.scss',
 })

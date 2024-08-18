@@ -58,53 +58,64 @@
 }
 
 .settings_container {
-    width: 15rem;
-    box-shadow: 0px 0px 10px 0px $normalGrey;
+    height: 25rem;
+    width: 20rem;
+    box-shadow: 0px 0px 15px 5px $normalGrey;
     border-radius: 12px;
     background-color: $offWhiteColor;
-    position: absolute;
+    position: fixed;
     top: 3.5rem;
     right: 2rem;
     display: flex;
     gap: 8px;
     flex-direction: column;
-    padding: 1rem 0.6rem;
+    padding: 1rem 0;
     z-index: 10;
 
-    .profile_section {
+    .heading {
+        height: 10%;
+        font-weight: 600;
+        font-size: 20px;
+        padding: 4px 10px;
+    }
+
+    .content {
+        max-height: 90%;
+        overflow-y: auto;
         display: flex;
         align-items: center;
         justify-content: flex-start;
-        gap: 0;
-        .profile_icon {
-            height: 40px;
-            width: 40px;
+        flex-direction: column;
+        padding: 4px 10px;
+
+        &::-webkit-scrollbar {
+            width: 4px;
         }
-        .user_info {
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            flex-direction: column;
-            gap: 2px;
-            padding: 0 8px;
 
-            .type {
-                font-size: 14px;
-            }
+        &::-webkit-scrollbar-thumb {
+            background-color: $normalGrey;
+            border-radius: 2px;
+        }
 
-            .email {
-                font-size: 13px;
+        &::-webkit-scrollbar-track {
+            background-color: $extraLightGreyColor;
+        }
+
+        .inner_hr {
+            margin: 11px 0;
+            height: 1px;
+            background-color: $offBlackColor;
+            width: 100%;
+        }
+
+        .notification {
+            cursor: pointer;
+            // border: 1px solid black;
+
+            &.unread {
+                font-weight: 600;
             }
         }
-    }
-
-    .option {
-        padding: 8px 16px 8px 0px;
-        cursor: pointer;
-    }
-
-    .sign_out {
-        width: 100%;
     }
 
     hr {

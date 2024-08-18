@@ -10,10 +10,9 @@
     </div>
   </div>
   <div class="icon_container">
-    <img src="assets/images/svg/settings-icon.svg" alt="" />
     <img
       class="profile_icon"
-      src="assets/images/svg/profile-icon.svg"
+      src="assets/images/svg/notification-icon.svg"
       alt=""
       (click)="toggleSettings()"
     />
@@ -26,37 +25,42 @@
   (closeModal)="toggleSettings()"
 >
   <div class="settings_container">
-    <div class="profile_section">
-      <img
-        class="profile_icon"
-        src="assets/images/svg/profile-icon.svg"
-        alt=""
-      />
-      <div class="user_info">
-        <div class="type">{{ user?.type }}</div>
-        <div class="email">{{ user?.email }}</div>
+    <div class="heading">
+      <span> Notifications </span>
+    </div>
+    <hr />
+    <div class="content">
+      <div class="notification" [ngClass]="{ unread: true }">
+        Clinician 1 has marked your medication as available.
       </div>
-    </div>
-    <hr />
-    <div class="option">Search Status</div>
-    <hr />
-    <div class="option" (click)="navigateToEditProfile()">Edit Profile</div>
-    <hr />
-    <div class="option" (click)="requestAccountDeletion()">
-      Request Account Deletion
-    </div>
-    <hr />
-    @if (user?.type!=="clinician") {
-    <div class="option" (click)="resetPassword()">Reset Password</div>
-    <hr />
-    }
-    <div class="sign_out">
-      <app-button
-        title="Sign out"
-        type="small_primary"
-        shape="rounded"
-        (clickEvent)="signout()"
-      />
+      <hr class="inner_hr" />
+      <div class="notification">
+        Clinician 2 has marked your medication as available.
+      </div>
+      <hr class="inner_hr" />
+      <div class="notification">
+        Clinician 2 has marked your medication as available.
+      </div>
+      <hr class="inner_hr" />
+      <div class="notification">
+        Clinician 2 has marked your medication as available.
+      </div>
+      <hr class="inner_hr" />
+      <div class="notification">
+        Clinician 2 has marked your medication as available.
+      </div>
+      <hr class="inner_hr" />
+      <div class="notification">
+        Clinician 2 has marked your medication as available.
+      </div>
+      <hr class="inner_hr" />
+      <div class="notification">
+        Clinician 2 has marked your medication as available.
+      </div>
+      <hr class="inner_hr" />
+      <div class="notification">
+        Clinician 2 has marked your medication as available.
+      </div>
     </div>
   </div>
 </app-modal>
