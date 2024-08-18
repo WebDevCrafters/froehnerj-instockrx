@@ -12,11 +12,11 @@ import { ClinicianComponent } from './auth/clinician/clinician.component';
 import { SigninComponent } from './auth/signin/signin.component';
 import { SignupComponent } from './auth/signup/signup.component';
 import { ForgotPasswordComponent } from './auth/forgot-password/forgot-password.component';
-import { EditPatientProfileComponent } from './dashboard/patient-dashboard/edit-patient-profile/edit-patient-profile.component';
-import { NewSearchComponent } from './dashboard/patient-dashboard/new-search/new-search.component';
-import { ActiveSearchesComponent } from './dashboard/patient-dashboard/active-searches/active-searches.component';
-import { PreviousSearchesComponent } from './dashboard/patient-dashboard/previous-searches/previous-searches.component';
-import { NearBySearchesComponent } from './dashboard/clinician-dashboard/near-by-searches/near-by-searches.component';
+import { EditPatientProfileComponent } from './dashboard/patient/edit-patient-profile/edit-patient-profile.component';
+import { NewSearchComponent } from './dashboard/patient/new-search/new-search.component';
+import { ActiveSearchesComponent } from './dashboard/patient/active-searches/active-searches.component';
+import { PreviousSearchesComponent } from './dashboard/patient/previous-searches/previous-searches.component';
+import { NearBySearchesComponent } from './dashboard/clinician/near-by-searches/near-by-searches.component';
 
 const routes: Routes = [
     {
