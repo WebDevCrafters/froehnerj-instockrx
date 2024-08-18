@@ -3,13 +3,13 @@ import { Component, HostListener } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 
 @Component({
-    selector: 'app-clinician-dashboard',
+    selector: 'app-near-by-searches',
     standalone: true,
     imports: [FormsModule, CommonModule],
-    templateUrl: './clinician-dashboard.component.html',
-    styleUrls: ['./clinician-dashboard.component.scss']
+    templateUrl: './near-by-searches.component.html',
+    styleUrl: './near-by-searches.component.scss'
 })
-export class ClinicianDashboardComponent {
+export class NearBySearchesComponent {
     dropdownOpen = false;
     allSelected = false;
     options = [

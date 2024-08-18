@@ -3,9 +3,7 @@ import { HeaderComponent } from '../../_shared/components/header/header.componen
 import { ButtonComponent } from '../../_shared/components/button/button.component';
 import { CommonModule } from '@angular/common';
 import { ModalComponent } from '../../_shared/components/modal/modal.component';
-import { PatientDashboardComponent } from './patient-dashboard/patient-dashboard.component';
 import { InputComponent } from '../../_shared/components/input/input.component';
-import { ClinicianDashboardComponent } from './clinician-dashboard/clinician-dashboard.component';
 import { AuthService } from '../../_core/services/auth.service';
 import { RouterLink, RouterLinkActive, RouterOutlet } from '@angular/router';
 import APP_ROUTES from '../../_shared/constants/routes';
@@ -19,8 +17,6 @@ import APP_ROUTES from '../../_shared/constants/routes';
         ButtonComponent,
         CommonModule,
         ModalComponent,
-        PatientDashboardComponent,
-        ClinicianDashboardComponent,
         RouterOutlet,
         RouterLink,
         RouterLinkActive

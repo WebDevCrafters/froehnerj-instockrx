@@ -16,6 +16,7 @@ const APP_ROUTES = {
         app: 'app',
         auth: 'auth',
         clinician: 'clinician',
+        nearBySearches: 'near-by-searches',
         patient: 'patient',
         signIn: 'sign-in',
         signUp: 'sign-up',

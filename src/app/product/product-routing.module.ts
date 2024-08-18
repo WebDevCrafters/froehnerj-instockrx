@@ -12,12 +12,11 @@ import { ClinicianComponent } from './auth/clinician/clinician.component';
 import { SigninComponent } from './auth/signin/signin.component';
 import { SignupComponent } from './auth/signup/signup.component';
 import { ForgotPasswordComponent } from './auth/forgot-password/forgot-password.component';
-import { PatientDashboardComponent } from './dashboard/patient-dashboard/patient-dashboard.component';
-import { ClinicianDashboardComponent } from './dashboard/clinician-dashboard/clinician-dashboard.component';
 import { EditPatientProfileComponent } from './dashboard/patient-dashboard/edit-patient-profile/edit-patient-profile.component';
 import { NewSearchComponent } from './dashboard/patient-dashboard/new-search/new-search.component';
 import { ActiveSearchesComponent } from './dashboard/patient-dashboard/active-searches/active-searches.component';
 import { PreviousSearchesComponent } from './dashboard/patient-dashboard/previous-searches/previous-searches.component';
+import { NearBySearchesComponent } from './dashboard/clinician-dashboard/near-by-searches/near-by-searches.component';
 
 const routes: Routes = [
     {
@@ -58,8 +57,8 @@ const routes: Routes = [
                         ]
                     },
                     {
-                        path: APP_ROUTES.product.clinician,
-                        component: ClinicianComponent,
+                        path: APP_ROUTES.product.clinician + '/' + APP_ROUTES.product.nearBySearches,
+                        component: NearBySearchesComponent,
                         children: [
                             {
                                 path: APP_ROUTES.product.signUp,
@@ -89,39 +88,28 @@ const routes: Routes = [
                 children: [
                     {
                         path: '',
-                        redirectTo: APP_ROUTES.product.patient,
+                        redirectTo: APP_ROUTES.product.patient + '/' + APP_ROUTES.product.newSearch,
                         pathMatch: 'full',
                     },
                     {
-                        path: APP_ROUTES.product.patient,
-                        component: PatientDashboardComponent,
-                        children: [
-                            {
-                                path: '',
-                                redirectTo: APP_ROUTES.product.newSearch,
-                                pathMatch: 'full',
-                            },
-                            {
-                                path: APP_ROUTES.product.newSearch,
-                                component: NewSearchComponent,
-                            },
-                            {
-                                path: APP_ROUTES.product.activeSearches,
-                                component: ActiveSearchesComponent,
-                            },
-                            {
-                                path: APP_ROUTES.product.previousSearches,
-                                component: PreviousSearchesComponent,
-                            },
-                            {
-                                path: APP_ROUTES.product.editPatientsProfile,
-                                component: EditPatientProfileComponent,
-                            },
-                        ]
+                        path: APP_ROUTES.product.patient + '/' + APP_ROUTES.product.newSearch,
+                        component: NewSearchComponent,
                     },
                     {
-                        path: APP_ROUTES.product.clinician,
-                        component: ClinicianDashboardComponent,
+                        path: APP_ROUTES.product.patient + '/' + APP_ROUTES.product.activeSearches,
+                        component: ActiveSearchesComponent,
+                    },
+                    {
+                        path: APP_ROUTES.product.patient + '/' + APP_ROUTES.product.previousSearches,
+                        component: PreviousSearchesComponent,
+                    },
+                    {
+                        path: APP_ROUTES.product.patient + '/' + APP_ROUTES.product.editPatientsProfile,
+                        component: EditPatientProfileComponent,
+                    },
+                    {
+                        path: APP_ROUTES.product.clinician + '/' + APP_ROUTES.product.nearBySearches,
+                        component: NearBySearchesComponent,
                     },
                 ],
             },
