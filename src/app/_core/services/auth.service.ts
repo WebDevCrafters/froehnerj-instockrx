@@ -44,11 +44,9 @@ export class AuthService {
   }
 
   getUserData(): User | null {
-
     if(this.user){
       return this.user;
     }
-
     const user = localStorage.getItem(KEYS.userData);
     if (!user) return null;
     const userObj = JSON.parse(user);

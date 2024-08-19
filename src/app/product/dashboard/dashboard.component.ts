@@ -7,6 +7,7 @@ import { InputComponent } from '../../_shared/components/input/input.component';
 import { AuthService } from '../../_core/services/auth.service';
 import { RouterLink, RouterLinkActive, RouterOutlet } from '@angular/router';
 import APP_ROUTES from '../../_shared/constants/routes';
+import { SidebarComponent } from "./_shared/sidebar/sidebar.component";
 
 
 @Component({
@@ -19,7 +20,8 @@ import APP_ROUTES from '../../_shared/constants/routes';
         ModalComponent,
         RouterOutlet,
         RouterLink,
-        RouterLinkActive
+        RouterLinkActive,
+        SidebarComponent
     ],
     templateUrl: './dashboard.component.html',
     styleUrl: './dashboard.component.scss',

@@ -77,11 +77,6 @@ const routes: Routes = [
                 ],
             },
             {
-                path: APP_ROUTES.product.newSearch,
-                component: NewSearchComponent,
-                canActivate: [authGuard],
-            },
-            {
                 path: APP_ROUTES.product.dashboard,
                 component: DashboardComponent,
                 canActivate: [authGuard],
