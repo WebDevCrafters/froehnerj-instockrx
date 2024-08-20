@@ -22,9 +22,6 @@
       [shape]="'flat'"
     />
     <div class="phoneNumber_container">
-      <app-custom-search-dropdown
-        (countryCode)="setCountryCode($event)"
-      ></app-custom-search-dropdown>
       <app-input
         [control]="signUpInfoForm.controls.phoneNumber"
         id="phoneNumber"
@@ -33,10 +30,26 @@
         [shape]="'flat'"
       />
     </div>
+    <div class="phoneNumber_container">
+      <app-input
+        [control]="signUpInfoForm.controls.zipCode"
+        id="zipCode"
+        label="Zip Code:"
+        [type]="'text'"
+        [shape]="'flat'"
+      />
+    </div>
     <app-input
       [control]="signUpInfoForm.controls.password"
       id="password"
       label="Password:"
+      [type]="'password'"
+      [shape]="'flat'"
+    />
+    <app-input
+      [control]="signUpInfoForm.controls.confirmPassword"
+      id="confirm-password"
+      label="Confirm Password:"
       [type]="'password'"
       [shape]="'flat'"
     />

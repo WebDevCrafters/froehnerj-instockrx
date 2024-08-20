@@ -29,8 +29,16 @@ export class SignupComponent implements OnInit {
         lastName: new FormControl(''),
         email: new FormControl(''),
         phoneNumber: new FormControl(''),
+        zipCode: new FormControl(''),
         password: new FormControl(''),
+        confirmPassword: new FormControl(''),
     });
+
+    /**
+        @todo: add validators in these fields 
+        @todo: Validate zipcode
+        @todo: Conpare pass and cpass
+     */
 
     public countryCode: string = '';
     public isPatientRoute: boolean = false;
@@ -75,14 +83,15 @@ export class SignupComponent implements OnInit {
             phoneNumber: this.signUpInfoForm.get('phoneNumber')?.value || "",
             type: this.isPatientRoute ? "patient" : "clinician"
         };
-        this.authService.signUp(user);
-        this.router.navigate(
-            [`${APP_ROUTES.product.app}/${APP_ROUTES.product.newSearch}`],
-            {
-                replaceUrl: true,
-                queryParams: { stepNumber: JSON.stringify(2) }
-            },
-        );
+        console.log(this.signUpInfoForm)
+        // this.authService.signUp(user);
+        // this.router.navigate(
+        //     [`${APP_ROUTES.product.app}/${APP_ROUTES.product.newSearch}`],
+        //     {
+        //         replaceUrl: true,
+        //         queryParams: { stepNumber: JSON.stringify(2) }
+        //     },
+        // );
     }
 
     public onSuccess() {

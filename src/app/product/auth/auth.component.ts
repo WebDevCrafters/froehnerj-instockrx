@@ -70,6 +70,8 @@ export class AuthComponent implements OnInit {
         password: new FormControl('', [
             requiredValidator("Password cannot be empty.")
         ]),
+        zipCode: new FormControl(''),
+        confirmPassword: new FormControl(''),
     });
 
     public verificationCodeInfo = new FormGroup({
