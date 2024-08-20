@@ -23,6 +23,7 @@ const APP_ROUTES = {
         forgotPassword: 'forgot-password',
         newSearch: 'new-search',
         activeSearches: 'active-searches',
+        medicationDetails: 'medication-details',
         previousSearches: 'previous-searches',
         dashboard: 'dashboard',
         resetPassword: 'reset-password',
