@@ -5,7 +5,7 @@ import { KEYS } from '../../_shared/constants/localStorageKeys';
 @Injectable({
   providedIn: 'root',
 })
-export class AuthService {
+export class UserService {
   isSignedIn: boolean = false;
   user: User | null = null;
 

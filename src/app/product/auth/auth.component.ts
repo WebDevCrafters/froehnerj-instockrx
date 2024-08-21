@@ -4,7 +4,6 @@ import { InputComponent } from '../../_shared/components/input/input.component';
 import { ButtonComponent } from '../../_shared/components/button/button.component';
 import { CommonModule } from '@angular/common';
 import { CustomSearchDropdownComponent } from '../../_shared/components/custom-search-dropdown/custom-search-dropdown.component';
-import { AuthService } from '../../_core/services/auth.service';
 import { User } from '../../_shared/dataTypes/User';
 import { ActivatedRoute, Router, RouterOutlet } from '@angular/router';
 import APP_ROUTES from '../../_shared/constants/routes';
@@ -13,6 +12,7 @@ import { emailValidator, requiredValidator } from '../../_shared/utils/Validator
 import { SignupComponent } from './signup/signup.component';
 import { SigninComponent } from './signin/signin.component';
 import { ForgotPasswordComponent } from './forgot-password/forgot-password.component';
+import { UserService } from '../../_core/services/user.service';
 
 @Component({
     selector: 'app-auth',
@@ -26,7 +26,7 @@ export class AuthComponent implements OnInit {
     isSignUpPage: boolean = false;
 
     constructor(
-        private authService: AuthService,
+        private userService: UserService,
         private router: Router,
         private route: ActivatedRoute
     ) { }
@@ -95,7 +95,7 @@ export class AuthComponent implements OnInit {
             phoneNumber: "+1134567892",
             type: 'patient'
         }
-        this.authService.signIn(user);
+        this.userService.signIn(user);
         this.router.navigate([`${APP_ROUTES.product.app}/${APP_ROUTES.product.dashboard}`], { replaceUrl: true })
     }
 

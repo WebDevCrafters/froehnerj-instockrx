@@ -2,13 +2,13 @@ import { Component, Input, Output, EventEmitter, OnInit } from '@angular/core';
 import { FormControl, FormGroup, FormsModule } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
 import { CommonModule } from '@angular/common';
-import { AuthService } from '../../../_core/services/auth.service';
 import { ButtonComponent } from '../../../_shared/components/button/button.component';
 import { CustomSearchDropdownComponent } from '../../../_shared/components/custom-search-dropdown/custom-search-dropdown.component';
 import { InputComponent } from '../../../_shared/components/input/input.component';
 import APP_ROUTES from '../../../_shared/constants/routes';
 import { User } from '../../../_shared/dataTypes/User';
 import { markAllAsDirty } from '../../../_shared/utils/formUtils';
+import { UserService } from '../../../_core/services/user.service';
 
 @Component({
     selector: 'app-forgot-password',
@@ -27,7 +27,7 @@ export class ForgotPasswordComponent implements OnInit {
     });
     public countryCode: string = '';
 
-    constructor(private authService: AuthService, private router: Router,
+    constructor(private userService: UserService, private router: Router,
         private route: ActivatedRoute) { }
 
     ngOnInit() {
@@ -70,7 +70,7 @@ export class ForgotPasswordComponent implements OnInit {
             phoneNumber: "+1134567892",
             type: "patient"
         }
-        this.authService.signIn(user);
+        this.userService.signIn(user);
         this.router.navigate([`${APP_ROUTES.product.app}/${APP_ROUTES.product.dashboard}`], { replaceUrl: true })
     }
 

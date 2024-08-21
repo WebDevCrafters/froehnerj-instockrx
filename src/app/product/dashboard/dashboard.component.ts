@@ -4,10 +4,10 @@ import { ButtonComponent } from '../../_shared/components/button/button.componen
 import { CommonModule } from '@angular/common';
 import { ModalComponent } from '../../_shared/components/modal/modal.component';
 import { InputComponent } from '../../_shared/components/input/input.component';
-import { AuthService } from '../../_core/services/auth.service';
 import { RouterLink, RouterLinkActive, RouterOutlet } from '@angular/router';
 import APP_ROUTES from '../../_shared/constants/routes';
 import { SidebarComponent } from "./_shared/sidebar/sidebar.component";
+import { UserService } from '../../_core/services/user.service';
 
 
 @Component({
@@ -31,14 +31,14 @@ export class DashboardComponent implements OnInit {
     userType: "patient" | "clinician" = "patient"
     public isSidebarExpanded: boolean = true;
 
-    constructor(private authService: AuthService) { }
+    constructor(private userService: UserService) { }
 
     ngOnInit(): void {
         this.getUserType();
     }
 
     getUserType() {
-        const user = this.authService.getUserData();
+        const user = this.userService.getUserData();
         if (!user) return;
         this.userType = user.type;
     }

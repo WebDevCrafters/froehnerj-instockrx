@@ -1,6 +1,5 @@
 import { Component, ElementRef, HostListener, OnInit, ViewChild } from '@angular/core';
 import { FormControl, FormGroup, FormArray, Validators, FormsModule } from '@angular/forms';
-import { AuthService } from '../../../../_core/services/auth.service';
 import { activeSearchData, defaultPackage } from '../../../../_shared/constants/data';
 import APP_ROUTES from '../../../../_shared/constants/routes';
 import { ActiveSearch } from '../../../../_shared/dataTypes/ActiveSearch';
@@ -14,6 +13,7 @@ import { ButtonComponent } from '../../../../_shared/components/button/button.co
 import { ModalComponent } from '../../../../_shared/components/modal/modal.component';
 import { InputComponent } from '../../../../_shared/components/input/input.component';
 import { DatePickerComponent } from '../../../../_shared/components/date-picker/date-picker.component';
+import { UserService } from '../../../../_core/services/user.service';
 
 @Component({
     selector: 'app-edit-patient-profile',
@@ -86,7 +86,7 @@ export class EditPatientProfileComponent implements OnInit {
     );
     backups: any[] = [];
 
-    constructor(private router: Router, private authService: AuthService) { }
+    constructor(private router: Router, private userService: UserService) { }
 
     ngOnInit(): void {
         this.getUser();
@@ -94,7 +94,7 @@ export class EditPatientProfileComponent implements OnInit {
     }
 
     getUser() {
-        const user = this.authService.getUserData();
+        const user = this.userService.getUserData();
         if (!user) return;
         this.user = user;
     }
@@ -258,7 +258,7 @@ export class EditPatientProfileComponent implements OnInit {
     }
 
     signout() {
-        this.authService.signOut();
+        this.userService.signOut();
         this.router.navigate(
             [`${APP_ROUTES.product.app}/${APP_ROUTES.product.auth}`],
             { replaceUrl: true }

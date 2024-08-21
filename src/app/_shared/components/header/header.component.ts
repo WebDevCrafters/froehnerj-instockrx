@@ -1,11 +1,11 @@
 import { Component, EventEmitter, OnInit, Output } from '@angular/core';
 import { ModalComponent } from '../modal/modal.component';
-import { AuthService } from '../../../_core/services/auth.service';
 import { ButtonComponent } from '../button/button.component';
 import { User } from '../../dataTypes/User';
 import { Router } from '@angular/router';
 import APP_ROUTES from '../../constants/routes';
 import { CommonModule, Location } from '@angular/common';
+import { UserService } from '../../../_core/services/user.service';
 
 @Component({
     selector: 'app-header',
@@ -17,7 +17,7 @@ import { CommonModule, Location } from '@angular/common';
 export class HeaderComponent implements OnInit {
     @Output() toggleSidebar = new EventEmitter<void>();
 
-    constructor(private authService: AuthService, private router: Router, private location: Location) { }
+    constructor(private userService: UserService, private router: Router, private location: Location) { }
 
     modalVisible: boolean = false;
     user: User | null = null;
@@ -27,7 +27,7 @@ export class HeaderComponent implements OnInit {
     }
 
     getUserEmail() {
-        const user = this.authService.getUserData();
+        const user = this.userService.getUserData();
         if (!user) return;
         this.user = user;
     }
@@ -42,7 +42,7 @@ export class HeaderComponent implements OnInit {
     }
 
     signout() {
-        this.authService.signOut();
+        this.userService.signOut();
         this.router.navigate(
             [`${APP_ROUTES.product.app}/${APP_ROUTES.product.auth}`],
             { replaceUrl: true }

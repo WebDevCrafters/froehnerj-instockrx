@@ -2,13 +2,13 @@ import { Component, Input, OnInit } from '@angular/core';
 import { FormControl, FormGroup } from '@angular/forms';
 import { Router, ActivatedRoute } from '@angular/router';
 import { CommonModule } from '@angular/common';
-import { AuthService } from '../../../_core/services/auth.service';
 import { ButtonComponent } from '../../../_shared/components/button/button.component';
 import { InputComponent } from '../../../_shared/components/input/input.component';
 import APP_ROUTES from '../../../_shared/constants/routes';
 import { User } from '../../../_shared/dataTypes/User';
 import { markAllAsDirty } from '../../../_shared/utils/formUtils';
 import { CustomSearchDropdownComponent } from '../../../_shared/components/custom-search-dropdown/custom-search-dropdown.component';
+import { UserService } from '../../../_core/services/user.service';
 
 @Component({
     selector: 'app-signin',
@@ -31,7 +31,7 @@ export class SigninComponent implements OnInit {
     public countryCode: string = '';
     public isPatientRoute: boolean = false;
 
-    constructor(private authService: AuthService, private router: Router, private route: ActivatedRoute) { }
+    constructor(private userService: UserService, private router: Router, private route: ActivatedRoute) { }
 
     ngOnInit() {
         this.route.parent?.url.subscribe(url => {
@@ -69,7 +69,7 @@ export class SigninComponent implements OnInit {
             phoneNumber: this.signInInfoForm.controls.phoneNumber.value || '',
             type: this.isPatientRoute ? 'patient' : 'clinician'
         };
-        this.authService.signIn(user);
+        this.userService.signIn(user);
         this.router.navigate([`${APP_ROUTES.product._}/${APP_ROUTES.product.dashboard}`], { replaceUrl: true });
     }
 
