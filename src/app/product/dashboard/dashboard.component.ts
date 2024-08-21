@@ -29,7 +29,7 @@ import UserType from '../../_shared/dataTypes/UserType';
 })
 export class DashboardComponent implements OnInit {
     APP_ROUTES = APP_ROUTES;
-    userType: UserType = UserType.Patient
+    userType?: UserType = UserType.Patient
     public isSidebarExpanded: boolean = true;
 
     constructor(private userService: UserService) { }

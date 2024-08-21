@@ -23,10 +23,13 @@ export class UserService {
   }
 
   async signIn(user: User) {
-    const url = `${BASE_URL}${this.USER_URL}/signup`;
-    const signupResult = await RestCalls.post(url, user);
-    this.storeUserData(user);
-    this.isSignedIn = true;
+    const url = `${BASE_URL}${this.USER_URL}/signin`;
+    const signinResult = await RestCalls.post(url, user);
+
+    if (signinResult.status === 200) {
+      this.storeUserData(signinResult.data);
+      this.isSignedIn = true;
+    }
   }
 
   async signUp(user: User) {

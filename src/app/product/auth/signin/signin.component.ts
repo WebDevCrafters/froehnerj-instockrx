@@ -1,5 +1,5 @@
 import { Component, Input, OnInit } from '@angular/core';
-import { FormControl, FormGroup } from '@angular/forms';
+import { FormControl, FormGroup, FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { Router, ActivatedRoute } from '@angular/router';
 import { CommonModule } from '@angular/common';
 import { ButtonComponent } from '../../../_shared/components/button/button.component';
@@ -13,7 +13,7 @@ import { UserService } from '../../../_core/services/user.service';
 @Component({
     selector: 'app-signin',
     standalone: true,
-    imports: [InputComponent, ButtonComponent, CustomSearchDropdownComponent, CommonModule],
+    imports: [InputComponent, ButtonComponent, CustomSearchDropdownComponent, CommonModule, FormsModule, ReactiveFormsModule],
     templateUrl: './signin.component.html',
     styleUrls: ['./signin.component.scss']
 })
@@ -61,15 +61,13 @@ export class SigninComponent implements OnInit {
         this.isEmailLoginInOptionSelected = false;
     }
 
-    public signin() {
-        // const user: User = {
-        //     email: this.signInInfoForm.controls.email.value || '',
-        //     firstName: 'John', // Placeholder value; should be fetched from server
-        //     lastName: 'Doe',
-        //     phoneNumber: this.signInInfoForm.controls.phoneNumber.value || '',
-        //     type: this.isPatientRoute ? 'patient' : 'clinician'
-        // };
-        // this.userService.signIn(user);
+    public async  signin() {
+        const user: User = {
+            email: this.signInInfoForm.controls.email.value || '',
+            phoneNumber: this.signInInfoForm.controls.phoneNumber.value || '',
+            password: this.signInInfoForm.controls.password.value || ''
+        };
+        await this.userService.signIn(user);
         // this.router.navigate([`${APP_ROUTES.product._}/${APP_ROUTES.product.dashboard}`], { replaceUrl: true });
     }
 
