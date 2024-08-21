@@ -9,5 +9,6 @@ export type User = {
   dob?: number;
   doctorId?: string;
   zipCode: number;
+  password?: string;
   location?: Location;
 };

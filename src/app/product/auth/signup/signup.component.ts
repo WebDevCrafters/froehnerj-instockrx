@@ -76,23 +76,23 @@ export class SignupComponent implements OnInit {
         ]);
     }
 
-    private signup() {
+    private async signup() {
         const user: User = {
             email: this.signUpInfoForm.get('email')?.value || "",
             name:`${ this.signUpInfoForm.get('firstName')?.value || ""} ${ this.signUpInfoForm.get('lastName')?.value || ""}`,
             phoneNumber: this.signUpInfoForm.get('phoneNumber')?.value || "",
             userType: this.isPatientRoute ? UserType.Patient : UserType.Clinician,
             zipCode:this.signUpInfoForm.get('zipCode')?.value || "",
+            password:this.signUpInfoForm.get('password')?.value || "",
         };
-        console.log(this.signUpInfoForm)
-        this.userService.signUp(user);
-        // this.router.navigate(
-        //     [`${APP_ROUTES.product.app}/${APP_ROUTES.product.newSearch}`],
-        //     {
-        //         replaceUrl: true,
-        //         queryParams: { stepNumber: JSON.stringify(2) }
-        //     },
-        // );
+        const signupResult = await this.userService.signUp(user);
+        this.router.navigate(
+            [`${APP_ROUTES.product.app}/${APP_ROUTES.product.dashboard}${APP_ROUTES.product.patient}`],
+            {
+                replaceUrl: true,
+                queryParams: { stepNumber: JSON.stringify(2) }
+            },
+        );
     }
 
     public onSuccess() {

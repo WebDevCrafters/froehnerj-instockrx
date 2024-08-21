@@ -2,6 +2,7 @@ import { Injectable } from '@angular/core';
 import { User } from '../../_shared/dataTypes/User';
 import { KEYS } from '../../_shared/constants/localStorageKeys';
 import RestCalls from '../rest/RestCalls';
+import { BASE_URL } from '../../../../env';
 
 @Injectable({
   providedIn: 'root',
@@ -9,6 +10,7 @@ import RestCalls from '../rest/RestCalls';
 export class UserService {
   isSignedIn: boolean = false;
   user: User | null = null;
+  USER_URL = '/user';
 
   constructor() {}
 
@@ -20,15 +22,29 @@ export class UserService {
     return this.isSignedIn;
   }
 
-  signIn(user: User) {
+  async signIn(user: User) {
+    const url = `${BASE_URL}${this.USER_URL}/signup`;
+    const signupResult = await RestCalls.post(url, user);
     this.storeUserData(user);
     this.isSignedIn = true;
   }
 
   async signUp(user: User) {
-    // const signupResult = await RestCalls.post()
-    // this.storeUserData(user);
-    // this.isSignedIn = true;
+    const url = `${BASE_URL}${this.USER_URL}/signup`;
+    const signupResult = await RestCalls.post(url, user);
+
+    if (signupResult.status === 200) {
+      this.storeUserData(signupResult.data);
+      this.isSignedIn = true;
+      return signupResult.data;
+    }
+
+    /**
+      @todo: throw new error from here acc to error code
+      @todo: handle error
+     */
+
+    return null;
   }
 
   signOut() {
@@ -36,9 +52,9 @@ export class UserService {
     this.isSignedIn = false;
   }
 
-  storeUserData(user: User) {
+  storeUserData(data: any) {
     localStorage.setItem(KEYS.isSignedIn, 'true');
-    localStorage.setItem(KEYS.userData, JSON.stringify(user));
+    localStorage.setItem(KEYS.userData, JSON.stringify(data));
   }
 
   removeUserData() {
@@ -46,7 +62,7 @@ export class UserService {
   }
 
   getUserData(): User | null {
-    if(this.user){
+    if (this.user) {
       return this.user;
     }
     const user = localStorage.getItem(KEYS.userData);
