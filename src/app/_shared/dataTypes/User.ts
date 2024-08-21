@@ -1,7 +1,13 @@
+import UserType from './UserType';
+
 export type User = {
-    firstName: string;
-    lastName: string;
-    email: string;
-    phoneNumber: string;
-    type: "patient" | "clinician"
-}
+  userId?: string;
+  email: string;
+  phoneNumber: string;
+  name: string;
+  userType: UserType;
+  dob?: number;
+  doctorId?: string;
+  zipCode: number;
+  location?: Location;
+};

@@ -9,6 +9,7 @@ import { User } from '../../../_shared/dataTypes/User';
 import { markAllAsDirty } from '../../../_shared/utils/formUtils';
 import { CustomSearchDropdownComponent } from '../../../_shared/components/custom-search-dropdown/custom-search-dropdown.component';
 import { UserService } from '../../../_core/services/user.service';
+import UserType from '../../../_shared/dataTypes/UserType';
 
 @Component({
     selector: 'app-signup', 
@@ -29,7 +30,7 @@ export class SignupComponent implements OnInit {
         lastName: new FormControl(''),
         email: new FormControl(''),
         phoneNumber: new FormControl(''),
-        zipCode: new FormControl(''),
+        zipCode: new FormControl(),
         password: new FormControl(''),
         confirmPassword: new FormControl(''),
     });
@@ -78,13 +79,13 @@ export class SignupComponent implements OnInit {
     private signup() {
         const user: User = {
             email: this.signUpInfoForm.get('email')?.value || "",
-            firstName: this.signUpInfoForm.get('firstName')?.value || "",
-            lastName: this.signUpInfoForm.get('lastName')?.value || "",
+            name:`${ this.signUpInfoForm.get('firstName')?.value || ""} ${ this.signUpInfoForm.get('lastName')?.value || ""}`,
             phoneNumber: this.signUpInfoForm.get('phoneNumber')?.value || "",
-            type: this.isPatientRoute ? "patient" : "clinician"
+            userType: this.isPatientRoute ? UserType.Patient : UserType.Clinician,
+            zipCode:this.signUpInfoForm.get('zipCode')?.value || "",
         };
         console.log(this.signUpInfoForm)
-        // this.authService.signUp(user);
+        this.userService.signUp(user);
         // this.router.navigate(
         //     [`${APP_ROUTES.product.app}/${APP_ROUTES.product.newSearch}`],
         //     {

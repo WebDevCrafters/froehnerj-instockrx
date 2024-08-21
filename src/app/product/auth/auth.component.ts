@@ -88,15 +88,15 @@ export class AuthComponent implements OnInit {
     });
 
     public signin() {
-        const user: User = {
-            email: "dummyEmail@email.com",
-            firstName: "John",
-            lastName: "Doe",
-            phoneNumber: "+1134567892",
-            type: 'patient'
-        }
-        this.userService.signIn(user);
-        this.router.navigate([`${APP_ROUTES.product.app}/${APP_ROUTES.product.dashboard}`], { replaceUrl: true })
+        // const user: User = {
+        //     email: "dummyEmail@email.com",
+        //     firstName: "John",
+        //     lastName: "Doe",
+        //     phoneNumber: "+1134567892",
+        //     type: 'patient'
+        // }
+        // this.userService.signIn(user);
+        // this.router.navigate([`${APP_ROUTES.product.app}/${APP_ROUTES.product.dashboard}`], { replaceUrl: true })
     }
 
     gotoHomePage() {

@@ -1,6 +1,7 @@
 import { Injectable } from '@angular/core';
 import { User } from '../../_shared/dataTypes/User';
 import { KEYS } from '../../_shared/constants/localStorageKeys';
+import RestCalls from '../rest/RestCalls';
 
 @Injectable({
   providedIn: 'root',
@@ -24,9 +25,10 @@ export class UserService {
     this.isSignedIn = true;
   }
 
-  signUp(user: User) {
-    this.storeUserData(user);
-    this.isSignedIn = true;
+  async signUp(user: User) {
+    // const signupResult = await RestCalls.post()
+    // this.storeUserData(user);
+    // this.isSignedIn = true;
   }
 
   signOut() {

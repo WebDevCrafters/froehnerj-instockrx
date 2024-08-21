@@ -62,15 +62,15 @@ export class SigninComponent implements OnInit {
     }
 
     public signin() {
-        const user: User = {
-            email: this.signInInfoForm.controls.email.value || '',
-            firstName: 'John', // Placeholder value; should be fetched from server
-            lastName: 'Doe',
-            phoneNumber: this.signInInfoForm.controls.phoneNumber.value || '',
-            type: this.isPatientRoute ? 'patient' : 'clinician'
-        };
-        this.userService.signIn(user);
-        this.router.navigate([`${APP_ROUTES.product._}/${APP_ROUTES.product.dashboard}`], { replaceUrl: true });
+        // const user: User = {
+        //     email: this.signInInfoForm.controls.email.value || '',
+        //     firstName: 'John', // Placeholder value; should be fetched from server
+        //     lastName: 'Doe',
+        //     phoneNumber: this.signInInfoForm.controls.phoneNumber.value || '',
+        //     type: this.isPatientRoute ? 'patient' : 'clinician'
+        // };
+        // this.userService.signIn(user);
+        // this.router.navigate([`${APP_ROUTES.product._}/${APP_ROUTES.product.dashboard}`], { replaceUrl: true });
     }
 
     public onSuccess() {

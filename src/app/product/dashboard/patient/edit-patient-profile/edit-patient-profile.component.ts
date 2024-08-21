@@ -101,8 +101,8 @@ export class EditPatientProfileComponent implements OnInit {
 
     setControls() {
         // these values should come from server
-        this.profileForm.controls.name.setValue(`${this.user?.firstName} ${this.user?.lastName}`)
-        this.profileForm.controls.email.setValue(`${this?.user?.email}`)
+        // this.profileForm.controls.name.setValue(`${this.user?.firstName} ${this.user?.lastName}`)
+        // this.profileForm.controls.email.setValue(`${this?.user?.email}`)
     }
 
 

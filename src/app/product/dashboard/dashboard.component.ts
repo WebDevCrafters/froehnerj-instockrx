@@ -8,6 +8,7 @@ import { RouterLink, RouterLinkActive, RouterOutlet } from '@angular/router';
 import APP_ROUTES from '../../_shared/constants/routes';
 import { SidebarComponent } from "./_shared/sidebar/sidebar.component";
 import { UserService } from '../../_core/services/user.service';
+import UserType from '../../_shared/dataTypes/UserType';
 
 
 @Component({
@@ -28,7 +29,7 @@ import { UserService } from '../../_core/services/user.service';
 })
 export class DashboardComponent implements OnInit {
     APP_ROUTES = APP_ROUTES;
-    userType: "patient" | "clinician" = "patient"
+    userType: UserType = UserType.Patient
     public isSidebarExpanded: boolean = true;
 
     constructor(private userService: UserService) { }
@@ -40,7 +41,7 @@ export class DashboardComponent implements OnInit {
     getUserType() {
         const user = this.userService.getUserData();
         if (!user) return;
-        this.userType = user.type;
+        this.userType = user.userType;
     }
 
     toggleSidebar() {

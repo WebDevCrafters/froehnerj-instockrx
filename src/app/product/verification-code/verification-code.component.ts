@@ -59,15 +59,15 @@ export class VerificationCodeComponent implements OnInit {
     }
 
     public signUp(){
-        const user: User = {
-            email: this.verificationCodeInfo.controls.email.value || "",
-            firstName: "John", //dummy values
-            lastName: "Doe",
-            phoneNumber: "(123) 456-7890",
-            type: this.patientSignUp? "patient" : "clinician"
-        }
-        this.router.navigate([`${APP_ROUTES.product.app}/${APP_ROUTES.product.dashboard}`], { replaceUrl: true })
-        this.userService.signUp(user);
+        // const user: User = {
+        //     email: this.verificationCodeInfo.controls.email.value || "",
+        //     firstName: "John", //dummy values
+        //     lastName: "Doe",
+        //     phoneNumber: "(123) 456-7890",
+        //     type: this.patientSignUp? "patient" : "clinician"
+        // }
+        // this.router.navigate([`${APP_ROUTES.product.app}/${APP_ROUTES.product.dashboard}`], { replaceUrl: true })
+        // this.userService.signUp(user);
     }
 
     public onSucces() {
