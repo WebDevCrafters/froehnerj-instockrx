@@ -22,6 +22,7 @@ const APP_ROUTES = {
         signUp: 'sign-up',
         forgotPassword: 'forgot-password',
         newSearch: 'new-search',
+        payments: 'payments',
         activeSearches: 'active-searches',
         medicationDetails: 'medication-details',
         previousSearches: 'previous-searches',

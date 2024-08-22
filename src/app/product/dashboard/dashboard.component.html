@@ -72,7 +72,9 @@
         <li>
           <a
             class="img_and_tag"
-            [routerLink]="APP_ROUTES.product.newSearch"
+            [routerLink]="[
+              APP_ROUTES.product.patient + '/' + APP_ROUTES.product.payments
+            ]"
             routerLinkActive="active-link"
             [routerLinkActiveOptions]="{ exact: true }"
           >
