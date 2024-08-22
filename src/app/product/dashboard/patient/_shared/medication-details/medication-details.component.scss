@@ -1,0 +1,138 @@
+@import "variables";
+
+$table-bg-color: #f9f9f9;
+$table-header-bg-color: #007bff;
+$table-header-text-color: #fff;
+$table-border-color: #ddd;
+$table-row-hover-color: #f1f1f1;
+$button-bg-color: #28a745;
+$button-text-color: #fff;
+$button-hover-bg-color: #218838;
+
+.main_container {
+    height: 100%;
+
+    .header {
+        display: flex;
+        align-items: center;
+        justify-content: flex-start;
+        height: 10%;
+        font-size: 25px;
+        font-weight: 600;
+        padding: 0 1rem;
+    }
+
+    .medication_info {
+        height: max-content;
+        padding: 0 0.5rem;
+        display: grid;
+        grid-template-columns: repeat(2, 1fr);
+        margin-bottom: 5px;
+
+        .label_and_value {
+            display: flex;
+            gap: 12px;
+            padding: 0.5rem;
+            // margin: 0.5rem;
+
+            .label {
+                color: $globalBlackColor;
+                font-weight: bold;
+                margin-bottom: 0.2rem;
+            }
+
+            .value {
+                color: $darkBrownColor;
+            }
+        }
+    }
+
+    .table_container {
+        padding: 0 1rem;
+        padding-bottom: 2rem;
+        table {
+            width: 100%;
+            height: max-content;
+            border-collapse: collapse;
+
+            thead {
+                background-color: $normalGrey;
+                color: black;
+
+                th {
+                    padding: 12px 15px;
+                    text-align: left;
+                    font-weight: bold;
+                    white-space: nowrap;
+                }
+            }
+
+            tbody {
+                tr {
+                    &:hover {
+                        background-color: $table-row-hover-color;
+                    }
+
+                    td {
+                        padding: 12px 15px;
+                        border-bottom: 1px solid $table-border-color;
+                        white-space: nowrap;
+
+                        &:first-child {
+                            border-left: 2px solid $table-border-color;
+                        }
+
+                        &:last-child {
+                            border-right: 2px solid $table-border-color;
+                        }
+
+                        .view_btn {
+                            padding: 8px 16px;
+                            cursor: pointer;
+                            background-color: $button-bg-color;
+                            color: $button-text-color;
+                            border-radius: 5px;
+                            display: inline-block;
+                            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+                            text-align: center;
+                            transition:
+                                background-color 0.3s ease,
+                                transform 0.2s ease;
+                            font-size: 14px;
+
+                            &:hover {
+                                background-color: $button-hover-bg-color;
+                                transform: translateY(-2px);
+                            }
+
+                            &:active {
+                                background-color: darken($button-bg-color, 5%);
+                                transform: translateY(0);
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    }
+}
+
+@media screen and (max-width: 700px) {
+    .main_container {
+        .medication_info {
+            grid-template-columns: repeat(1, 1fr);
+        }
+    }
+}
+
+::-webkit-scrollbar {
+    width: 4px;
+}
+
+::-webkit-scrollbar-thumb {
+    background: transparent;
+}
+
+::-webkit-scrollbar-thumb:hover {
+    background: transparent;
+}
