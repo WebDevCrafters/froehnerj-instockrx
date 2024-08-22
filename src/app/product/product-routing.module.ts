@@ -18,6 +18,7 @@ import { ActiveSearchesComponent } from './dashboard/patient/active-searches/act
 import { PreviousSearchesComponent } from './dashboard/patient/previous-searches/previous-searches.component';
 import { NearBySearchesComponent } from './dashboard/clinician/near-by-searches/near-by-searches.component';
 import { MedicationDetailsComponent } from './dashboard/patient/_shared/medication-details/medication-details.component';
+import { SelectPackageComponent } from './dashboard/patient/new-search/select-package/select-package.component';
 
 const routes: Routes = [
     {
@@ -114,6 +115,10 @@ const routes: Routes = [
                     {
                         path: APP_ROUTES.product.clinician + '/' + APP_ROUTES.product.nearBySearches,
                         component: NearBySearchesComponent,
+                    },
+                    {
+                        path: APP_ROUTES.product.patient + '/' + APP_ROUTES.product.payments,
+                        component: SelectPackageComponent,
                     },
                 ],
             },
