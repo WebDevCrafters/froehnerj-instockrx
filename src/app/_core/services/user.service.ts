@@ -73,8 +73,10 @@ export class UserService {
   }
 
   signOut() {
-    this.removeUserData();
+    this.accessToken = "";
+    this.userData = null;
     this.isSignedIn = false;
+    this.removeUserData();
   }
 
   private removeUserData() {

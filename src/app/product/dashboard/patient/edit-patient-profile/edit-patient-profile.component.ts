@@ -266,6 +266,7 @@ export class EditPatientProfileComponent implements OnInit {
     }
 
     resetPassword() {
+        this.userService.signOut();
         this.router.navigate(
             [`${APP_ROUTES.product.app}/${APP_ROUTES.product.resetPassword}`],
             { replaceUrl: true }

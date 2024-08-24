@@ -2,6 +2,7 @@
   [ngClass]="[type, shape]"
   (click)="onClick($event)"
   [type]="formButtonType"
+  [disabled]="isLoading"
 >
   <div
     class="icon_and_title_container"
@@ -12,7 +13,13 @@
         <img [src]="leftImageSrc || src" alt="" />
       </div>
     </ng-container>
-    <span *ngIf="title" class="title">{{ title }}</span>
+    <span *ngIf="title" class="title">
+      @if (isLoading) {
+      <app-loader/>
+      } @else {
+      {{ title }}
+      }
+    </span>
     <ng-container *ngIf="rightImageSrc">
       <div class="icon">
         <img [src]="rightImageSrc" alt="" />

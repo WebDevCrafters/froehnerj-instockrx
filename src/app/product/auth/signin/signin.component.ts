@@ -24,6 +24,7 @@ export class SigninComponent implements OnInit {
     @Input() public isVerificationScreenVisible: boolean = false;
     @Input() public patientSignUp: boolean = false;
     public error: string = "";
+    public isLoading: boolean = false;
 
     public signInInfoForm = new FormGroup({
         email: new FormControl(''),
@@ -64,6 +65,7 @@ export class SigninComponent implements OnInit {
     }
 
     public async  signin() {
+        this.isLoading = true;
         const user: User = {
             email: this.signInInfoForm.controls.email.value || '',
             phoneNumber: this.signInInfoForm.controls.phoneNumber.value || '',
@@ -71,9 +73,11 @@ export class SigninComponent implements OnInit {
         };
         this.userService.signIn(user).subscribe({
             next:(res)=>{
+                this.isLoading = false;
                 this.router.navigate([`${APP_ROUTES.product.app}/${APP_ROUTES.product.dashboard}/${APP_ROUTES.product.patient}/${APP_ROUTES.product.newSearch}`], { replaceUrl: true });
             },
             error:(err: HttpErrorResponse)=>{
+                this.isLoading = false;
                 this.error = err.error.message;
             }
         })
