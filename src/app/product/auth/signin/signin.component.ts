@@ -67,7 +67,16 @@ export class SigninComponent implements OnInit {
             phoneNumber: this.signInInfoForm.controls.phoneNumber.value || '',
             password: this.signInInfoForm.controls.password.value || ''
         };
-        await this.userService.signIn(user);
+        this.userService.signIn(user).subscribe({
+            next:(res)=>{
+                console.log("nono")
+                console.log("I am res ",res);
+            },
+            error:(err)=>{
+                console.log("okok")
+                console.log("Inside compoenent",err)
+            }
+        })
         // this.router.navigate([`${APP_ROUTES.product._}/${APP_ROUTES.product.dashboard}`], { replaceUrl: true });
     }
 

@@ -1,9 +1,11 @@
-import { Injectable } from '@angular/core';
+import { Inject, Injectable } from '@angular/core';
 import { User } from '../../product/_shared/interfaces/User';
 import { KEYS } from '../../_shared/constants/localStorageKeys';
 import RestCalls from '../rest/RestCalls';
 import { BASE_URL } from '../../../../env';
 import { AuthResponse } from '../../product/_shared/interfaces/AuthResponse';
+import { HttpClient, HttpErrorResponse } from '@angular/common/http';
+import { catchError, map, of, throwError } from 'rxjs';
 
 @Injectable({
   providedIn: 'root',
@@ -13,8 +15,7 @@ export class UserService {
   userData: AuthResponse | null = null;
   USER_URL = '/user';
   accessToken: string = '';
-
-  constructor() {}
+  constructor(private httpClient: HttpClient) {}
 
   checkIfSignedIn(): boolean {
     if (typeof window !== 'undefined' && localStorage) {
@@ -24,16 +25,22 @@ export class UserService {
     return this.isSignedIn;
   }
 
-  async signIn(user: User) {
+  signIn(user: User) {
     const url = `${BASE_URL}${this.USER_URL}/signin`;
-    const signinResult = await RestCalls.post(url, user);
-
-    if (signinResult.status === 200) {
-      const restResult = signinResult.data as AuthResponse;
-      this.accessToken = restResult.accessToken;
-      this.storeUserData(restResult);
-      this.isSignedIn = true;
-    }
+    return this.httpClient.post(url, user).pipe(
+      map((result) => {
+        let signinResult = result as AuthResponse;
+        this.accessToken = signinResult.accessToken;
+        this.storeUserData(signinResult);
+        return signinResult;
+      }),
+      catchError((error: HttpErrorResponse) => {
+        if (error.status === 404) {
+          return of([]);
+        }
+        return throwError(() => error);
+      })
+    );
   }
 
   async signUp(user: User) {
