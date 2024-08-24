@@ -2,7 +2,7 @@ import SubscriptionStatus from "./SubscriptionStatus";
 
 
 interface Subscription {
-    subscriptionId?: String;
+    subscriptionId?: string;
     name: string;
     cost: number;
     searchCount: number;

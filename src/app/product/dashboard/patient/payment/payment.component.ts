@@ -51,4 +51,8 @@ export class PaymentComponent implements OnInit {
         this.selectedPackage = event;
         this.step = 2;
     }
+
+    public onPaymentComplete(payment: Payment) {
+        this.payment = payment;
+    }
 }

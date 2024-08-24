@@ -5,5 +5,5 @@
 <app-select-package (onSelectPackageSubmit)="selectPackage($event)" />
 
 } @case (2) {
-<app-checkout [selectedPackage]="selectedPackage" />
+<app-checkout [selectedPackage]="selectedPackage" (onPaymentComplete)="onPaymentComplete($event)"/>
 } } } }
