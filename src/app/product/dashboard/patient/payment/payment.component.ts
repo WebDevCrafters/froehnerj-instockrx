@@ -5,31 +5,36 @@ import { SelectPackageComponent } from './select-package/select-package.componen
 import { Subscription } from 'rxjs';
 import { PaymentService } from '../../../../_core/services/payment.service';
 import Payment from '../../../_shared/interfaces/Payment';
+import { LoaderComponent } from '../../../../_shared/components/loader/loader.component';
 
 @Component({
-  selector: 'app-payment',
-  standalone: true,
-  imports: [SelectPackageComponent],
-  templateUrl: './payment.component.html',
-  styleUrl: './payment.component.scss',
+    selector: 'app-payment',
+    standalone: true,
+    imports: [SelectPackageComponent, LoaderComponent],
+    templateUrl: './payment.component.html',
+    styleUrl: './payment.component.scss',
 })
 export class PaymentComponent implements OnInit {
-  userSubscription: Subscription | null = null;
+    payment: Payment | null = null;
+    isLoading: boolean = false;
 
-  constructor(private paymentService: PaymentService) {}
+    constructor(private paymentService: PaymentService) {}
 
-  ngOnInit(): void {
-    this.getUserSubscription();
-  }
+    ngOnInit(): void {
+        this.getUserSubscription();
+    }
 
-  async getUserSubscription() {
-    // this.paymentService.getCurrentPayment().subscribe({
-    //   next: (data: Payment) => {
-    //     console.log(data);
-    //   },
-    //   error: (error: Error) => {
-    //     console.log("This is mee",error.message);
-    //   },
-    // });
-  }
+    async getUserSubscription() {
+        this.isLoading = true;
+        this.paymentService.getCurrentPayment().subscribe({
+            next: (payment: Payment | null) => {
+                this.payment = payment;
+                this.isLoading = false;
+            },
+            error: (error: Error) => {
+                console.log('This is mee', error.message);
+                this.isLoading = false;
+            },
+        });
+    }
 }
