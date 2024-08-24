@@ -2,11 +2,11 @@ import { Component, Input, OnInit } from '@angular/core';
 import { defaultPackage } from '../../../../_shared/constants/data';
 import { Package } from '../../../../_shared/dataTypes/Package';
 import { SelectPackageComponent } from './select-package/select-package.component';
-import { Subscription } from 'rxjs';
 import { PaymentService } from '../../../../_core/services/payment.service';
 import Payment from '../../../_shared/interfaces/Payment';
 import { LoaderComponent } from '../../../../_shared/components/loader/loader.component';
 import { CurrentPackageComponent } from './current-package/current-package.component';
+import Subscription from '../../../_shared/interfaces/Subscription';
 
 @Component({
     selector: 'app-payment',
@@ -25,7 +25,7 @@ export class PaymentComponent implements OnInit {
         this.getUserSubscription();
     }
 
-    async getUserSubscription() {
+    getUserSubscription() {
         this.isLoading = true;
         this.paymentService.getCurrentPayment().subscribe({
             next: (payment: Payment | null) => {
@@ -37,5 +37,9 @@ export class PaymentComponent implements OnInit {
                 this.isLoading = false;
             },
         });
+    }
+
+    public selectedPackage(event: Subscription | null) {
+        console.log(event);
     }
 }

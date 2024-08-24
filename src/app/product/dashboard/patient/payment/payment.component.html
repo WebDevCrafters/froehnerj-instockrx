@@ -1,5 +1,5 @@
 @if (isLoading) {
 <app-loader />
 } @else { @if (payment) { <app-current-package  [payment]="payment"/> } @else {
-<app-select-package />
+<app-select-package (onSelectPackageSubmit)="selectedPackage($event)"/>
 } }

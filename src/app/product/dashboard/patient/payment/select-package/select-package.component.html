@@ -6,15 +6,15 @@
     @for (package of packageOptions; track $index) {
     <div
       class="package_card"
-      [ngClass]="{ selected_card: selectedPackage.id === package.id }"
+      [ngClass]="{ selected_card: selectedPackage?.subscriptionId === package.subscriptionId }"
       (click)="selectPackage(package)"
     >
       <p class="heading">
-        {{ package.title }}
+        {{ package.name }}
       </p>
       <p class="cost">${{ package.cost }}</p>
       <p class="desc">
-       ${{(package.cost/package.searches).toFixed(2)}} per successfull search. 
+       ${{(package.cost/package.searchCount).toFixed(2)}} per successfull search. 
        <br>
        {{ package.description }}
       </p>

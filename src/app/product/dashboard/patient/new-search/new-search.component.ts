@@ -9,7 +9,12 @@ import { ActivatedRoute } from '@angular/router';
 import { defaultPackage } from '../../../../_shared/constants/data';
 import { Package } from '../../../../_shared/dataTypes/Package';
 import { markAllAsDirty } from '../../../../_shared/utils/formUtils';
-import { requiredValidator, dateValidator, charLimitValidator } from '../../../../_shared/utils/Validators';
+import {
+    requiredValidator,
+    dateValidator,
+    charLimitValidator,
+} from '../../../../_shared/utils/Validators';
+import Subscription from '../../../_shared/interfaces/Subscription';
 
 @Component({
     selector: 'app-new-search',
@@ -26,11 +31,9 @@ import { requiredValidator, dateValidator, charLimitValidator } from '../../../.
 })
 export class NewSearchComponent implements OnInit {
     stepNumber: number = 1;
-    selectedPackage: Package = defaultPackage;
+    selectedPackage: Subscription | null = null;
 
-    constructor(
-        private route: ActivatedRoute
-    ) { }
+    constructor(private route: ActivatedRoute) {}
 
     ngOnInit(): void {
         this.route.queryParams.subscribe((params) => {
@@ -63,7 +66,9 @@ export class NewSearchComponent implements OnInit {
                 brand: new FormControl(''),
             }),
         ]),
-        pickupDate: new FormControl(new Date().getTime(), [Validators.required]),
+        pickupDate: new FormControl(new Date().getTime(), [
+            Validators.required,
+        ]),
     });
 
     onAdditionalInfoSubmit() {
@@ -78,7 +83,7 @@ export class NewSearchComponent implements OnInit {
         }
     }
 
-    onSelectPackageSubmit(packageSelected: Package) {
+    onSelectPackageSubmit(packageSelected: Subscription | null) {
         this.selectedPackage = packageSelected;
         this.stepNumber += 1;
         console.log('got', this.selectedPackage);

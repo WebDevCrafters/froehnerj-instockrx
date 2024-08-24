@@ -6,7 +6,8 @@ interface Subscription {
     name: string;
     cost: number;
     searchCount: number;
-    status: SubscriptionStatus;
+    status?: SubscriptionStatus;
+    description?: string;
 }
 
 export default Subscription;
