@@ -6,7 +6,6 @@ import {
     FormGroup,
     ReactiveFormsModule,
 } from '@angular/forms';
-import { PersonalInfoComponent } from '../personal-info/personal-info.component';
 import { ButtonComponent } from '../../../../../_shared/components/button/button.component';
 import { DatePickerComponent } from '../../../../../_shared/components/date-picker/date-picker.component';
 import { InputComponent } from '../../../../../_shared/components/input/input.component';
@@ -25,7 +24,6 @@ import { dateValidator } from '../../../../../_shared/utils/Validators';
         ReactiveFormsModule,
         ModalComponent,
         DatePickerComponent,
-        PersonalInfoComponent,
     ],
     templateUrl: './additional-info.component.html',
     styleUrl: './additional-info.component.scss',

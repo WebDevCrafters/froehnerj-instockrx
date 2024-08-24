@@ -1,14 +1,14 @@
 import { Component, Input } from '@angular/core';
-import { defaultPackage } from '../../../../../_shared/constants/data';
 import { Package } from '../../../../../_shared/dataTypes/Package';
+import { defaultPackage } from '../../../../../_shared/constants/data';
 
 @Component({
-  selector: 'app-payment',
+  selector: 'app-checkout',
   standalone: true,
   imports: [],
-  templateUrl: './payment.component.html',
-  styleUrl: './payment.component.scss'
+  templateUrl: './checkout.component.html',
+  styleUrl: './checkout.component.scss'
 })
-export class PaymentComponent {
+export class CheckoutComponent {
   @Input() selectedPackage: Package = defaultPackage;
 }
