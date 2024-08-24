@@ -11,6 +11,6 @@ import { SelectPackageComponent } from './select-package/select-package.componen
   styleUrl: './payment.component.scss',
 })
 export class PaymentComponent {
-  userSubscription: any | null = {null};
+  userSubscription: any | null = null;
 
 }
