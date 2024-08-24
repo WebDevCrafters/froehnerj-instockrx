@@ -1,7 +1,7 @@
 import { Component, EventEmitter, OnInit, Output } from '@angular/core';
 import { ModalComponent } from '../modal/modal.component';
 import { ButtonComponent } from '../button/button.component';
-import { User } from '../../dataTypes/User';
+import { User } from '../../../product/_shared/interfaces/User';
 import { Router } from '@angular/router';
 import APP_ROUTES from '../../constants/routes';
 import { CommonModule, Location } from '@angular/common';
@@ -27,9 +27,9 @@ export class HeaderComponent implements OnInit {
     }
 
     getUserEmail() {
-        const user = this.userService.getUserData();
-        if (!user) return;
-        this.user = user;
+        const authResponse = this.userService.getUserData();
+        if (!authResponse) return;
+        this.user = authResponse.user;
     }
 
     toggleSettings() {

@@ -4,7 +4,7 @@ import { InputComponent } from '../../_shared/components/input/input.component';
 import { ButtonComponent } from '../../_shared/components/button/button.component';
 import { Router } from '@angular/router';
 import APP_ROUTES from '../../_shared/constants/routes';
-import { User } from '../../_shared/dataTypes/User';
+import { User } from '../_shared/interfaces/User';
 import { CustomSearchDropdownComponent } from '../../_shared/components/custom-search-dropdown/custom-search-dropdown.component';
 import { CommonModule } from '@angular/common';
 import { emailValidator } from '../../_shared/utils/Validators';

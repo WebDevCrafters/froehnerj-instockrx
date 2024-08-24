@@ -1,16 +1,18 @@
 import { Injectable } from '@angular/core';
-import { User } from '../../_shared/dataTypes/User';
+import { User } from '../../product/_shared/interfaces/User';
 import { KEYS } from '../../_shared/constants/localStorageKeys';
 import RestCalls from '../rest/RestCalls';
 import { BASE_URL } from '../../../../env';
+import { AuthResponse } from '../../product/_shared/interfaces/AuthResponse';
 
 @Injectable({
   providedIn: 'root',
 })
 export class UserService {
   isSignedIn: boolean = false;
-  user: User | null = null;
+  userData: AuthResponse | null = null;
   USER_URL = '/user';
+  accessToken: string = '';
 
   constructor() {}
 
@@ -27,7 +29,9 @@ export class UserService {
     const signinResult = await RestCalls.post(url, user);
 
     if (signinResult.status === 200) {
-      this.storeUserData(signinResult.data);
+      const restResult = signinResult.data as AuthResponse;
+      this.accessToken = restResult.accessToken;
+      this.storeUserData(restResult);
       this.isSignedIn = true;
     }
   }
@@ -37,7 +41,9 @@ export class UserService {
     const signupResult = await RestCalls.post(url, user);
 
     if (signupResult.status === 200) {
-      this.storeUserData(signupResult.data);
+      const restResult = signupResult.data as AuthResponse;
+      this.accessToken = restResult.accessToken;
+      this.storeUserData(restResult);
       this.isSignedIn = true;
       return signupResult.data;
     }
@@ -64,14 +70,24 @@ export class UserService {
     localStorage.clear();
   }
 
-  getUserData(): User | null {
-    if (this.user) {
-      return this.user;
+  getUserData(): AuthResponse | null {
+    if (this.userData) {
+      return this.userData;
     }
     const user = localStorage.getItem(KEYS.userData);
     if (!user) return null;
-    const userObj = JSON.parse(user);
-    this.user = userObj;
+    const userObj: AuthResponse = JSON.parse(user);
+    this.userData = userObj;
     return userObj;
+  }
+
+  getAccessToken(): string {
+    if (this.accessToken) {
+      return this.accessToken;
+    }
+
+    let authResponse = this.getUserData();
+    this.accessToken = authResponse?.accessToken || '';
+    return authResponse?.accessToken || '';
   }
 }

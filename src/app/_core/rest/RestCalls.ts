@@ -1,9 +1,14 @@
 import axios, { AxiosResponse } from 'axios';
 
 class RestCalls {
-  async get<T>(url: string): Promise<AxiosResponse<T>> {
+  async get<T>(
+    url: string,
+    headers?: Record<string, string>
+  ): Promise<AxiosResponse<T>> {
     try {
-      const response = await axios.get<T>(url);
+      const response = await axios.get<T>(url, {
+        headers,
+      });
       return response;
     } catch (error) {
       throw this.handleError(error);

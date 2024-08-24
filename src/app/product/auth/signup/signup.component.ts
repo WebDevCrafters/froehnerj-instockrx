@@ -5,11 +5,11 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { ButtonComponent } from '../../../_shared/components/button/button.component';
 import { InputComponent } from '../../../_shared/components/input/input.component';
 import APP_ROUTES from '../../../_shared/constants/routes';
-import { User } from '../../../_shared/dataTypes/User';
+import { User } from '../../_shared/interfaces/User';
 import { markAllAsDirty } from '../../../_shared/utils/formUtils';
 import { CustomSearchDropdownComponent } from '../../../_shared/components/custom-search-dropdown/custom-search-dropdown.component';
 import { UserService } from '../../../_core/services/user.service';
-import UserType from '../../../_shared/dataTypes/UserType';
+import UserType from '../../_shared/interfaces/UserType';
 
 @Component({
     selector: 'app-signup', 

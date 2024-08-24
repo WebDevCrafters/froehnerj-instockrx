@@ -8,7 +8,7 @@ import { RouterLink, RouterLinkActive, RouterOutlet } from '@angular/router';
 import APP_ROUTES from '../../_shared/constants/routes';
 import { SidebarComponent } from "./_shared/sidebar/sidebar.component";
 import { UserService } from '../../_core/services/user.service';
-import UserType from '../../_shared/dataTypes/UserType';
+import UserType from '../_shared/interfaces/UserType';
 
 
 @Component({
@@ -39,9 +39,9 @@ export class DashboardComponent implements OnInit {
     }
 
     getUserType() {
-        const user = this.userService.getUserData();
-        if (!user) return;
-        this.userType = user.userType;
+        const authResponse = this.userService.getUserData();
+        if (!authResponse) return;
+        this.userType = authResponse.user.userType;
     }
 
     toggleSidebar() {

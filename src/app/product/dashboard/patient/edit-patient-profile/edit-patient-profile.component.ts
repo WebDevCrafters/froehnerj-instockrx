@@ -3,7 +3,7 @@ import { FormControl, FormGroup, FormArray, Validators, FormsModule } from '@ang
 import { activeSearchData, defaultPackage } from '../../../../_shared/constants/data';
 import APP_ROUTES from '../../../../_shared/constants/routes';
 import { ActiveSearch } from '../../../../_shared/dataTypes/ActiveSearch';
-import { User } from '../../../../_shared/dataTypes/User';
+import { User } from '../../../_shared/interfaces/User';
 import { formatTimestamp, mmddyyToTimestamp } from '../../../../_shared/utils/dateTime';
 import { markAllAsDirty } from '../../../../_shared/utils/formUtils';
 import { requiredValidator, emailValidator, charLimitValidator, dateValidator } from '../../../../_shared/utils/Validators';
@@ -94,9 +94,9 @@ export class EditPatientProfileComponent implements OnInit {
     }
 
     getUser() {
-        const user = this.userService.getUserData();
-        if (!user) return;
-        this.user = user;
+        const authResponse = this.userService.getUserData();
+        if (!authResponse) return;
+        this.user = authResponse.user;
     }
 
     setControls() {
