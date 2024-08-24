@@ -7,17 +7,25 @@ import Payment from '../../../_shared/interfaces/Payment';
 import { LoaderComponent } from '../../../../_shared/components/loader/loader.component';
 import { CurrentPackageComponent } from './current-package/current-package.component';
 import Subscription from '../../../_shared/interfaces/Subscription';
+import { CheckoutComponent } from './checkout/checkout.component';
 
 @Component({
     selector: 'app-payment',
     standalone: true,
-    imports: [SelectPackageComponent, LoaderComponent, CurrentPackageComponent],
+    imports: [
+        SelectPackageComponent,
+        LoaderComponent,
+        CurrentPackageComponent,
+        CheckoutComponent,
+    ],
     templateUrl: './payment.component.html',
     styleUrl: './payment.component.scss',
 })
 export class PaymentComponent implements OnInit {
     payment: Payment | null = null;
     isLoading: boolean = false;
+    selectedPackage: Subscription | null = null;
+    step: 1 | 2 = 1;
 
     constructor(private paymentService: PaymentService) {}
 
@@ -39,7 +47,8 @@ export class PaymentComponent implements OnInit {
         });
     }
 
-    public selectedPackage(event: Subscription | null) {
-        console.log(event);
+    public selectPackage(event: Subscription | null) {
+        this.selectedPackage = event;
+        this.step = 2;
     }
 }
