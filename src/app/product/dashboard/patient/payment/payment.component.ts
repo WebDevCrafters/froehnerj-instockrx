@@ -23,13 +23,13 @@ export class PaymentComponent implements OnInit {
   }
 
   async getUserSubscription() {
-    this.paymentService.getCurrentPayment().subscribe({
-      next: (data: Payment) => {
-        console.log(data);
-      },
-      error: (error: Error) => {
-        console.log("This is mee",error.message);
-      },
-    });
+    // this.paymentService.getCurrentPayment().subscribe({
+    //   next: (data: Payment) => {
+    //     console.log(data);
+    //   },
+    //   error: (error: Error) => {
+    //     console.log("This is mee",error.message);
+    //   },
+    // });
   }
 }
