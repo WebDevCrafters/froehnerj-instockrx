@@ -1,25 +1,27 @@
 <div class="main_container">
-  <div class="header">Previous Searches</div>
-  <div class="content">
-    @if(false) {
-    <div class="empty_container">No Previous Searches</div>
-    } @else {
-    <table>
-      <thead>
-        <th>Medication Name</th>
-        <th>Time</th>
-        <th>View</th>
-      </thead>
-      <tbody>
-        <tr>
-          <td>Med 1</td>
-          <td>2 Sep 2024</td>
-          <td>
-            <div class="view_btn">View Details</div>
-          </td>
-        </tr>
-      </tbody>
-    </table>
-    }
-  </div>
+    <div class="header">Previous Searches</div>
+    <div class="content">
+        @if(false) {
+        <div class="empty_container">No Previous Searches</div>
+        } @else {
+        <table>
+            <thead>
+                <th>Medication Name</th>
+                <th>Time</th>
+                <th>View</th>
+            </thead>
+            <tbody>
+                @for (search of previousSearches; track $index) {
+                <tr>
+                    <td>{{ search.medication.name }}</td>
+                    <td>{{ search.medication.pickUpDate }}</td>
+                    <td>
+                        <div class="view_btn">View Details</div>
+                    </td>
+                </tr>
+                }
+            </tbody>
+        </table>
+        }
+    </div>
 </div>
