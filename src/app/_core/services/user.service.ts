@@ -10,10 +10,10 @@ import { catchError, map, of, throwError } from 'rxjs';
     providedIn: 'root',
 })
 export class UserService {
-    isSignedIn: boolean = false;
-    userData: AuthResponse | null = null;
-    USER_URL = '/user';
-    accessToken: string = '';
+    private isSignedIn: boolean = false;
+    private userData: AuthResponse | null = null;
+    private USER_URL = '/user';
+    private accessToken: string = '';
     constructor(private httpClient: HttpClient) {}
 
     checkIfSignedIn(): boolean {
