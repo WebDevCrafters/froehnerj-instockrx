@@ -9,6 +9,7 @@ import { User } from '../../_shared/interfaces/User';
 import { markAllAsDirty } from '../../../_shared/utils/formUtils';
 import { CustomSearchDropdownComponent } from '../../../_shared/components/custom-search-dropdown/custom-search-dropdown.component';
 import { UserService } from '../../../_core/services/user.service';
+import { HttpErrorResponse } from '@angular/common/http';
 
 @Component({
     selector: 'app-signin',
@@ -22,6 +23,7 @@ export class SigninComponent implements OnInit {
     @Input() public isEmailLoginInOptionSelected: boolean = true;
     @Input() public isVerificationScreenVisible: boolean = false;
     @Input() public patientSignUp: boolean = false;
+    public error: string = "";
 
     public signInInfoForm = new FormGroup({
         email: new FormControl(''),
@@ -69,15 +71,12 @@ export class SigninComponent implements OnInit {
         };
         this.userService.signIn(user).subscribe({
             next:(res)=>{
-                console.log("nono")
-                console.log("I am res ",res);
+                this.router.navigate([`${APP_ROUTES.product.app}/${APP_ROUTES.product.dashboard}/${APP_ROUTES.product.patient}/${APP_ROUTES.product.newSearch}`], { replaceUrl: true });
             },
-            error:(err)=>{
-                console.log("okok")
-                console.log("Inside compoenent",err)
+            error:(err: HttpErrorResponse)=>{
+                this.error = err.error.message;
             }
         })
-        // this.router.navigate([`${APP_ROUTES.product._}/${APP_ROUTES.product.dashboard}`], { replaceUrl: true });
     }
 
     public onSuccess() {

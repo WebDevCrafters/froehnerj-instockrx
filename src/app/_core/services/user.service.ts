@@ -30,14 +30,10 @@ export class UserService {
     return this.httpClient.post(url, user).pipe(
       map((result) => {
         let signinResult = result as AuthResponse;
-        this.accessToken = signinResult.accessToken;
-        this.storeUserData(signinResult);
+        this.setUser(signinResult);
         return signinResult;
       }),
       catchError((error: HttpErrorResponse) => {
-        if (error.status === 404) {
-          return of([]);
-        }
         return throwError(() => error);
       })
     );
@@ -49,32 +45,10 @@ export class UserService {
 
     if (signupResult.status === 200) {
       const restResult = signupResult.data as AuthResponse;
-      this.accessToken = restResult.accessToken;
-      this.storeUserData(restResult);
-      this.isSignedIn = true;
+      this.setUser(restResult);
       return signupResult.data;
     }
-
-    /**
-      @todo: throw new error from here acc to error code
-      @todo: handle error
-     */
-
     return null;
-  }
-
-  signOut() {
-    this.removeUserData();
-    this.isSignedIn = false;
-  }
-
-  storeUserData(data: any) {
-    localStorage.setItem(KEYS.isSignedIn, 'true');
-    localStorage.setItem(KEYS.userData, JSON.stringify(data));
-  }
-
-  removeUserData() {
-    localStorage.clear();
   }
 
   getUserData(): AuthResponse | null {
@@ -96,5 +70,26 @@ export class UserService {
     let authResponse = this.getUserData();
     this.accessToken = authResponse?.accessToken || '';
     return authResponse?.accessToken || '';
+  }
+
+  signOut() {
+    this.removeUserData();
+    this.isSignedIn = false;
+  }
+
+  private removeUserData() {
+    localStorage.clear();
+  }
+
+  private setUser(response: AuthResponse) {
+    this.accessToken = response.accessToken;
+    this.userData = response;
+    this.storeUserData(response);
+    this.isSignedIn = true;
+  }
+
+  private storeUserData(data: any) {
+    localStorage.setItem(KEYS.isSignedIn, 'true');
+    localStorage.setItem(KEYS.userData, JSON.stringify(data));
   }
 }
