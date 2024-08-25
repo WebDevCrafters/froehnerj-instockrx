@@ -3,11 +3,11 @@ import { SearchStatus } from './SearchStatus';
 
 interface Search {
     searchId?: string;
-    patient: string;
+    patient?: string;
     medication: Medication;
     status: SearchStatus;
     zipCode: number;
-    location: Location;
+    location?: Location;
     prescriberName: string;
 }
 

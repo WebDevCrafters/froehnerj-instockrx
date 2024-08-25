@@ -15,6 +15,10 @@ import {
     charLimitValidator,
 } from '../../../../_shared/utils/Validators';
 import Subscription from '../../../_shared/interfaces/Subscription';
+import { ButtonComponent } from '../../../../_shared/components/button/button.component';
+import { SearchService } from '../../../../_core/services/search.service';
+import Search from '../../../_shared/interfaces/Search';
+import { SearchStatus } from '../../../_shared/interfaces/SearchStatus';
 
 @Component({
     selector: 'app-new-search',
@@ -25,6 +29,7 @@ import Subscription from '../../../_shared/interfaces/Subscription';
         AdditionalInfoComponent,
         SelectPackageComponent,
         PaymentComponent,
+        ButtonComponent,
     ],
     templateUrl: './new-search.component.html',
     styleUrl: './new-search.component.scss',
@@ -33,7 +38,10 @@ export class NewSearchComponent implements OnInit {
     stepNumber: number = 1;
     selectedPackage: Subscription | null = null;
 
-    constructor(private route: ActivatedRoute) {}
+    constructor(
+        private route: ActivatedRoute,
+        private searchService: SearchService
+    ) {}
 
     ngOnInit(): void {
         this.route.queryParams.subscribe((params) => {
@@ -87,5 +95,27 @@ export class NewSearchComponent implements OnInit {
         this.selectedPackage = packageSelected;
         this.stepNumber += 1;
         console.log('got', this.selectedPackage);
+    }
+
+    add() {
+        const s: Search = {
+            zipCode: 226018,
+            prescriberName: 'babloo' + Date.now(),
+            medication: {
+                name: 'E2 ki search'+Date.now(),
+                pickUpDate: 16516534,
+                dose: '55',
+                quantity: 10,
+            },
+            status: SearchStatus.InProgress,
+        };
+        this.searchService.addSearch(s).subscribe({
+            next: (search) => {
+                console.log(search);
+            },
+            error: (err) => {
+                console.log(err);
+            },
+        });
     }
 }

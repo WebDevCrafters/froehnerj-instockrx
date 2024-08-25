@@ -21,7 +21,7 @@ export class SearchService {
         const accessToken = this.userService.getAccessToken();
         const url = `${BASE_URL}${this.SEARCH_URL}/add`;
         const headers = new HttpHeaders().set('authorization', accessToken);
-        return this.httpClient.get(url, { headers }).pipe(
+        return this.httpClient.post(url, search, { headers }).pipe(
             map((res) => {
                 return res as Search;
             }),
