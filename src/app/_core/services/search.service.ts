@@ -29,7 +29,7 @@ export class SearchService {
         );
     }
 
-    getMySearchesInRadius(status: SearchStatus) {
+    getSearchesInRadius(status: SearchStatus) {
         const accessToken = this.userService.getAccessToken();
         const url = `${BASE_URL}${this.SEARCH_URL}/radius`;
         const headers = new HttpHeaders().set('authorization', accessToken);
