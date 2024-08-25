@@ -12,14 +12,14 @@ import { UserService } from '../../../_core/services/user.service';
 import UserType from '../../_shared/interfaces/UserType';
 
 @Component({
-    selector: 'app-signup', 
-    standalone: true, 
+    selector: 'app-signup',
+    standalone: true,
     imports: [
         InputComponent,
         ButtonComponent,
         CustomSearchDropdownComponent,
         FormsModule,
-        CommonModule
+        CommonModule,
     ],
     templateUrl: './signup.component.html',
     styleUrl: './signup.component.scss',
@@ -48,14 +48,13 @@ export class SignupComponent implements OnInit {
         private userService: UserService,
         private router: Router,
         private route: ActivatedRoute
-    ) {
-
-    }
+    ) {}
 
     ngOnInit() {
-        this.route.parent?.url.subscribe(url => {
+        this.route.parent?.url.subscribe((url) => {
             if (url.length > 0) {
-                this.isPatientRoute = url[0].path === APP_ROUTES.product.patient;
+                this.isPatientRoute =
+                    url[0].path === APP_ROUTES.product.patient;
             }
         });
     }
@@ -72,27 +71,36 @@ export class SignupComponent implements OnInit {
             APP_ROUTES.product.app,
             APP_ROUTES.product.auth,
             targetRoute,
-            APP_ROUTES.product.signIn
+            APP_ROUTES.product.signIn,
         ]);
     }
 
     private async signup() {
         const user: User = {
-            email: this.signUpInfoForm.get('email')?.value || "",
-            name:`${ this.signUpInfoForm.get('firstName')?.value || ""} ${ this.signUpInfoForm.get('lastName')?.value || ""}`,
-            phoneNumber: this.signUpInfoForm.get('phoneNumber')?.value || "",
-            userType: this.isPatientRoute ? UserType.Patient : UserType.Clinician,
-            zipCode:this.signUpInfoForm.get('zipCode')?.value || "",
-            password:this.signUpInfoForm.get('password')?.value || "",
+            email: this.signUpInfoForm.get('email')?.value || '',
+            name: `${this.signUpInfoForm.get('firstName')?.value || ''} ${
+                this.signUpInfoForm.get('lastName')?.value || ''
+            }`,
+            phoneNumber: this.signUpInfoForm.get('phoneNumber')?.value || '',
+            userType: this.isPatientRoute
+                ? UserType.Patient
+                : UserType.Clinician,
+            zipCode: this.signUpInfoForm.get('zipCode')?.value || '',
+            password: this.signUpInfoForm.get('password')?.value || '',
         };
-        const signupResult = await this.userService.signUp(user);
-        this.router.navigate(
-            [`${APP_ROUTES.product.app}/${APP_ROUTES.product.dashboard}${APP_ROUTES.product.patient}`],
-            {
-                replaceUrl: true,
-                queryParams: { stepNumber: JSON.stringify(2) }
+        this.userService.signUp(user).subscribe({
+            next: (user) => {
+                this.router.navigate(
+                    [
+                        `${APP_ROUTES.product.app}/${APP_ROUTES.product.dashboard}/${APP_ROUTES.product.patient}/${APP_ROUTES.product.newSearch}`,
+                    ],
+                    { replaceUrl: true }
+                );
             },
-        );
+            error: (err) => {
+                console.log(err);
+            },
+        });
     }
 
     public onSuccess() {
@@ -106,12 +114,16 @@ export class SignupComponent implements OnInit {
     }
 
     public navigateToPrivacyPolicy() {
-        const url = this.router.serializeUrl(this.router.createUrlTree([`${APP_ROUTES.webpage.privacy}`]));
+        const url = this.router.serializeUrl(
+            this.router.createUrlTree([`${APP_ROUTES.webpage.privacy}`])
+        );
         window.open(url, '_blank');
     }
 
     public navigateToTermsOfService() {
-        const url = this.router.serializeUrl(this.router.createUrlTree([`${APP_ROUTES.webpage.termsOfService}`]));
+        const url = this.router.serializeUrl(
+            this.router.createUrlTree([`${APP_ROUTES.webpage.termsOfService}`])
+        );
         window.open(url, '_blank');
     }
 }
