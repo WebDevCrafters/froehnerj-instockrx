@@ -1,17 +1,39 @@
-<div style="display: flex; flex-direction: column">
-    <p>Package Name: {{ payment?.subscription?.name }}</p>
-    <p>
-        Package Cost:
-        {{ payment?.subscription?.cost }}
-    </p>
-    <p>
-        Package Total Searches:
-        {{ payment?.subscription?.searchCount }}
-    </p>
-    <p>Paid on:{{ payment?.paidOn }}</p>
-    <p>
-        Searches Consumed:{{ payment?.searchesConsumed }} Payment Status:{{
-            payment?.searchesConsumed
-        }}
-    </p>
+<div class="payment-container">
+    <div class="payment-card">
+        <h2>Payment Details</h2>
+        <div class="payment-info">
+            <p>
+                <strong>Payment ID:</strong> {{ payment?.paymentId || "N/A" }}
+            </p>
+            <p><strong>User ID:</strong> {{ payment?.userId }}</p>
+            <p><strong>Status:</strong> {{ payment?.status || "Pending" }}</p>
+            <p><strong>Paid On:</strong> {{ payment?.paidOn }}</p>
+            <p>
+                <strong>Searches Consumed:</strong>
+                {{ payment?.searchesConsumed }}
+            </p>
+        </div>
+
+        <h3>Subscription Details</h3>
+        <div class="subscription-info">
+            <p>
+                <strong>Subscription ID:</strong>
+                {{ payment?.subscription?.subscriptionId || "N/A" }}
+            </p>
+            <p><strong>Name:</strong> {{ payment?.subscription?.name }}</p>
+            <p><strong>Cost:</strong> ${{ payment?.subscription?.cost }}</p>
+            <p>
+                <strong>Search Count:</strong>
+                {{ payment?.subscription?.searchCount }}
+            </p>
+            <p>
+                <strong>Status:</strong>
+                {{ payment?.subscription?.status || "Active" }}
+            </p>
+            <p>
+                <strong>Description:</strong>
+                {{ payment?.subscription?.description || "No Description" }}
+            </p>
+        </div>
+    </div>
 </div>
