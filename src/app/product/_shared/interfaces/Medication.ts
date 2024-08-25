@@ -5,6 +5,10 @@ interface Medication {
     quantity?: number;
     alternatives?: Medication[];
     pickUpDate?: number;
+    brandName?: string;
+    /**
+      @todo: add brand Name
+     */
 }
 
 export default Medication;

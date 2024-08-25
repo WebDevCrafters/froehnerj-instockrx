@@ -19,7 +19,10 @@
                     <td>{{ search.medication?.pickUpDate }}</td>
                     <td>{{ search.status }}</td>
                     <td>
-                        <div class="view_btn" (click)="viewDetails()">
+                        <div
+                            class="view_btn"
+                            (click)="viewDetails(search?.searchId)"
+                        >
                             View Details
                         </div>
                     </td>

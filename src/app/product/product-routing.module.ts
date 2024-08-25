@@ -38,7 +38,10 @@ const routes: Routes = [
                 children: [
                     {
                         path: '',
-                        redirectTo: APP_ROUTES.product.patient + '/' + APP_ROUTES.product.signUp,
+                        redirectTo:
+                            APP_ROUTES.product.patient +
+                            '/' +
+                            APP_ROUTES.product.signUp,
                         pathMatch: 'full',
                     },
                     {
@@ -57,10 +60,13 @@ const routes: Routes = [
                                 path: APP_ROUTES.product.forgotPassword,
                                 component: ForgotPasswordComponent,
                             },
-                        ]
+                        ],
                     },
                     {
-                        path: APP_ROUTES.product.clinician + '/' + APP_ROUTES.product.nearBySearches,
+                        path:
+                            APP_ROUTES.product.clinician +
+                            '/' +
+                            APP_ROUTES.product.nearBySearches,
                         component: NearBySearchesComponent,
                         children: [
                             {
@@ -75,7 +81,7 @@ const routes: Routes = [
                                 path: APP_ROUTES.product.forgotPassword,
                                 component: ForgotPasswordComponent,
                             },
-                        ]
+                        ],
                     },
                 ],
             },
@@ -86,39 +92,71 @@ const routes: Routes = [
                 children: [
                     {
                         path: '',
-                        redirectTo: APP_ROUTES.product.patient + '/' + APP_ROUTES.product.newSearch,
+                        redirectTo:
+                            APP_ROUTES.product.patient +
+                            '/' +
+                            APP_ROUTES.product.newSearch,
                         pathMatch: 'full',
                     },
                     {
-                        path: APP_ROUTES.product.patient + '/' + APP_ROUTES.product.newSearch,
+                        path:
+                            APP_ROUTES.product.patient +
+                            '/' +
+                            APP_ROUTES.product.newSearch,
                         component: NewSearchComponent,
                     },
                     {
-                        path: APP_ROUTES.product.patient + '/' + APP_ROUTES.product.activeSearches,
+                        path:
+                            APP_ROUTES.product.patient +
+                            '/' +
+                            APP_ROUTES.product.activeSearches,
                         component: ActiveSearchesComponent,
                     },
                     {
-                        path: APP_ROUTES.product.patient + '/' + APP_ROUTES.product.activeSearches + '/' + APP_ROUTES.product.medicationDetails,
-                        component: MedicationDetailsComponent
+                        path:
+                            APP_ROUTES.product.patient +
+                            '/' +
+                            APP_ROUTES.product.activeSearches +
+                            '/' +
+                            APP_ROUTES.product.medicationDetails,
+                        component: MedicationDetailsComponent,
                     },
                     {
-                        path: APP_ROUTES.product.patient + '/' + APP_ROUTES.product.previousSearches + '/' + APP_ROUTES.product.medicationDetails,
-                        component: MedicationDetailsComponent
+                        path:
+                            APP_ROUTES.product.patient +
+                            '/' +
+                            APP_ROUTES.product.previousSearches +
+                            '/' +
+                            APP_ROUTES.product.medicationDetails +
+                            '/:searchId',
+                        component: MedicationDetailsComponent,
                     },
                     {
-                        path: APP_ROUTES.product.patient + '/' + APP_ROUTES.product.previousSearches,
+                        path:
+                            APP_ROUTES.product.patient +
+                            '/' +
+                            APP_ROUTES.product.previousSearches,
                         component: PreviousSearchesComponent,
                     },
                     {
-                        path: APP_ROUTES.product.patient + '/' + APP_ROUTES.product.editPatientsProfile,
+                        path:
+                            APP_ROUTES.product.patient +
+                            '/' +
+                            APP_ROUTES.product.editPatientsProfile,
                         component: EditPatientProfileComponent,
                     },
                     {
-                        path: APP_ROUTES.product.clinician + '/' + APP_ROUTES.product.nearBySearches,
+                        path:
+                            APP_ROUTES.product.clinician +
+                            '/' +
+                            APP_ROUTES.product.nearBySearches,
                         component: NearBySearchesComponent,
                     },
                     {
-                        path: APP_ROUTES.product.patient + '/' + APP_ROUTES.product.payments,
+                        path:
+                            APP_ROUTES.product.patient +
+                            '/' +
+                            APP_ROUTES.product.payments,
                         component: PaymentComponent,
                     },
                 ],
@@ -136,4 +174,4 @@ const routes: Routes = [
     imports: [RouterModule.forChild(routes)],
     exports: [RouterModule],
 })
-export class ProductRoutingModule { }
+export class ProductRoutingModule {}
