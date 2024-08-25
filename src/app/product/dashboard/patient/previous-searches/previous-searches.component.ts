@@ -19,7 +19,7 @@ export class PreviousSearchesComponent implements OnInit {
     }
 
     getMyCompletedSearch() {
-        this.searchService.getMySearches(SearchStatus.NotStarted).subscribe({
+        this.searchService.getMySearches(SearchStatus.Completed).subscribe({
             next: (result) => {
                 this.previousSearches.push(...result);
             },

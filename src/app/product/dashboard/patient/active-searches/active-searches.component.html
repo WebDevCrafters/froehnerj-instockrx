@@ -8,6 +8,7 @@
             <thead>
                 <th>Medication Name</th>
                 <th>Time</th>
+                <th>Status</th>
                 <th>View</th>
             </thead>
             <tbody>
@@ -16,6 +17,7 @@
                 <tr>
                     <td>{{ search.medication?.name }}</td>
                     <td>{{ search.medication?.pickUpDate }}</td>
+                    <td>{{ search.status }}</td>
                     <td>
                         <div class="view_btn" (click)="viewDetails()">
                             View Details
