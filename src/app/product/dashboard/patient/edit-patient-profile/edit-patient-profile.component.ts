@@ -1,12 +1,20 @@
-import { Component, ElementRef, HostListener, OnInit, ViewChild } from '@angular/core';
-import { FormControl, FormGroup, FormArray, Validators, FormsModule } from '@angular/forms';
-import { activeSearchData, defaultPackage } from '../../../../_shared/constants/data';
+import {
+    Component,
+    ElementRef,
+    HostListener,
+    OnInit,
+    ViewChild,
+} from '@angular/core';
+import { FormControl, FormGroup, FormsModule } from '@angular/forms';
 import APP_ROUTES from '../../../../_shared/constants/routes';
-import { ActiveSearch } from '../../../../_shared/dataTypes/ActiveSearch';
 import { User } from '../../../_shared/interfaces/User';
-import { formatTimestamp, mmddyyToTimestamp } from '../../../../_shared/utils/dateTime';
 import { markAllAsDirty } from '../../../../_shared/utils/formUtils';
-import { requiredValidator, emailValidator, charLimitValidator, dateValidator } from '../../../../_shared/utils/Validators';
+import {
+    requiredValidator,
+    emailValidator,
+    charLimitValidator,
+    dateValidator,
+} from '../../../../_shared/utils/Validators';
 import { Router } from '@angular/router';
 import { CommonModule } from '@angular/common';
 import { ButtonComponent } from '../../../../_shared/components/button/button.component';
@@ -24,35 +32,16 @@ import { UserService } from '../../../../_core/services/user.service';
         ModalComponent,
         ButtonComponent,
         CommonModule,
-        FormsModule,],
+        FormsModule,
+    ],
     templateUrl: './edit-patient-profile.component.html',
-    styleUrl: './edit-patient-profile.component.scss'
+    styleUrl: './edit-patient-profile.component.scss',
 })
 export class EditPatientProfileComponent implements OnInit {
-    activeSearchData: ActiveSearch = activeSearchData;
-    modalVisible: boolean = false;
-    isDateInputActive: boolean = false;
     isProfileEditable: boolean = false;
-    selectedDate: number = activeSearchData.pickupDate;
-    dateFormControl: FormControl = new FormControl('');
     profileBackup: any = null;
-    myPackage = defaultPackage;  //should come from server
     user: User | null = null;
     @ViewChild('myProfileEleRef') myProfileEleRef: ElementRef | null = null;
-
-    activeSearchForm = new FormGroup({
-        prescribedMedication: new FormArray([
-            new FormGroup({
-                name: new FormControl('Medication Name', [
-                    requiredValidator('Medication option 1 cannot be empty'),
-                ]),
-                dose: new FormControl('Dose'),
-                quantity: new FormControl('Quantity'),
-                brand: new FormControl('Brand Name'),
-            }),
-        ]),
-        pickupDate: new FormControl(new Date().getTime(), [Validators.required]),
-    });
 
     profileForm = new FormGroup({
         name: new FormControl('', [
@@ -81,123 +70,31 @@ export class EditPatientProfileComponent implements OnInit {
         doctorEmail: new FormControl('', []),
     });
 
-    editableStates: boolean[] = Array(activeSearchData.medications.length).fill(
-        false
-    );
     backups: any[] = [];
 
-    constructor(private router: Router, private userService: UserService) { }
+    constructor(private router: Router, private userService: UserService) {}
 
     ngOnInit(): void {
         this.getUser();
-        this.setControls();
     }
 
     getUser() {
         const authResponse = this.userService.getUserData();
         if (!authResponse) return;
+
         this.user = authResponse.user;
-    }
 
-    setControls() {
-        // these values should come from server
-        // this.profileForm.controls.name.setValue(`${this.user?.firstName} ${this.user?.lastName}`)
-        // this.profileForm.controls.email.setValue(`${this?.user?.email}`)
-    }
-
-
-    formatTimestamp(timestamp: number | null) {
-        if (!timestamp) return '';
-        return formatTimestamp(timestamp);
-    }
-
-    openDateChooserModal() {
-        this.modalVisible = true;
-    }
-
-    closeDateChooserModal(): void {
-        this.modalVisible = false;
-    }
-
-    toggleDateInput() {
-        this.isDateInputActive = !this.isDateInputActive;
-    }
-
-    onDatePicked(timestamp: number) {
-        this.selectedDate = timestamp;
-    }
-
-    onPositivePress() {
-        let pickupTimestamp = 0;
-        if (this.isDateInputActive && this.dateFormControl.value) {
-            if (!this.dateFormControl.valid) return;
-            pickupTimestamp = mmddyyToTimestamp(this.dateFormControl.value);
-        } else {
-            pickupTimestamp = this.selectedDate;
-        }
-        this.activeSearchForm.controls.pickupDate.setValue(pickupTimestamp);
-        this.closeDateChooserModal();
-    }
-
-    createPrescribedMedicationFormGroup(): FormGroup {
-        return new FormGroup({
-            name: new FormControl(''),
-            dose: new FormControl(''),
-            quantity: new FormControl(''),
-            brand: new FormControl(''),
+        this.profileForm.setValue({
+            name: this.user.name || '',
+            email: this.user.email || '',
+            phoneNumber: this.user.phoneNumber || '',
+            dob: this.user.dob
+                ? new Date(this.user.dob).toISOString().split('T')[0]
+                : '',
+            zipCode: this.user.zipCode?.toString() || '',
+            doctorName: '',
+            doctorEmail: '',
         });
-    }
-
-    addMedication() {
-        this.activeSearchForm.controls.prescribedMedication.push(
-            this.createPrescribedMedicationFormGroup()
-        );
-        this.editableStates.push(true);
-        this.backups.push(null);
-    }
-
-    removeMedication(index: number) {
-        this.activeSearchForm.controls.prescribedMedication.removeAt(index);
-        this.editableStates.splice(index, 1);
-        this.backups.splice(index, 1);
-    }
-
-    toggleEditable(index: number) {
-        if (!this.editableStates[index]) {
-            const medicationFormGroup =
-                this.activeSearchForm.controls.prescribedMedication.at(
-                    index
-                ) as FormGroup;
-            this.backups[index] = medicationFormGroup.value;
-        }
-        this.editableStates[index] = !this.editableStates[index];
-    }
-
-    getControl(formArrayIndex: number, formControlName: string): FormControl {
-        const medicationFormGroup =
-            this.activeSearchForm.controls.prescribedMedication.at(
-                formArrayIndex
-            ) as FormGroup;
-        return medicationFormGroup.get(formControlName) as FormControl;
-    }
-
-    get prescribedMedication(): FormArray {
-        return this.activeSearchForm.get('prescribedMedication') as FormArray;
-    }
-
-    saveMedication(index: number) {
-        this.editableStates[index] = false;
-        this.backups[index] = null;
-    }
-
-    cancelMedication(index: number) {
-        const medicationFormGroup =
-            this.activeSearchForm.controls.prescribedMedication.at(
-                index
-            ) as FormGroup;
-        medicationFormGroup.setValue(this.backups[index]);
-        this.editableStates[index] = false;
-        this.backups[index] = null;
     }
 
     onSubmit(): void {
@@ -209,7 +106,7 @@ export class EditPatientProfileComponent implements OnInit {
     }
 
     toggleEditProfile(event: Event) {
-        event.stopPropagation()
+        event.stopPropagation();
         this.isProfileEditable = !this.isProfileEditable;
         if (this.isProfileEditable) {
             this.profileBackup = this.profileForm.value;
@@ -232,25 +129,14 @@ export class EditPatientProfileComponent implements OnInit {
         this.profileBackup = null;
     }
 
-    completePayment() {
-        this.router.navigate(
-            [`${APP_ROUTES.product.app}/${APP_ROUTES.product.newSearch}`],
-            {
-                replaceUrl: true,
-                queryParams: { stepNumber: JSON.stringify(4) }
-            },
-        );
-    }
-
     @HostListener('document:click', ['$event'])
     onDocumentClick(event: MouseEvent): void {
-        const clickedInsideProfile = this.myProfileEleRef?.nativeElement.contains(event.target);
+        const clickedInsideProfile =
+            this.myProfileEleRef?.nativeElement.contains(event.target);
         if (!clickedInsideProfile) {
             this.cancelEditProfile();
-            console.log("putsie");
         }
     }
-
 
     requestAccountDeletion() {
         const url = 'https://u4acjiu8lv3.typeform.com/to/WDj0hN0I';
@@ -273,4 +159,3 @@ export class EditPatientProfileComponent implements OnInit {
         );
     }
 }
-
