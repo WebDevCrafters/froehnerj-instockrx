@@ -1,25 +1,11 @@
-<div
-  class="signup_container"
-  [ngClass]="{ small_header_active: stepNumber >= 3 }"
->
-  <div class="header" [ngClass]="{ small_header: stepNumber >= 3 }">
-    @if (stepNumber<3) {
-    <p>Never Search For Your Meds Again</p>
-    }
-  </div>
-  <div class="form_container">
-    @if(stepNumber===1){
-    <app-additional-info
-      [additionalInfoForm]="additionalInfoForm"
-      (onAdditionalInfoSubmit)="onAdditionalInfoSubmit()"
-    />
-    } @else if(stepNumber===2){
-    <app-select-package
-      (onSelectPackageSubmit)="onSelectPackageSubmit($event)"
-    />
-    } @else if(stepNumber===3){
-    <app-payment/>
-    }
-  </div>
+<div class="signup_container">
+    <div class="header">
+        <p>Never Search For Your Meds Again</p>
+    </div>
+    <div class="form_container">
+        <app-additional-info
+            [additionalInfoForm]="additionalInfoForm"
+            (onAdditionalInfoSubmit)="onAdditionalInfoSubmit()"
+        />
+    </div>
 </div>
-<app-button title="clic" (clickEvent)="add()"/>

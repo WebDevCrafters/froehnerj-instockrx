@@ -1,8 +1,8 @@
 interface Medication {
     medicationId?: string;
     name: string;
-    dose: string;
-    quantity: number;
+    dose?: string;
+    quantity?: number;
     alternatives?: Medication[];
     pickUpDate?: number;
 }

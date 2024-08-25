@@ -4,11 +4,11 @@ import { SearchStatus } from './SearchStatus';
 interface Search {
     searchId?: string;
     patient?: string;
-    medication: Medication;
-    status: SearchStatus;
-    zipCode: number;
+    medication?: Medication;
+    status?: SearchStatus;
+    zipCode?: number;
     location?: Location;
-    prescriberName: string;
+    prescriberName?: string;
 }
 
 export default Search;

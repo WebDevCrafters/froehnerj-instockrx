@@ -13,8 +13,8 @@
             <tbody>
                 @for (search of previousSearches; track $index) {
                 <tr>
-                    <td>{{ search.medication.name }}</td>
-                    <td>{{ search.medication.pickUpDate }}</td>
+                    <td>{{ search.medication?.name }}</td>
+                    <td>{{ search.medication?.pickUpDate }}</td>
                     <td>
                         <div class="view_btn">View Details</div>
                     </td>

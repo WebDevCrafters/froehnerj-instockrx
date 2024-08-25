@@ -5,7 +5,7 @@ import { PersonalInfoComponent } from './personal-info/personal-info.component';
 import { SelectPackageComponent } from '../payment/select-package/select-package.component';
 import { PaymentComponent } from '../payment/payment.component';
 import { AdditionalInfoComponent } from './additional-info/additional-info.component';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { defaultPackage } from '../../../../_shared/constants/data';
 import { Package } from '../../../../_shared/dataTypes/Package';
 import { markAllAsDirty } from '../../../../_shared/utils/formUtils';
@@ -19,6 +19,8 @@ import { ButtonComponent } from '../../../../_shared/components/button/button.co
 import { SearchService } from '../../../../_core/services/search.service';
 import Search from '../../../_shared/interfaces/Search';
 import { SearchStatus } from '../../../_shared/interfaces/SearchStatus';
+import { PaymentService } from '../../../../_core/services/payment.service';
+import APP_ROUTES from '../../../../_shared/constants/routes';
 
 @Component({
     selector: 'app-new-search',
@@ -34,23 +36,12 @@ import { SearchStatus } from '../../../_shared/interfaces/SearchStatus';
     templateUrl: './new-search.component.html',
     styleUrl: './new-search.component.scss',
 })
-export class NewSearchComponent implements OnInit {
-    stepNumber: number = 1;
-    selectedPackage: Subscription | null = null;
-
+export class NewSearchComponent {
     constructor(
-        private route: ActivatedRoute,
-        private searchService: SearchService
+        private searchService: SearchService,
+        private paymentService: PaymentService,
+        private router: Router
     ) {}
-
-    ngOnInit(): void {
-        this.route.queryParams.subscribe((params) => {
-            const serializedValue = params['stepNumber'];
-            if (serializedValue) {
-                this.stepNumber = JSON.parse(serializedValue);
-            }
-        });
-    }
 
     additionalInfoForm = new FormGroup({
         dob: new FormControl('', [
@@ -79,43 +70,94 @@ export class NewSearchComponent implements OnInit {
         ]),
     });
 
-    onAdditionalInfoSubmit() {
+    async onAdditionalInfoSubmit() {
         if (this.additionalInfoForm.valid) {
-            console.log(this.additionalInfoForm.value);
-            this.stepNumber += 1;
-            console.log('step was added');
+            const isPaid = await this.checkUserPayment();
+            const search: Search = this.convertFormToSearch(isPaid);
+            this.addNewSearch(search, isPaid);
         } else {
             this.additionalInfoForm.markAllAsTouched();
             markAllAsDirty(this.additionalInfoForm);
-            console.log(this.additionalInfoForm);
         }
     }
 
-    onSelectPackageSubmit(packageSelected: Subscription | null) {
-        this.selectedPackage = packageSelected;
-        this.stepNumber += 1;
-        console.log('got', this.selectedPackage);
+    private checkUserPayment(): Promise<boolean> {
+        return new Promise((resolve) => {
+            this.paymentService.getCurrentPayment().subscribe({
+                next: (data) => {
+                    if (data) {
+                        resolve(true);
+                    } else {
+                        resolve(false);
+                    }
+                },
+                error: (err) => {
+                    console.log(err);
+                },
+            });
+        });
     }
 
-    add() {
-        const s: Search = {
-            zipCode: 226018,
-            prescriberName: 'babloo' + Date.now(),
-            medication: {
-                name: 'E2 ki search'+Date.now(),
-                pickUpDate: 16516534,
-                dose: '55',
-                quantity: 10,
-            },
-            status: SearchStatus.InProgress,
-        };
-        this.searchService.addSearch(s).subscribe({
+    private addNewSearch(search: Search, isPaid: boolean) {
+        this.searchService.addSearch(search).subscribe({
             next: (search) => {
                 console.log(search);
+                if (!isPaid) this.navigateToPayment();
+                else this.navigateToActiveSearch();
             },
             error: (err) => {
                 console.log(err);
             },
         });
+    }
+
+    private navigateToPayment() {
+        this.router.navigate([
+            APP_ROUTES.product.app,
+            APP_ROUTES.product.dashboard,
+            APP_ROUTES.product.patient,
+            APP_ROUTES.product.payments,
+        ]);
+    }
+    private navigateToActiveSearch() {
+        this.router.navigate([
+            APP_ROUTES.product.app,
+            APP_ROUTES.product.dashboard,
+            APP_ROUTES.product.patient,
+            APP_ROUTES.product.activeSearches,
+        ]);
+    }
+
+    private convertFormToSearch(isPaid: boolean) {
+        const formValues = this.additionalInfoForm.value;
+
+        const search: Search = {
+            prescriberName: formValues.prescriber || '',
+            zipCode: Number(formValues.zipCode),
+            status: isPaid ? SearchStatus.InProgress : SearchStatus.NotStarted,
+            medication:
+                formValues.prescribedMedication &&
+                formValues.prescribedMedication.length > 0
+                    ? {
+                          name: formValues.prescribedMedication[0]?.name || '',
+                          dose:
+                              formValues.prescribedMedication[0]?.dose ??
+                              undefined,
+                          quantity: Number(
+                              formValues.prescribedMedication[0]?.quantity
+                          ),
+                          pickUpDate: Number(formValues.pickupDate),
+                          alternatives: formValues.prescribedMedication
+                              .slice(1)
+                              .map((med: any) => ({
+                                  name: med.name || '',
+                                  dose: med.dose ?? undefined,
+                                  quantity: Number(med.quantity),
+                              })),
+                      }
+                    : undefined,
+        };
+
+        return search;
     }
 }
