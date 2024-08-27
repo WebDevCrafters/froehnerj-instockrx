@@ -7,8 +7,6 @@ import { AuthComponent } from './auth/auth.component';
 import { authPreventGuard } from '../_core/guards/auth-prevent.guard';
 import { authGuard } from '../_core/guards/auth.guard';
 import { ResetPasswordComponent } from './reset-password/reset-password.component';
-import { PatientComponent } from './auth/patient/patient.component';
-import { ClinicianComponent } from './auth/clinician/clinician.component';
 import { SigninComponent } from './auth/signin/signin.component';
 import { SignupComponent } from './auth/signup/signup.component';
 import { ForgotPasswordComponent } from './auth/forgot-password/forgot-password.component';
@@ -38,50 +36,16 @@ const routes: Routes = [
                 children: [
                     {
                         path: '',
-                        redirectTo:
-                            APP_ROUTES.product.patient +
-                            '/' +
-                            APP_ROUTES.product.signUp,
+                        redirectTo: APP_ROUTES.product.signIn,
                         pathMatch: 'full',
                     },
                     {
-                        path: APP_ROUTES.product.patient,
-                        component: PatientComponent,
-                        children: [
-                            {
-                                path: APP_ROUTES.product.signUp,
-                                component: SignupComponent,
-                            },
-                            {
-                                path: APP_ROUTES.product.signIn,
-                                component: SigninComponent,
-                            },
-                            {
-                                path: APP_ROUTES.product.forgotPassword,
-                                component: ForgotPasswordComponent,
-                            },
-                        ],
+                        path: APP_ROUTES.product.signIn + '/:userType',
+                        component: SigninComponent,
                     },
                     {
-                        path:
-                            APP_ROUTES.product.clinician +
-                            '/' +
-                            APP_ROUTES.product.nearBySearches,
-                        component: NearBySearchesComponent,
-                        children: [
-                            {
-                                path: APP_ROUTES.product.signUp,
-                                component: SignupComponent,
-                            },
-                            {
-                                path: APP_ROUTES.product.signIn,
-                                component: SigninComponent,
-                            },
-                            {
-                                path: APP_ROUTES.product.forgotPassword,
-                                component: ForgotPasswordComponent,
-                            },
-                        ],
+                        path: APP_ROUTES.product.signUp + '/:userType',
+                        component: SignupComponent,
                     },
                 ],
             },
