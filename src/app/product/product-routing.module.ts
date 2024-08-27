@@ -136,7 +136,7 @@ const routes: Routes = [
                             APP_ROUTES.product.patient +
                             '/' +
                             APP_ROUTES.product.previousSearches,
-                        component: NearBySearchesComponent,
+                        component: PreviousSearchesComponent,
                     },
                     {
                         path:
@@ -174,4 +174,4 @@ const routes: Routes = [
     imports: [RouterModule.forChild(routes)],
     exports: [RouterModule],
 })
-export class ProductRoutingModule {}
+export class ProductRoutingModule { }

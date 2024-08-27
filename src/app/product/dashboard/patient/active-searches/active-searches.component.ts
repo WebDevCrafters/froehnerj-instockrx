@@ -49,11 +49,11 @@ export class ActiveSearchesComponent implements OnInit {
             next: (result) => {
                 this.setInDatService(result);
                 this.activeSearches.unshift(...result);
-                this.isLoading = false;
+                // this.isLoading = false;
             },
             error: (err) => {
                 console.log(err);
-                this.isLoading = false;
+                // this.isLoading = false;
             },
         });
     }
@@ -62,9 +62,11 @@ export class ActiveSearchesComponent implements OnInit {
         this.searchService.getMySearches(SearchStatus.NotStarted).subscribe({
             next: (result) => {
                 this.activeSearches.push(...result);
+                this.isLoading = false;
             },
             error: (err) => {
                 console.log(err);
+                this.isLoading = false;
             },
         });
     }

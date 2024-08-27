@@ -26,24 +26,27 @@ $button-hover-bg-color: #218838;
         height: 90%;
         padding: 1rem;
 
-        .empty_container {
+        .empty_container,
+        .loader_container {
             width: 100%;
             height: 100%;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-size: 30px;
-            font-weight: 500;
         }
 
         table {
             width: 100%;
-            height: max-content;
+            height: 100%;
             border-collapse: collapse;
+            border-radius: 16px;
+            overflow: hidden;
 
             thead {
+                display: table;
+                table-layout: fixed;
+                height: 10%;
+                width: 100%;
                 background-color: $normalGrey;
                 color: black;
+                border-radius: 16px 16px 0 0;
 
                 th {
                     padding: 12px 15px;
@@ -54,9 +57,24 @@ $button-hover-bg-color: #218838;
             }
 
             tbody {
+                height: 90%;
+                width: 100%;
+                display: block;
+                overflow-y: auto;
+                border-radius: 0 0 16px 16px;
+                border-bottom: 1px solid $table-border-color;
+
                 tr {
+                    display: table;
+                    table-layout: fixed;
+                    width: 100%;
+                    height: 46px;
                     &:hover {
                         background-color: $table-row-hover-color;
+                    }
+
+                    &:last-child {
+                        border-bottom: none;
                     }
 
                     td {
@@ -65,19 +83,20 @@ $button-hover-bg-color: #218838;
                         white-space: nowrap;
 
                         &:first-child {
-                            border-left: 2px solid $table-border-color;
+                            border-left: 1px solid $table-border-color;
                         }
 
                         &:last-child {
-                            border-right: 2px solid $table-border-color;
+                            border-right: 1px solid $table-border-color;
+                            text-align: center;
                         }
 
                         .view_btn {
                             padding: 8px 16px;
                             cursor: pointer;
-                            background-color: $button-bg-color;
+                            background-color: $brandLightPrimaryColor;
                             color: $button-text-color;
-                            border-radius: 5px;
+                            border-radius: 8px;
                             display: inline-block;
                             box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
                             text-align: center;
@@ -87,7 +106,7 @@ $button-hover-bg-color: #218838;
                             font-size: 14px;
 
                             &:hover {
-                                background-color: $button-hover-bg-color;
+                                background-color: $brandPrimaryColor;
                                 transform: translateY(-2px);
                             }
 

@@ -5,20 +5,13 @@
         <div class="loader_container">
             <app-loader></app-loader>
         </div>
-        } @else { @if(!activeSearches.length) {
-        <div class="empty_container">
-            <app-empty-state
-                [src]="'assets/images/svg/no-search-icon.svg'"
-                [caption]="'No Active Searches'"
-            ></app-empty-state>
-        </div>
-        } @else {
+        } @else { @if(activeSearches.length) {
         <table>
             <thead>
                 <th>Medication Name</th>
                 <th>Time</th>
                 <th>Status</th>
-                <th>View</th>
+                <th></th>
             </thead>
             <tbody>
                 @for (search of activeSearches; track $index) {
@@ -38,6 +31,13 @@
                 }
             </tbody>
         </table>
+        } @else {
+        <div class="empty_container">
+            <app-empty-state
+                [src]="'assets/images/svg/no-search-icon.svg'"
+                [caption]="'No Active Searches'"
+            ></app-empty-state>
+        </div>
         } }
     </div>
 </div>
