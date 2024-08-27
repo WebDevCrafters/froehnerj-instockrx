@@ -26,7 +26,8 @@ $button-hover-bg-color: #218838;
         height: 90%;
         padding: 1rem;
 
-        .empty_container {
+        .empty_container,
+        .loader_container {
             width: 100%;
             height: 100%;
         }

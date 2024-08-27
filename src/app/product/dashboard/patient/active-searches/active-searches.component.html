@@ -1,8 +1,11 @@
 <div class="main_container">
     <div class="header">Active Searches</div>
     <div class="content">
-        <!-- @if(true) { -->
-        @if(!activeSearches.length) {
+        @if(isLoading) {
+        <div class="loader_container">
+            <app-loader></app-loader>
+        </div>
+        } @else { @if(!activeSearches.length) {
         <div class="empty_container">
             <app-empty-state
                 [src]="'assets/images/svg/no-search-icon.svg'"
@@ -19,7 +22,6 @@
             </thead>
             <tbody>
                 @for (search of activeSearches; track $index) {
-
                 <tr>
                     <td>{{ search.medication?.name }}</td>
                     <td>{{ search.medication?.pickUpDate }}</td>
@@ -36,6 +38,6 @@
                 }
             </tbody>
         </table>
-        }
+        } }
     </div>
 </div>

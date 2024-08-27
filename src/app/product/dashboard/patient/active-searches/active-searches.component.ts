@@ -7,11 +7,12 @@ import { SearchStatus } from '../../../_shared/interfaces/SearchStatus';
 import Search from '../../../_shared/interfaces/Search';
 import { DataService } from '../../../../_core/services/data.service';
 import { EmptyStateComponent } from "../../_shared/components/empty-state/empty-state.component";
+import { LoaderComponent } from '../../_shared/components/loader/loader.component';
 
 @Component({
     selector: 'app-active-searches',
     standalone: true,
-    imports: [MedicationDetailsComponent, EmptyStateComponent],
+    imports: [MedicationDetailsComponent, EmptyStateComponent, LoaderComponent],
     templateUrl: './active-searches.component.html',
     styleUrl: './active-searches.component.scss',
 })
@@ -21,7 +22,8 @@ export class ActiveSearchesComponent implements OnInit {
         private searchService: SearchService,
         private dataService: DataService
     ) { }
-    activeSearches: Search[] = [];
+    public activeSearches: Search[] = [];
+    public isLoading: boolean = true;
 
     ngOnInit(): void {
         this.getMyInNotStartedSearch();
@@ -45,11 +47,15 @@ export class ActiveSearchesComponent implements OnInit {
     getMyInProgressSearch() {
         this.searchService.getMySearches(SearchStatus.InProgress).subscribe({
             next: (result) => {
-                this.setInDatService(result);
-                this.activeSearches.unshift(...result);
+                setTimeout(() => {
+                    this.setInDatService(result);
+                    this.activeSearches.unshift(...result);
+                    this.isLoading = false;
+                }, 2000);
             },
             error: (err) => {
                 console.log(err);
+                this.isLoading = false;
             },
         });
     }
