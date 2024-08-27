@@ -58,18 +58,14 @@
                 <th>Contact Info</th>
             </thead>
             <tbody>
+                @for (avai of availability; track $index) {
                 <tr>
-                    <td>Medication Name / Alternative Name</td>
-                    <td>My Pharmacy</td>
-                    <td>Raviwar Peth Wai</td>
-                    <td>9049965167</td>
+                    <td>{{ avai.clinician?.name }}</td>
+                    <td>{{ avai.clinician?.email }}</td>
+                    <td>{{ avai.clinician?.phoneNumber }}</td>
+                    <td>{{ avai.clinician?.zipCode }}</td>
                 </tr>
-                <tr>
-                    <td>Medication Name / Alternative Name</td>
-                    <td>My Pharmacy</td>
-                    <td>Raviwar Peth Wai</td>
-                    <td>9049965167</td>
-                </tr>
+                }
             </tbody>
         </table>
     </div>

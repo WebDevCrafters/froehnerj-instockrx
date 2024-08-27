@@ -28,10 +28,12 @@ export class AvailabilityService {
     }
 
     get(searchId: string) {
+        const accessToken = this.userService.getAccessToken();
         const url = `${BASE_URL}${this.AVAILABILITY_URL}/${searchId}`;
-        return this.httpClient.get(url).pipe(
+        const headers = new HttpHeaders().set('authorization', accessToken);
+        return this.httpClient.get(url, { headers }).pipe(
             map((res) => {
-                return res as Availability;
+                return res as Availability[];
             }),
             catchError((err) => throwError(() => err))
         );

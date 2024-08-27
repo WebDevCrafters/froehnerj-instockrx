@@ -136,7 +136,7 @@ const routes: Routes = [
                             APP_ROUTES.product.patient +
                             '/' +
                             APP_ROUTES.product.previousSearches,
-                        component: PreviousSearchesComponent,
+                        component: NearBySearchesComponent,
                     },
                     {
                         path:
