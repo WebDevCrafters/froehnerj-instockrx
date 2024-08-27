@@ -20,6 +20,7 @@ import { SelectPackageComponent } from './dashboard/patient/payment/select-packa
 import { PaymentComponent } from './dashboard/patient/payment/payment.component';
 import UserType from './_shared/interfaces/UserType';
 import { patientGuard } from '../_core/guards/patient.guard';
+import { clinicianGuard } from '../_core/guards/clinician.guard';
 
 const routes: Routes = [
     {
@@ -82,6 +83,11 @@ const routes: Routes = [
                         canActivate: [patientGuard],
                     },
                     {
+                        path: APP_ROUTES.product.nearBySearches,
+                        component: NearBySearchesComponent,
+                        canActivate: [clinicianGuard],
+                    },
+                    {
                         path:
                             APP_ROUTES.product.medicationDetails + '/:searchId',
                         component: MedicationDetailsComponent,
@@ -89,10 +95,6 @@ const routes: Routes = [
                     {
                         path: APP_ROUTES.product.editPatientsProfile,
                         component: EditPatientProfileComponent,
-                    },
-                    {
-                        path: APP_ROUTES.product.nearBySearches,
-                        component: NearBySearchesComponent,
                     },
                 ],
             },

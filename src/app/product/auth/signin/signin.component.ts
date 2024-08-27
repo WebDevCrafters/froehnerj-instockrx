@@ -89,7 +89,7 @@ export class SigninComponent {
                 this.isLoading = false;
                 this.router.navigate(
                     [
-                        `${APP_ROUTES.product.app}/${APP_ROUTES.product.dashboard}/${APP_ROUTES.product.patient}/${APP_ROUTES.product.newSearch}`,
+                        `${APP_ROUTES.product.app}/${APP_ROUTES.product.dashboard}/${APP_ROUTES.product.newSearch}`,
                     ],
                     { replaceUrl: true }
                 );
