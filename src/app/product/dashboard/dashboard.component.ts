@@ -6,10 +6,9 @@ import { ModalComponent } from '../../_shared/components/modal/modal.component';
 import { InputComponent } from '../../_shared/components/input/input.component';
 import { RouterLink, RouterLinkActive, RouterOutlet } from '@angular/router';
 import APP_ROUTES from '../../_shared/constants/routes';
-import { SidebarComponent } from "./_shared/sidebar/sidebar.component";
+import { SidebarComponent } from './_shared/sidebar/sidebar.component';
 import { UserService } from '../../_core/services/user.service';
 import UserType from '../_shared/interfaces/UserType';
-
 
 @Component({
     selector: 'app-dashboard',
@@ -22,17 +21,18 @@ import UserType from '../_shared/interfaces/UserType';
         RouterOutlet,
         RouterLink,
         RouterLinkActive,
-        SidebarComponent
+        SidebarComponent,
     ],
     templateUrl: './dashboard.component.html',
     styleUrl: './dashboard.component.scss',
 })
 export class DashboardComponent implements OnInit {
     APP_ROUTES = APP_ROUTES;
-    userType?: UserType = UserType.Patient
+    userType?: UserType = UserType.Patient;
+    UserType = UserType;
     public isSidebarExpanded: boolean = true;
 
-    constructor(private userService: UserService) { }
+    constructor(private userService: UserService) {}
 
     ngOnInit(): void {
         this.getUserType();
@@ -45,6 +45,6 @@ export class DashboardComponent implements OnInit {
     }
 
     toggleSidebar() {
-        this.isSidebarExpanded = !this.isSidebarExpanded
+        this.isSidebarExpanded = !this.isSidebarExpanded;
     }
 }

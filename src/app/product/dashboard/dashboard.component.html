@@ -8,6 +8,8 @@
     >
         <div class="sidebar_container">
             <ul>
+                @if (userType===UserType.Patient) {
+
                 <li>
                     <a
                         class="img_and_tag"
@@ -57,22 +59,6 @@
                 <li>
                     <a
                         class="img_and_tag"
-                        [routerLink]="[APP_ROUTES.product.editPatientsProfile]"
-                        routerLinkActive="active-link"
-                        [routerLinkActiveOptions]="{ exact: true }"
-                    >
-                        <div class="img">
-                            <img
-                                src="assets/images/svg/profile-icon.svg"
-                                alt=""
-                            />
-                        </div>
-                        <span> Profile </span>
-                    </a>
-                </li>
-                <li>
-                    <a
-                        class="img_and_tag"
                         [routerLink]="[APP_ROUTES.product.payments]"
                         routerLinkActive="active-link"
                         [routerLinkActiveOptions]="{ exact: true }"
@@ -84,6 +70,41 @@
                             />
                         </div>
                         <span> Payments </span>
+                    </a>
+                </li>
+                } @else if (UserType.Clinician) {
+                <li>
+                    <a
+                        class="img_and_tag"
+                        [routerLink]="[APP_ROUTES.product.nearBySearches]"
+                        routerLinkActive="active-link"
+                        [routerLinkActiveOptions]="{ exact: true }"
+                    >
+                        <div class="img">
+                            <img
+                                src="assets/images/svg/nearby-icon.svg"
+                                alt=""
+                            />
+                        </div>
+                        <span> Nearby Searches</span>
+                    </a>
+                </li>
+
+                }
+                <li>
+                    <a
+                        class="img_and_tag"
+                        [routerLink]="[APP_ROUTES.product.editPatientsProfile]"
+                        routerLinkActive="active-link"
+                        [routerLinkActiveOptions]="{ exact: true }"
+                    >
+                        <div class="img">
+                            <img
+                                src="assets/images/svg/profile-icon.svg"
+                                alt=""
+                            />
+                        </div>
+                        <span> Profile </span>
                     </a>
                 </li>
             </ul>
