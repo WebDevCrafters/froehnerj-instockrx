@@ -6,11 +6,13 @@ import { SearchService } from '../../../../_core/services/search.service';
 import { SearchStatus } from '../../../_shared/interfaces/SearchStatus';
 import Search from '../../../_shared/interfaces/Search';
 import { DataService } from '../../../../_core/services/data.service';
+import { EmptyStateComponent } from "../../_shared/components/empty-state/empty-state.component";
+import { LoaderComponent } from '../../_shared/components/loader/loader.component';
 
 @Component({
     selector: 'app-active-searches',
     standalone: true,
-    imports: [MedicationDetailsComponent],
+    imports: [MedicationDetailsComponent, EmptyStateComponent, LoaderComponent],
     templateUrl: './active-searches.component.html',
     styleUrl: './active-searches.component.scss',
 })
@@ -19,8 +21,9 @@ export class ActiveSearchesComponent implements OnInit {
         private router: Router,
         private searchService: SearchService,
         private dataService: DataService
-    ) {}
-    activeSearches: Search[] = [];
+    ) { }
+    public activeSearches: Search[] = [];
+    public isLoading: boolean = true;
 
     ngOnInit(): void {
         this.getMyInNotStartedSearch();
@@ -46,9 +49,11 @@ export class ActiveSearchesComponent implements OnInit {
             next: (result) => {
                 this.setInDatService(result);
                 this.activeSearches.unshift(...result);
+                this.isLoading = false;
             },
             error: (err) => {
                 console.log(err);
+                this.isLoading = false;
             },
         });
     }
