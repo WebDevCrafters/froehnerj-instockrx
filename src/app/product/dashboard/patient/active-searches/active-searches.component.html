@@ -1,8 +1,14 @@
 <div class="main_container">
     <div class="header">Active Searches</div>
     <div class="content">
-        @if(false) {
-        <div class="empty_container">No Active Searches</div>
+        <!-- @if(true) { -->
+        @if(!activeSearches.length) {
+        <div class="empty_container">
+            <app-empty-state
+                [src]="'assets/images/svg/no-search-icon.svg'"
+                [caption]="'No Active Searches'"
+            ></app-empty-state>
+        </div>
         } @else {
         <table>
             <thead>

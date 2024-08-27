@@ -6,11 +6,12 @@ import { SearchService } from '../../../../_core/services/search.service';
 import { SearchStatus } from '../../../_shared/interfaces/SearchStatus';
 import Search from '../../../_shared/interfaces/Search';
 import { DataService } from '../../../../_core/services/data.service';
+import { EmptyStateComponent } from "../../_shared/components/empty-state/empty-state.component";
 
 @Component({
     selector: 'app-active-searches',
     standalone: true,
-    imports: [MedicationDetailsComponent],
+    imports: [MedicationDetailsComponent, EmptyStateComponent],
     templateUrl: './active-searches.component.html',
     styleUrl: './active-searches.component.scss',
 })
@@ -19,7 +20,7 @@ export class ActiveSearchesComponent implements OnInit {
         private router: Router,
         private searchService: SearchService,
         private dataService: DataService
-    ) {}
+    ) { }
     activeSearches: Search[] = [];
 
     ngOnInit(): void {

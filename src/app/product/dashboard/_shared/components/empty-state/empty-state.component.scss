@@ -1,0 +1,23 @@
+@import "variables";
+
+.main_container {
+    height: 100%;
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+    padding: 20px;
+    border-radius: 10px;
+
+    .img_container {
+        img {
+            height: 240px;
+            width: 240px;
+        }
+    }
+
+    .caption {
+        font-size: 16px;
+    }
+}
