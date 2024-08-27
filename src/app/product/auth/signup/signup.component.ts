@@ -106,9 +106,7 @@ export class SignupComponent implements OnInit {
         markAllAsDirty(this.signUpInfoForm);
         if (!this.signUpInfoForm.valid) return;
 
-        if (this.userType === UserType.Patient) {
-            this.signup();
-        }
+        this.signup();
     }
 
     public navigateToPrivacyPolicy() {
