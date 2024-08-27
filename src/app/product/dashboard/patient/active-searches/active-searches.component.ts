@@ -47,11 +47,9 @@ export class ActiveSearchesComponent implements OnInit {
     getMyInProgressSearch() {
         this.searchService.getMySearches(SearchStatus.InProgress).subscribe({
             next: (result) => {
-                setTimeout(() => {
-                    this.setInDatService(result);
-                    this.activeSearches.unshift(...result);
-                    this.isLoading = false;
-                }, 2000);
+                this.setInDatService(result);
+                this.activeSearches.unshift(...result);
+                this.isLoading = false;
             },
             error: (err) => {
                 console.log(err);
