@@ -57,72 +57,37 @@ const routes: Routes = [
                 children: [
                     {
                         path: '',
-                        redirectTo:
-                            APP_ROUTES.product.patient +
-                            '/' +
-                            APP_ROUTES.product.newSearch,
+                        redirectTo: APP_ROUTES.product.newSearch,
                         pathMatch: 'full',
                     },
                     {
-                        path:
-                            APP_ROUTES.product.patient +
-                            '/' +
-                            APP_ROUTES.product.newSearch,
+                        path: APP_ROUTES.product.newSearch,
                         component: NewSearchComponent,
                     },
                     {
-                        path:
-                            APP_ROUTES.product.patient +
-                            '/' +
-                            APP_ROUTES.product.activeSearches,
+                        path: APP_ROUTES.product.activeSearches,
                         component: ActiveSearchesComponent,
                     },
                     {
+                        path: APP_ROUTES.product.previousSearches,
+                        component: PreviousSearchesComponent,
+                    },
+                    {
                         path:
-                            APP_ROUTES.product.patient +
-                            '/' +
-                            APP_ROUTES.product.activeSearches +
-                            '/' +
-                            APP_ROUTES.product.medicationDetails,
+                            APP_ROUTES.product.medicationDetails + '/:searchId',
                         component: MedicationDetailsComponent,
                     },
                     {
-                        path:
-                            APP_ROUTES.product.patient +
-                            '/' +
-                            APP_ROUTES.product.previousSearches +
-                            '/' +
-                            APP_ROUTES.product.medicationDetails +
-                            '/:searchId',
-                        component: MedicationDetailsComponent,
-                    },
-                    {
-                        path:
-                            APP_ROUTES.product.patient +
-                            '/' +
-                            APP_ROUTES.product.previousSearches,
-                        component: NearBySearchesComponent,
-                    },
-                    {
-                        path:
-                            APP_ROUTES.product.patient +
-                            '/' +
-                            APP_ROUTES.product.editPatientsProfile,
+                        path: APP_ROUTES.product.editPatientsProfile,
                         component: EditPatientProfileComponent,
                     },
                     {
-                        path:
-                            APP_ROUTES.product.clinician +
-                            '/' +
-                            APP_ROUTES.product.nearBySearches,
-                        component: NearBySearchesComponent,
+                        path: APP_ROUTES.product.payments,
+                        component: PaymentComponent,
                     },
                     {
-                        path:
-                            APP_ROUTES.product.patient +
-                            '/' +
-                            APP_ROUTES.product.payments,
-                        component: PaymentComponent,
+                        path: APP_ROUTES.product.nearBySearches,
+                        component: NearBySearchesComponent,
                     },
                 ],
             },

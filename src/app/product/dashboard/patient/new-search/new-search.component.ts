@@ -115,7 +115,6 @@ export class NewSearchComponent {
         this.router.navigate([
             APP_ROUTES.product.app,
             APP_ROUTES.product.dashboard,
-            APP_ROUTES.product.patient,
             APP_ROUTES.product.payments,
         ]);
     }
@@ -123,7 +122,6 @@ export class NewSearchComponent {
         this.router.navigate([
             APP_ROUTES.product.app,
             APP_ROUTES.product.dashboard,
-            APP_ROUTES.product.patient,
             APP_ROUTES.product.activeSearches,
         ]);
     }

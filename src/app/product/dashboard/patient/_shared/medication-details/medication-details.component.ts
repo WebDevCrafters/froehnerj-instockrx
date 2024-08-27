@@ -28,8 +28,8 @@ export class MedicationDetailsComponent implements OnInit {
     ) {}
 
     ngOnInit(): void {
-        this.route.queryParams.subscribe((params) => {
-            this.searchId = JSON.parse(params['searchId']);
+        this.route.paramMap.subscribe((params) => {
+            this.searchId = params.get("searchId")
 
             console.log(this.searchId);
             this.getSearchDetails();

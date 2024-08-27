@@ -6,7 +6,7 @@ import { SearchService } from '../../../../_core/services/search.service';
 import { SearchStatus } from '../../../_shared/interfaces/SearchStatus';
 import Search from '../../../_shared/interfaces/Search';
 import { DataService } from '../../../../_core/services/data.service';
-import { EmptyStateComponent } from "../../_shared/components/empty-state/empty-state.component";
+import { EmptyStateComponent } from '../../_shared/components/empty-state/empty-state.component';
 import { LoaderComponent } from '../../_shared/components/loader/loader.component';
 
 @Component({
@@ -21,7 +21,7 @@ export class ActiveSearchesComponent implements OnInit {
         private router: Router,
         private searchService: SearchService,
         private dataService: DataService
-    ) { }
+    ) {}
     public activeSearches: Search[] = [];
     public isLoading: boolean = true;
 
@@ -32,16 +32,12 @@ export class ActiveSearchesComponent implements OnInit {
 
     viewDetails(searchId?: string) {
         if (searchId)
-            this.router.navigate(
-                [
-                    APP_ROUTES.product.app,
-                    APP_ROUTES.product.dashboard,
-                    APP_ROUTES.product.patient,
-                    APP_ROUTES.product.activeSearches,
-                    APP_ROUTES.product.medicationDetails,
-                ],
-                { queryParams: { searchId: JSON.stringify(searchId) } }
-            );
+            this.router.navigate([
+                APP_ROUTES.product.app,
+                APP_ROUTES.product.dashboard,
+                APP_ROUTES.product.medicationDetails,
+                searchId,
+            ]);
     }
 
     getMyInProgressSearch() {
@@ -61,6 +57,7 @@ export class ActiveSearchesComponent implements OnInit {
     getMyInNotStartedSearch() {
         this.searchService.getMySearches(SearchStatus.NotStarted).subscribe({
             next: (result) => {
+                this.setInDatService(result);
                 this.activeSearches.push(...result);
             },
             error: (err) => {
