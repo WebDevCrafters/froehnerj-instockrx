@@ -1,93 +1,115 @@
 <div class="dashboard_container">
-  <div class="header_container">
-    <app-header (toggleSidebar)="toggleSidebar()" />
-  </div>
-  <div class="content_container" [ngClass]="{ isExpanded: isSidebarExpanded }">
-    <div class="sidebar_container">
-      <ul>
-        <li>
-          <a
-            class="img_and_tag"
-            [routerLink]="[
-              APP_ROUTES.product.patient + '/' + APP_ROUTES.product.newSearch
-            ]"
-            routerLinkActive="active-link"
-            [routerLinkActiveOptions]="{ exact: true }"
-          >
-            <div class="img">
-              <img src="assets/images/svg/plus-black-icon.svg" alt="" />
-            </div>
-            <span> New Search </span>
-          </a>
-        </li>
-        <li>
-          <a
-            class="img_and_tag"
-            [routerLink]="[
-              APP_ROUTES.product.patient +
-                '/' +
-                APP_ROUTES.product.activeSearches
-            ]"
-            routerLinkActive="active-link"
-          >
-            <div class="img">
-              <img src="assets/images/svg/active-search-icon.svg" alt="" />
-            </div>
-            <span> Active Searches </span>
-          </a>
-        </li>
-        <li>
-          <a
-            class="img_and_tag"
-            [routerLink]="[
-              APP_ROUTES.product.patient +
-                '/' +
-                APP_ROUTES.product.previousSearches
-            ]"
-            routerLinkActive="active-link"
-          >
-            <div class="img">
-              <img src="assets/images/svg/previous-icon.svg" alt="" />
-            </div>
-            <span> Previous Searches </span>
-          </a>
-        </li>
-        <li>
-          <a
-            class="img_and_tag"
-            [routerLink]="[
-              APP_ROUTES.product.patient +
-                '/' +
-                APP_ROUTES.product.editPatientsProfile
-            ]"
-            routerLinkActive="active-link"
-            [routerLinkActiveOptions]="{ exact: true }"
-          >
-            <div class="img">
-              <img src="assets/images/svg/profile-icon.svg" alt="" />
-            </div>
-            <span> Profile </span>
-          </a>
-        </li>
-        <li>
-          <a
-            class="img_and_tag"
-            [routerLink]="[
-              APP_ROUTES.product.patient + '/' + APP_ROUTES.product.payments
-            ]"
-            routerLinkActive="active-link"
-            [routerLinkActiveOptions]="{ exact: true }"
-          >
-            <div class="img">
-              <img src="assets/images/svg/payment-icon.svg" alt="" />
-            </div>
-            <span> Payments </span>
-          </a>
-        </li>
-      </ul>
+    <div class="header_container">
+        <app-header (toggleSidebar)="toggleSidebar()" />
     </div>
-    <div class="right_container">
-      <router-outlet></router-outlet>
+    <div
+        class="content_container"
+        [ngClass]="{ isExpanded: isSidebarExpanded }"
+    >
+        <div class="sidebar_container">
+            <ul>
+                <li>
+                    <a
+                        class="img_and_tag"
+                        [routerLink]="[
+                            APP_ROUTES.product.patient +
+                                '/' +
+                                APP_ROUTES.product.newSearch
+                        ]"
+                        routerLinkActive="active-link"
+                        [routerLinkActiveOptions]="{ exact: true }"
+                    >
+                        <div class="img">
+                            <img
+                                src="assets/images/svg/plus-black-icon.svg"
+                                alt=""
+                            />
+                        </div>
+                        <span> New Search </span>
+                    </a>
+                </li>
+                <li>
+                    <a
+                        class="img_and_tag"
+                        [routerLink]="[
+                            APP_ROUTES.product.patient +
+                                '/' +
+                                APP_ROUTES.product.activeSearches
+                        ]"
+                        routerLinkActive="active-link"
+                    >
+                        <div class="img">
+                            <img
+                                src="assets/images/svg/active-search-icon.svg"
+                                alt=""
+                            />
+                        </div>
+                        <span> Active Searches </span>
+                    </a>
+                </li>
+                <li>
+                    <a
+                        class="img_and_tag"
+                        [routerLink]="[
+                            APP_ROUTES.product.patient +
+                                '/' +
+                                APP_ROUTES.product.previousSearches
+                        ]"
+                        routerLinkActive="active-link"
+                    >
+                        <div class="img">
+                            <img
+                                src="assets/images/svg/previous-icon.svg"
+                                alt=""
+                            />
+                        </div>
+                        <span> Previous Searches </span>
+                    </a>
+                </li>
+                <li>
+                    <a
+                        class="img_and_tag"
+                        [routerLink]="[
+                            APP_ROUTES.product.patient +
+                                '/' +
+                                APP_ROUTES.product.editPatientsProfile
+                        ]"
+                        routerLinkActive="active-link"
+                        [routerLinkActiveOptions]="{ exact: true }"
+                    >
+                        <div class="img">
+                            <img
+                                src="assets/images/svg/profile-icon.svg"
+                                alt=""
+                            />
+                        </div>
+                        <span> Profile </span>
+                    </a>
+                </li>
+                <li>
+                    <a
+                        class="img_and_tag"
+                        [routerLink]="[
+                            APP_ROUTES.product.patient +
+                                '/' +
+                                APP_ROUTES.product.payments
+                        ]"
+                        routerLinkActive="active-link"
+                        [routerLinkActiveOptions]="{ exact: true }"
+                    >
+                        <div class="img">
+                            <img
+                                src="assets/images/svg/payment-icon.svg"
+                                alt=""
+                            />
+                        </div>
+                        <span> Payments </span>
+                    </a>
+                </li>
+            </ul>
+        </div>
+        <div class="right_container">
+            <router-outlet></router-outlet>
+        </div>
     </div>
-  </div>
 </div>

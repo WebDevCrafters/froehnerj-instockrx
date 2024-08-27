@@ -2,10 +2,10 @@ import { Component, OnInit } from '@angular/core';
 import { SearchService } from '../../../../_core/services/search.service';
 import { SearchStatus } from '../../../_shared/interfaces/SearchStatus';
 import Search from '../../../_shared/interfaces/Search';
-import { EmptyStateComponent } from "../../_shared/components/empty-state/empty-state.component";
-import { LoaderComponent } from "../../../../_shared/components/loader/loader.component";
 import { Router } from '@angular/router';
 import APP_ROUTES from '../../../../_shared/constants/routes';
+import { EmptyStateComponent } from '../../../../_shared/components/empty-state/empty-state.component';
+import { LoaderComponent } from '../../../../_shared/components/loader/loader.component';
 
 @Component({
     selector: 'app-previous-searches',
@@ -43,9 +43,11 @@ export class PreviousSearchesComponent implements OnInit {
         this.searchService.getMySearches(SearchStatus.Completed).subscribe({
             next: (result) => {
                 this.previousSearches.push(...result);
+                this.isLoading = false
             },
             error: (err) => {
                 console.log(err);
+                this.isLoading = false
             },
         });
     }

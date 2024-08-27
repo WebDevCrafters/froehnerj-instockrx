@@ -1,20 +1,36 @@
 @import "variables";
 
-.loader {
-    width: 1rem;
-    height: 1rem;
-    border: 3px solid $globalWhiteColor;
-    border-top: 3px solid $normalGrey; 
-    border-radius: 50%;
-    animation: spin 0.5s linear infinite; 
-  }
-  
-  @keyframes spin {
+.main_container {
+    height: 100%;
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    .loader {
+        position: relative;
+        width: 80px;
+        height: 80px;
+    }
+
+    .loader:before,
+    .loader:after {
+        content: "";
+        border-radius: 50%;
+        position: absolute;
+        inset: 0;
+    }
+    .loader:after {
+        box-shadow: 0 2px 0 $brandPrimaryColor inset;
+        animation: rotate 0.6s linear infinite;
+    }
+}
+
+@keyframes rotate {
     0% {
-      transform: rotate(0deg);
+        transform: rotate(0);
     }
     100% {
-      transform: rotate(360deg);
+        transform: rotate(360deg);
     }
-  }
-  
+}

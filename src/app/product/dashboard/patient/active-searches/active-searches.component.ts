@@ -1,13 +1,13 @@
+import { Router } from '@angular/router';
 import { Component, OnInit } from '@angular/core';
 import { MedicationDetailsComponent } from '../_shared/medication-details/medication-details.component';
-import { Router } from '@angular/router';
 import APP_ROUTES from '../../../../_shared/constants/routes';
 import { SearchService } from '../../../../_core/services/search.service';
 import { SearchStatus } from '../../../_shared/interfaces/SearchStatus';
 import Search from '../../../_shared/interfaces/Search';
 import { DataService } from '../../../../_core/services/data.service';
-import { EmptyStateComponent } from "../../_shared/components/empty-state/empty-state.component";
-import { LoaderComponent } from '../../_shared/components/loader/loader.component';
+import { EmptyStateComponent } from '../../../../_shared/components/empty-state/empty-state.component';
+import { LoaderComponent } from '../../../../_shared/components/loader/loader.component';
 
 @Component({
     selector: 'app-active-searches',
