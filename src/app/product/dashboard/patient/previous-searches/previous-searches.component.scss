@@ -37,7 +37,7 @@ $button-hover-bg-color: #218838;
             height: 100%;
             border-collapse: collapse;
             border-radius: 16px;
-            overflow: hidden;
+            // overflow: hidden;
 
             thead {
                 display: table;
@@ -62,32 +62,36 @@ $button-hover-bg-color: #218838;
                 display: block;
                 overflow-y: auto;
                 border-radius: 0 0 16px 16px;
-                border-bottom: 1px solid $table-border-color;
+                border: 1px solid $table-border-color;
 
                 tr {
                     display: table;
                     table-layout: fixed;
                     width: 100%;
                     height: 46px;
+                    border-bottom: 1px solid $table-border-color;
+
                     &:hover {
                         background-color: $table-row-hover-color;
                     }
 
                     &:last-child {
                         border-bottom: none;
+                        border-radius: 0 0 16px 16px;
+                        border-bottom: 1px solid $table-border-color;
                     }
 
                     td {
                         padding: 12px 15px;
-                        border-bottom: 1px solid $table-border-color;
+                        // border-bottom: 1px solid $table-border-color;
                         white-space: nowrap;
 
                         &:first-child {
-                            border-left: 1px solid $table-border-color;
+                            // border-left: 1px solid $table-border-color;
                         }
 
                         &:last-child {
-                            border-right: 1px solid $table-border-color;
+                            // border-right: 1px solid $table-border-color;
                             text-align: center;
                         }
 
