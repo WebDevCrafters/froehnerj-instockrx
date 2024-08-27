@@ -31,15 +31,19 @@
                     cursor: pointer;
                     height: 30px;
                 }
+
+                .btn_container {
+                    margin-left: auto;
+                }
             }
 
             .content_container {
                 padding: 1rem 0;
 
                 .edit_profile_form {
-                    display: flex;
-                    gap: 1rem;
-                    flex-direction: column;
+                    display: grid;
+                    grid-template-columns: 1fr 1fr;
+                    gap: 2rem;
 
                     .actions {
                         display: flex;
@@ -47,9 +51,9 @@
                     }
                 }
                 .value_container {
-                    display: flex;
-                    flex-direction: column;
-                    gap: 2rem;
+                    display: grid;
+                    grid-template-columns: 1fr 1fr;
+                    gap: 2.6rem;
 
                     .info {
                         display: flex;
