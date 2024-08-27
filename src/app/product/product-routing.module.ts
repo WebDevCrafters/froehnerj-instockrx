@@ -18,6 +18,7 @@ import { NearBySearchesComponent } from './dashboard/clinician/near-by-searches/
 import { MedicationDetailsComponent } from './dashboard/patient/_shared/medication-details/medication-details.component';
 import { SelectPackageComponent } from './dashboard/patient/payment/select-package/select-package.component';
 import { PaymentComponent } from './dashboard/patient/payment/payment.component';
+import UserType from './_shared/interfaces/UserType';
 
 const routes: Routes = [
     {
@@ -40,7 +41,7 @@ const routes: Routes = [
                         pathMatch: 'full',
                     },
                     {
-                        path: APP_ROUTES.product.signIn + '/:userType',
+                        path: APP_ROUTES.product.signIn,
                         component: SigninComponent,
                     },
                     {

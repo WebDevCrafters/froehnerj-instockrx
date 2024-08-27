@@ -35,24 +35,19 @@ export class NavbarComponent {
     }
 
     openFindMyMeds(event: MouseEvent) {
-        this.router.navigate(
-            [
-                APP_ROUTES.product.app,
-                APP_ROUTES.product.auth,
-                APP_ROUTES.product.signUp,
-                UserType.Patient
-            ]
-        );
+        this.router.navigate([
+            APP_ROUTES.product.app,
+            APP_ROUTES.product.auth,
+            APP_ROUTES.product.signUp,
+            UserType.Patient,
+        ]);
     }
 
     openSignUpPage(event: MouseEvent) {
-        this.router.navigate(
-            [
-                APP_ROUTES.product.app,
-                APP_ROUTES.product.auth,
-                APP_ROUTES.product.signIn,
-                UserType.Patient
-            ],
-        );
+        this.router.navigate([
+            APP_ROUTES.product.app,
+            APP_ROUTES.product.auth,
+            APP_ROUTES.product.signIn,
+        ]);
     }
 }

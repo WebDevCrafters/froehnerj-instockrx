@@ -5,7 +5,12 @@ import { ButtonComponent } from '../../_shared/components/button/button.componen
 import { CommonModule } from '@angular/common';
 import { CustomSearchDropdownComponent } from '../../_shared/components/custom-search-dropdown/custom-search-dropdown.component';
 import { User } from '../_shared/interfaces/User';
-import { ActivatedRoute, Router, RouterOutlet } from '@angular/router';
+import {
+    ActivatedRoute,
+    NavigationEnd,
+    Router,
+    RouterOutlet,
+} from '@angular/router';
 import APP_ROUTES from '../../_shared/constants/routes';
 import { VerificationCodeComponent } from '../verification-code/verification-code.component';
 import {
@@ -17,6 +22,7 @@ import { SigninComponent } from './signin/signin.component';
 import { ForgotPasswordComponent } from './forgot-password/forgot-password.component';
 import { UserService } from '../../_core/services/user.service';
 import UserType from '../_shared/interfaces/UserType';
+import { filter } from 'rxjs';
 
 @Component({
     selector: 'app-auth',
@@ -47,6 +53,17 @@ export class AuthComponent implements OnInit {
     ) {}
 
     ngOnInit(): void {
+        // Subscribe to router events to detect navigation changes
+        this.router.events
+            .pipe(filter((event) => event instanceof NavigationEnd))
+            .subscribe(() => {
+                this.checkIfSignInOrSignUp();
+                this.userType = this.activatedRoute.children
+                    .map((child) => child.snapshot.paramMap.get('userType'))
+                    .find((value) => value !== null) as UserType;
+            });
+
+        // Initial check
         this.checkIfSignInOrSignUp();
         this.userType = this.activatedRoute.children
             .map((child) => child.snapshot.paramMap.get('userType'))
@@ -118,8 +135,8 @@ export class AuthComponent implements OnInit {
         this.router.navigate([
             APP_ROUTES.product.app,
             APP_ROUTES.product.auth,
-            APP_ROUTES.product.patient,
             APP_ROUTES.product.signUp,
+            UserType.Patient,
         ]);
     }
 

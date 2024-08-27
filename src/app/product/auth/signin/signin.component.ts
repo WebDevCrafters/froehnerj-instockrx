@@ -55,7 +55,14 @@ export class SigninComponent {
         this.countryCode = countryCode;
     }
 
-    public openSignUpScreen() {}
+    public openClinicianSignUpScreen() {
+        this.router.navigate([
+            APP_ROUTES.product.app,
+            APP_ROUTES.product.auth,
+            APP_ROUTES.product.signUp,
+            UserType.Clinician,
+        ]);
+    }
 
     public openForgotPasswordScreen() {}
 

@@ -64,7 +64,13 @@ export class SignupComponent implements OnInit {
         this.countryCode = countryCode;
     }
 
-    public openSignInScreen() {}
+    public openSignInScreen() {
+        this.router.navigate([
+            APP_ROUTES.product.app,
+            APP_ROUTES.product.auth,
+            APP_ROUTES.product.signIn,
+        ]);
+    }
 
     private async signup() {
         if (!this.userType) return;
