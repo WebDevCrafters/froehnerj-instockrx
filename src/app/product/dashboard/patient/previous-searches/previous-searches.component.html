@@ -1,15 +1,17 @@
 <div class="main_container">
     <div class="header">Previous Searches</div>
     <div class="content">
-        @if(false) {
-        <div class="empty_container">No Previous Searches</div>
-        } @else {
+        @if(isLoading) {
+        <div class="loader_container">
+            <app-loader></app-loader>
+        </div>
+        } @else { @if(previousSearches.length) {
         <table>
             <thead>
                 <th>Medication Name</th>
                 <th>Time</th>
                 <th>Status</th>
-                <th>View</th>
+                <th></th>
             </thead>
             <tbody>
                 @for (search of previousSearches; track $index) {
@@ -20,7 +22,7 @@
                     <td>
                         <div
                             class="view_btn"
-                            (click)="viewDetails(search.searchId)"
+                            (click)="viewDetails(search?.searchId)"
                         >
                             View Details
                         </div>
@@ -29,6 +31,13 @@
                 }
             </tbody>
         </table>
-        }
+        } @else {
+        <div class="empty_container">
+            <app-empty-state
+                [src]="'assets/images/svg/no-search-icon.svg'"
+                [caption]="'No Previous Searches'"
+            ></app-empty-state>
+        </div>
+        } }
     </div>
 </div>

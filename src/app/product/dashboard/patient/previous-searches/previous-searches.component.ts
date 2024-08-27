@@ -2,19 +2,22 @@ import { Component, OnInit } from '@angular/core';
 import { SearchService } from '../../../../_core/services/search.service';
 import { SearchStatus } from '../../../_shared/interfaces/SearchStatus';
 import Search from '../../../_shared/interfaces/Search';
-import APP_ROUTES from '../../../../_shared/constants/routes';
 import { Router } from '@angular/router';
 import { DataService } from '../../../../_core/services/data.service';
+import APP_ROUTES from '../../../../_shared/constants/routes';
+import { EmptyStateComponent } from '../../../../_shared/components/empty-state/empty-state.component';
+import { LoaderComponent } from '../../../../_shared/components/loader/loader.component';
 
 @Component({
     selector: 'app-previous-searches',
     standalone: true,
-    imports: [],
+    imports: [EmptyStateComponent, LoaderComponent],
     templateUrl: './previous-searches.component.html',
     styleUrl: './previous-searches.component.scss',
 })
 export class PreviousSearchesComponent implements OnInit {
     previousSearches: Search[] = [];
+    isLoading: boolean = true;
     constructor(
         private searchService: SearchService,
         private router: Router,
@@ -30,9 +33,11 @@ export class PreviousSearchesComponent implements OnInit {
             next: (result) => {
                 this.setInDatService(result);
                 this.previousSearches.push(...result);
+                this.isLoading = false;
             },
             error: (err) => {
                 console.log(err);
+                this.isLoading = false;
             },
         });
     }
