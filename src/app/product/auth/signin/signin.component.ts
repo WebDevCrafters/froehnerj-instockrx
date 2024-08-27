@@ -1,5 +1,10 @@
 import { Component, Input, OnInit } from '@angular/core';
-import { FormControl, FormGroup, FormsModule, ReactiveFormsModule } from '@angular/forms';
+import {
+    FormControl,
+    FormGroup,
+    FormsModule,
+    ReactiveFormsModule,
+} from '@angular/forms';
 import { Router, ActivatedRoute } from '@angular/router';
 import { CommonModule } from '@angular/common';
 import { ButtonComponent } from '../../../_shared/components/button/button.component';
@@ -10,20 +15,26 @@ import { markAllAsDirty } from '../../../_shared/utils/formUtils';
 import { CustomSearchDropdownComponent } from '../../../_shared/components/custom-search-dropdown/custom-search-dropdown.component';
 import { UserService } from '../../../_core/services/user.service';
 import { HttpErrorResponse } from '@angular/common/http';
+import UserType from '../../_shared/interfaces/UserType';
+import { DataService } from '../../../_core/services/data.service';
 
 @Component({
     selector: 'app-signin',
     standalone: true,
-    imports: [InputComponent, ButtonComponent, CustomSearchDropdownComponent, CommonModule, FormsModule, ReactiveFormsModule],
+    imports: [
+        InputComponent,
+        ButtonComponent,
+        CustomSearchDropdownComponent,
+        CommonModule,
+        FormsModule,
+        ReactiveFormsModule,
+    ],
     templateUrl: './signin.component.html',
-    styleUrls: ['./signin.component.scss']
+    styleUrls: ['./signin.component.scss'],
 })
-export class SigninComponent implements OnInit {
-    @Input() public isForgotPasswordScreenVisible: boolean = false;
+export class SigninComponent {
     @Input() public isEmailLoginInOptionSelected: boolean = true;
-    @Input() public isVerificationScreenVisible: boolean = false;
-    @Input() public patientSignUp: boolean = false;
-    public error: string = "";
+    public error: string = '';
     public isLoading: boolean = false;
 
     public signInInfoForm = new FormGroup({
@@ -32,29 +43,28 @@ export class SigninComponent implements OnInit {
         password: new FormControl(''),
     });
     public countryCode: string = '';
-    public isPatientRoute: boolean = false;
 
-    constructor(private userService: UserService, private router: Router, private route: ActivatedRoute) { }
-
-    ngOnInit() {
-        this.route.parent?.url.subscribe(url => {
-            this.isPatientRoute = url.length > 0 && url[0].path === APP_ROUTES.product.patient;
-        });
-    }
+    constructor(
+        private userService: UserService,
+        private router: Router,
+        private route: ActivatedRoute,
+        private dataService: DataService
+    ) {}
 
     public setCountryCode(countryCode: string) {
         this.countryCode = countryCode;
     }
 
-    public openSignUpScreen() {
-        const targetRoute = this.isPatientRoute ? APP_ROUTES.product.patient : APP_ROUTES.product.clinician;
-        this.router.navigate([APP_ROUTES.product.app, APP_ROUTES.product.auth, targetRoute, APP_ROUTES.product.signUp]);
+    public openClinicianSignUpScreen() {
+        this.router.navigate([
+            APP_ROUTES.product.app,
+            APP_ROUTES.product.auth,
+            APP_ROUTES.product.signUp,
+            UserType.Clinician,
+        ]);
     }
 
-    public openForgotPasswordScreen() {
-        const targetRoute = this.isPatientRoute ? APP_ROUTES.product.patient : APP_ROUTES.product.clinician;
-        this.router.navigate([APP_ROUTES.product.app, APP_ROUTES.product.auth, targetRoute, APP_ROUTES.product.forgotPassword]);
-    }
+    public openForgotPasswordScreen() {}
 
     public markEmailOptionAsSelected() {
         this.isEmailLoginInOptionSelected = true;
@@ -64,30 +74,41 @@ export class SigninComponent implements OnInit {
         this.isEmailLoginInOptionSelected = false;
     }
 
-    public async  signin() {
+    public async signin() {
         this.isLoading = true;
         const user: User = {
             email: this.signInInfoForm.controls.email.value || '',
             phoneNumber: this.signInInfoForm.controls.phoneNumber.value || '',
-            password: this.signInInfoForm.controls.password.value || ''
+            password: this.signInInfoForm.controls.password.value || '',
         };
         this.userService.signIn(user).subscribe({
-            next:(res)=>{
+            next: (res) => {
+                if (res.user.userType) {
+                    this.dataService.currentUserType = res.user.userType;
+                }
                 this.isLoading = false;
-                this.router.navigate([`${APP_ROUTES.product.app}/${APP_ROUTES.product.dashboard}/${APP_ROUTES.product.patient}/${APP_ROUTES.product.newSearch}`], { replaceUrl: true });
+                this.router.navigate(
+                    [
+                        `${APP_ROUTES.product.app}/${APP_ROUTES.product.dashboard}/${APP_ROUTES.product.patient}/${APP_ROUTES.product.newSearch}`,
+                    ],
+                    { replaceUrl: true }
+                );
             },
-            error:(err: HttpErrorResponse)=>{
+            error: (err: HttpErrorResponse) => {
                 this.isLoading = false;
                 this.error = err.error.message;
-            }
-        })
+            },
+        });
     }
 
     public onSuccess() {
         this.signInInfoForm.markAllAsTouched();
         markAllAsDirty(this.signInInfoForm);
 
-        if (this.signInInfoForm.controls.email.valid || this.signInInfoForm.controls.phoneNumber.valid) {
+        if (
+            this.signInInfoForm.controls.email.valid ||
+            this.signInInfoForm.controls.phoneNumber.valid
+        ) {
             this.signin();
         }
     }

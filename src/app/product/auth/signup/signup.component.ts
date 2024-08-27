@@ -10,6 +10,7 @@ import { markAllAsDirty } from '../../../_shared/utils/formUtils';
 import { CustomSearchDropdownComponent } from '../../../_shared/components/custom-search-dropdown/custom-search-dropdown.component';
 import { UserService } from '../../../_core/services/user.service';
 import UserType from '../../_shared/interfaces/UserType';
+import { DataService } from '../../../_core/services/data.service';
 
 @Component({
     selector: 'app-signup',
@@ -25,6 +26,8 @@ import UserType from '../../_shared/interfaces/UserType';
     styleUrl: './signup.component.scss',
 })
 export class SignupComponent implements OnInit {
+    userType: UserType | null = null;
+
     public signUpInfoForm = new FormGroup({
         firstName: new FormControl(''),
         lastName: new FormControl(''),
@@ -42,20 +45,18 @@ export class SignupComponent implements OnInit {
      */
 
     public countryCode: string = '';
-    public isPatientRoute: boolean = false;
 
     constructor(
         private userService: UserService,
         private router: Router,
-        private route: ActivatedRoute
+        private route: ActivatedRoute,
+        private dataService: DataService
     ) {}
 
     ngOnInit() {
-        this.route.parent?.url.subscribe((url) => {
-            if (url.length > 0) {
-                this.isPatientRoute =
-                    url[0].path === APP_ROUTES.product.patient;
-            }
+        this.route.paramMap.subscribe((params) => {
+            this.userType = params.get('userType') as UserType;
+            console.log(this.userType);
         });
     }
 
@@ -64,32 +65,29 @@ export class SignupComponent implements OnInit {
     }
 
     public openSignInScreen() {
-        const targetRoute = this.isPatientRoute
-            ? APP_ROUTES.product.patient
-            : APP_ROUTES.product.clinician;
         this.router.navigate([
             APP_ROUTES.product.app,
             APP_ROUTES.product.auth,
-            targetRoute,
             APP_ROUTES.product.signIn,
         ]);
     }
 
     private async signup() {
+        if (!this.userType) return;
+
         const user: User = {
             email: this.signUpInfoForm.get('email')?.value || '',
             name: `${this.signUpInfoForm.get('firstName')?.value || ''} ${
                 this.signUpInfoForm.get('lastName')?.value || ''
             }`,
             phoneNumber: this.signUpInfoForm.get('phoneNumber')?.value || '',
-            userType: this.isPatientRoute
-                ? UserType.Patient
-                : UserType.Clinician,
+            userType: this.userType,
             zipCode: this.signUpInfoForm.get('zipCode')?.value || '',
             password: this.signUpInfoForm.get('password')?.value || '',
         };
         this.userService.signUp(user).subscribe({
             next: (user) => {
+                this.dataService.currentUserType = this.userType;
                 this.router.navigate(
                     [
                         `${APP_ROUTES.product.app}/${APP_ROUTES.product.dashboard}/${APP_ROUTES.product.patient}/${APP_ROUTES.product.newSearch}`,
@@ -108,9 +106,7 @@ export class SignupComponent implements OnInit {
         markAllAsDirty(this.signUpInfoForm);
         if (!this.signUpInfoForm.valid) return;
 
-        if (this.isPatientRoute) {
-            this.signup();
-        }
+        this.signup();
     }
 
     public navigateToPrivacyPolicy() {

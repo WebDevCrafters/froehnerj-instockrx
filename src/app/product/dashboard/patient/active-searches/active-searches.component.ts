@@ -21,7 +21,7 @@ export class ActiveSearchesComponent implements OnInit {
         private router: Router,
         private searchService: SearchService,
         private dataService: DataService
-    ) { }
+    ) {}
     public activeSearches: Search[] = [];
     public isLoading: boolean = true;
 
@@ -32,16 +32,12 @@ export class ActiveSearchesComponent implements OnInit {
 
     viewDetails(searchId?: string) {
         if (searchId)
-            this.router.navigate(
-                [
-                    APP_ROUTES.product.app,
-                    APP_ROUTES.product.dashboard,
-                    APP_ROUTES.product.patient,
-                    APP_ROUTES.product.activeSearches,
-                    APP_ROUTES.product.medicationDetails,
-                ],
-                { queryParams: { searchId: JSON.stringify(searchId) } }
-            );
+            this.router.navigate([
+                APP_ROUTES.product.app,
+                APP_ROUTES.product.dashboard,
+                APP_ROUTES.product.medicationDetails,
+                searchId,
+            ]);
     }
 
     getMyInProgressSearch() {
@@ -61,6 +57,7 @@ export class ActiveSearchesComponent implements OnInit {
     getMyInNotStartedSearch() {
         this.searchService.getMySearches(SearchStatus.NotStarted).subscribe({
             next: (result) => {
+                this.setInDatService(result);
                 this.activeSearches.push(...result);
                 this.isLoading = false;
             },

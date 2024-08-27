@@ -12,7 +12,7 @@ const APP_ROUTES = {
         termsOfService: 'InStockRxTerms',
     },
     product: {
-        _: "",
+        _: '',
         app: 'app',
         auth: 'auth',
         clinician: 'clinician',
