@@ -1,46 +1,54 @@
 import { CommonModule } from '@angular/common';
-import { Component, HostListener } from '@angular/core';
+import { Component, HostListener, OnInit } from '@angular/core';
 import { FormsModule } from '@angular/forms';
+import { SearchService } from '../../../../_core/services/search.service';
+import { SearchStatus } from '../../../_shared/interfaces/SearchStatus';
+import Search from '../../../_shared/interfaces/Search';
+import { AvailabilityService } from '../../../../_core/services/availability.service';
+import Availability from '../../../_shared/interfaces/Availability';
+import { ButtonComponent } from '../../../../_shared/components/button/button.component';
 
 @Component({
     selector: 'app-near-by-searches',
     standalone: true,
-    imports: [FormsModule, CommonModule],
+    imports: [FormsModule, CommonModule, ButtonComponent],
     templateUrl: './near-by-searches.component.html',
-    styleUrl: './near-by-searches.component.scss'
+    styleUrl: './near-by-searches.component.scss',
 })
-export class NearBySearchesComponent {
-    dropdownOpen = false;
-    allSelected = false;
-    options = [
-        { label: 'Payment Authorized', checked: false },
-        { label: 'On Hold', checked: false },
-        { label: 'In Progress', checked: false },
-        { label: 'Script Found', checked: false }
-    ];
+export class NearBySearchesComponent implements OnInit {
+    constructor(
+        private searchSercice: SearchService,
+        private availabilityService: AvailabilityService
+    ) {}
+    searches: Search[] = [];
 
-    toggleDropdown() {
-        this.dropdownOpen = !this.dropdownOpen;
+    ngOnInit(): void {
+        this.getSearchInRadius();
     }
 
-    closeDropdown() {
-        this.dropdownOpen = false;
+    getSearchInRadius() {
+        this.searchSercice.getSearchesInRadius().subscribe({
+            next: (res) => {
+                this.searches = res;
+            },
+            error: (err) => {
+                console.log(err);
+            },
+        });
     }
 
-    @HostListener('document:click', ['$event'])
-    onDocumentClick(event: MouseEvent) {
-        const target = event.target as HTMLElement;
-        if (!target.closest('.dropdown-content') && !target.closest('.dropdown-toggle')) {
-            this.closeDropdown();
-        }
-    }
-
-    toggleAllOptions() {
-        const newValue = this.allSelected;
-        this.options.forEach(option => option.checked = newValue);
-    }
-
-    updateAllSelected() {
-        this.allSelected = this.options.every(option => option.checked);
+    markAsAvailable(searchId?: string) {
+        if (!searchId) return;
+        const availability: Availability = {
+            search: searchId,
+        };
+        this.availabilityService.add(availability).subscribe({
+            next: (res) => {
+                console.log(res);
+            },
+            error: (err) => {
+                console.log(err);
+            },
+        });
     }
 }

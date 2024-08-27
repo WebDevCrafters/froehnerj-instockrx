@@ -3,7 +3,7 @@ import { Injectable } from '@angular/core';
 import { UserService } from './user.service';
 import { SearchStatus } from '../../product/_shared/interfaces/SearchStatus';
 import { BASE_URL } from '../../../../env';
-import { catchError, map, Observable, throwError } from 'rxjs';
+import { catchError, map, Observable, of, throwError } from 'rxjs';
 import Search from '../../product/_shared/interfaces/Search';
 
 @Injectable({
@@ -41,7 +41,7 @@ export class SearchService {
         );
     }
 
-    getSearchesInRadius(status: SearchStatus) {
+    getSearchesInRadius() {
         const accessToken = this.userService.getAccessToken();
         const url = `${BASE_URL}${this.SEARCH_URL}/radius`;
         const headers = new HttpHeaders().set('authorization', accessToken);
@@ -49,7 +49,12 @@ export class SearchService {
             map((res) => {
                 return res as Search[];
             }),
-            catchError((err) => throwError(() => err))
+            catchError((err) => {
+                if (err.status === 404) return of([]);
+                return throwError(() => err);
+            })
         );
     }
+
+    updateSearch() {}
 }
