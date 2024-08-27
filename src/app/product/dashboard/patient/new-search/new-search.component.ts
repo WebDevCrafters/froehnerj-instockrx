@@ -1,26 +1,23 @@
-import { Component, OnInit } from '@angular/core';
+import { Component } from '@angular/core';
 import { FormArray, FormControl, FormGroup, Validators } from '@angular/forms';
 import { CommonModule } from '@angular/common';
 import { PersonalInfoComponent } from './personal-info/personal-info.component';
 import { SelectPackageComponent } from '../payment/select-package/select-package.component';
 import { PaymentComponent } from '../payment/payment.component';
 import { AdditionalInfoComponent } from './additional-info/additional-info.component';
-import { ActivatedRoute, Router } from '@angular/router';
-import { defaultPackage } from '../../../../_shared/constants/data';
-import { Package } from '../../../../_shared/dataTypes/Package';
-import { markAllAsDirty } from '../../../../_shared/utils/formUtils';
+import { Router } from '@angular/router';
 import {
     requiredValidator,
     dateValidator,
     charLimitValidator,
 } from '../../../../_shared/utils/Validators';
-import Subscription from '../../../_shared/interfaces/Subscription';
 import { ButtonComponent } from '../../../../_shared/components/button/button.component';
 import { SearchService } from '../../../../_core/services/search.service';
 import Search from '../../../_shared/interfaces/Search';
 import { SearchStatus } from '../../../_shared/interfaces/SearchStatus';
 import { PaymentService } from '../../../../_core/services/payment.service';
 import APP_ROUTES from '../../../../_shared/constants/routes';
+import { ModalComponent } from "../../../../_shared/components/modal/modal.component";
 
 @Component({
     selector: 'app-new-search',
@@ -32,16 +29,19 @@ import APP_ROUTES from '../../../../_shared/constants/routes';
         SelectPackageComponent,
         PaymentComponent,
         ButtonComponent,
+        ModalComponent
     ],
     templateUrl: './new-search.component.html',
     styleUrl: './new-search.component.scss',
 })
 export class NewSearchComponent {
+    public modalVisible: boolean = false;
+
     constructor(
         private searchService: SearchService,
         private paymentService: PaymentService,
         private router: Router
-    ) {}
+    ) { }
 
     additionalInfoForm = new FormGroup({
         dob: new FormControl('', [
@@ -71,14 +71,20 @@ export class NewSearchComponent {
     });
 
     async onAdditionalInfoSubmit() {
-        if (this.additionalInfoForm.valid) {
-            const isPaid = await this.checkUserPayment();
-            const search: Search = this.convertFormToSearch(isPaid);
-            this.addNewSearch(search, isPaid);
-        } else {
-            this.additionalInfoForm.markAllAsTouched();
-            markAllAsDirty(this.additionalInfoForm);
-        }
+        this.modalVisible = true;
+
+        // if (this.additionalInfoForm.valid) {
+        //     const isPaid = await this.checkUserPayment();
+        //     const search: Search = this.convertFormToSearch(isPaid);
+        //     this.addNewSearch(search, isPaid);
+        // } else {
+        //     this.additionalInfoForm.markAllAsTouched();
+        //     markAllAsDirty(this.additionalInfoForm);
+        // }
+    }
+
+    public toggleModal() {
+        this.modalVisible = !this.modalVisible;
     }
 
     private checkUserPayment(): Promise<boolean> {
@@ -137,24 +143,24 @@ export class NewSearchComponent {
             status: isPaid ? SearchStatus.InProgress : SearchStatus.NotStarted,
             medication:
                 formValues.prescribedMedication &&
-                formValues.prescribedMedication.length > 0
+                    formValues.prescribedMedication.length > 0
                     ? {
-                          name: formValues.prescribedMedication[0]?.name || '',
-                          dose:
-                              formValues.prescribedMedication[0]?.dose ??
-                              undefined,
-                          quantity: Number(
-                              formValues.prescribedMedication[0]?.quantity
-                          ),
-                          pickUpDate: Number(formValues.pickupDate),
-                          alternatives: formValues.prescribedMedication
-                              .slice(1)
-                              .map((med: any) => ({
-                                  name: med.name || '',
-                                  dose: med.dose ?? undefined,
-                                  quantity: Number(med.quantity),
-                              })),
-                      }
+                        name: formValues.prescribedMedication[0]?.name || '',
+                        dose:
+                            formValues.prescribedMedication[0]?.dose ??
+                            undefined,
+                        quantity: Number(
+                            formValues.prescribedMedication[0]?.quantity
+                        ),
+                        pickUpDate: Number(formValues.pickupDate),
+                        alternatives: formValues.prescribedMedication
+                            .slice(1)
+                            .map((med: any) => ({
+                                name: med.name || '',
+                                dose: med.dose ?? undefined,
+                                quantity: Number(med.quantity),
+                            })),
+                    }
                     : undefined,
         };
 
