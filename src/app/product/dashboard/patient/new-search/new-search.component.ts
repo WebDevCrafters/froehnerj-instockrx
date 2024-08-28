@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { FormArray, FormControl, FormGroup, Validators } from '@angular/forms';
 import { CommonModule } from '@angular/common';
 import { PersonalInfoComponent } from './personal-info/personal-info.component';
@@ -18,6 +18,8 @@ import { SearchStatus } from '../../../_shared/interfaces/SearchStatus';
 import { PaymentService } from '../../../../_core/services/payment.service';
 import APP_ROUTES from '../../../../_shared/constants/routes';
 import { ModalComponent } from "../../../../_shared/components/modal/modal.component";
+import Payment from '../../../_shared/interfaces/Payment';
+import { markAllAsDirty } from '../../../../_shared/utils/formUtils';
 
 @Component({
     selector: 'app-new-search',
@@ -34,14 +36,23 @@ import { ModalComponent } from "../../../../_shared/components/modal/modal.compo
     templateUrl: './new-search.component.html',
     styleUrl: './new-search.component.scss',
 })
-export class NewSearchComponent {
+export class NewSearchComponent implements OnInit {
     public modalVisible: boolean = false;
+    public packageDetail: Payment | null = null;
+    public isPaid: boolean = false;
+    public remaningSearches: number = 0;
+    public search: Search | null = null;
 
     constructor(
         private searchService: SearchService,
         private paymentService: PaymentService,
         private router: Router
     ) { }
+
+    async ngOnInit(): Promise<void> {
+        this.isPaid = await this.checkUserPayment();
+        this.checkSearchesRemaining();
+    }
 
     additionalInfoForm = new FormGroup({
         dob: new FormControl('', [
@@ -71,20 +82,19 @@ export class NewSearchComponent {
     });
 
     async onAdditionalInfoSubmit() {
-        this.modalVisible = true;
-
-        // if (this.additionalInfoForm.valid) {
-        //     const isPaid = await this.checkUserPayment();
-        //     const search: Search = this.convertFormToSearch(isPaid);
-        //     this.addNewSearch(search, isPaid);
-        // } else {
-        //     this.additionalInfoForm.markAllAsTouched();
-        //     markAllAsDirty(this.additionalInfoForm);
-        // }
+        if (this.search) {
+            this.addNewSearch(this.search, this.isPaid);
+        }
     }
 
-    public toggleModal() {
-        this.modalVisible = !this.modalVisible;
+    openModalPopup() {
+        if (this.additionalInfoForm.valid) {
+            this.search = this.convertFormToSearch(this.isPaid);
+            this.modalVisible = !this.modalVisible;
+        } else {
+            this.additionalInfoForm.markAllAsTouched();
+            markAllAsDirty(this.additionalInfoForm);
+        }
     }
 
     private checkUserPayment(): Promise<boolean> {
@@ -92,6 +102,7 @@ export class NewSearchComponent {
             this.paymentService.getCurrentPayment().subscribe({
                 next: (data) => {
                     if (data) {
+                        this.packageDetail = data;
                         resolve(true);
                     } else {
                         resolve(false);
@@ -117,6 +128,12 @@ export class NewSearchComponent {
         });
     }
 
+    public checkSearchesRemaining() {
+        if (this.packageDetail) {
+            this.remaningSearches = this.packageDetail?.subscription.searchCount - this.packageDetail?.searchesConsumed;
+        }
+    }
+
     private navigateToPayment() {
         this.router.navigate([
             APP_ROUTES.product.app,
@@ -132,11 +149,19 @@ export class NewSearchComponent {
         ]);
     }
 
+    public convertDobToTimestamp(dobString: any): number {
+        const [month, day, year] = dobString.split('/').map(Number);
+        const date = new Date(year, month - 1, day);
+        return date.getTime();
+    }
+
     private convertFormToSearch(isPaid: boolean) {
         const formValues = this.additionalInfoForm.value;
+        const dob = this.convertDobToTimestamp(formValues.dob);
 
         const search: Search = {
             prescriberName: formValues.prescriber || '',
+            dob: dob,
             zipCode: Number(formValues.zipCode),
             status: isPaid ? SearchStatus.InProgress : SearchStatus.NotStarted,
             medication:
