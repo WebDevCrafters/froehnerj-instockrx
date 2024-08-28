@@ -9,7 +9,6 @@
         <div class="sidebar_container">
             <ul>
                 @if (userType===UserType.Patient) {
-
                 <li>
                     <a
                         class="img_and_tag"
@@ -18,10 +17,11 @@
                         [routerLinkActiveOptions]="{ exact: true }"
                     >
                         <div class="img">
-                            <img
-                                src="assets/images/svg/plus-black-icon.svg"
-                                alt=""
-                            />
+                            <svg>
+                                <use
+                                    xlink:href="assets/images/svg/sprites/sidebar_icon.svg#plus"
+                                ></use>
+                            </svg>
                         </div>
                         <span> New Search </span>
                     </a>
@@ -33,10 +33,11 @@
                         routerLinkActive="active-link"
                     >
                         <div class="img">
-                            <img
-                                src="assets/images/svg/active-search-icon.svg"
-                                alt=""
-                            />
+                            <svg>
+                                <use
+                                    xlink:href="assets/images/svg/sprites/sidebar_icon.svg#active"
+                                ></use>
+                            </svg>
                         </div>
                         <span> Active Searches </span>
                     </a>
@@ -48,10 +49,11 @@
                         routerLinkActive="active-link"
                     >
                         <div class="img">
-                            <img
-                                src="assets/images/svg/previous-icon.svg"
-                                alt=""
-                            />
+                            <svg>
+                                <use
+                                    xlink:href="assets/images/svg/sprites/sidebar_icon.svg#previous"
+                                ></use>
+                            </svg>
                         </div>
                         <span> Previous Searches </span>
                     </a>
@@ -64,10 +66,11 @@
                         [routerLinkActiveOptions]="{ exact: true }"
                     >
                         <div class="img">
-                            <img
-                                src="assets/images/svg/payment-icon.svg"
-                                alt=""
-                            />
+                            <svg>
+                                <use
+                                    xlink:href="assets/images/svg/sprites/sidebar_icon.svg#payment"
+                                ></use>
+                            </svg>
                         </div>
                         <span> Payments </span>
                     </a>
@@ -102,7 +105,7 @@
                                 alt=""
                             />
                         </div>
-                        <span> Marked as Available  </span>
+                        <span> Marked as Available </span>
                     </a>
                 </li>
 
@@ -115,10 +118,11 @@
                         [routerLinkActiveOptions]="{ exact: true }"
                     >
                         <div class="img">
-                            <img
-                                src="assets/images/svg/profile-icon.svg"
-                                alt=""
-                            />
+                            <svg>
+                                <use
+                                    xlink:href="assets/images/svg/sprites/sidebar_icon.svg#profile"
+                                ></use>
+                            </svg>
                         </div>
                         <span> Profile </span>
                     </a>

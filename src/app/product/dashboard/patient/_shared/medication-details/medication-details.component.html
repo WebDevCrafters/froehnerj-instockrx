@@ -1,5 +1,21 @@
 <div class="main_container">
-    <div class="header">Medication Details:</div>
+    <div class="header">
+        <div class="title_container">
+            <p>Medication Details:</p>
+            @if(search?.status === searchStatus.NotStarted) {
+            <img
+                src="assets/images/svg/edit-icon.svg"
+                alt="Edit"
+                class="edit_icon"
+            />
+            }
+        </div>
+        @if(search?.status === searchStatus.NotStarted) {
+        <div class="edit_btn">
+            <app-button title="Start Search" [type]="'small_primary'" />
+        </div>
+        }
+    </div>
     <div class="medication_info">
         <div class="label_and_value">
             <div class="label">Name:</div>
@@ -25,9 +41,15 @@
             <div class="label">Pick up date:</div>
             <div class="value">{{ search?.medication?.pickUpDate }}</div>
         </div>
+        <div class="label_and_value">
+            <div class="label">Status:</div>
+            <div class="value">{{ search?.status }}</div>
+        </div>
     </div>
     @if(search?.medication?.alternatives?.length) {
-    <div class="header">Alternative Medication Details:</div>
+    <div class="header">
+        <div class="title">Alternative Medication Details:</div>
+    </div>
     @for (alternative of search?.medication?.alternatives; track $index) {
     <div class="medication_info">
         <div class="label_and_value">
@@ -48,8 +70,15 @@
         </div>
     </div>
     } }
-    <div class="header">Pharmacy Details:</div>
+    <div class="header">
+        <div class="title">Pharmacy Details:</div>
+    </div>
     <div class="table_container">
+        @if(false) {
+        <div class="loader_container">
+            <app-loader></app-loader>
+        </div>
+        } @else { @if(false) {
         <table>
             <thead>
                 <th>Medication Name</th>
@@ -68,5 +97,15 @@
                 }
             </tbody>
         </table>
+        } @else {
+        <div class="empty_container">
+            <app-empty-state
+                [src]="'assets/images/svg/no-search-icon.svg'"
+                [caption]="
+                    'No Pharmacy has marked your medication as available yet.'
+                "
+            ></app-empty-state>
+        </div>
+        } }
     </div>
 </div>

@@ -5,11 +5,15 @@ import { ActivatedRoute } from '@angular/router';
 import { SearchService } from '../../../../../_core/services/search.service';
 import { AvailabilityService } from '../../../../../_core/services/availability.service';
 import Availability from '../../../../_shared/interfaces/Availability';
+import { LoaderComponent } from "../../../../../_shared/components/loader/loader.component";
+import { EmptyStateComponent } from "../../../../../_shared/components/empty-state/empty-state.component";
+import { ButtonComponent } from "../../../../../_shared/components/button/button.component";
+import { SearchStatus } from '../../../../_shared/interfaces/SearchStatus';
 
 @Component({
     selector: 'app-medication-details',
     standalone: true,
-    imports: [],
+    imports: [LoaderComponent, EmptyStateComponent, ButtonComponent],
     templateUrl: './medication-details.component.html',
     styleUrl: './medication-details.component.scss',
 })
@@ -20,27 +24,24 @@ export class MedicationDetailsComponent implements OnInit {
     search: Search | null = null;
     searchId: string | null = null;
     availability: Availability[] = [];
+    searchStatus = SearchStatus;
 
     constructor(
         private dataService: DataService,
         private route: ActivatedRoute,
         private availabilityService: AvailabilityService
-    ) {}
+    ) { }
 
     ngOnInit(): void {
         this.route.paramMap.subscribe((params) => {
             this.searchId = params.get("searchId")
-
-            console.log(this.searchId);
             this.getSearchDetails();
         });
         this.getAvailability();
     }
 
     getSearchDetails() {
-        if (this.searchId)
-            this.search = this.dataService.getData(this.searchId);
-        console.log(this.search);
+        if (this.searchId) this.search = this.dataService.getData(this.searchId);
     }
 
     getAvailability() {

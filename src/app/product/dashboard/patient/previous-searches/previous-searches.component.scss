@@ -1,14 +1,5 @@
 @import "variables";
 
-$table-bg-color: #f9f9f9;
-$table-header-bg-color: #007bff;
-$table-header-text-color: #fff;
-$table-border-color: #ddd;
-$table-row-hover-color: #f1f1f1;
-$button-bg-color: #28a745;
-$button-text-color: #fff;
-$button-hover-bg-color: #218838;
-
 .main_container {
     height: 100%;
 
@@ -44,7 +35,7 @@ $button-hover-bg-color: #218838;
                 table-layout: fixed;
                 height: 10%;
                 width: 100%;
-                background-color: $normalGrey;
+                background-color: $brandLightPrimaryColor;
                 color: black;
                 border-radius: 16px 16px 0 0;
 
@@ -53,6 +44,7 @@ $button-hover-bg-color: #218838;
                     text-align: left;
                     font-weight: bold;
                     white-space: nowrap;
+                    color: $offWhiteColor;
                 }
             }
 
@@ -62,62 +54,53 @@ $button-hover-bg-color: #218838;
                 display: block;
                 overflow-y: auto;
                 border-radius: 0 0 16px 16px;
-                border: 1px solid $table-border-color;
+                border: 1px solid $normalGrey;
 
                 tr {
                     display: table;
                     table-layout: fixed;
                     width: 100%;
                     height: 46px;
-                    border-bottom: 1px solid $table-border-color;
+                    border-bottom: 1px solid $normalGrey;
+
+                    // &:nth-child(even) {
+                    //     background-color: $brandExtraLightPrimaryColor;
+                    // }
 
                     &:hover {
-                        background-color: $table-row-hover-color;
+                        background-color: $brandExtraLightPrimaryColor;
                     }
 
                     &:last-child {
                         border-bottom: none;
-                        border-radius: 0 0 16px 16px;
-                        border-bottom: 1px solid $table-border-color;
+                        // border-radius: 0 0 16px 16px;
+                        border-bottom: 1px solid $normalGrey;
                     }
 
                     td {
                         padding: 12px 15px;
-                        // border-bottom: 1px solid $table-border-color;
+                        // border-bottom: 1px solid $offBlackColor;
                         white-space: nowrap;
 
                         &:first-child {
-                            // border-left: 1px solid $table-border-color;
+                            // border-left: 1px solid $offBlackColor;
                         }
 
                         &:last-child {
-                            // border-right: 1px solid $table-border-color;
+                            // border-right: 1px solid $offBlackColor;
                             text-align: center;
                         }
 
                         .view_btn {
                             padding: 8px 16px;
                             cursor: pointer;
-                            background-color: $brandLightPrimaryColor;
-                            color: $button-text-color;
+                            color: $brandPrimaryColor;
                             border-radius: 8px;
                             display: inline-block;
-                            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
                             text-align: center;
-                            transition:
-                                background-color 0.3s ease,
-                                transform 0.2s ease;
                             font-size: 14px;
-
-                            &:hover {
-                                background-color: $brandPrimaryColor;
-                                transform: translateY(-2px);
-                            }
-
-                            &:active {
-                                background-color: darken($button-bg-color, 5%);
-                                transform: translateY(0);
-                            }
+                            text-decoration: underline;
+                            font-weight: bold;
                         }
                     }
                 }

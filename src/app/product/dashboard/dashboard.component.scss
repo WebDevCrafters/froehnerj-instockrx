@@ -72,35 +72,49 @@
                             display: flex;
                             align-items: center;
                             justify-content: center;
-                        }
 
-                        span {
-                            opacity: 0;
-                            display: none;
-                            transition: opacity 0.3s ease-in-out;
-                            white-space: nowrap;
-                            color: $offBlackColor;
+                            svg {
+                                height: 20px;
+                                width: 20px;
+                                color: $brandSecondaryColor;
+                            }
                         }
+                    }
 
+                    span {
+                        opacity: 0;
+                        display: none;
+                        transition: opacity 0.3s ease-in-out;
+                        white-space: nowrap;
+                        color: $offBlackColor;
+                    }
+
+                    a {
                         &.active-link {
+                            // background-color: $normalGrey;
+                            .img {
+                                svg {
+                                    color: $brandPrimaryColor;
+                                }
+                            }
                             span {
                                 color: $brandPrimaryColor;
                             }
                         }
                     }
+                }
 
-                    &:hover {
-                        color: $brandPrimaryColor;
-                    }
+                &:hover {
+                    color: $brandPrimaryColor;
                 }
             }
         }
+    }
 
-        .right_container {
-            width: calc(100% - 70px);
-            overflow-y: auto;
-            transition: width 0.3s ease-in-out;
-        }
+    .right_container {
+        width: calc(100% - 70px);
+        overflow-y: auto;
+        transition: width 0.3s ease-in-out;
     }
 }
 

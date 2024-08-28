@@ -48,6 +48,10 @@
                     .actions {
                         display: flex;
                         gap: 1rem;
+
+                        .action_btn {
+                            width: 120px;
+                        }
                     }
                 }
                 .value_container {
