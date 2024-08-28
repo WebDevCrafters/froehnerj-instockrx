@@ -16,8 +16,7 @@
                 <tr>
                     <td>{{ search.medication?.name }}</td>
                     <td>{{ search.medication?.dose }}</td>
-                    <td>{{ search.status }}</td>
-                    <td><app-button title="Mark as available" (clickEvent)="markAsAvailable(search.searchId)"/></td>
+                    <td><app-button title="Mark as available" (clickEvent)="markAsAvailable(search.searchId)" [type]="'small_secondary'" shape="rounded"/></td>
                     
                     <td>
                         <div class="userDetails">User Details</div>

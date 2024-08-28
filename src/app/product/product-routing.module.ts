@@ -19,6 +19,8 @@ import { MedicationDetailsComponent } from './dashboard/patient/_shared/medicati
 import { SelectPackageComponent } from './dashboard/patient/payment/select-package/select-package.component';
 import { PaymentComponent } from './dashboard/patient/payment/payment.component';
 import UserType from './_shared/interfaces/UserType';
+import { patientGuard } from '../_core/guards/patient.guard';
+import { clinicianGuard } from '../_core/guards/clinician.guard';
 
 const routes: Routes = [
     {
@@ -63,14 +65,27 @@ const routes: Routes = [
                     {
                         path: APP_ROUTES.product.newSearch,
                         component: NewSearchComponent,
+                        canActivate: [patientGuard],
                     },
                     {
                         path: APP_ROUTES.product.activeSearches,
                         component: ActiveSearchesComponent,
+                        canActivate: [patientGuard],
                     },
                     {
                         path: APP_ROUTES.product.previousSearches,
                         component: PreviousSearchesComponent,
+                        canActivate: [patientGuard],
+                    },
+                    {
+                        path: APP_ROUTES.product.payments,
+                        component: PaymentComponent,
+                        canActivate: [patientGuard],
+                    },
+                    {
+                        path: APP_ROUTES.product.nearBySearches,
+                        component: NearBySearchesComponent,
+                        canActivate: [clinicianGuard],
                     },
                     {
                         path:
@@ -80,14 +95,6 @@ const routes: Routes = [
                     {
                         path: APP_ROUTES.product.editPatientsProfile,
                         component: EditPatientProfileComponent,
-                    },
-                    {
-                        path: APP_ROUTES.product.payments,
-                        component: PaymentComponent,
-                    },
-                    {
-                        path: APP_ROUTES.product.nearBySearches,
-                        component: NearBySearchesComponent,
                     },
                 ],
             },

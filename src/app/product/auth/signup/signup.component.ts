@@ -90,7 +90,7 @@ export class SignupComponent implements OnInit {
                 this.dataService.currentUserType = this.userType;
                 this.router.navigate(
                     [
-                        `${APP_ROUTES.product.app}/${APP_ROUTES.product.dashboard}/${APP_ROUTES.product.patient}/${APP_ROUTES.product.newSearch}`,
+                        `${APP_ROUTES.product.app}/${APP_ROUTES.product.dashboard}/${APP_ROUTES.product.newSearch}`,
                     ],
                     { replaceUrl: true }
                 );
