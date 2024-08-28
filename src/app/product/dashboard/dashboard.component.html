@@ -89,6 +89,22 @@
                         <span> Nearby Searches</span>
                     </a>
                 </li>
+                <li>
+                    <a
+                        class="img_and_tag"
+                        [routerLink]="[APP_ROUTES.product.nearBySearches]"
+                        routerLinkActive="active-link"
+                        [routerLinkActiveOptions]="{ exact: true }"
+                    >
+                        <div class="img">
+                            <img
+                                src="assets/images/svg/nearby-icon.svg"
+                                alt=""
+                            />
+                        </div>
+                        <span> Marked as Available  </span>
+                    </a>
+                </li>
 
                 }
                 <li>
