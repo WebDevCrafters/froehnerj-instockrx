@@ -8,11 +8,12 @@ import Search from '../../../_shared/interfaces/Search';
 import { DataService } from '../../../../_core/services/data.service';
 import { EmptyStateComponent } from '../../../../_shared/components/empty-state/empty-state.component';
 import { LoaderComponent } from '../../../../_shared/components/loader/loader.component';
+import { CommonModule } from '@angular/common';
 
 @Component({
     selector: 'app-active-searches',
     standalone: true,
-    imports: [MedicationDetailsComponent, EmptyStateComponent, LoaderComponent],
+    imports: [MedicationDetailsComponent, EmptyStateComponent, LoaderComponent, CommonModule],
     templateUrl: './active-searches.component.html',
     styleUrl: './active-searches.component.scss',
 })

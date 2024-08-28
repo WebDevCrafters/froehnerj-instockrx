@@ -26,7 +26,7 @@
                 <div class="section_content">
                     <div class="label_and_value">
                         <div class="label">DOB:</div>
-                        <div class="value">{{ search?.dob }}</div>
+                        <div class="value">{{ search?.dob | date }}</div>
                     </div>
                     <div class="label_and_value">
                         <div class="label">Zip Code:</div>
@@ -94,7 +94,7 @@
                 <div class="label_and_value">
                     <div class="label">Pick up date:</div>
                     <div class="value">
-                        {{ search?.medication?.pickUpDate }}
+                        {{ search?.medication?.pickUpDate | date }}
                     </div>
                 </div>
             </div>

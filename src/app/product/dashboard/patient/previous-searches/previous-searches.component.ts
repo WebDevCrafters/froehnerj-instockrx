@@ -7,11 +7,12 @@ import { DataService } from '../../../../_core/services/data.service';
 import APP_ROUTES from '../../../../_shared/constants/routes';
 import { EmptyStateComponent } from '../../../../_shared/components/empty-state/empty-state.component';
 import { LoaderComponent } from '../../../../_shared/components/loader/loader.component';
+import { CommonModule } from '@angular/common';
 
 @Component({
     selector: 'app-previous-searches',
     standalone: true,
-    imports: [EmptyStateComponent, LoaderComponent],
+    imports: [EmptyStateComponent, LoaderComponent, CommonModule],
     templateUrl: './previous-searches.component.html',
     styleUrl: './previous-searches.component.scss',
 })
