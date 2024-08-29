@@ -1,6 +1,12 @@
 <div class="main_container">
     <div class="header">Clusters of patients</div>
-    <div class="table-container">
+    <div class="content">
+        @if(isLoading) {
+        <div class="loader_container">
+            <app-loader></app-loader>
+        </div>
+        } @else { @if(searches.length) {
+
         <table class="responsive-table">
             <thead>
                 <tr>
@@ -12,12 +18,18 @@
             </thead>
             <tbody>
                 @for (search of searches; track $index) {
-
                 <tr>
                     <td>{{ search.medication?.name }}</td>
                     <td>{{ search.medication?.dose }}</td>
-                    <td><app-button title="Mark as available" (clickEvent)="markAsAvailable(search.searchId)" [type]="'small_secondary'" shape="rounded"/></td>
-                    
+                    <td>
+                        <app-button
+                            title="Mark as available"
+                            (clickEvent)="markAsAvailable(search.searchId)"
+                            [type]="'small_secondary'"
+                            shape="rounded"
+                        />
+                    </td>
+
                     <td>
                         <div class="userDetails">User Details</div>
                     </td>
@@ -25,5 +37,13 @@
                 }
             </tbody>
         </table>
+        } @else {
+        <div class="empty_container">
+            <app-empty-state
+                [src]="'assets/images/svg/no-search-icon.svg'"
+                [caption]="'No Active Searches'"
+            ></app-empty-state>
+        </div>
+        } }
     </div>
 </div>
