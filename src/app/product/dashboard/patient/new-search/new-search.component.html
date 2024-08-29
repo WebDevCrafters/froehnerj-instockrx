@@ -21,6 +21,15 @@
         </div>
         <hr />
         <div class="content">
+            @if(remaningSearches) {
+            <div class="search_consumed_info_section">
+                <div class="section_heading">Package Details:</div>
+                <div class="section_content search">
+                    Tap confirm to use 1 search; you will have
+                    {{ remaningSearches - 1 }} searches remaining.
+                </div>
+            </div>
+            }
             <div class="personal_info_section">
                 <div class="section_heading">Personal Details:</div>
                 <div class="section_content">
@@ -98,15 +107,6 @@
                     </div>
                 </div>
             </div>
-            @if(remaningSearches) {
-            <div class="search_consumed_info_section">
-                <div class="section_heading">Package Details:</div>
-                <div class="section_content search">
-                    Tap confirm to use 1 search; you will have
-                    {{ remaningSearches - 1 }} searches remaining.
-                </div>
-            </div>
-            }
         </div>
         <hr />
         <div class="footer">
