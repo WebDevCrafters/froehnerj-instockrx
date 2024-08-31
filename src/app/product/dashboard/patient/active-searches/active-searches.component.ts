@@ -27,8 +27,7 @@ export class ActiveSearchesComponent implements OnInit {
     public isLoading: boolean = true;
 
     ngOnInit(): void {
-        this.getMyInNotStartedSearch();
-        this.getMyInProgressSearch();
+        this.getMyActiveSearches();
     }
 
     viewDetails(searchId?: string) {
@@ -41,25 +40,11 @@ export class ActiveSearchesComponent implements OnInit {
             ]);
     }
 
-    getMyInProgressSearch() {
-        this.searchService.getMySearches(SearchStatus.InProgress).subscribe({
+    getMyActiveSearches() {
+        this.searchService.getMySearches([SearchStatus.InProgress, SearchStatus.NotStarted]).subscribe({
             next: (result) => {
                 this.setInDatService(result);
                 this.activeSearches.unshift(...result);
-                // this.isLoading = false;
-            },
-            error: (err) => {
-                console.log(err);
-                // this.isLoading = false;
-            },
-        });
-    }
-
-    getMyInNotStartedSearch() {
-        this.searchService.getMySearches(SearchStatus.NotStarted).subscribe({
-            next: (result) => {
-                this.setInDatService(result);
-                this.activeSearches.push(...result);
                 this.isLoading = false;
             },
             error: (err) => {

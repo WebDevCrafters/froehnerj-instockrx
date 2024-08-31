@@ -30,7 +30,7 @@ export class PreviousSearchesComponent implements OnInit {
     }
 
     getMyCompletedSearch() {
-        this.searchService.getMySearches(SearchStatus.Completed).subscribe({
+        this.searchService.getMySearches([SearchStatus.Completed]).subscribe({
             next: (result) => {
                 this.setInDatService(result);
                 this.previousSearches.push(...result);

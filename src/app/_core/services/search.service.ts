@@ -29,9 +29,11 @@ export class SearchService {
         );
     }
 
-    getMySearches(status: SearchStatus) {
+    getMySearches(statusArr: SearchStatus[]) {
         const accessToken = this.userService.getAccessToken();
-        const url = `${BASE_URL}${this.SEARCH_URL}?status=${status}`;
+        const query = statusArr.map((status) => `status=${status}`).join('&');
+
+        const url = `${BASE_URL}${this.SEARCH_URL}?${query}`;
         const headers = new HttpHeaders().set('authorization', accessToken);
         return this.httpClient.get(url, { headers }).pipe(
             map((res) => {
