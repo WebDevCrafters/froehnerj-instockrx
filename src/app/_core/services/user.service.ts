@@ -3,7 +3,7 @@ import { User } from '../../product/_shared/interfaces/User';
 import { KEYS } from '../../_shared/constants/localStorageKeys';
 import { BASE_URL } from '../../../../env';
 import { AuthResponse } from '../../product/_shared/interfaces/AuthResponse';
-import { HttpClient, HttpErrorResponse } from '@angular/common/http';
+import { HttpClient, HttpErrorResponse, HttpHeaders } from '@angular/common/http';
 import { catchError, map, of, throwError } from 'rxjs';
 
 @Injectable({
@@ -14,7 +14,7 @@ export class UserService {
     private userData: AuthResponse | null = null;
     private USER_URL = '/user';
     private accessToken: string = '';
-    constructor(private httpClient: HttpClient) {}
+    constructor(private httpClient: HttpClient) { }
 
     checkIfSignedIn(): boolean {
         if (typeof window !== 'undefined' && localStorage) {
@@ -61,6 +61,21 @@ export class UserService {
         const userObj: AuthResponse = JSON.parse(user);
         this.userData = userObj;
         return userObj;
+    }
+
+    getUser(userId: string) {
+        const accessToken = this.getAccessToken();
+        const url = `${BASE_URL}${this.USER_URL}/${userId}`;
+        const headers = new HttpHeaders().set('authorization', accessToken);
+        return this.httpClient.get(url, { headers }).pipe(
+            map((res) => {
+                return res as User;
+            }),
+            catchError((err) => {
+                if (err.status === 404) return of(null);
+                return throwError(() => err);
+            })
+        );
     }
 
     getAccessToken(): string {

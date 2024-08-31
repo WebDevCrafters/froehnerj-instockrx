@@ -37,8 +37,7 @@ export class MarkedAsAvailableComponent implements OnInit {
     }
 
     getSearchInRadius() {
-        // Fetch only those searches which are marked as available
-        this.searchService.getSearchesInRadius().subscribe({
+        this.searchService.getMarkedByMeSearches().subscribe({
             next: (res) => {
                 this.searches = res;
                 this.setInDatService(res);

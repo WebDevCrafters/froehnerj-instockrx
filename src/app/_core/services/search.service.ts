@@ -15,7 +15,7 @@ export class SearchService {
     constructor(
         private httpClient: HttpClient,
         private userService: UserService
-    ) {}
+    ) { }
 
     addSearch(search: Search): Observable<Search> {
         const accessToken = this.userService.getAccessToken();
@@ -58,5 +58,20 @@ export class SearchService {
         );
     }
 
-    updateSearch() {}
+    getMarkedByMeSearches() {
+        const accessToken = this.userService.getAccessToken();
+        const url = `${BASE_URL}${this.SEARCH_URL}/marked`;
+        const headers = new HttpHeaders().set('authorization', accessToken);
+        return this.httpClient.get(url, { headers }).pipe(
+            map((res) => {
+                return res as Search[];
+            }),
+            catchError((err) => {
+                if (err.status === 404) return of([]);
+                return throwError(() => err);
+            })
+        );
+    }
+
+    updateSearch() { }
 }

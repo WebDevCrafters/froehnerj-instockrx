@@ -1,8 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { DataService } from '../../../../../_core/services/data.service';
 import Search from '../../../../_shared/interfaces/Search';
-import { ActivatedRoute, Router } from '@angular/router';
-import { SearchService } from '../../../../../_core/services/search.service';
+import { ActivatedRoute } from '@angular/router';
 import { AvailabilityService } from '../../../../../_core/services/availability.service';
 import Availability from '../../../../_shared/interfaces/Availability';
 import { LoaderComponent } from "../../../../../_shared/components/loader/loader.component";
@@ -19,7 +18,7 @@ import { PaymentService } from '../../../../../_core/services/payment.service';
 import { CommonModule } from '@angular/common';
 import UserType from '../../../../_shared/interfaces/UserType';
 import { UserService } from '../../../../../_core/services/user.service';
-import { userInfo } from 'os';
+import { User } from '../../../../_shared/interfaces/User';
 
 @Component({
     selector: 'app-medication-details',
@@ -37,9 +36,9 @@ export class MedicationDetailsComponent implements OnInit {
     availability: Availability[] = [];
     searchStatus = SearchStatus;
     public isModalVisible: boolean = false;
-    public isPaid: boolean = false;
     public additionalInfoForm: any;
     public userType: UserType | null = null;
+    public userInfo: User | null = null;
     readonly UserType = UserType;
     public isMedicationMarkedAsAvailable: boolean = false;
 
@@ -48,9 +47,7 @@ export class MedicationDetailsComponent implements OnInit {
         private userService: UserService,
         private route: ActivatedRoute,
         private availabilityService: AvailabilityService,
-        private searchService: SearchService,
         private paymentService: PaymentService,
-        private router: Router
     ) { }
 
     async ngOnInit(): Promise<void> {
@@ -61,7 +58,7 @@ export class MedicationDetailsComponent implements OnInit {
         });
         this.getAvailability();
         this.setUserType();
-        this.isPaid = await this.checkUserPayment();
+        this.getSearchUserInfo(this.search?.patient);
     }
 
     private setUserType() {
@@ -71,11 +68,33 @@ export class MedicationDetailsComponent implements OnInit {
         }
     }
 
+    public getSearchUserInfo(userId?: string) {
+        if (!(userId && this.userType === UserType.Clinician)) return;
+        this.userService.getUser(userId).subscribe({
+            next: (res) => {
+                this.userInfo = res;
+            },
+            error: (err) => {
+                console.log(err);
+            },
+        });
+    }
+
     markMedicationAsAvailable() {
-        if (this.isMedicationMarkedAsAvailable) {
-            return alert('You have already marked the medication as available')
+        if (!this.searchId) return;
+        let availability: Availability = {
+            search: this.searchId,
         }
-        this.isMedicationMarkedAsAvailable = true;
+        this.availabilityService.add(availability).subscribe({
+            next: (res) => {
+                if (res) {
+                    this.isMedicationMarkedAsAvailable = true;
+                }
+            },
+            error: (err) => {
+                console.log(err);
+            },
+        })
     }
 
     generateForm() {
@@ -176,7 +195,7 @@ export class MedicationDetailsComponent implements OnInit {
             prescriberName: formValues.prescriber || '',
             dob: dob,
             zipCode: Number(formValues.zipCode),
-            status: this.isPaid ? SearchStatus.InProgress : SearchStatus.NotStarted,
+            status: this.search?.status,
             medication:
                 formValues.prescribedMedication &&
                     formValues.prescribedMedication.length > 0
@@ -210,7 +229,7 @@ export class MedicationDetailsComponent implements OnInit {
     }
 
     getAvailability() {
-        if (!this.searchId) return;
+        if (!this.searchId || this.userType === UserType.Clinician) return;
         this.availabilityService.get(this.searchId).subscribe({
             next: (res) => {
                 this.availability = res;
