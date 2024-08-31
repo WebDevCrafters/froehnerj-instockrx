@@ -73,7 +73,7 @@ export class NewSearchComponent implements OnInit {
                 ]),
                 dose: new FormControl(''),
                 quantity: new FormControl(''),
-                brand: new FormControl(''),
+                brandName: new FormControl(''),
             }),
         ]),
         pickupDate: new FormControl(new Date().getTime(), [
@@ -158,7 +158,6 @@ export class NewSearchComponent implements OnInit {
     private convertFormToSearch(isPaid: boolean) {
         const formValues = this.additionalInfoForm.value;
         const dob = this.convertDobToTimestamp(formValues.dob);
-
         const search: Search = {
             prescriberName: formValues.prescriber || '',
             dob: dob,
@@ -175,6 +174,7 @@ export class NewSearchComponent implements OnInit {
                         quantity: Number(
                             formValues.prescribedMedication[0]?.quantity
                         ),
+                        brandName: formValues.prescribedMedication[0]?.brandName || '',
                         pickUpDate: Number(formValues.pickupDate),
                         alternatives: formValues.prescribedMedication
                             .slice(1)
@@ -182,10 +182,13 @@ export class NewSearchComponent implements OnInit {
                                 name: med.name || '',
                                 dose: med.dose ?? undefined,
                                 quantity: Number(med.quantity),
+                                brandName: med.brandName || ''
                             })),
                     }
                     : undefined,
         };
+
+        console.log(search);
 
         return search;
     }

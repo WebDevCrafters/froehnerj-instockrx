@@ -29,6 +29,7 @@ import { dateValidator } from '../../../../../_shared/utils/Validators';
     styleUrl: './additional-info.component.scss',
 })
 export class AdditionalInfoComponent {
+    @Input() showDatePickerOnlyasInput: boolean = false;
     modalVisible: boolean = false;
     isDateInputActive: boolean = false;
     selectedDate: number = new Date().getTime();
@@ -46,7 +47,7 @@ export class AdditionalInfoComponent {
                 name: new FormControl(''),
                 dose: new FormControl(''),
                 quantity: new FormControl(''),
-                brand: new FormControl(''),
+                brandName: new FormControl(''),
             }),
         ]),
         pickupDate: new FormControl(new Date().getTime()),
@@ -70,7 +71,7 @@ export class AdditionalInfoComponent {
             name: new FormControl(''),
             dose: new FormControl(''),
             quantity: new FormControl(''),
-            brand: new FormControl(''),
+            brandName: new FormControl(''),
         });
     }
 
