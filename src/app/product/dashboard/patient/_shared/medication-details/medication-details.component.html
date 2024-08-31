@@ -1,4 +1,5 @@
 <div class="main_container">
+    @if(userType === UserType.Patient) {
     <div class="header">
         <div class="title_container">
             <p>Medication Details:</p>
@@ -12,14 +13,23 @@
         </div>
         }
     </div>
+    }
+    @else {
+    <div class="header">
+        <div class="title_container">
+            <p>Medication Details:</p>
+        </div>
+        <div class="mark_btn" (click)="markMedicationAsAvailable()">
+            <app-button title="Mark as Available" [type]="'small_primary'" />
+        </div>
+    </div>
+    }
+
     <div class="medication_info">
+        @if(userType === UserType.Patient) {
         <div class="label_and_value">
             <div class="label">Name:</div>
             <div class="value">{{ search?.medication?.name }}</div>
-        </div>
-        <div class="label_and_value">
-            <div class="label">DOB:</div>
-            <div class="value">{{ search?.dob | date }}</div>
         </div>
         <div class="label_and_value">
             <div class="label">Dose:</div>
@@ -34,6 +44,10 @@
             <div class="value">{{ search?.medication?.brandName }}</div>
         </div>
         <div class="label_and_value">
+            <div class="label">DOB:</div>
+            <div class="value">{{ search?.dob | date }}</div>
+        </div>
+        <div class="label_and_value">
             <div class="label">Zip Code</div>
             <div class="value">{{ search?.zipCode }}</div>
         </div>
@@ -45,6 +59,25 @@
             <div class="label">Status:</div>
             <div class="value">{{ search?.status }}</div>
         </div>
+        }
+        @else {
+        <div class="label_and_value">
+            <div class="label">Name:</div>
+            <div class="value">{{ search?.medication?.name }}</div>
+        </div>
+        <div class="label_and_value">
+            <div class="label">Dose:</div>
+            <div class="value">{{ search?.medication?.dose }}</div>
+        </div>
+        <div class="label_and_value">
+            <div class="label">Quantity:</div>
+            <div class="value">{{ search?.medication?.quantity }}</div>
+        </div>
+        <div class="label_and_value">
+            <div class="label">Brand Name:</div>
+            <div class="value">{{ search?.medication?.brandName }}</div>
+        </div>
+        }
     </div>
     @if(search?.medication?.alternatives?.length) {
     <div class="header">
@@ -70,6 +103,8 @@
         </div>
     </div>
     } }
+
+    @if(userType === UserType.Patient) {
     <div class="header">
         <div class="title">Pharmacy Details:</div>
     </div>
@@ -100,11 +135,33 @@
         } @else {
         <div class="empty_container">
             <app-empty-state [src]="'assets/images/svg/no-search-icon.svg'" [caption]="
-                    'No Pharmacy has marked your medication as available yet.'
-                "></app-empty-state>
+                        'No Pharmacy has marked your medication as available yet.'
+                    "></app-empty-state>
         </div>
         } }
     </div>
+    }
+    @else {
+    @if(isMedicationMarkedAsAvailable) {
+    <div class="header">
+        <div class="title">User Details:</div>
+    </div>
+    <div class="user_nfo">
+        <div class="label_and_value">
+            <div class="label">DOB:</div>
+            <div class="value">{{ search?.dob | date }}</div>
+        </div>
+        <div class="label_and_value">
+            <div class="label">Zip Code</div>
+            <div class="value">{{ search?.zipCode }}</div>
+        </div>
+        <div class="label_and_value">
+            <div class="label">Pick up date:</div>
+            <div class="value">{{ search?.medication?.pickUpDate | date }}</div>
+        </div>
+    </div>
+    }
+    }
 </div>
 
 <app-modal [isVisible]="isModalVisible" bg="transparent" (closeModal)="openModalPopup()">

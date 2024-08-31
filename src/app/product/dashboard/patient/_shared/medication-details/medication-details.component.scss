@@ -25,6 +25,10 @@
             }
         }
 
+        .sub_heading {
+            font-size: 19px;
+        }
+
         .title {
             font-size: 25px;
             font-weight: 600;
@@ -33,9 +37,13 @@
         .edit_btn {
             width: 140px;
         }
+        .mark_btn {
+            width: 180px;
+        }
     }
 
-    .medication_info {
+    .medication_info,
+    .user_nfo {
         height: max-content;
         padding: 0 2rem;
         display: grid;

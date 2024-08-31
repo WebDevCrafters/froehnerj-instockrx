@@ -9,6 +9,9 @@ import Availability from '../../../_shared/interfaces/Availability';
 import { ButtonComponent } from '../../../../_shared/components/button/button.component';
 import { LoaderComponent } from "../../../../_shared/components/loader/loader.component";
 import { EmptyStateComponent } from "../../../../_shared/components/empty-state/empty-state.component";
+import APP_ROUTES from '../../../../_shared/constants/routes';
+import { Router } from '@angular/router';
+import { DataService } from '../../../../_core/services/data.service';
 
 @Component({
     selector: 'app-near-by-searches',
@@ -22,7 +25,9 @@ export class NearBySearchesComponent implements OnInit {
     public isLoading: boolean = true;
 
     constructor(
-        private searchSercice: SearchService,
+        private router: Router,
+        private searchService: SearchService,
+        private dataService: DataService,
         private availabilityService: AvailabilityService
     ) { }
     searches: Search[] = [];
@@ -32,9 +37,10 @@ export class NearBySearchesComponent implements OnInit {
     }
 
     getSearchInRadius() {
-        this.searchSercice.getSearchesInRadius().subscribe({
+        this.searchService.getSearchesInRadius().subscribe({
             next: (res) => {
                 this.searches = res;
+                this.setInDatService(res);
                 this.isLoading = false;
             },
             error: (err) => {
@@ -42,6 +48,24 @@ export class NearBySearchesComponent implements OnInit {
                 this.isLoading = false;
             },
         });
+    }
+
+    setInDatService(searchArr: Search[]) {
+        searchArr.forEach((search) => {
+            if (search.searchId)
+                this.dataService.setData(search.searchId, search);
+        });
+    }
+
+
+    viewInfo(searchId?: string) {
+        if (searchId)
+            this.router.navigate([
+                APP_ROUTES.product.app,
+                APP_ROUTES.product.dashboard,
+                APP_ROUTES.product.medicationDetails,
+                searchId
+            ]);
     }
 
     markAsAvailable(searchId?: string) {

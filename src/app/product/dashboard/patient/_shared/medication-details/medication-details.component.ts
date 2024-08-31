@@ -17,6 +17,9 @@ import { AdditionalInfoComponent } from "../../new-search/additional-info/additi
 import { markAllAsDirty } from '../../../../../_shared/utils/formUtils';
 import { PaymentService } from '../../../../../_core/services/payment.service';
 import { CommonModule } from '@angular/common';
+import UserType from '../../../../_shared/interfaces/UserType';
+import { UserService } from '../../../../../_core/services/user.service';
+import { userInfo } from 'os';
 
 @Component({
     selector: 'app-medication-details',
@@ -36,9 +39,13 @@ export class MedicationDetailsComponent implements OnInit {
     public isModalVisible: boolean = false;
     public isPaid: boolean = false;
     public additionalInfoForm: any;
+    public userType: UserType | null = null;
+    readonly UserType = UserType;
+    public isMedicationMarkedAsAvailable: boolean = false;
 
     constructor(
         private dataService: DataService,
+        private userService: UserService,
         private route: ActivatedRoute,
         private availabilityService: AvailabilityService,
         private searchService: SearchService,
@@ -48,17 +55,31 @@ export class MedicationDetailsComponent implements OnInit {
 
     async ngOnInit(): Promise<void> {
         this.route.paramMap.subscribe((params) => {
-            this.searchId = params.get("searchId")
+            this.searchId = params.get("searchId");
             this.getSearchDetails();
             this.generateForm();
         });
         this.getAvailability();
+        this.setUserType();
         this.isPaid = await this.checkUserPayment();
+    }
+
+    private setUserType() {
+        let userInfo = this.userService.getUserData();
+        if (userInfo?.user?.userType) {
+            this.userType = userInfo.user.userType;
+        }
+    }
+
+    markMedicationAsAvailable() {
+        if (this.isMedicationMarkedAsAvailable) {
+            return alert('You have already marked the medication as available')
+        }
+        this.isMedicationMarkedAsAvailable = true;
     }
 
     generateForm() {
         if (this.search) {
-            console.log("this.search", this.search);
             let DOBstring = '';
             let PickUpDateString = '';
             if (this.search?.dob) {

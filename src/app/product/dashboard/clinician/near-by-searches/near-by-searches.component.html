@@ -11,27 +11,21 @@
             <thead>
                 <tr>
                     <th>Medication Name</th>
-                    <th>Dose</th>
-                    <th>Availability</th>
-                    <th>User Details</th>
+                    <th>Pickup Date</th>
+                    <th>Alternative Provided</th>
+                    <th></th>
                 </tr>
             </thead>
             <tbody>
                 @for (search of searches; track $index) {
                 <tr>
                     <td>{{ search.medication?.name }}</td>
-                    <td>{{ search.medication?.dose }}</td>
+                    <td>{{ search.medication?.pickUpDate }}</td>
+                    <td>{{ search.medication?.alternatives?.length ? 'Yes' : 'No' }}</td>
                     <td>
-                        <app-button
-                            title="Mark as available"
-                            (clickEvent)="markAsAvailable(search.searchId)"
-                            [type]="'small_secondary'"
-                            shape="rounded"
-                        />
-                    </td>
-
-                    <td>
-                        <div class="userDetails">User Details</div>
+                        <div class="view_btn" (click)="viewInfo(search?.searchId)">
+                            View Details
+                        </div>
                     </td>
                 </tr>
                 }
@@ -39,10 +33,8 @@
         </table>
         } @else {
         <div class="empty_container">
-            <app-empty-state
-                [src]="'assets/images/svg/no-search-icon.svg'"
-                [caption]="'No Active Searches'"
-            ></app-empty-state>
+            <app-empty-state [src]="'assets/images/svg/no-search-icon.svg'"
+                [caption]="'No Active Searches'"></app-empty-state>
         </div>
         } }
     </div>
