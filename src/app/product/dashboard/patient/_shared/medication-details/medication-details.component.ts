@@ -54,6 +54,7 @@ export class MedicationDetailsComponent implements OnInit {
         this.route.paramMap.subscribe((params) => {
             this.searchId = params.get("searchId");
             this.getSearchDetails();
+            this.checkIfMarkedAsAvailable();
             this.generateForm();
         });
         this.getAvailability();
@@ -163,23 +164,6 @@ export class MedicationDetailsComponent implements OnInit {
         }
     }
 
-    private checkUserPayment(): Promise<boolean> {
-        return new Promise((resolve) => {
-            this.paymentService.getCurrentPayment().subscribe({
-                next: (data) => {
-                    if (data) {
-                        resolve(true);
-                    } else {
-                        resolve(false);
-                    }
-                },
-                error: (err) => {
-                    console.log(err);
-                },
-            });
-        });
-    }
-
     public convertDobToTimestamp(dobString: any): number {
         const [month, day, year] = dobString.split('/').map(Number);
         const date = new Date(year, month - 1, day);
@@ -225,7 +209,11 @@ export class MedicationDetailsComponent implements OnInit {
     }
 
     getSearchDetails() {
-        if (this.searchId) this.search = this.dataService.getData(this.searchId);
+        if (this.searchId) this.search = this.dataService.getSearch(this.searchId);
+    }
+
+    checkIfMarkedAsAvailable() {
+        if (this.searchId) this.isMedicationMarkedAsAvailable = !!this.dataService.getAvailability(this.searchId);
     }
 
     getAvailability() {

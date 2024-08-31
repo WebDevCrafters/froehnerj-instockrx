@@ -33,14 +33,14 @@ export class MarkedAsAvailableComponent implements OnInit {
     searches: Search[] = [];
 
     ngOnInit(): void {
-        this.getSearchInRadius();
+        this.getMarkedByMeSearches();
     }
 
-    getSearchInRadius() {
+    getMarkedByMeSearches() {
         this.searchService.getMarkedByMeSearches().subscribe({
             next: (res) => {
                 this.searches = res;
-                this.setInDatService(res);
+                this.setInDataService(res);
                 this.isLoading = false;
             },
             error: (err) => {
@@ -50,10 +50,12 @@ export class MarkedAsAvailableComponent implements OnInit {
         });
     }
 
-    setInDatService(searchArr: Search[]) {
+    setInDataService(searchArr: Search[]) {
         searchArr.forEach((search) => {
-            if (search.searchId)
-                this.dataService.setData(search.searchId, search);
+            if (search.searchId) {
+                this.dataService.setSearch(search.searchId, search);
+                this.dataService.setAvailability(search.searchId, search);
+            }
         });
     }
 
