@@ -21,6 +21,7 @@ import { PaymentComponent } from './dashboard/patient/payment/payment.component'
 import UserType from './_shared/interfaces/UserType';
 import { patientGuard } from '../_core/guards/patient.guard';
 import { clinicianGuard } from '../_core/guards/clinician.guard';
+import { MarkedAsAvailableComponent } from './dashboard/clinician/marked-as-available/marked-as-available.component';
 
 const routes: Routes = [
     {
@@ -88,6 +89,11 @@ const routes: Routes = [
                         canActivate: [clinicianGuard],
                     },
                     {
+                        path: APP_ROUTES.product.markedAsAvailable,
+                        component: MarkedAsAvailableComponent,
+                        canActivate: [clinicianGuard],
+                    },
+                    {
                         path:
                             APP_ROUTES.product.medicationDetails + '/:searchId',
                         component: MedicationDetailsComponent,
@@ -111,4 +117,4 @@ const routes: Routes = [
     imports: [RouterModule.forChild(routes)],
     exports: [RouterModule],
 })
-export class ProductRoutingModule {}
+export class ProductRoutingModule { }

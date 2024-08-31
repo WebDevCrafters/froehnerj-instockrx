@@ -2,74 +2,49 @@
     <div class="header_container">
         <app-header (toggleSidebar)="toggleSidebar()" />
     </div>
-    <div
-        class="content_container"
-        [ngClass]="{ isExpanded: isSidebarExpanded }"
-    >
+    <div class="content_container" [ngClass]="{ isExpanded: isSidebarExpanded }">
         <div class="sidebar_container">
             <ul>
                 @if (userType===UserType.Patient) {
                 <li>
-                    <a
-                        class="img_and_tag"
-                        [routerLink]="[APP_ROUTES.product.newSearch]"
-                        routerLinkActive="active-link"
-                        [routerLinkActiveOptions]="{ exact: true }"
-                    >
+                    <a class="img_and_tag" [routerLink]="[APP_ROUTES.product.newSearch]" routerLinkActive="active-link"
+                        [routerLinkActiveOptions]="{ exact: true }">
                         <div class="img">
                             <svg>
-                                <use
-                                    xlink:href="assets/images/svg/sprites/sidebar_icon.svg#plus"
-                                ></use>
+                                <use xlink:href="assets/images/svg/sprites/sidebar_icon.svg#plus"></use>
                             </svg>
                         </div>
                         <span> New Search </span>
                     </a>
                 </li>
                 <li>
-                    <a
-                        class="img_and_tag"
-                        [routerLink]="[APP_ROUTES.product.activeSearches]"
-                        routerLinkActive="active-link"
-                    >
+                    <a class="img_and_tag" [routerLink]="[APP_ROUTES.product.activeSearches]"
+                        routerLinkActive="active-link">
                         <div class="img">
                             <svg>
-                                <use
-                                    xlink:href="assets/images/svg/sprites/sidebar_icon.svg#active"
-                                ></use>
+                                <use xlink:href="assets/images/svg/sprites/sidebar_icon.svg#active"></use>
                             </svg>
                         </div>
                         <span> Active Searches </span>
                     </a>
                 </li>
                 <li>
-                    <a
-                        class="img_and_tag"
-                        [routerLink]="[APP_ROUTES.product.previousSearches]"
-                        routerLinkActive="active-link"
-                    >
+                    <a class="img_and_tag" [routerLink]="[APP_ROUTES.product.previousSearches]"
+                        routerLinkActive="active-link">
                         <div class="img">
                             <svg>
-                                <use
-                                    xlink:href="assets/images/svg/sprites/sidebar_icon.svg#previous"
-                                ></use>
+                                <use xlink:href="assets/images/svg/sprites/sidebar_icon.svg#previous"></use>
                             </svg>
                         </div>
                         <span> Previous Searches </span>
                     </a>
                 </li>
                 <li>
-                    <a
-                        class="img_and_tag"
-                        [routerLink]="[APP_ROUTES.product.payments]"
-                        routerLinkActive="active-link"
-                        [routerLinkActiveOptions]="{ exact: true }"
-                    >
+                    <a class="img_and_tag" [routerLink]="[APP_ROUTES.product.payments]" routerLinkActive="active-link"
+                        [routerLinkActiveOptions]="{ exact: true }">
                         <div class="img">
                             <svg>
-                                <use
-                                    xlink:href="assets/images/svg/sprites/sidebar_icon.svg#payment"
-                                ></use>
+                                <use xlink:href="assets/images/svg/sprites/sidebar_icon.svg#payment"></use>
                             </svg>
                         </div>
                         <span> Payments </span>
@@ -77,33 +52,19 @@
                 </li>
                 } @else if (UserType.Clinician) {
                 <li>
-                    <a
-                        class="img_and_tag"
-                        [routerLink]="[APP_ROUTES.product.nearBySearches]"
-                        routerLinkActive="active-link"
-                        [routerLinkActiveOptions]="{ exact: true }"
-                    >
+                    <a class="img_and_tag" [routerLink]="[APP_ROUTES.product.nearBySearches]"
+                        routerLinkActive="active-link" [routerLinkActiveOptions]="{ exact: true }">
                         <div class="img">
-                            <img
-                                src="assets/images/svg/nearby-icon.svg"
-                                alt=""
-                            />
+                            <img src="assets/images/svg/nearby-icon.svg" alt="" />
                         </div>
                         <span> Nearby Searches</span>
                     </a>
                 </li>
                 <li>
-                    <a
-                        class="img_and_tag"
-                        [routerLink]="[APP_ROUTES.product.nearBySearches]"
-                        routerLinkActive="active-link"
-                        [routerLinkActiveOptions]="{ exact: true }"
-                    >
+                    <a class="img_and_tag" [routerLink]="[APP_ROUTES.product.markedAsAvailable]"
+                        routerLinkActive="active-link" [routerLinkActiveOptions]="{ exact: true }">
                         <div class="img">
-                            <img
-                                src="assets/images/svg/nearby-icon.svg"
-                                alt=""
-                            />
+                            <img src="assets/images/svg/available-icon.svg" alt="" />
                         </div>
                         <span> Marked as Available </span>
                     </a>
@@ -111,17 +72,11 @@
 
                 }
                 <li>
-                    <a
-                        class="img_and_tag"
-                        [routerLink]="[APP_ROUTES.product.editPatientsProfile]"
-                        routerLinkActive="active-link"
-                        [routerLinkActiveOptions]="{ exact: true }"
-                    >
+                    <a class="img_and_tag" [routerLink]="[APP_ROUTES.product.editPatientsProfile]"
+                        routerLinkActive="active-link" [routerLinkActiveOptions]="{ exact: true }">
                         <div class="img">
                             <svg>
-                                <use
-                                    xlink:href="assets/images/svg/sprites/sidebar_icon.svg#profile"
-                                ></use>
+                                <use xlink:href="assets/images/svg/sprites/sidebar_icon.svg#profile"></use>
                             </svg>
                         </div>
                         <span> Profile </span>
