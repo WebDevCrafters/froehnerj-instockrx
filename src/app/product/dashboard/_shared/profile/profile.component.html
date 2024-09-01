@@ -17,14 +17,13 @@
                     <app-input label="Full Name" [control]="profileForm.controls.name" />
                     <app-input label="Email" [control]="profileForm.controls.email" />
                     <app-input label="Phone Number" [control]="profileForm.controls.phoneNumber" type="phoneNumber" />
-                    <app-input label="Date of Birth" [control]="profileForm.controls.dob" type="dates" />
+                    <!-- <app-input label="Date of Birth" [control]="profileForm.controls.dob" type="dates" /> -->
                     <app-input label="Zip Code" [control]="profileForm.controls.zipCode" />
-                    <app-input label="Presciber" [control]="profileForm.controls.doctorName" />
-                    <app-input label="Doctor's Email" [control]="profileForm.controls.doctorEmail" />
+                    <!-- <app-input label="Presciber" [control]="profileForm.controls.doctorName" /> -->
+                    <!-- <app-input label="Doctor's Email" [control]="profileForm.controls.doctorEmail" /> -->
                     <div class="actions">
                         <div class="action_btn">
-                            <app-button (clickEvent)="saveEditProfile()" title="Save" type="small_primary"
-                                shape="rounded" formButtonType="submit" />
+                            <app-button title="Save" type="small_primary" shape="rounded" formButtonType="submit" />
                         </div>
                         <div class="action_btn">
                             <app-button (clickEvent)="cancelEditProfile()" title="Cancel" type="small_secondary"
@@ -51,16 +50,16 @@
                     </div>
 
                     <div class="info">
-                        <p class="label">Date of birth</p>
-                        <p>{{ profileForm.controls["dob"].value }}</p>
-                    </div>
-
-                    <div class="info">
                         <p class="label">Zip Code</p>
                         <p>{{ profileForm.controls["zipCode"].value }}</p>
                     </div>
 
-                    <div class="info">
+                    <!-- <div class="info">
+                        <p class="label">Date of birth</p>
+                        <p>{{ profileForm.controls["dob"].value }}</p>
+                    </div> -->
+
+                    <!-- <div class="info">
                         <p class="label">Doctor's Name</p>
                         <p>{{ profileForm.controls["doctorName"].value }}</p>
                     </div>
@@ -68,7 +67,7 @@
                     <div class="info">
                         <p class="label">Doctor's Email</p>
                         <p>{{ profileForm.controls["doctorEmail"].value }}</p>
-                    </div>
+                    </div> -->
                 </div>
                 }
             </div>

@@ -11,6 +11,8 @@ import { markAllAsDirty } from '../../../../_shared/utils/formUtils';
 import { requiredValidator, emailValidator, charLimitValidator, dateValidator } from '../../../../_shared/utils/Validators';
 import { User } from '../../../_shared/interfaces/User';
 import { Router } from '@angular/router';
+import { KEYS } from '../../../../_shared/constants/localStorageKeys';
+import UserType from '../../../_shared/interfaces/UserType';
 
 @Component({
     selector: 'app-profile',
@@ -28,6 +30,8 @@ export class ProfileComponent implements OnInit {
     isProfileEditable: boolean = false;
     profileBackup: any = null;
     user: User | null = null;
+    userType: UserType | null = null
+
     @ViewChild('myProfileEleRef') myProfileEleRef: ElementRef | null = null;
 
     profileForm = new FormGroup({
@@ -45,16 +49,16 @@ export class ProfileComponent implements OnInit {
                 "Patient's phone must be 10 digits. (Only US phone numbers are supported at this time.)"
             ),
         ]),
-        dob: new FormControl('', [
-            requiredValidator("Patient's date of birth cannot be empty"),
-            dateValidator('Please enter a valid date'),
-        ]),
+        // dob: new FormControl('', [
+        //     requiredValidator("Patient's date of birth cannot be empty"),
+        //     dateValidator('Please enter a valid date'),
+        // ]),
         zipCode: new FormControl('', [
             requiredValidator('Zip code must not be empty'),
             charLimitValidator(5, 'Zip code must be 5 digits'),
         ]),
-        doctorName: new FormControl('', []),
-        doctorEmail: new FormControl('', []),
+        // doctorName: new FormControl('', []),
+        // doctorEmail: new FormControl('', []),
     });
 
     backups: any[] = [];
@@ -68,28 +72,16 @@ export class ProfileComponent implements OnInit {
     getUser() {
         const authResponse = this.userService.getUserData();
         if (!authResponse) return;
-
+        this.userType = authResponse.user.userType || null;
         this.user = authResponse.user;
-
         this.profileForm.setValue({
             name: this.user.name || '',
             email: this.user.email || '',
             phoneNumber: this.user.phoneNumber || '',
-            dob: this.user.dob
-                ? new Date(this.user.dob).toISOString().split('T')[0]
-                : '',
             zipCode: this.user.zipCode?.toString() || '',
-            doctorName: '',
-            doctorEmail: '',
         });
-    }
-
-    onSubmit(): void {
-        if (this.profileForm.valid) {
-            console.log(this.profileForm.value);
-        } else {
-            console.log('Form is invalid');
-        }
+        console.log("this.profileForm", this.profileForm.value);
+        // this.profileBackup = this.profileForm.value;
     }
 
     toggleEditProfile(event: Event) {
@@ -104,8 +96,22 @@ export class ProfileComponent implements OnInit {
         this.profileForm.markAllAsTouched();
         markAllAsDirty(this.profileForm);
         if (!this.profileForm.valid) return;
+        this.user = this.convertFormToUser();
+        this.updateProfile(this.user);
         this.isProfileEditable = false;
         this.profileBackup = null;
+    }
+
+    public updateProfile(user: User) {
+        this.userService.updateProfile(user).subscribe({
+            next: (result) => {
+                this.user = result;
+                this.userService.setUserData(this.user);
+            },
+            error: (err) => {
+                console.log(err);
+            },
+        })
     }
 
     cancelEditProfile() {
@@ -144,5 +150,19 @@ export class ProfileComponent implements OnInit {
             [`${APP_ROUTES.product.app}/${APP_ROUTES.product.resetPassword}`],
             { replaceUrl: true }
         );
+    }
+
+    private convertFormToUser() {
+        const formValues = this.profileForm.value;
+        const user: User = {
+            email: formValues.email || '',
+            zipCode: Number(formValues.zipCode) || 0,
+            name: formValues.name || '',
+            phoneNumber: formValues.phoneNumber || '',
+        };
+
+        console.log(user);
+
+        return user;
     }
 }
