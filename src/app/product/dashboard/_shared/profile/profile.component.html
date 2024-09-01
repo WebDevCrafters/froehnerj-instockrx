@@ -4,72 +4,31 @@
             <div class="header_container">
                 <p class="heading">My Profile</p>
                 @if (!isProfileEditable) {
-                <img
-                    src="assets/images/svg/edit-icon.svg"
-                    alt="Edit"
-                    (click)="toggleEditProfile($event)"
-                    class="edit_icon"
-                />
+                <img src="assets/images/svg/edit-icon.svg" alt="Edit" (click)="toggleEditProfile($event)"
+                    class="edit_icon" />
                 }
                 <div class="btn_container">
-                    <app-button
-                        title="Sign Out"
-                        [type]="'small_primary'"
-                        (clickEvent)="signout()"
-                    />
+                    <app-button title="Sign Out" [type]="'small_primary'" (clickEvent)="signout()" />
                 </div>
             </div>
             <div class="content_container">
                 @if (isProfileEditable) {
                 <form class="edit_profile_form" (submit)="saveEditProfile()">
-                    <app-input
-                        label="Full Name"
-                        [control]="profileForm.controls.name"
-                    />
-                    <app-input
-                        label="Email"
-                        [control]="profileForm.controls.email"
-                    />
-                    <app-input
-                        label="Phone Number"
-                        [control]="profileForm.controls.phoneNumber"
-                        type="phoneNumber"
-                    />
-                    <app-input
-                        label="Date of Birth"
-                        [control]="profileForm.controls.dob"
-                        type="dates"
-                    />
-                    <app-input
-                        label="Zip Code"
-                        [control]="profileForm.controls.zipCode"
-                    />
-                    <app-input
-                        label="Presciber"
-                        [control]="profileForm.controls.doctorName"
-                    />
-                    <app-input
-                        label="Doctor's Email"
-                        [control]="profileForm.controls.doctorEmail"
-                    />
+                    <app-input label="Full Name" [control]="profileForm.controls.name" />
+                    <app-input label="Email" [control]="profileForm.controls.email" />
+                    <app-input label="Phone Number" [control]="profileForm.controls.phoneNumber" type="phoneNumber" />
+                    <app-input label="Date of Birth" [control]="profileForm.controls.dob" type="dates" />
+                    <app-input label="Zip Code" [control]="profileForm.controls.zipCode" />
+                    <app-input label="Presciber" [control]="profileForm.controls.doctorName" />
+                    <app-input label="Doctor's Email" [control]="profileForm.controls.doctorEmail" />
                     <div class="actions">
                         <div class="action_btn">
-                            <app-button
-                                (clickEvent)="saveEditProfile()"
-                                title="Save"
-                                type="small_primary"
-                                shape="rounded"
-                                formButtonType="submit"
-                            />
+                            <app-button (clickEvent)="saveEditProfile()" title="Save" type="small_primary"
+                                shape="rounded" formButtonType="submit" />
                         </div>
                         <div class="action_btn">
-                            <app-button
-                                (clickEvent)="cancelEditProfile()"
-                                title="Cancel"
-                                type="small_secondary"
-                                shape="rounded"
-                                formButtonType="button"
-                            />
+                            <app-button (clickEvent)="cancelEditProfile()" title="Cancel" type="small_secondary"
+                                shape="rounded" formButtonType="button" />
                         </div>
                     </div>
                 </form>

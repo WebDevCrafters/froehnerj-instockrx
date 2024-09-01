@@ -1,43 +1,30 @@
-import {
-    Component,
-    ElementRef,
-    HostListener,
-    OnInit,
-    ViewChild,
-} from '@angular/core';
-import { FormControl, FormGroup, FormsModule } from '@angular/forms';
-import APP_ROUTES from '../../../../_shared/constants/routes';
-import { User } from '../../../_shared/interfaces/User';
-import { markAllAsDirty } from '../../../../_shared/utils/formUtils';
-import {
-    requiredValidator,
-    emailValidator,
-    charLimitValidator,
-    dateValidator,
-} from '../../../../_shared/utils/Validators';
-import { Router } from '@angular/router';
 import { CommonModule } from '@angular/common';
+import { Component, ElementRef, HostListener, OnInit, ViewChild } from '@angular/core';
+import { FormControl, FormGroup, FormsModule } from '@angular/forms';
 import { ButtonComponent } from '../../../../_shared/components/button/button.component';
-import { ModalComponent } from '../../../../_shared/components/modal/modal.component';
-import { InputComponent } from '../../../../_shared/components/input/input.component';
 import { DatePickerComponent } from '../../../../_shared/components/date-picker/date-picker.component';
+import { InputComponent } from '../../../../_shared/components/input/input.component';
+import { ModalComponent } from '../../../../_shared/components/modal/modal.component';
 import { UserService } from '../../../../_core/services/user.service';
+import APP_ROUTES from '../../../../_shared/constants/routes';
+import { markAllAsDirty } from '../../../../_shared/utils/formUtils';
+import { requiredValidator, emailValidator, charLimitValidator, dateValidator } from '../../../../_shared/utils/Validators';
+import { User } from '../../../_shared/interfaces/User';
+import { Router } from '@angular/router';
 
 @Component({
-    selector: 'app-edit-patient-profile',
+    selector: 'app-profile',
     standalone: true,
-    imports: [
-        DatePickerComponent,
+    imports: [DatePickerComponent,
         InputComponent,
         ModalComponent,
         ButtonComponent,
         CommonModule,
-        FormsModule,
-    ],
-    templateUrl: './edit-patient-profile.component.html',
-    styleUrl: './edit-patient-profile.component.scss',
+        FormsModule,],
+    templateUrl: './profile.component.html',
+    styleUrl: './profile.component.scss'
 })
-export class EditPatientProfileComponent implements OnInit {
+export class ProfileComponent implements OnInit {
     isProfileEditable: boolean = false;
     profileBackup: any = null;
     user: User | null = null;
@@ -72,7 +59,7 @@ export class EditPatientProfileComponent implements OnInit {
 
     backups: any[] = [];
 
-    constructor(private router: Router, private userService: UserService) {}
+    constructor(private router: Router, private userService: UserService) { }
 
     ngOnInit(): void {
         this.getUser();

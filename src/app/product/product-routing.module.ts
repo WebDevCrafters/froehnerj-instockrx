@@ -10,7 +10,6 @@ import { ResetPasswordComponent } from './reset-password/reset-password.componen
 import { SigninComponent } from './auth/signin/signin.component';
 import { SignupComponent } from './auth/signup/signup.component';
 import { ForgotPasswordComponent } from './auth/forgot-password/forgot-password.component';
-import { EditPatientProfileComponent } from './dashboard/patient/edit-patient-profile/edit-patient-profile.component';
 import { NewSearchComponent } from './dashboard/patient/new-search/new-search.component';
 import { ActiveSearchesComponent } from './dashboard/patient/active-searches/active-searches.component';
 import { PreviousSearchesComponent } from './dashboard/patient/previous-searches/previous-searches.component';
@@ -22,6 +21,7 @@ import UserType from './_shared/interfaces/UserType';
 import { patientGuard } from '../_core/guards/patient.guard';
 import { clinicianGuard } from '../_core/guards/clinician.guard';
 import { MarkedAsAvailableComponent } from './dashboard/clinician/marked-as-available/marked-as-available.component';
+import { ProfileComponent } from './dashboard/_shared/profile/profile.component';
 
 const routes: Routes = [
     {
@@ -99,8 +99,8 @@ const routes: Routes = [
                         component: MedicationDetailsComponent,
                     },
                     {
-                        path: APP_ROUTES.product.editPatientsProfile,
-                        component: EditPatientProfileComponent,
+                        path: APP_ROUTES.product.profile,
+                        component: ProfileComponent,
                     },
                 ],
             },

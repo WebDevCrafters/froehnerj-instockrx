@@ -61,7 +61,7 @@ export class HeaderComponent implements OnInit {
             APP_ROUTES.product.app,
             APP_ROUTES.product.dashboard,
             APP_ROUTES.product.patient,
-            APP_ROUTES.product.editPatientsProfile
+            APP_ROUTES.product.profile
         ]);
         this.toggleSettings();
     }

@@ -29,7 +29,7 @@ const APP_ROUTES = {
         previousSearches: 'previous-searches',
         dashboard: 'dashboard',
         resetPassword: 'reset-password',
-        editPatientsProfile: 'edit-patients-profile',
+        profile: 'profile',
         searchInfo: 'search-info',
         searchStatus: 'search-status',
     },
