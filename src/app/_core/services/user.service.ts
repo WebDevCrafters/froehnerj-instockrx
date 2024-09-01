@@ -52,6 +52,18 @@ export class UserService {
         );
     }
 
+    updateProfile(user: User) {
+        const accessToken = this.getAccessToken();
+        const url = `${BASE_URL}${this.USER_URL}/update`;
+        const headers = new HttpHeaders().set('authorization', accessToken);
+        return this.httpClient.put(url, user, { headers }).pipe(
+            map((res) => {
+                return res as User;
+            }),
+            catchError((err) => throwError(() => err))
+        );
+    }
+
     getUserData(): AuthResponse | null {
         if (this.userData) {
             return this.userData;
@@ -61,6 +73,15 @@ export class UserService {
         const userObj: AuthResponse = JSON.parse(user);
         this.userData = userObj;
         return userObj;
+    }
+
+    setUserData(user: User): void {
+        let accessToken = this.getAccessToken();
+        this.userData = {
+            accessToken: accessToken,
+            user: user
+        };
+        localStorage.setItem(KEYS.userData, JSON.stringify(this.userData));
     }
 
     getUser(userId: string) {
