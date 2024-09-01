@@ -73,5 +73,27 @@ export class SearchService {
         );
     }
 
-    updateSearch() { }
+    updateSearch(search: Search): Observable<Search> {
+        const accessToken = this.userService.getAccessToken();
+        const url = `${BASE_URL}${this.SEARCH_URL}/update`;
+        const headers = new HttpHeaders().set('authorization', accessToken);
+        return this.httpClient.post(url, search, { headers }).pipe(
+            map((res) => {
+                return res as Search;
+            }),
+            catchError((err) => throwError(() => err))
+        );
+    }
+
+    markStatus(searchId: string, status: SearchStatus): Observable<Search> {
+        const accessToken = this.userService.getAccessToken();
+        const url = `${BASE_URL}${this.SEARCH_URL}/update-status`;
+        const headers = new HttpHeaders().set('authorization', accessToken);
+        return this.httpClient.post(url, { searchId, status }, { headers }).pipe(
+            map((res) => {
+                return res as Search;
+            }),
+            catchError((err) => throwError(() => err))
+        );
+    }
 }

@@ -19,6 +19,7 @@ import { CommonModule } from '@angular/common';
 import UserType from '../../../../_shared/interfaces/UserType';
 import { UserService } from '../../../../../_core/services/user.service';
 import { User } from '../../../../_shared/interfaces/User';
+import { SearchService } from '../../../../../_core/services/search.service';
 
 @Component({
     selector: 'app-medication-details',
@@ -45,6 +46,7 @@ export class MedicationDetailsComponent implements OnInit {
     constructor(
         private dataService: DataService,
         private userService: UserService,
+        private searchService: SearchService,
         private route: ActivatedRoute,
         private availabilityService: AvailabilityService,
         private paymentService: PaymentService,
@@ -141,14 +143,43 @@ export class MedicationDetailsComponent implements OnInit {
     converTimestampToDOBString(dob: any) {
         const date = new Date(dob);
         return `${date.getMonth() + 1}/${date.getDate()}/${date.getFullYear()}`;
-
     }
 
-    async onAdditionalInfoSubmit() {
+    public startSearch() {
+        if (!this.search?.searchId) return;
+        this.markStatus(this.search?.searchId, SearchStatus.InProgress);
+    }
+
+    private markStatus(searchId: string, status: SearchStatus) {
+        this.searchService.markStatus(searchId, status).subscribe({
+            next: (res) => {
+                if (!this.search) return
+                this.search.status = res.status;
+            },
+            error: (err) => {
+                console.log(err);
+            },
+        });
+    }
+
+    private updateSearch(search: Search | null) {
+        if (!search) return;
+        this.searchService.updateSearch(search).subscribe({
+            next: (res) => {
+                console.log(res);
+                this.search = res;
+            },
+            error: (err) => {
+                console.log(err);
+            },
+        });
+    }
+
+    async updateMedicationDetails() {
         if (this.search) {
             this.search = this.convertFormToSearch();
-            // Add update function call here
-            // this.addNewSearch(this.search, this.isPaid);
+            this.updateSearch(this.search);
+            this.isModalVisible = false;
         }
     }
 
@@ -156,8 +187,6 @@ export class MedicationDetailsComponent implements OnInit {
         this.isModalVisible = !this.isModalVisible
         if (this.additionalInfoForm.valid) {
             this.search = this.convertFormToSearch();
-            console.log(this.search);
-            // this.isModalVisible = !this.isModalVisible
         } else {
             this.additionalInfoForm.markAllAsTouched();
             markAllAsDirty(this.additionalInfoForm);
@@ -174,8 +203,10 @@ export class MedicationDetailsComponent implements OnInit {
         const formValues = this.additionalInfoForm.value;
         const dob = this.convertDobToTimestamp(formValues.dob);
         const pickUpDate = this.convertDobToTimestamp(formValues.pickupDate);
+        if (!this.searchId || !this.search?.medication?.medicationId) return null;
 
         const search: Search = {
+            searchId: this.searchId,
             prescriberName: formValues.prescriber || '',
             dob: dob,
             zipCode: Number(formValues.zipCode),
@@ -184,6 +215,7 @@ export class MedicationDetailsComponent implements OnInit {
                 formValues.prescribedMedication &&
                     formValues.prescribedMedication.length > 0
                     ? {
+                        medicationId: this.search?.medication?.medicationId,
                         name: formValues.prescribedMedication[0]?.name || '',
                         dose:
                             formValues.prescribedMedication[0]?.dose ??
@@ -205,7 +237,7 @@ export class MedicationDetailsComponent implements OnInit {
                     : undefined,
         };
 
-        return search;
+        return search || null;
     }
 
     getSearchDetails() {

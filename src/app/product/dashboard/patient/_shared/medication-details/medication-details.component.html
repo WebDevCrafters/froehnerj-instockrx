@@ -8,7 +8,7 @@
             }
         </div>
         @if(search?.status === searchStatus.NotStarted) {
-        <div class="edit_btn" (click)="openModalPopup()">
+        <div class="edit_btn" (click)="startSearch()">
             <app-button title="Start Search" [type]="'small_primary'" />
         </div>
         }
@@ -157,8 +157,8 @@
         </div>
         <hr />
         <div class="content">
-            <app-additional-info [additionalInfoForm]="additionalInfoForm" (onAdditionalInfoSubmit)="openModalPopup()"
-                [showDatePickerOnlyasInput]="true" />
+            <app-additional-info [additionalInfoForm]="additionalInfoForm"
+                (onAdditionalInfoSubmit)="updateMedicationDetails()" [showDatePickerOnlyasInput]="true" />
         </div>
         <hr />
         <div class="footer">
@@ -168,7 +168,7 @@
             </div>
             <div class="btn_container">
                 <app-button [title]="'Confirm'" [type]="'small_primary'" [shape]="'rounded'"
-                    (clickEvent)="openModalPopup()"></app-button>
+                    (clickEvent)="updateMedicationDetails()"></app-button>
             </div>
         </div>
     </div>
