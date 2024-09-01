@@ -54,7 +54,7 @@ export class UserService {
 
     updateProfile(user: User) {
         const accessToken = this.getAccessToken();
-        const url = `${BASE_URL}${this.USER_URL}/update`;
+        const url = `${API_URL}${this.USER_URL}/update`;
         const headers = new HttpHeaders().set('authorization', accessToken);
         return this.httpClient.put(url, user, { headers }).pipe(
             map((res) => {
