@@ -57,7 +57,7 @@ export class ActiveSearchesComponent implements OnInit {
     setInDatService(searchArr: Search[]) {
         searchArr.forEach((search) => {
             if (search.searchId)
-                this.dataService.setData(search.searchId, search);
+                this.dataService.setSearch(search.searchId, search);
         });
     }
 }

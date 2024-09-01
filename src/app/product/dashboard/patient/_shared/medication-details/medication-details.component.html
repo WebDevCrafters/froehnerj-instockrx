@@ -19,14 +19,15 @@
         <div class="title_container">
             <p>Medication Details:</p>
         </div>
+        @if(!isMedicationMarkedAsAvailable) {
         <div class="mark_btn" (click)="markMedicationAsAvailable()">
             <app-button title="Mark as Available" [type]="'small_primary'" />
         </div>
+        }
     </div>
     }
 
     <div class="medication_info">
-        @if(userType === UserType.Patient) {
         <div class="label_and_value">
             <div class="label">Name:</div>
             <div class="value">{{ search?.medication?.name }}</div>
@@ -59,25 +60,6 @@
             <div class="label">Status:</div>
             <div class="value">{{ search?.status }}</div>
         </div>
-        }
-        @else {
-        <div class="label_and_value">
-            <div class="label">Name:</div>
-            <div class="value">{{ search?.medication?.name }}</div>
-        </div>
-        <div class="label_and_value">
-            <div class="label">Dose:</div>
-            <div class="value">{{ search?.medication?.dose }}</div>
-        </div>
-        <div class="label_and_value">
-            <div class="label">Quantity:</div>
-            <div class="value">{{ search?.medication?.quantity }}</div>
-        </div>
-        <div class="label_and_value">
-            <div class="label">Brand Name:</div>
-            <div class="value">{{ search?.medication?.brandName }}</div>
-        </div>
-        }
     </div>
     @if(search?.medication?.alternatives?.length) {
     <div class="header">
@@ -148,16 +130,20 @@
     </div>
     <div class="user_nfo">
         <div class="label_and_value">
-            <div class="label">DOB:</div>
-            <div class="value">{{ search?.dob | date }}</div>
+            <div class="label">Name:</div>
+            <div class="value">{{ userInfo?.name }}</div>
+        </div>
+        <div class="label_and_value">
+            <div class="label">Email:</div>
+            <div class="value">{{ userInfo?.email }}</div>
+        </div>
+        <div class="label_and_value">
+            <div class="label">Phone Number:</div>
+            <div class="value">{{ userInfo?.phoneNumber }}</div>
         </div>
         <div class="label_and_value">
             <div class="label">Zip Code</div>
-            <div class="value">{{ search?.zipCode }}</div>
-        </div>
-        <div class="label_and_value">
-            <div class="label">Pick up date:</div>
-            <div class="value">{{ search?.medication?.pickUpDate | date }}</div>
+            <div class="value">{{ userInfo?.zipCode }}</div>
         </div>
     </div>
     }
