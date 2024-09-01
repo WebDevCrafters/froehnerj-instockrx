@@ -1,7 +1,7 @@
 import { Inject, Injectable } from '@angular/core';
 import { User } from '../../product/_shared/interfaces/User';
 import { KEYS } from '../../_shared/constants/localStorageKeys';
-import { BASE_URL } from '../../../../env';
+import { API_URL } from '../../../../env';
 import { AuthResponse } from '../../product/_shared/interfaces/AuthResponse';
 import { HttpClient, HttpErrorResponse, HttpHeaders } from '@angular/common/http';
 import { catchError, map, of, throwError } from 'rxjs';
@@ -25,7 +25,7 @@ export class UserService {
     }
 
     signIn(user: User) {
-        const url = `${BASE_URL}${this.USER_URL}/signin`;
+        const url = `${API_URL}${this.USER_URL}/signin`;
         return this.httpClient.post(url, user).pipe(
             map((result) => {
                 let signinResult = result as AuthResponse;
@@ -39,7 +39,7 @@ export class UserService {
     }
 
     signUp(user: User) {
-        const url = `${BASE_URL}${this.USER_URL}/signup`;
+        const url = `${API_URL}${this.USER_URL}/signup`;
         return this.httpClient.post(url, user).pipe(
             map((result) => {
                 let signupResult = result as AuthResponse;
@@ -65,7 +65,7 @@ export class UserService {
 
     getUser(userId: string) {
         const accessToken = this.getAccessToken();
-        const url = `${BASE_URL}${this.USER_URL}/${userId}`;
+        const url = `${API_URL}${this.USER_URL}/${userId}`;
         const headers = new HttpHeaders().set('authorization', accessToken);
         return this.httpClient.get(url, { headers }).pipe(
             map((res) => {

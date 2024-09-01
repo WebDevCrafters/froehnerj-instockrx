@@ -7,7 +7,7 @@ import {
     HttpErrorResponse,
     HttpHeaders,
 } from '@angular/common/http';
-import { BASE_URL } from '../../../../env';
+import { API_URL } from '../../../../env';
 import PaymentStatus from '../../product/_shared/interfaces/PaymentStatus';
 import { AddPaymentRequest } from '../../product/_shared/interfaces/AddPaymentRequest';
 import { error } from 'node:console';
@@ -24,7 +24,7 @@ export class PaymentService {
     ) {}
 
     getCurrentPayment(): Observable<Payment | null> {
-        const url = `${BASE_URL}${this.PAYMENT_URL}`;
+        const url = `${API_URL}${this.PAYMENT_URL}`;
         const accessToken = this.userService.getAccessToken();
         const headers = new HttpHeaders().set('authorization', accessToken);
         return this.httpClinet.get(url, { headers }).pipe(
@@ -41,7 +41,7 @@ export class PaymentService {
     }
 
     addPayment(requestBody: AddPaymentRequest) {
-        const url = `${BASE_URL}${this.PAYMENT_URL}`;
+        const url = `${API_URL}${this.PAYMENT_URL}`;
         const accessToken = this.userService.getAccessToken();
         const headers = new HttpHeaders().set('authorization', accessToken);
         return this.httpClinet.post(url, requestBody, { headers }).pipe(
