@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import Availability from '../../product/_shared/interfaces/Availability';
 import { UserService } from './user.service';
-import { BASE_URL } from '../../../../env';
+import { API_URL } from '../../../../env';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { catchError, map, throwError } from 'rxjs';
 
@@ -17,7 +17,7 @@ export class AvailabilityService {
 
     add(availability: Availability) {
         const accessToken = this.userService.getAccessToken();
-        const url = `${BASE_URL}${this.AVAILABILITY_URL}`;
+        const url = `${API_URL}${this.AVAILABILITY_URL}`;
         const headers = new HttpHeaders().set('authorization', accessToken);
         return this.httpClient.post(url, availability, { headers }).pipe(
             map((res) => {
@@ -29,7 +29,7 @@ export class AvailabilityService {
 
     get(searchId: string) {
         const accessToken = this.userService.getAccessToken();
-        const url = `${BASE_URL}${this.AVAILABILITY_URL}/${searchId}`;
+        const url = `${API_URL}${this.AVAILABILITY_URL}/${searchId}`;
         const headers = new HttpHeaders().set('authorization', accessToken);
         return this.httpClient.get(url, { headers }).pipe(
             map((res) => {

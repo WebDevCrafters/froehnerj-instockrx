@@ -6,6 +6,8 @@ import { Router } from '@angular/router';
 import APP_ROUTES from '../../constants/routes';
 import { CommonModule, Location } from '@angular/common';
 import { UserService } from '../../../_core/services/user.service';
+import { SocketService } from '../../../_core/services/socket.service';
+import { SocketEvents } from '../../../product/_shared/interfaces/SocketEvents';
 
 @Component({
     selector: 'app-header',
@@ -17,13 +19,19 @@ import { UserService } from '../../../_core/services/user.service';
 export class HeaderComponent implements OnInit {
     @Output() toggleSidebar = new EventEmitter<void>();
 
-    constructor(private userService: UserService, private router: Router, private location: Location) { }
+    constructor(
+        private userService: UserService,
+        private router: Router,
+        private location: Location,
+        private socketService: SocketService
+    ) {}
 
     modalVisible: boolean = false;
     user: User | null = null;
 
     ngOnInit(): void {
         this.getUserEmail();
+        this.initializeSocketConnection();
     }
 
     getUserEmail() {
@@ -61,7 +69,7 @@ export class HeaderComponent implements OnInit {
             APP_ROUTES.product.app,
             APP_ROUTES.product.dashboard,
             APP_ROUTES.product.patient,
-            APP_ROUTES.product.profile
+            APP_ROUTES.product.profile,
         ]);
         this.toggleSettings();
     }
@@ -72,5 +80,20 @@ export class HeaderComponent implements OnInit {
 
     goBack() {
         this.location.back();
+    }
+
+    initializeSocketConnection() {
+        const userId = this.user?.userId;
+
+        if (!userId) return;
+
+        this.socketService.init();
+        this.socketService.onEvent(SocketEvents.Connect, () => {
+            console.info('Socket Connected');
+        });
+        this.socketService.emitEvent(SocketEvents.JoinMyRoom, userId);
+        this.socketService.onEvent(SocketEvents.Notification,(notification)=>{
+            console.log(notification)
+        })
     }
 }
