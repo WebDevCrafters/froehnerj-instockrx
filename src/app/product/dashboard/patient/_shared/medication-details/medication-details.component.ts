@@ -150,6 +150,11 @@ export class MedicationDetailsComponent implements OnInit {
         this.markStatus(this.search?.searchId, SearchStatus.InProgress);
     }
 
+    public markSearchAsCompleted() {
+        if (!this.search?.searchId) return;
+        this.markStatus(this.search?.searchId, SearchStatus.Completed);
+    }
+
     private markStatus(searchId: string, status: SearchStatus) {
         this.searchService.markStatus(searchId, status).subscribe({
             next: (res) => {

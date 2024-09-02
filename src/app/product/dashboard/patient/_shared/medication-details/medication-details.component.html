@@ -12,6 +12,11 @@
             <app-button title="Start Search" [type]="'small_primary'" />
         </div>
         }
+        @else if(search?.status === searchStatus.InProgress && availability.length) {
+        <div class="edit_btn" (click)="markSearchAsCompleted()">
+            <app-button title="Mark Completed" [type]="'small_primary'" />
+        </div>
+        }
     </div>
     }
     @else {
@@ -34,15 +39,15 @@
         </div>
         <div class="label_and_value">
             <div class="label">Dose:</div>
-            <div class="value">{{ search?.medication?.dose }}</div>
+            <div class="value">{{ search?.medication?.dose || '---' }}</div>
         </div>
         <div class="label_and_value">
             <div class="label">Quantity:</div>
-            <div class="value">{{ search?.medication?.quantity }}</div>
+            <div class="value">{{ search?.medication?.quantity || '---' }}</div>
         </div>
         <div class="label_and_value">
             <div class="label">Brand Name:</div>
-            <div class="value">{{ search?.medication?.brandName }}</div>
+            <div class="value">{{ search?.medication?.brandName || '---' }}</div>
         </div>
         <div class="label_and_value">
             <div class="label">DOB:</div>
