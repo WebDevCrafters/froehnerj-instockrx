@@ -4,17 +4,17 @@
         <div class="title_container">
             <p>Medication Details:</p>
             @if(search?.status === searchStatus.NotStarted) {
-            <img
-                src="assets/images/svg/edit-icon.svg"
-                alt="Edit"
-                class="edit_icon"
-                (click)="openModalPopup()"
-            />
+            <img src="assets/images/svg/edit-icon.svg" alt="Edit" class="edit_icon" (click)="openModalPopup()" />
             }
         </div>
         @if(search?.status === searchStatus.NotStarted) {
         <div class="edit_btn" (click)="startSearch()">
             <app-button title="Start Search" [type]="'small_primary'" />
+        </div>
+        }
+        @if((search?.status === searchStatus.InProgress && availability.length  && !isMedicationMarkedAsAvailable)) {
+        <div class="edit_btn" (click)="toggleDecisionModalPopup()">
+            <app-button title="Mark Completed" [type]="'small_primary'" />
         </div>
         }
     </div>
@@ -38,15 +38,15 @@
         </div>
         <div class="label_and_value">
             <div class="label">Dose:</div>
-            <div class="value">{{ search?.medication?.dose }}</div>
+            <div class="value">{{ search?.medication?.dose || '---' }}</div>
         </div>
         <div class="label_and_value">
             <div class="label">Quantity:</div>
-            <div class="value">{{ search?.medication?.quantity }}</div>
+            <div class="value">{{ search?.medication?.quantity || '---' }}</div>
         </div>
         <div class="label_and_value">
             <div class="label">Brand Name:</div>
-            <div class="value">{{ search?.medication?.brandName }}</div>
+            <div class="value">{{ search?.medication?.brandName || '---' }}</div>
         </div>
         <div class="label_and_value">
             <div class="label">DOB:</div>
@@ -118,12 +118,9 @@
         </table>
         } @else {
         <div class="empty_container">
-            <app-empty-state
-                [src]="'assets/images/svg/no-search-icon.svg'"
-                [caption]="
+            <app-empty-state [src]="'assets/images/svg/no-search-icon.svg'" [caption]="
                     'No Pharmacy has marked your medication as available yet.'
-                "
-            ></app-empty-state>
+                "></app-empty-state>
         </div>
         } }
     </div>
@@ -152,40 +149,50 @@
     } }
 </div>
 
-<app-modal
-    [isVisible]="isModalVisible"
-    bg="transparent"
-    (closeModal)="openModalPopup()"
->
+<app-modal [isVisible]="isModalVisible" bg="transparent" (closeModal)="openModalPopup()">
     <div class="model_container">
         <div class="heading">
             <span> Edit Medication Details </span>
         </div>
         <hr />
         <div class="content">
-            <app-additional-info
-                [additionalInfoForm]="additionalInfoForm"
-                (onAdditionalInfoSubmit)="updateMedicationDetails()"
-                [showDatePickerOnlyasInput]="true"
-            />
+            <app-additional-info [additionalInfoForm]="additionalInfoForm"
+                (onAdditionalInfoSubmit)="updateMedicationDetails()" [showDatePickerOnlyasInput]="true" />
         </div>
         <hr />
         <div class="footer">
             <div class="btn_container">
-                <app-button
-                    [title]="'Cancel'"
-                    [type]="'small_secondary'"
-                    [shape]="'rounded'"
-                    (clickEvent)="openModalPopup()"
-                ></app-button>
+                <app-button [title]="'Cancel'" [type]="'small_secondary'" [shape]="'rounded'"
+                    (clickEvent)="openModalPopup()"></app-button>
             </div>
             <div class="btn_container">
-                <app-button
-                    [title]="'Confirm'"
-                    [type]="'small_primary'"
-                    [shape]="'rounded'"
-                    (clickEvent)="updateMedicationDetails()"
-                ></app-button>
+                <app-button [title]="'Confirm'" [type]="'small_primary'" [shape]="'rounded'"
+                    (clickEvent)="updateMedicationDetails()"></app-button>
+            </div>
+        </div>
+    </div>
+</app-modal>
+
+
+<app-modal [isVisible]="isDecisionModalVisible" bg="transparent">
+    <div class="decision_container">
+        <div class="heading">
+            <span> Are you sure? </span>
+        </div>
+        <hr />
+        <div class="content">
+            Please ensure that once a medication is marked as completed, it cannot be reverted. If you have successfully
+            obtained the medication, kindly confirm to mark the search as completed.
+        </div>
+        <hr />
+        <div class="footer">
+            <div class="btn_container">
+                <app-button [title]="'Cancel'" [type]="'small_secondary'" [shape]="'rounded'"
+                    (clickEvent)="toggleDecisionModalPopup()"></app-button>
+            </div>
+            <div class="btn_container">
+                <app-button [title]="'Confirm'" [type]="'small_primary'" [shape]="'rounded'"
+                    (clickEvent)="markSearchAsCompleted()"></app-button>
             </div>
         </div>
     </div>

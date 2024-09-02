@@ -33,10 +33,10 @@
                         routerLinkActive="active-link">
                         <div class="img">
                             <svg>
-                                <use xlink:href="assets/images/svg/sprites/sidebar_icon.svg#previous"></use>
+                                <use xlink:href="assets/images/svg/sprites/sidebar_icon.svg#available"></use>
                             </svg>
                         </div>
-                        <span> Previous Searches </span>
+                        <span> Completed Searches </span>
                     </a>
                 </li>
                 <li>
@@ -55,7 +55,9 @@
                     <a class="img_and_tag" [routerLink]="[APP_ROUTES.product.nearBySearches]"
                         routerLinkActive="active-link" [routerLinkActiveOptions]="{ exact: true }">
                         <div class="img">
-                            <img src="assets/images/svg/nearby-icon.svg" alt="" />
+                            <svg>
+                                <use xlink:href="assets/images/svg/sprites/sidebar_icon.svg#nearby"></use>
+                            </svg>
                         </div>
                         <span> Nearby Searches</span>
                     </a>
@@ -64,7 +66,9 @@
                     <a class="img_and_tag" [routerLink]="[APP_ROUTES.product.markedAsAvailable]"
                         routerLinkActive="active-link" [routerLinkActiveOptions]="{ exact: true }">
                         <div class="img">
-                            <img src="assets/images/svg/available-icon.svg" alt="" />
+                            <svg>
+                                <use xlink:href="assets/images/svg/sprites/sidebar_icon.svg#available"></use>
+                            </svg>
                         </div>
                         <span> Marked as Available </span>
                     </a>

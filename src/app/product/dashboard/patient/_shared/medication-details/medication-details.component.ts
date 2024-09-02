@@ -49,6 +49,7 @@ export class MedicationDetailsComponent implements OnInit {
     availability: Availability[] = [];
     searchStatus = SearchStatus;
     public isModalVisible: boolean = false;
+    public isDecisionModalVisible: boolean = false;
     public isLoading: boolean = true;
     public additionalInfoForm: any;
     public userType: UserType | null = null;
@@ -63,7 +64,7 @@ export class MedicationDetailsComponent implements OnInit {
         private route: ActivatedRoute,
         private availabilityService: AvailabilityService,
         private paymentService: PaymentService
-    ) {}
+    ) { }
 
     async ngOnInit(): Promise<void> {
         this.route.paramMap.subscribe((params) => {
@@ -173,6 +174,12 @@ export class MedicationDetailsComponent implements OnInit {
         this.markStatus(this.search?.searchId, SearchStatus.InProgress);
     }
 
+    public markSearchAsCompleted() {
+        if (!this.search?.searchId) return;
+        this.toggleDecisionModalPopup();
+        this.markStatus(this.search?.searchId, SearchStatus.Completed);
+    }
+
     private markStatus(searchId: string, status: SearchStatus) {
         this.searchService.markStatus(searchId, status).subscribe({
             next: (res) => {
@@ -196,6 +203,11 @@ export class MedicationDetailsComponent implements OnInit {
                 console.log(err);
             },
         });
+    }
+
+    toggleDecisionModalPopup() {
+        console.log("Called");
+        this.isDecisionModalVisible = !this.isDecisionModalVisible
     }
 
     async updateMedicationDetails() {
@@ -237,29 +249,29 @@ export class MedicationDetailsComponent implements OnInit {
             status: this.search?.status,
             medication:
                 formValues.prescribedMedication &&
-                formValues.prescribedMedication.length > 0
+                    formValues.prescribedMedication.length > 0
                     ? {
-                          medicationId: this.search?.medication?.medicationId,
-                          name: formValues.prescribedMedication[0]?.name || '',
-                          dose:
-                              formValues.prescribedMedication[0]?.dose ??
-                              undefined,
-                          quantity: Number(
-                              formValues.prescribedMedication[0]?.quantity
-                          ),
-                          pickUpDate: pickUpDate,
-                          brandName:
-                              formValues.prescribedMedication[0]?.brandName ||
-                              '',
-                          alternatives: formValues.prescribedMedication
-                              .slice(1)
-                              .map((med: any) => ({
-                                  name: med.name || '',
-                                  dose: med.dose ?? undefined,
-                                  quantity: Number(med.quantity),
-                                  brandName: med.brandName,
-                              })),
-                      }
+                        medicationId: this.search?.medication?.medicationId,
+                        name: formValues.prescribedMedication[0]?.name || '',
+                        dose:
+                            formValues.prescribedMedication[0]?.dose ??
+                            undefined,
+                        quantity: Number(
+                            formValues.prescribedMedication[0]?.quantity
+                        ),
+                        pickUpDate: pickUpDate,
+                        brandName:
+                            formValues.prescribedMedication[0]?.brandName ||
+                            '',
+                        alternatives: formValues.prescribedMedication
+                            .slice(1)
+                            .map((med: any) => ({
+                                name: med.name || '',
+                                dose: med.dose ?? undefined,
+                                quantity: Number(med.quantity),
+                                brandName: med.brandName,
+                            })),
+                    }
                     : undefined,
         };
 
