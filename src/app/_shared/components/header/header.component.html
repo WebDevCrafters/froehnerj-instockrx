@@ -1,66 +1,43 @@
 <div class="header">
-  <div class="back_icon" (click)="onMenuClick()">
-    <img src="assets/images/svg/menu-icon.svg" alt="" />
-  </div>
-  <div class="brand">
-    <img src="assets/images/png/pill-logo.png" alt="" />
-    <div class="brand_name">
-      <div class="heading">FindMyMeds</div>
-      <div class="sub_heading">by InStockRx</div>
+    <div class="back_icon" (click)="onMenuClick()">
+        <img src="assets/images/svg/menu-icon.svg" alt="" />
     </div>
-  </div>
-  <div class="icon_container">
-    <img
-      class="profile_icon"
-      src="assets/images/svg/notification-icon.svg"
-      alt=""
-      (click)="toggleSettings()"
-    />
-  </div>
+    <div class="brand">
+        <img src="assets/images/png/pill-logo.png" alt="" />
+        <div class="brand_name">
+            <div class="heading">FindMyMeds</div>
+            <div class="sub_heading">by InStockRx</div>
+        </div>
+    </div>
+    <div class="icon_container">
+        <img
+            class="profile_icon"
+            src="assets/images/svg/notification-icon.svg"
+            alt=""
+            (click)="toggleSettings()"
+        />
+    </div>
 </div>
 
 <app-modal
-  [isVisible]="modalVisible"
-  bg="transparent"
-  (closeModal)="toggleSettings()"
+    [isVisible]="modalVisible"
+    bg="transparent"
+    (closeModal)="toggleSettings()"
 >
-  <div class="settings_container">
-    <div class="heading">
-      <span> Notifications </span>
+    <div class="settings_container">
+        <div class="heading">
+            <span> Notifications </span>
+        </div>
+        <hr />
+        <div class="content">
+            @for (notification of notificationArr; track $index) {
+            <div class="notification" [ngClass]="{ unread: true }">
+                {{ notification.data?.clinician?.name }} has marked your
+                medication as available.
+            </div>
+            <hr class="inner_hr" />
+
+            }
+        </div>
     </div>
-    <hr />
-    <div class="content">
-      <div class="notification" [ngClass]="{ unread: true }">
-        Clinician 1 has marked your medication as available.
-      </div>
-      <hr class="inner_hr" />
-      <div class="notification">
-        Clinician 2 has marked your medication as available.
-      </div>
-      <hr class="inner_hr" />
-      <div class="notification">
-        Clinician 2 has marked your medication as available.
-      </div>
-      <hr class="inner_hr" />
-      <div class="notification">
-        Clinician 2 has marked your medication as available.
-      </div>
-      <hr class="inner_hr" />
-      <div class="notification">
-        Clinician 2 has marked your medication as available.
-      </div>
-      <hr class="inner_hr" />
-      <div class="notification">
-        Clinician 2 has marked your medication as available.
-      </div>
-      <hr class="inner_hr" />
-      <div class="notification">
-        Clinician 2 has marked your medication as available.
-      </div>
-      <hr class="inner_hr" />
-      <div class="notification">
-        Clinician 2 has marked your medication as available.
-      </div>
-    </div>
-  </div>
 </app-modal>

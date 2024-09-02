@@ -8,6 +8,8 @@ import { CommonModule, Location } from '@angular/common';
 import { UserService } from '../../../_core/services/user.service';
 import { SocketService } from '../../../_core/services/socket.service';
 import { SocketEvents } from '../../../product/_shared/interfaces/SocketEvents';
+import { NotificationService } from '../../../_core/services/notification.service';
+import { Notification } from '../../../product/_shared/interfaces/Notification';
 
 @Component({
     selector: 'app-header',
@@ -18,12 +20,14 @@ import { SocketEvents } from '../../../product/_shared/interfaces/SocketEvents';
 })
 export class HeaderComponent implements OnInit {
     @Output() toggleSidebar = new EventEmitter<void>();
+    notificationArr: Notification[] = [];
 
     constructor(
         private userService: UserService,
         private router: Router,
         private location: Location,
-        private socketService: SocketService
+        private socketService: SocketService,
+        private notificationService: NotificationService
     ) {}
 
     modalVisible: boolean = false;
@@ -32,6 +36,7 @@ export class HeaderComponent implements OnInit {
     ngOnInit(): void {
         this.getUserEmail();
         this.initializeSocketConnection();
+        this.getNotifications();
     }
 
     getUserEmail() {
@@ -92,8 +97,23 @@ export class HeaderComponent implements OnInit {
             console.info('Socket Connected');
         });
         this.socketService.emitEvent(SocketEvents.JoinMyRoom, userId);
-        this.socketService.onEvent(SocketEvents.Notification,(notification)=>{
-            console.log(notification)
-        })
+        this.socketService.onEvent(
+            SocketEvents.Notification,
+            (notification) => {
+                console.log(notification);
+            }
+        );
+    }
+
+    getNotifications() {
+        this.notificationService.getNotifications().subscribe({
+            next: (res) => {
+                this.notificationArr = res;
+                console.log(res);
+            },
+            error: (err) => {
+                console.log(err);
+            },
+        });
     }
 }
