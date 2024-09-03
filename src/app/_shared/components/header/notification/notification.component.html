@@ -5,7 +5,10 @@
     <hr />
     <div class="content">
         @for (notification of notificationArr; track $index) {
-        <div class="notification">
+        <div
+            class="notification"
+            (click)="markAsRead(notification.notificationId)"
+        >
             <span>
                 <strong>
                     {{ notification.data?.clinician?.name }}
@@ -13,7 +16,9 @@
                 has marked your medication as available.
             </span>
             <div class="details">
-                <span class="time">1:56pm</span>
+                <span class="time">{{
+                    notification.createdOn | date : "shortTime"
+                }}</span>
                 @if (!notification.isRead ) {
                 <span class="unread_dot"></span>
                 }
@@ -21,10 +26,11 @@
         </div>
         <hr class="inner_hr" />
 
-        }
-
-        @if(!notificationArr.length){
-            <app-empty-state caption="No notifications" [src]="'assets/images/svg/no-search-icon.svg'"/>
+        } @if(!notificationArr.length){
+        <app-empty-state
+            caption="No notifications"
+            [src]="'assets/images/svg/no-search-icon.svg'"
+        />
         }
     </div>
 </div>

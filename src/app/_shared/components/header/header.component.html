@@ -25,5 +25,5 @@
     bg="transparent"
     (closeModal)="toggleSettings()"
 >
-    <app-notification />
+    <app-notification [count]="count" (countChange)="updateCount($event)"/>
 </app-modal>

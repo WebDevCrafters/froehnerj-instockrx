@@ -121,4 +121,8 @@ export class HeaderComponent implements OnInit {
             },
         });
     }
+
+    updateCount(count: number) {
+        this.count = count;
+    }
 }

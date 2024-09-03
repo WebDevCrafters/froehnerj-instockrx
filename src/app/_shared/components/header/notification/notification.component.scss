@@ -66,6 +66,7 @@
                 justify-content: space-between;
                 height: 100%;
                 align-items: end;
+                flex-shrink: 0;
 
                 .unread_dot {
                     width: 0.5rem;
@@ -75,7 +76,7 @@
                 }
 
                 .time {
-                    font-size: 0.8rem;
+                    font-size: 0.7rem;
                     color: $darkGreyColor;
                 }
             }
