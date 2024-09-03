@@ -30,4 +30,32 @@ export class NotificationService {
             })
         );
     }
+
+    markAllAsRead() {
+        const accessToken = this.userService.getAccessToken();
+        const url = `${API_URL}${this.NOTIFICATION_URL}/read`;
+        const headers = new HttpHeaders().set('authorization', accessToken);
+        return this.httpClient.put(url, { headers }).pipe(
+            map((res) => {
+                return true;
+            }),
+            catchError((err) => {
+                return throwError(() => err);
+            })
+        );
+    }
+
+    getUnreadCount() {
+        const accessToken = this.userService.getAccessToken();
+        const url = `${API_URL}${this.NOTIFICATION_URL}/unread-count`;
+        const headers = new HttpHeaders().set('authorization', accessToken);
+        return this.httpClient.get(url, { headers }).pipe(
+            map((res) => {
+                return res as { count: number };
+            }),
+            catchError((err) => {
+                return throwError(() => err);
+            })
+        );
+    }
 }

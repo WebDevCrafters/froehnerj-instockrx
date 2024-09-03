@@ -15,18 +15,25 @@ import { NotificationComponent } from './notification/notification.component';
 @Component({
     selector: 'app-header',
     standalone: true,
-    imports: [ButtonComponent, CommonModule, NotificationComponent, ModalComponent],
+    imports: [
+        ButtonComponent,
+        CommonModule,
+        NotificationComponent,
+        ModalComponent,
+    ],
     templateUrl: './header.component.html',
     styleUrl: './header.component.scss',
 })
 export class HeaderComponent implements OnInit {
     @Output() toggleSidebar = new EventEmitter<void>();
+    count: number = 0;
 
     constructor(
         private userService: UserService,
         private router: Router,
         private location: Location,
-        private socketService: SocketService
+        private socketService: SocketService,
+        private notificationService: NotificationService
     ) {}
 
     modalVisible: boolean = false;
@@ -35,6 +42,7 @@ export class HeaderComponent implements OnInit {
     ngOnInit(): void {
         this.getUserEmail();
         this.initializeSocketConnection();
+        this.getUnreadCount();
     }
 
     getUserEmail() {
@@ -101,5 +109,16 @@ export class HeaderComponent implements OnInit {
                 console.log(notification);
             }
         );
+    }
+
+    getUnreadCount() {
+        this.notificationService.getUnreadCount().subscribe({
+            next: (res) => {
+                this.count = res.count;
+            },
+            error: (err) => {
+                console.log(err);
+            },
+        });
     }
 }

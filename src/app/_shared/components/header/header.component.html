@@ -9,12 +9,14 @@
             <div class="sub_heading">by InStockRx</div>
         </div>
     </div>
-    <div class="icon_container">
+    <div class="icon_container" (click)="toggleSettings()">
+        @if (count>0) {
+        <span class="count">{{ count }}</span>
+        }
         <img
             class="profile_icon"
             src="assets/images/svg/notification-icon.svg"
             alt=""
-            (click)="toggleSettings()"
         />
     </div>
 </div>

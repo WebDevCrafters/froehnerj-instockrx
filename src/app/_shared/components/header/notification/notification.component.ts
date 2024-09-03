@@ -19,7 +19,6 @@ export class NotificationComponent implements OnInit {
 
     ngOnInit(): void {
         this.getNotifications();
-        console.log('Ia m eher');
     }
 
     getNotifications() {
