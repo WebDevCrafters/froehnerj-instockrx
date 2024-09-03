@@ -281,8 +281,12 @@ export class MedicationDetailsComponent implements OnInit {
     }
 
     getSearchDetails() {
-        if (this.searchId)
+        if (this.searchId) {
             this.search = this.dataService.getSearch(this.searchId);
+        }
+        if (!this.search) {
+            this.getSearch();
+        }
     }
 
     checkIfMarkedAsAvailable() {
@@ -317,6 +321,17 @@ export class MedicationDetailsComponent implements OnInit {
             error: (err) => {
                 console.log(err);
             },
+        });
+    }
+
+    getSearch() {
+        if (!this.searchId) return;
+
+        this.searchService.getSearch(this.searchId).subscribe({
+            next: (res) => {
+                this.search = res;
+            },
+            error: (err) => {},
         });
     }
 }

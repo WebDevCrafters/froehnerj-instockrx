@@ -15,7 +15,7 @@ export class SearchService {
     constructor(
         private httpClient: HttpClient,
         private userService: UserService
-    ) { }
+    ) {}
 
     addSearch(search: Search): Observable<Search> {
         const accessToken = this.userService.getAccessToken();
@@ -38,6 +38,18 @@ export class SearchService {
         return this.httpClient.get(url, { headers }).pipe(
             map((res) => {
                 return res as Search[];
+            }),
+            catchError((err) => throwError(() => err))
+        );
+    }
+
+    getSearch(searchId: string) {
+        const accessToken = this.userService.getAccessToken();
+        const url = `${API_URL}${this.SEARCH_URL}/${searchId}`;
+        const headers = new HttpHeaders().set('authorization', accessToken);
+        return this.httpClient.get(url, { headers }).pipe(
+            map((res) => {
+                return res as Search;
             }),
             catchError((err) => throwError(() => err))
         );
@@ -89,11 +101,13 @@ export class SearchService {
         const accessToken = this.userService.getAccessToken();
         const url = `${API_URL}${this.SEARCH_URL}/update-status`;
         const headers = new HttpHeaders().set('authorization', accessToken);
-        return this.httpClient.post(url, { searchId, status }, { headers }).pipe(
-            map((res) => {
-                return res as Search;
-            }),
-            catchError((err) => throwError(() => err))
-        );
+        return this.httpClient
+            .post(url, { searchId, status }, { headers })
+            .pipe(
+                map((res) => {
+                    return res as Search;
+                }),
+                catchError((err) => throwError(() => err))
+            );
     }
 }
