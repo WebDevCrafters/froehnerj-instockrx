@@ -53,11 +53,31 @@
 
         .notification {
             cursor: pointer;
-            font-size: 14px;
+            font-size: 1rem;
+            line-height: 1.2rem;
             // border: 1px solid black;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
 
-            &.unread {
-                font-weight: 600;
+            .details {
+                display: flex;
+                flex-direction: column;
+                justify-content: space-between;
+                height: 100%;
+                align-items: end;
+
+                .unread_dot {
+                    width: 0.5rem;
+                    height: 0.5rem;
+                    background-color: $green;
+                    border-radius: 50%;
+                }
+
+                .time {
+                    font-size: 0.8rem;
+                    color: $darkGreyColor;
+                }
             }
         }
     }

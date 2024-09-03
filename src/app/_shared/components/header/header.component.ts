@@ -15,7 +15,7 @@ import { NotificationComponent } from './notification/notification.component';
 @Component({
     selector: 'app-header',
     standalone: true,
-    imports: [ButtonComponent, CommonModule, NotificationComponent],
+    imports: [ButtonComponent, CommonModule, NotificationComponent, ModalComponent],
     templateUrl: './header.component.html',
     styleUrl: './header.component.scss',
 })

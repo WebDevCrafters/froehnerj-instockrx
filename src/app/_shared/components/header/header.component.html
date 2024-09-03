@@ -18,5 +18,10 @@
         />
     </div>
 </div>
-
-<app-notification [modalVisible]="modalVisible" (closeModalEventEmitter)="toggleSettings()"/>
+<app-modal
+    [isVisible]="modalVisible"
+    bg="transparent"
+    (closeModal)="toggleSettings()"
+>
+    <app-notification />
+</app-modal>

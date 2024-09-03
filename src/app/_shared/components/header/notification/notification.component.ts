@@ -2,6 +2,7 @@ import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { ModalComponent } from '../../modal/modal.component';
 import { NotificationService } from '../../../../_core/services/notification.service';
 import { CommonModule } from '@angular/common';
+import { Notification } from '../../../../product/_shared/interfaces/Notification';
 
 @Component({
     selector: 'app-notification',
@@ -12,12 +13,13 @@ import { CommonModule } from '@angular/common';
 })
 export class NotificationComponent implements OnInit {
     notificationArr: Notification[] = [];
-    @Input() modalVisible = false;
-    @Output() closeModalEventEmitter = new EventEmitter();
 
     constructor(private notificationService: NotificationService) {}
 
-    ngOnInit(): void {}
+    ngOnInit(): void {
+        this.getNotifications();
+        console.log('Ia m eher');
+    }
 
     getNotifications() {
         this.notificationService.getNotifications().subscribe({
@@ -29,9 +31,5 @@ export class NotificationComponent implements OnInit {
                 console.log(err);
             },
         });
-    }
-
-    closeModal(event: any) {
-        this.closeModalEventEmitter.emit();
     }
 }
