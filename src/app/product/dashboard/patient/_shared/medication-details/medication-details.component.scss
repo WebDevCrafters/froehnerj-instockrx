@@ -71,6 +71,8 @@
         height: 80vh;
         padding: 0 1rem;
         padding-bottom: 2rem;
+        overflow-x: scroll;
+        min-width: 600px;
 
         .empty_container,
         .loader_container {
