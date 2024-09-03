@@ -2,6 +2,7 @@
 
 .main_container {
     height: 100%;
+    box-sizing: border-box;
 
     .header {
         display: flex;
@@ -14,8 +15,11 @@
     }
 
     .content {
+        width: 100%;
         height: 90%;
         padding: 1rem;
+        overflow-x: scroll;
+        min-width: 600px;
 
         .empty_container,
         .loader_container {
@@ -28,7 +32,6 @@
             height: 100%;
             border-collapse: collapse;
             border-radius: 16px;
-            // overflow: hidden;
 
             thead {
                 display: table;

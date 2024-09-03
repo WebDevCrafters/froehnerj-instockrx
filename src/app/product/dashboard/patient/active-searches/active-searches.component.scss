@@ -16,6 +16,8 @@
     .content {
         height: 90%;
         padding: 1rem;
+        overflow-x: scroll;
+        min-width: 600px;
 
         .empty_container,
         .loader_container {
