@@ -120,11 +120,16 @@
     .content {
         height: 75%;
         max-height: 75%;
-        overflow-y: auto;
+        overflow: auto;
         display: flex;
         flex-direction: column;
         gap: 16px;
         padding: 4px 16px;
+
+        ::-webkit-scrollbar {
+            width: 2px;
+        }
+        
 
         .label_and_value {
             display: flex;
@@ -132,10 +137,14 @@
             .label {
                 font-weight: bold;
                 color: $brandLightPrimaryColor;
+                flex-shrink: 0;
+                word-wrap: nowrap;
             }
-
+            
             .value {
                 color: $brandSecondaryColor;
+                overflow: hidden;
+                text-overflow: ellipsis;
             }
         }
 

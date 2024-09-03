@@ -8,7 +8,7 @@
                 @if (userType===UserType.Patient) {
                 <li>
                     <a class="img_and_tag" [routerLink]="[APP_ROUTES.product.newSearch]" routerLinkActive="active-link"
-                        [routerLinkActiveOptions]="{ exact: true }">
+                        [routerLinkActiveOptions]="{ exact: true }" (click)="closeSidebar()">
                         <div class="img">
                             <svg>
                                 <use xlink:href="assets/images/svg/sprites/sidebar_icon.svg#plus"></use>
@@ -19,7 +19,7 @@
                 </li>
                 <li>
                     <a class="img_and_tag" [routerLink]="[APP_ROUTES.product.activeSearches]"
-                        routerLinkActive="active-link">
+                        routerLinkActive="active-link" (click)="closeSidebar()">
                         <div class="img">
                             <svg>
                                 <use xlink:href="assets/images/svg/sprites/sidebar_icon.svg#active"></use>
@@ -30,7 +30,7 @@
                 </li>
                 <li>
                     <a class="img_and_tag" [routerLink]="[APP_ROUTES.product.previousSearches]"
-                        routerLinkActive="active-link">
+                        routerLinkActive="active-link" (click)="closeSidebar()">
                         <div class="img">
                             <svg>
                                 <use xlink:href="assets/images/svg/sprites/sidebar_icon.svg#available"></use>
@@ -41,7 +41,7 @@
                 </li>
                 <li>
                     <a class="img_and_tag" [routerLink]="[APP_ROUTES.product.payments]" routerLinkActive="active-link"
-                        [routerLinkActiveOptions]="{ exact: true }">
+                        [routerLinkActiveOptions]="{ exact: true }" (click)="closeSidebar()">
                         <div class="img">
                             <svg>
                                 <use xlink:href="assets/images/svg/sprites/sidebar_icon.svg#payment"></use>
@@ -53,7 +53,8 @@
                 } @else if (UserType.Clinician) {
                 <li>
                     <a class="img_and_tag" [routerLink]="[APP_ROUTES.product.nearBySearches]"
-                        routerLinkActive="active-link" [routerLinkActiveOptions]="{ exact: true }">
+                        routerLinkActive="active-link" [routerLinkActiveOptions]="{ exact: true }"
+                        (click)="closeSidebar()">
                         <div class="img">
                             <svg>
                                 <use xlink:href="assets/images/svg/sprites/sidebar_icon.svg#nearby"></use>
@@ -64,7 +65,8 @@
                 </li>
                 <li>
                     <a class="img_and_tag" [routerLink]="[APP_ROUTES.product.markedAsAvailable]"
-                        routerLinkActive="active-link" [routerLinkActiveOptions]="{ exact: true }">
+                        routerLinkActive="active-link" [routerLinkActiveOptions]="{ exact: true }"
+                        (click)="closeSidebar()">
                         <div class="img">
                             <svg>
                                 <use xlink:href="assets/images/svg/sprites/sidebar_icon.svg#available"></use>
@@ -77,7 +79,7 @@
                 }
                 <li>
                     <a class="img_and_tag" [routerLink]="[APP_ROUTES.product.profile]" routerLinkActive="active-link"
-                        [routerLinkActiveOptions]="{ exact: true }">
+                        [routerLinkActiveOptions]="{ exact: true }" (click)="closeSidebar()">
                         <div class="img">
                             <svg>
                                 <use xlink:href="assets/images/svg/sprites/sidebar_icon.svg#profile"></use>

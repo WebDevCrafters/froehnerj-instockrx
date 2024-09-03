@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, HostListener } from '@angular/core';
 import { HeaderComponent } from '../../_shared/components/header/header.component';
 import { ButtonComponent } from '../../_shared/components/button/button.component';
 import { CommonModule } from '@angular/common';
@@ -32,7 +32,7 @@ export class DashboardComponent implements OnInit {
     UserType = UserType;
     public isSidebarExpanded: boolean = true;
 
-    constructor(private userService: UserService) {}
+    constructor(private userService: UserService) { }
 
     ngOnInit(): void {
         this.getUserType();
@@ -46,5 +46,18 @@ export class DashboardComponent implements OnInit {
 
     toggleSidebar() {
         this.isSidebarExpanded = !this.isSidebarExpanded;
+    }
+
+    closeSidebar() {
+        if (window.innerWidth <= 700) {
+            this.isSidebarExpanded = false;
+        }
+    }
+
+    @HostListener('window:resize', ['$event'])
+    onResize(event: Event) {
+        if (window.innerWidth > 700 && !this.isSidebarExpanded) {
+            this.isSidebarExpanded = true;
+        }
     }
 }
