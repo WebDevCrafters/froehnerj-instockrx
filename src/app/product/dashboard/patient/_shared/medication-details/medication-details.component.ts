@@ -52,6 +52,7 @@ export class MedicationDetailsComponent implements OnInit {
     public isModalVisible: boolean = false;
     public isDecisionModalVisible: boolean = false;
     public isLoading: boolean = true;
+    public isPaid: boolean = false;
     public additionalInfoForm: any;
     public userType: UserType | null = null;
     public userInfo: User | null = null;
@@ -64,7 +65,8 @@ export class MedicationDetailsComponent implements OnInit {
         private searchService: SearchService,
         private route: ActivatedRoute,
         private availabilityService: AvailabilityService,
-        private notificationService: NotificationService
+        private notificationService: NotificationService,
+        private paymentService: PaymentService
     ) {}
 
     async ngOnInit(): Promise<void> {
@@ -287,6 +289,7 @@ export class MedicationDetailsComponent implements OnInit {
         if (!this.search) {
             this.getSearch();
         }
+        this.checkPayment();
     }
 
     checkIfMarkedAsAvailable() {
@@ -332,6 +335,20 @@ export class MedicationDetailsComponent implements OnInit {
                 this.search = res;
             },
             error: (err) => {},
+        });
+    }
+
+    checkPayment() {
+        if (this.search?.status !== SearchStatus.NotStarted) return;
+
+        this.paymentService.getCurrentPayment().subscribe({
+            next: (payment) => {
+                this.isPaid = !!payment;
+            },
+            error: (err) => {
+                this.isPaid = false;
+                console.log(err);
+            },
         });
     }
 }
