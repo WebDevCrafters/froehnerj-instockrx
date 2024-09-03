@@ -29,6 +29,19 @@ export class NotificationComponent implements OnInit {
 
     ngOnInit(): void {
         this.getNotifications();
+        this.listenLiveNotification();
+    }
+
+    listenLiveNotification() {
+        this.notificationService.notification$.subscribe({
+            next: (notification) => {
+                console.log('from nitit', notification);
+                this.notificationArr.unshift(notification);
+            },
+            error: (err) => {
+                console.log(err);
+            },
+        });
     }
 
     getNotifications() {

@@ -106,6 +106,9 @@ export class HeaderComponent implements OnInit {
         this.socketService.onEvent(
             SocketEvents.Notification,
             (notification) => {
+                this.playAudio();
+                this.count++;
+                this.notificationService.emitNotification(notification);
                 console.log(notification);
             }
         );
@@ -124,5 +127,12 @@ export class HeaderComponent implements OnInit {
 
     updateCount(count: number) {
         this.count = count;
+    }
+
+    playAudio() {
+        let audio = new Audio();
+        audio.src = '../../../assets/audio/notification.wav';
+        audio.load();
+        audio.play();
     }
 }
