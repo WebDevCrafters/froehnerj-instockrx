@@ -19,25 +19,4 @@
     </div>
 </div>
 
-<app-modal
-    [isVisible]="modalVisible"
-    bg="transparent"
-    (closeModal)="toggleSettings()"
->
-    <div class="settings_container">
-        <div class="heading">
-            <span> Notifications </span>
-        </div>
-        <hr />
-        <div class="content">
-            @for (notification of notificationArr; track $index) {
-            <div class="notification" [ngClass]="{ unread: true }">
-                {{ notification.data?.clinician?.name }} has marked your
-                medication as available.
-            </div>
-            <hr class="inner_hr" />
-
-            }
-        </div>
-    </div>
-</app-modal>
+<app-notification [modalVisible]="modalVisible" (closeModalEventEmitter)="toggleSettings()"/>

@@ -10,24 +10,23 @@ import { SocketService } from '../../../_core/services/socket.service';
 import { SocketEvents } from '../../../product/_shared/interfaces/SocketEvents';
 import { NotificationService } from '../../../_core/services/notification.service';
 import { Notification } from '../../../product/_shared/interfaces/Notification';
+import { NotificationComponent } from './notification/notification.component';
 
 @Component({
     selector: 'app-header',
     standalone: true,
-    imports: [ModalComponent, ButtonComponent, CommonModule],
+    imports: [ButtonComponent, CommonModule, NotificationComponent],
     templateUrl: './header.component.html',
     styleUrl: './header.component.scss',
 })
 export class HeaderComponent implements OnInit {
     @Output() toggleSidebar = new EventEmitter<void>();
-    notificationArr: Notification[] = [];
 
     constructor(
         private userService: UserService,
         private router: Router,
         private location: Location,
-        private socketService: SocketService,
-        private notificationService: NotificationService
+        private socketService: SocketService
     ) {}
 
     modalVisible: boolean = false;
@@ -36,7 +35,6 @@ export class HeaderComponent implements OnInit {
     ngOnInit(): void {
         this.getUserEmail();
         this.initializeSocketConnection();
-        this.getNotifications();
     }
 
     getUserEmail() {
@@ -103,17 +101,5 @@ export class HeaderComponent implements OnInit {
                 console.log(notification);
             }
         );
-    }
-
-    getNotifications() {
-        this.notificationService.getNotifications().subscribe({
-            next: (res) => {
-                this.notificationArr = res;
-                console.log(res);
-            },
-            error: (err) => {
-                console.log(err);
-            },
-        });
     }
 }
