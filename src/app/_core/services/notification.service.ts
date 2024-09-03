@@ -2,7 +2,7 @@ import { Injectable } from '@angular/core';
 import { UserService } from './user.service';
 import { API_URL } from '../../../../env';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
-import { catchError, map, of, throwError } from 'rxjs';
+import { catchError, map, of, Subject, throwError } from 'rxjs';
 import { Notification } from '../../product/_shared/interfaces/Notification';
 
 @Injectable({
@@ -10,10 +10,17 @@ import { Notification } from '../../product/_shared/interfaces/Notification';
 })
 export class NotificationService {
     NOTIFICATION_URL = '/notification';
+    notificationSubject = new Subject<Notification>()
     constructor(
         private userService: UserService,
         private httpClient: HttpClient
     ) {}
+
+    notification$ = this.notificationSubject.asObservable();
+  
+    emitNotification(data: Notification) {
+      this.notificationSubject.next(data);
+    }
 
     getNotifications() {
         const accessToken = this.userService.getAccessToken();

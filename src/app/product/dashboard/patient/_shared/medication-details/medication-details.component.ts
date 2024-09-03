@@ -24,6 +24,7 @@ import UserType from '../../../../_shared/interfaces/UserType';
 import { UserService } from '../../../../../_core/services/user.service';
 import { User } from '../../../../_shared/interfaces/User';
 import { SearchService } from '../../../../../_core/services/search.service';
+import { NotificationService } from '../../../../../_core/services/notification.service';
 
 @Component({
     selector: 'app-medication-details',
@@ -63,8 +64,8 @@ export class MedicationDetailsComponent implements OnInit {
         private searchService: SearchService,
         private route: ActivatedRoute,
         private availabilityService: AvailabilityService,
-        private paymentService: PaymentService
-    ) { }
+        private notificationService: NotificationService
+    ) {}
 
     async ngOnInit(): Promise<void> {
         this.route.paramMap.subscribe((params) => {
@@ -76,6 +77,7 @@ export class MedicationDetailsComponent implements OnInit {
         this.getAvailability();
         this.setUserType();
         this.getSearchUserInfo(this.search?.patient);
+        this.listenForLiveNotification();
     }
 
     private setUserType() {
@@ -206,8 +208,8 @@ export class MedicationDetailsComponent implements OnInit {
     }
 
     toggleDecisionModalPopup() {
-        console.log("Called");
-        this.isDecisionModalVisible = !this.isDecisionModalVisible
+        console.log('Called');
+        this.isDecisionModalVisible = !this.isDecisionModalVisible;
     }
 
     async updateMedicationDetails() {
@@ -249,29 +251,29 @@ export class MedicationDetailsComponent implements OnInit {
             status: this.search?.status,
             medication:
                 formValues.prescribedMedication &&
-                    formValues.prescribedMedication.length > 0
+                formValues.prescribedMedication.length > 0
                     ? {
-                        medicationId: this.search?.medication?.medicationId,
-                        name: formValues.prescribedMedication[0]?.name || '',
-                        dose:
-                            formValues.prescribedMedication[0]?.dose ??
-                            undefined,
-                        quantity: Number(
-                            formValues.prescribedMedication[0]?.quantity
-                        ),
-                        pickUpDate: pickUpDate,
-                        brandName:
-                            formValues.prescribedMedication[0]?.brandName ||
-                            '',
-                        alternatives: formValues.prescribedMedication
-                            .slice(1)
-                            .map((med: any) => ({
-                                name: med.name || '',
-                                dose: med.dose ?? undefined,
-                                quantity: Number(med.quantity),
-                                brandName: med.brandName,
-                            })),
-                    }
+                          medicationId: this.search?.medication?.medicationId,
+                          name: formValues.prescribedMedication[0]?.name || '',
+                          dose:
+                              formValues.prescribedMedication[0]?.dose ??
+                              undefined,
+                          quantity: Number(
+                              formValues.prescribedMedication[0]?.quantity
+                          ),
+                          pickUpDate: pickUpDate,
+                          brandName:
+                              formValues.prescribedMedication[0]?.brandName ||
+                              '',
+                          alternatives: formValues.prescribedMedication
+                              .slice(1)
+                              .map((med: any) => ({
+                                  name: med.name || '',
+                                  dose: med.dose ?? undefined,
+                                  quantity: Number(med.quantity),
+                                  brandName: med.brandName,
+                              })),
+                      }
                     : undefined,
         };
 
@@ -299,6 +301,20 @@ export class MedicationDetailsComponent implements OnInit {
             },
             error: (err) => {
                 this.isLoading = false;
+                console.log(err);
+            },
+        });
+    }
+
+    listenForLiveNotification() {
+        this.notificationService.notification$.subscribe({
+            next: (notification) => {
+                const notiAvailability = notification.data as Availability;
+                if (this.searchId === notiAvailability.search) {
+                    this.availability.unshift(notification.data);
+                }
+            },
+            error: (err) => {
                 console.log(err);
             },
         });
