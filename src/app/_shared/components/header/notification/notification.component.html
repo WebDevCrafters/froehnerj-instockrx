@@ -22,5 +22,9 @@
         <hr class="inner_hr" />
 
         }
+
+        @if(!notificationArr.length){
+            <app-empty-state caption="No notifications" [src]="'assets/images/svg/no-search-icon.svg'"/>
+        }
     </div>
 </div>

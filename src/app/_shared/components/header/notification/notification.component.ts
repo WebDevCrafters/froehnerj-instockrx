@@ -3,11 +3,12 @@ import { ModalComponent } from '../../modal/modal.component';
 import { NotificationService } from '../../../../_core/services/notification.service';
 import { CommonModule } from '@angular/common';
 import { Notification } from '../../../../product/_shared/interfaces/Notification';
+import { EmptyStateComponent } from '../../empty-state/empty-state.component';
 
 @Component({
     selector: 'app-notification',
     standalone: true,
-    imports: [ModalComponent, CommonModule],
+    imports: [ModalComponent, CommonModule, EmptyStateComponent],
     templateUrl: './notification.component.html',
     styleUrl: './notification.component.scss',
 })
