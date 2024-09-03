@@ -97,3 +97,20 @@
         }
     }
 }
+
+@media screen and (max-width: 600px) {
+    .main_container {
+        .form_container {
+            .my_profile {
+                .content_container {
+                    .edit_profile_form {
+                        grid-template-columns: 1fr;
+                    }
+                    .value_container {
+                        grid-template-columns: 1fr;
+                    }
+                }
+            }
+        }
+    }
+}
