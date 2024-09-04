@@ -4,7 +4,15 @@ import { provideRouter } from '@angular/router';
 import { routes } from './app.routes';
 import { provideClientHydration } from '@angular/platform-browser';
 import { provideHttpClient, withFetch } from '@angular/common/http';
+import { provideCacheableAnimationLoader, provideLottieOptions } from 'ngx-lottie';
+import player from 'lottie-web';
 
 export const appConfig: ApplicationConfig = {
-  providers: [provideRouter(routes), provideClientHydration(), provideHttpClient(withFetch())]
+    providers: [
+        provideRouter(routes),
+        provideClientHydration(),
+        provideHttpClient(withFetch()),
+        provideLottieOptions({ player: () => player }),
+        provideCacheableAnimationLoader(),
+    ],
 };
