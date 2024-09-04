@@ -3,11 +3,12 @@ import { Package } from '../../../../../_shared/dataTypes/Package';
 import Payment from '../../../../_shared/interfaces/Payment';
 import { AnimationOptions, LottieComponent } from 'ngx-lottie';
 import { AnimationItem } from 'lottie-web';
+import { CommonModule } from '@angular/common';
 
 @Component({
     selector: 'app-current-package',
     standalone: true,
-    imports: [LottieComponent],
+    imports: [LottieComponent, CommonModule],
     templateUrl: './current-package.component.html',
     styleUrl: './current-package.component.scss',
 })

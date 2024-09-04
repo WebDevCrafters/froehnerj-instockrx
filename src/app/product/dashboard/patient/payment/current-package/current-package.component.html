@@ -1,5 +1,35 @@
 <div class="main_container">
     <h1>You have an Active Package!</h1>
-    <ng-lottie [options]="options" width="200px" 
-    height="200px" />
+    <p class="cost">${{ payment?.subscription?.cost }}</p>
+    <ng-lottie [options]="options" width="150px" height="150px" />
+
+    <div class="payment-card">
+        <div class="subscription-info">
+            <div class="info-row">
+                <span class="info-label">Subscription:</span>
+                <span class="info-value">{{
+                    payment?.subscription?.name
+                }}</span>
+            </div>
+            <div class="info-row">
+                <span class="info-label">Paid On:</span>
+                <span class="info-value">{{
+                    payment?.paidOn | date : "mediumDate"
+                }}</span>
+            </div>
+            <div class="info-row">
+                <span class="info-label">Searches Consumed:</span>
+                <span class="info-value"
+                    >{{ payment?.searchesConsumed }} /
+                    {{ payment?.subscription?.searchCount }}</span
+                >
+            </div>
+            <div class="info-row">
+                <span class="info-label">Status:</span>
+                <span class="info-value">{{
+                    payment?.subscription?.status || "Active"
+                }}</span>
+            </div>
+        </div>
+    </div>
 </div>
