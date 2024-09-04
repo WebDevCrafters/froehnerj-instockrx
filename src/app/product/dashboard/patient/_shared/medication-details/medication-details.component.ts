@@ -60,7 +60,9 @@ export class MedicationDetailsComponent implements OnInit {
     readonly UserType = UserType;
     public isMedicationMarkedAsAvailable: boolean = false;
     public isEditMedicationLoading: boolean = false;
+    public isStartSearchLoading: boolean = false;
     public isMarkAsCompleteLoading: boolean = false;
+    public isMarkAsAvailableLoading: boolean = false;
 
     constructor(
         private dataService: DataService,
@@ -71,7 +73,7 @@ export class MedicationDetailsComponent implements OnInit {
         private notificationService: NotificationService,
         private paymentService: PaymentService,
         private router: Router
-    ) {}
+    ) { }
 
     async ngOnInit(): Promise<void> {
         this.route.paramMap.subscribe((params) => {
@@ -106,7 +108,11 @@ export class MedicationDetailsComponent implements OnInit {
     }
 
     markMedicationAsAvailable() {
-        if (!this.searchId) return;
+        this.isMarkAsAvailableLoading = true;
+        if (!this.searchId) {
+            return
+            this.isMarkAsAvailableLoading = false
+        };
         let availability: Availability = {
             search: this.searchId,
         };
@@ -115,9 +121,13 @@ export class MedicationDetailsComponent implements OnInit {
                 if (res) {
                     this.isMedicationMarkedAsAvailable = true;
                 }
+                else {
+                    this.isMarkAsAvailableLoading = false
+                }
             },
             error: (err) => {
                 console.log(err);
+                this.isMarkAsAvailableLoading = false
             },
         });
     }
@@ -178,12 +188,17 @@ export class MedicationDetailsComponent implements OnInit {
     }
 
     public startSearchOrPay() {
+        this.isStartSearchLoading = true;
         if (!this.isPaid) {
+            this.isStartSearchLoading = false;
             this.navigateToPayment();
             return;
         }
 
-        if (!this.search?.searchId) return;
+        if (!this.search?.searchId) {
+            this.isStartSearchLoading = false;
+            return
+        };
         this.markStatus(this.search?.searchId, SearchStatus.InProgress);
     }
 
@@ -203,11 +218,13 @@ export class MedicationDetailsComponent implements OnInit {
                 if (!this.search) return;
                 this.search.status = res.status;
                 this.isMarkAsCompleteLoading = false;
+                this.isStartSearchLoading = false;
                 this.toggleDecisionModalPopup();
             },
             error: (err) => {
                 console.log(err);
                 this.isMarkAsCompleteLoading = false;
+                this.isStartSearchLoading = false;
                 this.toggleDecisionModalPopup();
             },
         });
@@ -231,7 +248,6 @@ export class MedicationDetailsComponent implements OnInit {
     }
 
     toggleDecisionModalPopup() {
-        console.log('Called');
         this.isDecisionModalVisible = !this.isDecisionModalVisible;
     }
 
@@ -358,7 +374,7 @@ export class MedicationDetailsComponent implements OnInit {
             next: (res) => {
                 this.search = res;
             },
-            error: (err) => {},
+            error: (err) => { },
         });
     }
 

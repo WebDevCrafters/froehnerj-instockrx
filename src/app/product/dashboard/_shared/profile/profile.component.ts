@@ -29,6 +29,7 @@ import UserType from '../../../_shared/interfaces/UserType';
 export class ProfileComponent implements OnInit {
     isProfileEditable: boolean = false;
     isLoading: boolean = false;
+    public isSigoutLoading: boolean = false;
     profileBackup: any = null;
     user: User | null = null;
     userType: UserType | null = null
@@ -145,7 +146,9 @@ export class ProfileComponent implements OnInit {
     }
 
     signout() {
+        this.isSigoutLoading = true;
         this.userService.signOut();
+        this.isSigoutLoading = false;
         this.router.navigate(
             [`${APP_ROUTES.product.app}/${APP_ROUTES.product.auth}`],
             { replaceUrl: true }

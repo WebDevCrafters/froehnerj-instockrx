@@ -8,7 +8,7 @@
                     class="edit_icon" />
                 }
                 <div class="btn_container">
-                    <app-button title="Sign Out" [type]="'small_primary'" (clickEvent)="signout()" />
+                    <app-button title="Sign Out" [type]="'small_primary'" (clickEvent)="signout()" [isLoading]="isSigoutLoading"/>
                 </div>
             </div>
             <div class="content_container">

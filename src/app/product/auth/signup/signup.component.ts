@@ -27,6 +27,7 @@ import { DataService } from '../../../_core/services/data.service';
 })
 export class SignupComponent implements OnInit {
     userType: UserType | null = null;
+    isLoading: boolean = false;
 
     public signUpInfoForm = new FormGroup({
         firstName: new FormControl(''),
@@ -51,7 +52,7 @@ export class SignupComponent implements OnInit {
         private router: Router,
         private route: ActivatedRoute,
         private dataService: DataService
-    ) {}
+    ) { }
 
     ngOnInit() {
         this.route.paramMap.subscribe((params) => {
@@ -73,13 +74,15 @@ export class SignupComponent implements OnInit {
     }
 
     private async signup() {
-        if (!this.userType) return;
+        if (!this.userType) {
+            this.isLoading = false;
+            return;
+        }
 
         const user: User = {
             email: this.signUpInfoForm.get('email')?.value || '',
-            name: `${this.signUpInfoForm.get('firstName')?.value || ''} ${
-                this.signUpInfoForm.get('lastName')?.value || ''
-            }`,
+            name: `${this.signUpInfoForm.get('firstName')?.value || ''} ${this.signUpInfoForm.get('lastName')?.value || ''
+                }`,
             phoneNumber: this.signUpInfoForm.get('phoneNumber')?.value || '',
             userType: this.userType,
             zipCode: this.signUpInfoForm.get('zipCode')?.value || '',
@@ -88,6 +91,7 @@ export class SignupComponent implements OnInit {
         this.userService.signUp(user).subscribe({
             next: (user) => {
                 this.dataService.currentUserType = this.userType;
+                this.isLoading = false;
                 this.router.navigate(
                     [
                         `${APP_ROUTES.product.app}/${APP_ROUTES.product.dashboard}/${APP_ROUTES.product.newSearch}`,
@@ -96,15 +100,20 @@ export class SignupComponent implements OnInit {
                 );
             },
             error: (err) => {
+                this.isLoading = false;
                 console.log(err);
             },
         });
     }
 
     public onSuccess() {
+        this.isLoading = true;
         this.signUpInfoForm.markAllAsTouched();
         markAllAsDirty(this.signUpInfoForm);
-        if (!this.signUpInfoForm.valid) return;
+        if (!this.signUpInfoForm.valid) {
+            this.isLoading = false;
+            return;
+        }
 
         this.signup();
     }
