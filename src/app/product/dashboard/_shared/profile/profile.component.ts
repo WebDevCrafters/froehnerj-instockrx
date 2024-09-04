@@ -28,6 +28,7 @@ import UserType from '../../../_shared/interfaces/UserType';
 })
 export class ProfileComponent implements OnInit {
     isProfileEditable: boolean = false;
+    isLoading: boolean = false;
     profileBackup: any = null;
     user: User | null = null;
     userType: UserType | null = null
@@ -93,12 +94,15 @@ export class ProfileComponent implements OnInit {
     }
 
     saveEditProfile() {
+        this.isLoading = true;
         this.profileForm.markAllAsTouched();
         markAllAsDirty(this.profileForm);
-        if (!this.profileForm.valid) return;
+        if (!this.profileForm.valid) {
+            this.isLoading = false;
+            return
+        };
         this.user = this.convertFormToUser();
         this.updateProfile(this.user);
-        this.isProfileEditable = false;
         this.profileBackup = null;
     }
 
@@ -107,9 +111,13 @@ export class ProfileComponent implements OnInit {
             next: (result) => {
                 this.user = result;
                 this.userService.setUserData(this.user);
+                this.isLoading = false;
+                this.isProfileEditable = false;
             },
             error: (err) => {
                 console.log(err);
+                this.isLoading = false;
+                this.isProfileEditable = false;
             },
         })
     }

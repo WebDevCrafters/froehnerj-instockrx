@@ -12,7 +12,7 @@
             <app-button title="Start Search" [type]="'small_primary'" />
         </div>
         }
-        @if((search?.status === searchStatus.InProgress && availability.length  && !isMedicationMarkedAsAvailable)) {
+        @if((search?.status === searchStatus.InProgress && availability.length && !isMedicationMarkedAsAvailable)) {
         <div class="edit_btn" (click)="toggleDecisionModalPopup()">
             <app-button title="Mark Completed" [type]="'small_primary'" />
         </div>
@@ -167,7 +167,7 @@
             </div>
             <div class="btn_container">
                 <app-button [title]="'Confirm'" [type]="'small_primary'" [shape]="'rounded'"
-                    (clickEvent)="updateMedicationDetails()"></app-button>
+                    [isLoading]="isEditMedicationLoading" (clickEvent)="updateMedicationDetails()"></app-button>
             </div>
         </div>
     </div>
@@ -192,7 +192,7 @@
             </div>
             <div class="btn_container">
                 <app-button [title]="'Confirm'" [type]="'small_primary'" [shape]="'rounded'"
-                    (clickEvent)="markSearchAsCompleted()"></app-button>
+                    (clickEvent)="markSearchAsCompleted()" [isLoading]="isMarkAsCompleteLoading"></app-button>
             </div>
         </div>
     </div>

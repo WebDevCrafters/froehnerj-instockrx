@@ -20,14 +20,18 @@ export class CheckoutComponent implements OnDestroy {
     @Output() onPaymentComplete = new EventEmitter<Payment>();
     allSubscriptions$: ObservableSubscription[] = [];
 
-    constructor(private paymentService: PaymentService) {}
+    public isLoading: boolean = false;
+
+    constructor(private paymentService: PaymentService) { }
 
     ngOnDestroy(): void {
         this.allSubscriptions$.forEach((sub) => sub.unsubscribe());
     }
 
     pay() {
+        this.isLoading = true;
         if (!this.selectedPackage?.subscriptionId) {
+            this.isLoading = false;
             return;
         }
 
@@ -41,9 +45,11 @@ export class CheckoutComponent implements OnDestroy {
                 next: (res) => {
                     this.onPaymentComplete.emit(res)
                     console.log(res);
+                    this.isLoading = false;
                 },
                 error: (err) => {
                     console.log(err);
+                    this.isLoading = false;
                 },
             });
         this.allSubscriptions$.push(subscription$);

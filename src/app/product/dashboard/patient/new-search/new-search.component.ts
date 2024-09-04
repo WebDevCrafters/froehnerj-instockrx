@@ -42,6 +42,7 @@ export class NewSearchComponent implements OnInit {
     public isPaid: boolean = false;
     public remaningSearches: number = 0;
     public search: Search | null = null;
+    public isLoading: boolean = false;
 
     constructor(
         private searchService: SearchService,
@@ -116,14 +117,17 @@ export class NewSearchComponent implements OnInit {
     }
 
     private addNewSearch(search: Search, isPaid: boolean) {
+        this.isLoading = true;
         this.searchService.addSearch(search).subscribe({
             next: (search) => {
                 console.log(search);
                 if (!isPaid) this.navigateToPayment();
                 else this.navigateToActiveSearch();
+                this.isLoading = false;
             },
             error: (err) => {
                 console.log(err);
+                this.isLoading = false;
             },
         });
     }

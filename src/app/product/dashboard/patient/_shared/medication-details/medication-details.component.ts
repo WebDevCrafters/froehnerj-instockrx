@@ -57,6 +57,8 @@ export class MedicationDetailsComponent implements OnInit {
     public userInfo: User | null = null;
     readonly UserType = UserType;
     public isMedicationMarkedAsAvailable: boolean = false;
+    public isEditMedicationLoading: boolean = false;
+    public isMarkAsCompleteLoading: boolean = false;
 
     constructor(
         private dataService: DataService,
@@ -65,7 +67,7 @@ export class MedicationDetailsComponent implements OnInit {
         private route: ActivatedRoute,
         private availabilityService: AvailabilityService,
         private notificationService: NotificationService
-    ) {}
+    ) { }
 
     async ngOnInit(): Promise<void> {
         this.route.paramMap.subscribe((params) => {
@@ -177,8 +179,12 @@ export class MedicationDetailsComponent implements OnInit {
     }
 
     public markSearchAsCompleted() {
-        if (!this.search?.searchId) return;
-        this.toggleDecisionModalPopup();
+        this.isMarkAsCompleteLoading = true;
+        if (!this.search?.searchId) {
+            this.isMarkAsCompleteLoading = false;
+            this.toggleDecisionModalPopup();
+            return;
+        }
         this.markStatus(this.search?.searchId, SearchStatus.Completed);
     }
 
@@ -187,9 +193,13 @@ export class MedicationDetailsComponent implements OnInit {
             next: (res) => {
                 if (!this.search) return;
                 this.search.status = res.status;
+                this.isMarkAsCompleteLoading = false;
+                this.toggleDecisionModalPopup();
             },
             error: (err) => {
                 console.log(err);
+                this.isMarkAsCompleteLoading = false;
+                this.toggleDecisionModalPopup();
             },
         });
     }
@@ -200,9 +210,13 @@ export class MedicationDetailsComponent implements OnInit {
             next: (res) => {
                 console.log(res);
                 this.search = res;
+                this.isEditMedicationLoading = false;
+                this.isModalVisible = false;
             },
             error: (err) => {
                 console.log(err);
+                this.isEditMedicationLoading = false;
+                this.isModalVisible = false;
             },
         });
     }
@@ -213,10 +227,13 @@ export class MedicationDetailsComponent implements OnInit {
     }
 
     async updateMedicationDetails() {
+        this.isEditMedicationLoading = true;
         if (this.search) {
             this.search = this.convertFormToSearch();
             this.updateSearch(this.search);
-            this.isModalVisible = false;
+        }
+        else {
+            this.isEditMedicationLoading = false;
         }
     }
 
@@ -251,29 +268,29 @@ export class MedicationDetailsComponent implements OnInit {
             status: this.search?.status,
             medication:
                 formValues.prescribedMedication &&
-                formValues.prescribedMedication.length > 0
+                    formValues.prescribedMedication.length > 0
                     ? {
-                          medicationId: this.search?.medication?.medicationId,
-                          name: formValues.prescribedMedication[0]?.name || '',
-                          dose:
-                              formValues.prescribedMedication[0]?.dose ??
-                              undefined,
-                          quantity: Number(
-                              formValues.prescribedMedication[0]?.quantity
-                          ),
-                          pickUpDate: pickUpDate,
-                          brandName:
-                              formValues.prescribedMedication[0]?.brandName ||
-                              '',
-                          alternatives: formValues.prescribedMedication
-                              .slice(1)
-                              .map((med: any) => ({
-                                  name: med.name || '',
-                                  dose: med.dose ?? undefined,
-                                  quantity: Number(med.quantity),
-                                  brandName: med.brandName,
-                              })),
-                      }
+                        medicationId: this.search?.medication?.medicationId,
+                        name: formValues.prescribedMedication[0]?.name || '',
+                        dose:
+                            formValues.prescribedMedication[0]?.dose ??
+                            undefined,
+                        quantity: Number(
+                            formValues.prescribedMedication[0]?.quantity
+                        ),
+                        pickUpDate: pickUpDate,
+                        brandName:
+                            formValues.prescribedMedication[0]?.brandName ||
+                            '',
+                        alternatives: formValues.prescribedMedication
+                            .slice(1)
+                            .map((med: any) => ({
+                                name: med.name || '',
+                                dose: med.dose ?? undefined,
+                                quantity: Number(med.quantity),
+                                brandName: med.brandName,
+                            })),
+                    }
                     : undefined,
         };
 

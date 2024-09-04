@@ -23,7 +23,7 @@
                     <!-- <app-input label="Doctor's Email" [control]="profileForm.controls.doctorEmail" /> -->
                     <div class="actions">
                         <div class="action_btn">
-                            <app-button title="Save" type="small_primary" shape="rounded" formButtonType="submit" />
+                            <app-button title="Save" type="small_primary" shape="rounded" formButtonType="submit" [isLoading]="isLoading" />
                         </div>
                         <div class="action_btn">
                             <app-button (clickEvent)="cancelEditProfile()" title="Cancel" type="small_secondary"
