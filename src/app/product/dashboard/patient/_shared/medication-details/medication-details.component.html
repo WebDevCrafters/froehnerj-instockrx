@@ -12,9 +12,12 @@
             />
             }
         </div>
-        @if(isPaid===true && search?.status === searchStatus.NotStarted) {
-        <div class="edit_btn" (click)="startSearch()">
-            <app-button title="Start Search" [type]="'small_primary'" />
+        @if(isPaid!==null && search?.status === searchStatus.NotStarted) {
+        <div class="edit_btn" (click)="startSearchOrPay()">
+            <app-button
+                [title]="isPaid ? 'Start Search' : 'Complete Payment'"
+                [type]="'small_primary'"
+            />
         </div>
         } @if((search?.status === searchStatus.InProgress && availability.length
         && !isMedicationMarkedAsAvailable)) {

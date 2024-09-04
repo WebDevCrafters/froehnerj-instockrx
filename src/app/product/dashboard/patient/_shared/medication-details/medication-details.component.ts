@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { DataService } from '../../../../../_core/services/data.service';
 import Search from '../../../../_shared/interfaces/Search';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { AvailabilityService } from '../../../../../_core/services/availability.service';
 import Availability from '../../../../_shared/interfaces/Availability';
 import { LoaderComponent } from '../../../../../_shared/components/loader/loader.component';
@@ -25,6 +25,7 @@ import { UserService } from '../../../../../_core/services/user.service';
 import { User } from '../../../../_shared/interfaces/User';
 import { SearchService } from '../../../../../_core/services/search.service';
 import { NotificationService } from '../../../../../_core/services/notification.service';
+import APP_ROUTES from '../../../../../_shared/constants/routes';
 
 @Component({
     selector: 'app-medication-details',
@@ -52,7 +53,7 @@ export class MedicationDetailsComponent implements OnInit {
     public isModalVisible: boolean = false;
     public isDecisionModalVisible: boolean = false;
     public isLoading: boolean = true;
-    public isPaid: boolean = false;
+    public isPaid: boolean | null = null;
     public additionalInfoForm: any;
     public userType: UserType | null = null;
     public userInfo: User | null = null;
@@ -68,7 +69,8 @@ export class MedicationDetailsComponent implements OnInit {
         private route: ActivatedRoute,
         private availabilityService: AvailabilityService,
         private notificationService: NotificationService,
-        private paymentService: PaymentService
+        private paymentService: PaymentService,
+        private router: Router
     ) {}
 
     async ngOnInit(): Promise<void> {
@@ -175,7 +177,12 @@ export class MedicationDetailsComponent implements OnInit {
         return `${date.getMonth() + 1}/${date.getDate()}/${date.getFullYear()}`;
     }
 
-    public startSearch() {
+    public startSearchOrPay() {
+        if (!this.isPaid) {
+            this.navigateToPayment();
+            return;
+        }
+
         if (!this.search?.searchId) return;
         this.markStatus(this.search?.searchId, SearchStatus.InProgress);
     }
@@ -367,5 +374,13 @@ export class MedicationDetailsComponent implements OnInit {
                 console.log(err);
             },
         });
+    }
+
+    navigateToPayment() {
+        this.router.navigate([
+            APP_ROUTES.product.app,
+            APP_ROUTES.product.dashboard,
+            APP_ROUTES.product.payments,
+        ]);
     }
 }
