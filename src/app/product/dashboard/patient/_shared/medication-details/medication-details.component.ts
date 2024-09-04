@@ -219,13 +219,17 @@ export class MedicationDetailsComponent implements OnInit {
                 this.search.status = res.status;
                 this.isMarkAsCompleteLoading = false;
                 this.isStartSearchLoading = false;
-                this.toggleDecisionModalPopup();
+                if (this.isDecisionModalVisible) {
+                    this.toggleDecisionModalPopup();
+                }
             },
             error: (err) => {
                 console.log(err);
                 this.isMarkAsCompleteLoading = false;
                 this.isStartSearchLoading = false;
-                this.toggleDecisionModalPopup();
+                if (this.isDecisionModalVisible) {
+                    this.toggleDecisionModalPopup();
+                }
             },
         });
     }
