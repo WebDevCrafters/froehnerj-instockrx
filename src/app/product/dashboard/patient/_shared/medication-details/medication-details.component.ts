@@ -187,19 +187,32 @@ export class MedicationDetailsComponent implements OnInit {
         return `${date.getMonth() + 1}/${date.getDate()}/${date.getFullYear()}`;
     }
 
-    public startSearchOrPay() {
-        this.isStartSearchLoading = true;
+    pay() {
         if (!this.isPaid) {
             this.isStartSearchLoading = false;
             this.navigateToPayment();
             return;
         }
+    }
+
+    public startSearch() {
+        this.isStartSearchLoading = true;
 
         if (!this.search?.searchId) {
             this.isStartSearchLoading = false;
             return
         };
+
         this.markStatus(this.search?.searchId, SearchStatus.InProgress);
+    }
+
+    public onSuccess() {
+        if (this.search?.status == this.searchStatus.InProgress) {
+            this.markSearchAsCompleted();
+        }
+        else {
+            this.startSearch();
+        }
     }
 
     public markSearchAsCompleted() {
