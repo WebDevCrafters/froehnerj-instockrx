@@ -52,6 +52,7 @@ export class MedicationDetailsComponent implements OnInit {
     public isModalVisible: boolean = false;
     public isDecisionModalVisible: boolean = false;
     public isLoading: boolean = true;
+    public isPaid: boolean = false;
     public additionalInfoForm: any;
     public userType: UserType | null = null;
     public userInfo: User | null = null;
@@ -66,8 +67,9 @@ export class MedicationDetailsComponent implements OnInit {
         private searchService: SearchService,
         private route: ActivatedRoute,
         private availabilityService: AvailabilityService,
-        private notificationService: NotificationService
-    ) { }
+        private notificationService: NotificationService,
+        private paymentService: PaymentService
+    ) {}
 
     async ngOnInit(): Promise<void> {
         this.route.paramMap.subscribe((params) => {
@@ -298,8 +300,13 @@ export class MedicationDetailsComponent implements OnInit {
     }
 
     getSearchDetails() {
-        if (this.searchId)
+        if (this.searchId) {
             this.search = this.dataService.getSearch(this.searchId);
+        }
+        if (!this.search) {
+            this.getSearch();
+        }
+        this.checkPayment();
     }
 
     checkIfMarkedAsAvailable() {
@@ -332,6 +339,31 @@ export class MedicationDetailsComponent implements OnInit {
                 }
             },
             error: (err) => {
+                console.log(err);
+            },
+        });
+    }
+
+    getSearch() {
+        if (!this.searchId) return;
+
+        this.searchService.getSearch(this.searchId).subscribe({
+            next: (res) => {
+                this.search = res;
+            },
+            error: (err) => {},
+        });
+    }
+
+    checkPayment() {
+        if (this.search?.status !== SearchStatus.NotStarted) return;
+
+        this.paymentService.getCurrentPayment().subscribe({
+            next: (payment) => {
+                this.isPaid = !!payment;
+            },
+            error: (err) => {
+                this.isPaid = false;
                 console.log(err);
             },
         });

@@ -12,6 +12,9 @@ import { NotificationService } from '../../../../_core/services/notification.ser
 import { CommonModule } from '@angular/common';
 import { Notification } from '../../../../product/_shared/interfaces/Notification';
 import { EmptyStateComponent } from '../../empty-state/empty-state.component';
+import { Router } from '@angular/router';
+import APP_ROUTES from '../../../constants/routes';
+import { NotificationType } from '../../../../product/_shared/interfaces/NotificationType';
 
 @Component({
     selector: 'app-notification',
@@ -25,7 +28,10 @@ export class NotificationComponent implements OnInit {
     @Input() count = 0;
     @Output() countChange = new EventEmitter<number>();
 
-    constructor(private notificationService: NotificationService) {}
+    constructor(
+        private notificationService: NotificationService,
+        private router: Router
+    ) {}
 
     ngOnInit(): void {
         this.getNotifications();
@@ -126,5 +132,23 @@ export class NotificationComponent implements OnInit {
         }
 
         return date.toLocaleDateString(); // Returns the date in a readable format
+    }
+
+    routeToMedicationDetails(searchId: string) {
+        this.router.navigate([
+            APP_ROUTES.product.app,
+            APP_ROUTES.product.dashboard,
+            APP_ROUTES.product.medicationDetails,
+            searchId,
+        ]);
+    }
+
+    onNotificationClick(notification: Notification) {
+        if (
+            notification.notificationType === NotificationType.MarkAsAvailable
+        ) {
+            this.markAsRead(notification.notificationId);
+            this.routeToMedicationDetails(notification.data.search);
+        }
     }
 }

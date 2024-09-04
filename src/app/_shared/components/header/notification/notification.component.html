@@ -7,7 +7,7 @@
         @for (notification of notificationArr; track $index) {
         <div
             class="notification"
-            (click)="markAsRead(notification.notificationId)"
+            (click)="onNotificationClick(notification)"
         >
             <span>
                 <strong>
