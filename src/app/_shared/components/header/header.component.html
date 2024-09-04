@@ -13,17 +13,9 @@
         @if (count>0) {
         <span class="count">{{ count }}</span>
         }
-        <img
-            class="profile_icon"
-            src="assets/images/svg/notification-icon.svg"
-            alt=""
-        />
+        <img class="profile_icon" src="assets/images/svg/notification-icon.svg" alt="" />
     </div>
 </div>
-<app-modal
-    [isVisible]="modalVisible"
-    bg="transparent"
-    (closeModal)="toggleSettings()"
->
-    <app-notification [count]="count" (countChange)="updateCount($event)"/>
+<app-modal [isVisible]="modalVisible" bg="transparent" (closeModal)="toggleSettings()">
+    <app-notification [count]="count" (countChange)="updateCount($event)" />
 </app-modal>

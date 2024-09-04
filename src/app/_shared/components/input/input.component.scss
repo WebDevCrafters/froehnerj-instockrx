@@ -5,8 +5,8 @@
 }
 
 .input_container {
+    margin: 12px 0;
     border-radius: 12px;
-    position: relative;
     flex-grow: 0;
     background-color: $globalWhiteColor;
     color: $darkGreyColor;
@@ -16,16 +16,13 @@
 
     .animated_label {
         font-size: 12px;
-        top: -0.5rem;
-        left: 8px;
-        width: unset;
+        transform: translateY(-1.5rem);
     }
 
     &:focus-within {
-
-        &.flat{
+        &.flat {
             &:not(:hover) {
-                label{
+                label {
                     color: $brandPrimaryColor;
                 }
             }
@@ -33,26 +30,25 @@
 
         label {
             font-size: 12px;
-            top: -0.5rem;
-            left: 8px;
+            transform: translateY(-1.5rem);
         }
     }
 
     label {
-        position: absolute;
         background-color: $globalWhiteColor;
-        padding: 0 3px;
+        width: max-content;
+        padding: 0 10px;
         transition: all 0.2s ease;
-
         font-size: 0.9rem;
-        top: 0.9rem;
-        left: 0.5rem;
+        margin-bottom: -2rem;
+        margin-left: 3px;
         cursor: text;
+        z-index: 1;
     }
 
-    &.flat{
-        label{
-            color: $darkBrownColor
+    &.flat {
+        label {
+            color: $darkBrownColor;
         }
     }
 
@@ -60,7 +56,7 @@
         border-radius: 12px;
         border: 1.6px solid $darkGreyColor;
         transition: border 0.5s ease;
-        padding: 0.7rem;
+        padding: 0.7rem 0.5rem 0.7rem 0.5rem;
         width: 100%;
         font-size: 1rem;
         caret-color: $brandPrimaryColor;
@@ -75,6 +71,7 @@
 
         ::placeholder {
             color: $darkGreyColor;
+            opacity: 1;
         }
 
         &.error_input {
@@ -85,13 +82,13 @@
             border-color: $globalBlackColor;
         }
 
-        &.flat{
+        &.flat {
             border: none;
             border-radius: unset;
             border-bottom: 1.5px solid $darkBrownColor;
         }
 
-        &.disabled{
+        &.disabled {
             color: $normalGrey;
         }
     }
