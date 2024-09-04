@@ -45,7 +45,7 @@ export class SearchService {
 
     getSearch(searchId: string) {
         const accessToken = this.userService.getAccessToken();
-        const url = `${API_URL}${this.SEARCH_URL}/${searchId}`;
+        const url = `${API_URL}${this.SEARCH_URL}/one/${searchId}`;
         const headers = new HttpHeaders().set('authorization', accessToken);
         return this.httpClient.get(url, { headers }).pipe(
             map((res) => {
