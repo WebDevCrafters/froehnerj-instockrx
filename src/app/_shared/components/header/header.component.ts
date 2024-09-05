@@ -34,7 +34,7 @@ export class HeaderComponent implements OnInit {
         private location: Location,
         private socketService: SocketService,
         private notificationService: NotificationService
-    ) {}
+    ) { }
 
     modalVisible: boolean = false;
     user: User | null = null;
@@ -51,7 +51,7 @@ export class HeaderComponent implements OnInit {
         this.user = authResponse.user;
     }
 
-    toggleSettings() {
+    toggleSettings(event?: any) {
         this.modalVisible = !this.modalVisible;
     }
 

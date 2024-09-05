@@ -27,11 +27,12 @@ export class NotificationComponent implements OnInit {
     notificationArr: Notification[] = [];
     @Input() count = 0;
     @Output() countChange = new EventEmitter<number>();
+    @Output() isModalVisible = new EventEmitter<boolean>();
 
     constructor(
         private notificationService: NotificationService,
         private router: Router
-    ) {}
+    ) { }
 
     ngOnInit(): void {
         this.getNotifications();
@@ -135,18 +136,20 @@ export class NotificationComponent implements OnInit {
     }
 
     routeToMedicationDetails(searchId: string) {
-        this.router.navigate([
-            APP_ROUTES.product.app,
-            APP_ROUTES.product.dashboard,
-            APP_ROUTES.product.medicationDetails,
-            searchId,
-        ]);
+        if (searchId)
+            this.router.navigate([
+                APP_ROUTES.product.app,
+                APP_ROUTES.product.dashboard,
+                APP_ROUTES.product.medicationDetails,
+                searchId,
+            ]);
     }
 
     onNotificationClick(notification: Notification) {
         if (
             notification.notificationType === NotificationType.MarkAsAvailable
         ) {
+            this.isModalVisible.emit(false);
             this.markAsRead(notification.notificationId);
             this.routeToMedicationDetails(notification.data.search);
         }

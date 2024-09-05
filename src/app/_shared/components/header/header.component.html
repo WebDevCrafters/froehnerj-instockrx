@@ -17,5 +17,5 @@
     </div>
 </div>
 <app-modal [isVisible]="modalVisible" bg="transparent" (closeModal)="toggleSettings()">
-    <app-notification [count]="count" (countChange)="updateCount($event)" />
+    <app-notification [count]="count" (countChange)="updateCount($event)" (isModalVisible)="toggleSettings($event)" />
 </app-modal>
