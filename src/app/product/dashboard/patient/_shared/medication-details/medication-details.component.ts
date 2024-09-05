@@ -76,11 +76,11 @@ export class MedicationDetailsComponent implements OnInit {
     ) { }
 
     async ngOnInit(): Promise<void> {
+        this.initializeForm();
         this.route.paramMap.subscribe((params) => {
             this.searchId = params.get('searchId');
             this.getSearchDetails();
             this.checkIfMarkedAsAvailable();
-            this.generateForm();
         });
         this.getAvailability();
         this.setUserType();
@@ -129,6 +129,23 @@ export class MedicationDetailsComponent implements OnInit {
                 console.log(err);
                 this.isMarkAsAvailableLoading = false
             },
+        });
+    }
+
+    initializeForm() {
+        this.additionalInfoForm = new FormGroup({
+            dob: new FormControl(''),
+            zipCode: new FormControl(''),
+            prescriber: new FormControl(''),
+            prescribedMedication: new FormArray([
+                new FormGroup({
+                    name: new FormControl(''),
+                    dose: new FormControl(''),
+                    quantity: new FormControl(''),
+                    brandName: new FormControl(''),
+                }),
+            ]),
+            pickupDate: new FormControl(new Date().getTime()),
         });
     }
 
@@ -340,13 +357,13 @@ export class MedicationDetailsComponent implements OnInit {
     }
 
     getSearchDetails() {
-        if (this.searchId) {
-            this.search = this.dataService.getSearch(this.searchId);
-        }
-        if (!this.search) {
-            this.getSearch();
-        }
-        this.checkPayment();
+        // if (this.searchId) {
+        //     this.search = this.dataService.getSearch(this.searchId);
+        //     console.log(this.search);
+        // }
+        // if (!this.search) {
+        // }
+        this.getSearch();
     }
 
     checkIfMarkedAsAvailable() {
@@ -386,10 +403,12 @@ export class MedicationDetailsComponent implements OnInit {
 
     getSearch() {
         if (!this.searchId) return;
-
         this.searchService.getSearch(this.searchId).subscribe({
             next: (res) => {
                 this.search = res;
+                console.log(this.search);
+                this.checkPayment();
+                this.generateForm();
             },
             error: (err) => { },
         });
