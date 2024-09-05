@@ -105,8 +105,8 @@
             <thead>
                 <th>Clinician Name</th>
                 <th>Pharmacy Name</th>
-                <th>Address</th>
-                <th>Contact Info</th>
+                <th>Email</th>
+                <th>Phone</th>
             </thead>
             <tbody>
                 @for (avai of availability; track $index) {
@@ -122,46 +122,51 @@
         } @else {
         <div class="empty_container">
             <app-empty-state [src]="'assets/images/svg/no-search-icon.svg'" [caption]="
-                    'No Pharmacy has marked your medication as available yet.'
-                "></app-empty-state>
+                            'No Pharmacy has marked your medication as available yet.'
+                        "></app-empty-state>
         </div>
         } }
     </div>
     <div class="header">
-        <div class="title">Fax sent to below Pharmacies:</div>
+        <div class="title">List of Pharmacies Notified via Fax: ({{pharmaciesCount}})</div>
     </div>
     <div class="table_container">
-        @if(isLoading) {
+        @if(isGetNearPharmacyloading) {
         <div class="loader_container">
             <app-loader></app-loader>
         </div>
-        } @else { @if(availability.length) {
+        }
+        @else {
         <table>
             <thead>
-                <th>Clinician Name</th>
-                <th>Pharmacy Name</th>
-                <th>Address</th>
-                <th>Contact Info</th>
-            </thead>
-            <tbody>
-                @for (avai of availability; track $index) {
                 <tr>
-                    <td>{{ avai.clinician?.name }}</td>
-                    <td>{{ avai.clinician?.email }}</td>
-                    <td>{{ avai.clinician?.phoneNumber }}</td>
-                    <td>{{ avai.clinician?.zipCode }}</td>
+                    <th>Pharmacy Name</th>
+                    <th>Official Name</th>
+                    <th>Official Phone</th>
+                    <th>Pharmacy Phone</th>
+                    <th>URL</th>
+                </tr>
+            </thead>
+            <tbody (scroll)="onScroll($event)">
+                <tr *ngFor="let pharmacy of pharmaciesNearSearchArray; let i = index">
+                    <td>{{ pharmacy.name }}</td>
+                    <td>{{ pharmacy.authorizedOfficialName }}</td>
+                    <td>{{ pharmacy.authorizedOfficialContactNumber }}</td>
+                    <td>{{ pharmacy.phoneNumber }}</td>
+                    <td>{{ pharmacy.url }}</td>
+                </tr>
+                @if(isNextPharmacyLoading) {
+                <tr>
+                    <div class="bottom_loader_container">
+                        <app-loader></app-loader>
+                    </div>
                 </tr>
                 }
             </tbody>
         </table>
-        } @else {
-        <div class="empty_container">
-            <app-empty-state [src]="'assets/images/svg/no-search-icon.svg'" [caption]="
-                    'No Pharmacy has marked your medication as available yet.'
-                "></app-empty-state>
-        </div>
-        } }
+        }
     </div>
+
     } @else { @if(isMedicationMarkedAsAvailable) {
     <div class="header">
         <div class="title">User Details:</div>

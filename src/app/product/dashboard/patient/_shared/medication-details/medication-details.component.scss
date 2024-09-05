@@ -72,7 +72,7 @@
         padding: 0 1rem;
         padding-bottom: 2rem;
         overflow-x: scroll;
-        min-width: 600px;
+        min-width: 800px;
 
         .empty_container,
         .loader_container {
@@ -112,6 +112,7 @@
                 overflow-y: auto;
                 border-radius: 0 0 16px 16px;
                 border: 1px solid $normalGrey;
+                -webkit-overflow-scrolling: touch;
 
                 tr {
                     display: table;
@@ -161,6 +162,15 @@
                             text-decoration: underline;
                             font-weight: bold;
                         }
+                    }
+                }
+
+                .bottom_loader_container {
+                    height: 150px;
+                    width: 100%;
+
+                    &:hover {
+                        background-color: $offWhiteColor;
                     }
                 }
             }

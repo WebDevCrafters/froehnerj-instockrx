@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, HostListener, OnInit } from '@angular/core';
 import { DataService } from '../../../../../_core/services/data.service';
 import Search from '../../../../_shared/interfaces/Search';
 import { ActivatedRoute, Router } from '@angular/router';
@@ -27,6 +27,7 @@ import { SearchService } from '../../../../../_core/services/search.service';
 import { NotificationService } from '../../../../../_core/services/notification.service';
 import APP_ROUTES from '../../../../../_shared/constants/routes';
 import { PharmacyService } from '../../../../../_core/services/pharmacy.service';
+import Pharmacy from '../../../../_shared/interfaces/Pharmacy';
 
 @Component({
     selector: 'app-medication-details',
@@ -47,13 +48,18 @@ export class MedicationDetailsComponent implements OnInit {
     /**
      @todo Add tooltip, add ellipses, handle mutiple alternative medications
     **/
+
+    page: number = 1;
     search: Search | null = null;
     searchId: string | null = null;
+    pharmaciesCount: number = 0;
     availability: Availability[] = [];
     searchStatus = SearchStatus;
     public isModalVisible: boolean = false;
     public isDecisionModalVisible: boolean = false;
     public isLoading: boolean = true;
+    public isGetNearPharmacyloading: boolean = true;
+    public isNextPharmacyLoading: boolean = false;
     public isPaid: boolean | null = null;
     public additionalInfoForm: any;
     public userType: UserType | null = null;
@@ -65,6 +71,8 @@ export class MedicationDetailsComponent implements OnInit {
     public isMarkAsCompleteLoading: boolean = false;
     public isMarkAsAvailableLoading: boolean = false;
 
+    public pharmaciesNearSearchArray: Pharmacy[] = []
+
     constructor(
         private dataService: DataService,
         private userService: UserService,
@@ -75,7 +83,7 @@ export class MedicationDetailsComponent implements OnInit {
         private paymentService: PaymentService,
         private router: Router,
         private pharmacyService: PharmacyService
-    ) {}
+    ) { }
 
     async ngOnInit(): Promise<void> {
         this.initializeForm();
@@ -326,29 +334,29 @@ export class MedicationDetailsComponent implements OnInit {
             status: this.search?.status,
             medication:
                 formValues.prescribedMedication &&
-                formValues.prescribedMedication.length > 0
+                    formValues.prescribedMedication.length > 0
                     ? {
-                          medicationId: this.search?.medication?.medicationId,
-                          name: formValues.prescribedMedication[0]?.name || '',
-                          dose:
-                              formValues.prescribedMedication[0]?.dose ??
-                              undefined,
-                          quantity: Number(
-                              formValues.prescribedMedication[0]?.quantity
-                          ),
-                          pickUpDate: pickUpDate,
-                          brandName:
-                              formValues.prescribedMedication[0]?.brandName ||
-                              '',
-                          alternatives: formValues.prescribedMedication
-                              .slice(1)
-                              .map((med: any) => ({
-                                  name: med.name || '',
-                                  dose: med.dose ?? undefined,
-                                  quantity: Number(med.quantity),
-                                  brandName: med.brandName,
-                              })),
-                      }
+                        medicationId: this.search?.medication?.medicationId,
+                        name: formValues.prescribedMedication[0]?.name || '',
+                        dose:
+                            formValues.prescribedMedication[0]?.dose ??
+                            undefined,
+                        quantity: Number(
+                            formValues.prescribedMedication[0]?.quantity
+                        ),
+                        pickUpDate: pickUpDate,
+                        brandName:
+                            formValues.prescribedMedication[0]?.brandName ||
+                            '',
+                        alternatives: formValues.prescribedMedication
+                            .slice(1)
+                            .map((med: any) => ({
+                                name: med.name || '',
+                                dose: med.dose ?? undefined,
+                                quantity: Number(med.quantity),
+                                brandName: med.brandName,
+                            })),
+                    }
                     : undefined,
         };
 
@@ -412,7 +420,7 @@ export class MedicationDetailsComponent implements OnInit {
                 this.getPharmaciesNearSearch();
                 this.getPharmaciesNearSearchCount();
             },
-            error: (err) => {},
+            error: (err) => { },
         });
     }
 
@@ -439,16 +447,18 @@ export class MedicationDetailsComponent implements OnInit {
     }
 
     getPharmaciesNearSearch() {
+        this.isGetNearPharmacyloading = true;
         if (!this.search?.location) return;
-
         this.pharmacyService
-            .getPharmacyInRadius(this.search?.location, 0, 10)
+            .getPharmacyInRadius(this.search?.location, 1, 20)
             .subscribe({
                 next: (res) => {
-                    console.log('The pharmacies are ----->', res);
+                    this.pharmaciesNearSearchArray.push(...res);
+                    this.isGetNearPharmacyloading = false;
                 },
                 error: (err) => {
                     console.log(err);
+                    this.isGetNearPharmacyloading = false;
                 },
             });
     }
@@ -460,11 +470,38 @@ export class MedicationDetailsComponent implements OnInit {
             .getPharmacyInRadiusCount(this.search?.location)
             .subscribe({
                 next: (res) => {
-                    console.log('The count is--->', res);
+                    this.pharmaciesCount = res.count;
                 },
                 error: (err) => {
                     console.log(err);
                 },
             });
     }
+
+    @HostListener('window:scroll', ['$event'])
+    onScroll(event: any) {
+        const element = event.target;
+        if (element.scrollTop + element.clientHeight + 3 >= element.scrollHeight) {
+            this.loadMorePharmacies();
+        }
+    }
+
+    loadMorePharmacies() {
+        if (!this.search?.location) return;
+        this.isNextPharmacyLoading = true;
+        this.pharmacyService
+            .getPharmacyInRadius(this.search?.location, this.page, 20)
+            .subscribe({
+                next: (res) => {
+                    this.pharmaciesNearSearchArray.push(...res);
+                    this.page++;
+                    this.isNextPharmacyLoading = false;
+                },
+                error: (err) => {
+                    console.error(err);
+                    this.isNextPharmacyLoading = false;
+                },
+            });
+    }
+
 }
