@@ -81,6 +81,8 @@
                     }
 
                     td {
+                        overflow: hidden;
+                        text-overflow: ellipsis;
                         padding: 12px 15px;
                         // border-bottom: 1px solid $offBlackColor;
                         white-space: nowrap;
