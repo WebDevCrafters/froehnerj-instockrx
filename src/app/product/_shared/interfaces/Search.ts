@@ -1,3 +1,4 @@
+import Location from '../../../_shared/dataTypes/Location';
 import Medication from './Medication';
 import { SearchStatus } from './SearchStatus';
 
