@@ -166,10 +166,11 @@
             <thead>
                 <tr>
                     <th>Pharmacy Name</th>
-                    <th>Official Name</th>
-                    <th>Official Phone</th>
+                    <!-- <th>Official Name</th> -->
+                    <!-- <th>Official Phone</th> -->
                     <th>Pharmacy Phone</th>
-                    <th>URL</th>
+                    <!-- <th>URL</th> -->
+                    <th>Address</th>
                 </tr>
             </thead>
             <tbody (scroll)="onScroll($event)">
@@ -180,10 +181,11 @@
                     "
                 >
                     <td>{{ pharmacy.name }}</td>
-                    <td>{{ pharmacy.authorizedOfficialName }}</td>
-                    <td>{{ pharmacy.authorizedOfficialContactNumber }}</td>
+                    <!-- <td>{{ pharmacy.authorizedOfficialName }}</td> -->
+                    <!-- <td>{{ pharmacy.authorizedOfficialContactNumber }}</td> -->
                     <td>{{ pharmacy.phoneNumber }}</td>
-                    <td>{{ pharmacy.url }}</td>
+                    <!-- <td>{{ pharmacy.url }}</td> -->
+                    <td [title]="pharmacy.address">{{ pharmacy.address }}</td>
                 </tr>
                 @if(isNextPharmacyLoading) {
                 <tr>
