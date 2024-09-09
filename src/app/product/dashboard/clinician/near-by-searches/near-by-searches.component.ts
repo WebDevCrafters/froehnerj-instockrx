@@ -12,6 +12,7 @@ import { EmptyStateComponent } from "../../../../_shared/components/empty-state/
 import APP_ROUTES from '../../../../_shared/constants/routes';
 import { Router } from '@angular/router';
 import { DataService } from '../../../../_core/services/data.service';
+import { ToastrService } from 'ngx-toastr';
 
 @Component({
     selector: 'app-near-by-searches',
@@ -28,7 +29,8 @@ export class NearBySearchesComponent implements OnInit {
         private router: Router,
         private searchService: SearchService,
         private dataService: DataService,
-        private availabilityService: AvailabilityService
+        private availabilityService: AvailabilityService,
+        private toastrService: ToastrService
     ) { }
     searches: Search[] = [];
 
@@ -46,6 +48,7 @@ export class NearBySearchesComponent implements OnInit {
             error: (err) => {
                 console.log(err);
                 this.isLoading = false;
+                this.toastrService.error('Unable to fetch near by searches. Please try again later.');
             },
         });
     }

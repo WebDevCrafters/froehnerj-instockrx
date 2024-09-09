@@ -8,6 +8,7 @@ import APP_ROUTES from '../../../../_shared/constants/routes';
 import { EmptyStateComponent } from '../../../../_shared/components/empty-state/empty-state.component';
 import { LoaderComponent } from '../../../../_shared/components/loader/loader.component';
 import { CommonModule } from '@angular/common';
+import { ToastrService } from 'ngx-toastr';
 
 @Component({
     selector: 'app-previous-searches',
@@ -22,7 +23,8 @@ export class PreviousSearchesComponent implements OnInit {
     constructor(
         private searchService: SearchService,
         private router: Router,
-        private dataService: DataService
+        private dataService: DataService,
+        private toastrService: ToastrService
     ) {}
 
     ngOnInit(): void {
@@ -35,6 +37,7 @@ export class PreviousSearchesComponent implements OnInit {
                 this.setInDatService(result);
                 this.previousSearches.push(...result);
                 this.isLoading = false;
+                this.toastrService.error('Unable to fetch completed searches. Please try again later.');
             },
             error: (err) => {
                 console.log(err);

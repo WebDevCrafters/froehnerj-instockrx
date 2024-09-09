@@ -9,6 +9,7 @@ import { DataService } from '../../../../_core/services/data.service';
 import { EmptyStateComponent } from '../../../../_shared/components/empty-state/empty-state.component';
 import { LoaderComponent } from '../../../../_shared/components/loader/loader.component';
 import { CommonModule } from '@angular/common';
+import { ToastrService } from 'ngx-toastr';
 
 @Component({
     selector: 'app-active-searches',
@@ -21,8 +22,9 @@ export class ActiveSearchesComponent implements OnInit {
     constructor(
         private router: Router,
         private searchService: SearchService,
-        private dataService: DataService
-    ) {}
+        private dataService: DataService,
+        private toastrService: ToastrService
+    ) { }
     public activeSearches: Search[] = [];
     public isLoading: boolean = true;
 
@@ -50,6 +52,7 @@ export class ActiveSearchesComponent implements OnInit {
             error: (err) => {
                 console.log(err);
                 this.isLoading = false;
+                this.toastrService.error('Unable to fetch active searches. Please try again later.');
             },
         });
     }

@@ -11,6 +11,7 @@ import { CustomSearchDropdownComponent } from '../../../_shared/components/custo
 import { UserService } from '../../../_core/services/user.service';
 import UserType from '../../_shared/interfaces/UserType';
 import { DataService } from '../../../_core/services/data.service';
+import { ToastrService } from 'ngx-toastr';
 
 @Component({
     selector: 'app-signup',
@@ -51,7 +52,8 @@ export class SignupComponent implements OnInit {
         private userService: UserService,
         private router: Router,
         private route: ActivatedRoute,
-        private dataService: DataService
+        private dataService: DataService,
+        private toastrService: ToastrService
     ) { }
 
     ngOnInit() {
@@ -100,8 +102,9 @@ export class SignupComponent implements OnInit {
                 );
             },
             error: (err) => {
-                this.isLoading = false;
                 console.log(err);
+                this.isLoading = false;
+                this.toastrService.error('Failed to signup');
             },
         });
     }
