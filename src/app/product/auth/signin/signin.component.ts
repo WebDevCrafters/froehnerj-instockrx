@@ -64,7 +64,13 @@ export class SigninComponent {
         ]);
     }
 
-    public openForgotPasswordScreen() {}
+    public openForgotPasswordScreen() {
+        this.router.navigate([
+            APP_ROUTES.product.app,
+            APP_ROUTES.product.auth,
+            APP_ROUTES.product.resetPassword,
+        ]);
+    }
 
     public markEmailOptionAsSelected() {
         this.isEmailLoginInOptionSelected = true;
