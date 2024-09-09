@@ -28,6 +28,8 @@ import { NotificationService } from '../../../../../_core/services/notification.
 import APP_ROUTES from '../../../../../_shared/constants/routes';
 import { PharmacyService } from '../../../../../_core/services/pharmacy.service';
 import Pharmacy from '../../../../_shared/interfaces/Pharmacy';
+import Medication from '../../../../_shared/interfaces/Medication';
+import { ToastrService } from 'ngx-toastr';
 
 @Component({
     selector: 'app-medication-details',
@@ -82,7 +84,8 @@ export class MedicationDetailsComponent implements OnInit {
         private notificationService: NotificationService,
         private paymentService: PaymentService,
         private router: Router,
-        private pharmacyService: PharmacyService
+        private pharmacyService: PharmacyService,
+        private toastrService: ToastrService
     ) { }
 
     async ngOnInit(): Promise<void> {
@@ -131,7 +134,9 @@ export class MedicationDetailsComponent implements OnInit {
             next: (res) => {
                 if (res) {
                     this.isMedicationMarkedAsAvailable = true;
+                    this.toastrService.success('Medication successfully marked as available!');
                 } else {
+                    this.toastrService.error('Failed to mark medication as available.');
                     this.isMarkAsAvailableLoading = false;
                 }
             },
@@ -206,7 +211,24 @@ export class MedicationDetailsComponent implements OnInit {
                     Validators.required,
                 ]),
             });
+
+            if (this.search.medication?.alternatives) {
+                this.search.medication.alternatives.forEach((alternative) => {
+                    const alternativeFormGroup = new FormGroup({
+                        name: new FormControl(alternative.name),
+                        dose: new FormControl(alternative.dose),
+                        quantity: new FormControl(alternative.quantity),
+                        brandName: new FormControl(alternative.brandName),
+                    });
+                    this.prescribedMedication.push(alternativeFormGroup);
+                });
+            }
+
         }
+    }
+
+    get prescribedMedication(): FormArray {
+        return this.additionalInfoForm.get('prescribedMedication') as FormArray;
     }
 
     converTimestampToDOBString(dob: any) {
@@ -261,6 +283,7 @@ export class MedicationDetailsComponent implements OnInit {
                 if (this.isDecisionModalVisible) {
                     this.toggleDecisionModalPopup();
                 }
+                this.toastrService.success('Search status updated successfully!');
             },
             error: (err) => {
                 console.log(err);
@@ -269,26 +292,39 @@ export class MedicationDetailsComponent implements OnInit {
                 if (this.isDecisionModalVisible) {
                     this.toggleDecisionModalPopup();
                 }
+                this.toastrService.success('Failed to update search status');
             },
         });
     }
 
-    private updateSearch(search: Search | null) {
+    private updateSearch(search: Search | null): void {
         if (!search) return;
+
         this.searchService.updateSearch(search).subscribe({
             next: (res) => {
-                console.log(res);
-                this.search = res;
+                const alternatives = this.search?.medication?.alternatives;
+                const resAlternatives = res.medication?.alternatives;
+
+                if (alternatives && resAlternatives) {
+                    alternatives.forEach((alternative, index) => {
+                        alternative.medicationId = resAlternatives[index] as any;
+                    });
+                }
+
                 this.isEditMedicationLoading = false;
                 this.isModalVisible = false;
+                // console.log("Response update search:", this.search);
+                this.toastrService.success('Medication Details updated successfully!');
             },
             error: (err) => {
-                console.log(err);
+                this.toastrService.success('Failed to update Medication Details');
+                console.error("Error updating search:", err);
                 this.isEditMedicationLoading = false;
                 this.isModalVisible = false;
             },
         });
     }
+
 
     toggleDecisionModalPopup() {
         this.isDecisionModalVisible = !this.isDecisionModalVisible;
@@ -298,6 +334,7 @@ export class MedicationDetailsComponent implements OnInit {
         this.isEditMedicationLoading = true;
         if (this.search) {
             this.search = this.convertFormToSearch();
+            // console.log("Request update search", this.search);
             this.updateSearch(this.search);
         } else {
             this.isEditMedicationLoading = false;
@@ -414,10 +451,9 @@ export class MedicationDetailsComponent implements OnInit {
         this.searchService.getSearch(this.searchId).subscribe({
             next: (res) => {
                 this.search = res;
-                console.log(this.search);
+                console.log("Fetched Search", this.search);
                 this.checkPayment();
                 this.generateForm();
-
                 this.getPharmaciesNearSearch();
                 this.getPharmaciesNearSearchCount();
             },

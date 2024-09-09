@@ -13,6 +13,7 @@ import { User } from '../../../_shared/interfaces/User';
 import { Router } from '@angular/router';
 import { KEYS } from '../../../../_shared/constants/localStorageKeys';
 import UserType from '../../../_shared/interfaces/UserType';
+import { ToastrService } from 'ngx-toastr';
 
 @Component({
     selector: 'app-profile',
@@ -65,7 +66,7 @@ export class ProfileComponent implements OnInit {
 
     backups: any[] = [];
 
-    constructor(private router: Router, private userService: UserService) { }
+    constructor(private router: Router, private userService: UserService, private toastrService: ToastrService) { }
 
     ngOnInit(): void {
         this.getUser();
@@ -110,12 +111,14 @@ export class ProfileComponent implements OnInit {
     public updateProfile(user: User) {
         this.userService.updateProfile(user).subscribe({
             next: (result) => {
+                this.toastrService.success('Your profile has been updated successfully.');
                 this.user = result;
                 this.userService.setUserData(this.user);
                 this.isLoading = false;
                 this.isProfileEditable = false;
             },
             error: (err) => {
+                this.toastrService.error('Profile update failed. Please try again.');
                 console.log(err);
                 this.isLoading = false;
                 this.isProfileEditable = false;
