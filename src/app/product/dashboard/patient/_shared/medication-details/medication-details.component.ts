@@ -66,6 +66,7 @@ export class MedicationDetailsComponent implements OnInit {
     public additionalInfoForm: any;
     public userType: UserType | null = null;
     public userInfo: User | null = null;
+    public patientInfo: User | null = null;
     readonly UserType = UserType;
     public isMedicationMarkedAsAvailable: boolean = false;
     public isEditMedicationLoading: boolean = false;
@@ -95,9 +96,7 @@ export class MedicationDetailsComponent implements OnInit {
             this.getSearchDetails();
             this.checkIfMarkedAsAvailable();
         });
-        this.getAvailability();
         this.setUserType();
-        this.getSearchUserInfo(this.search?.patient);
         this.listenForLiveNotification();
     }
 
@@ -109,15 +108,18 @@ export class MedicationDetailsComponent implements OnInit {
     }
 
     public getSearchUserInfo(userId?: string) {
-        if (!(userId && this.userType === UserType.Clinician)) return;
-        this.userService.getUser(userId).subscribe({
-            next: (res) => {
-                this.userInfo = res;
-            },
-            error: (err) => {
-                console.log(err);
-            },
-        });
+        if (!(userId || this.userType === UserType.Clinician)) return;
+        if (userId) {
+            this.userService.getUser(userId).subscribe({
+                next: (res) => {
+                    this.patientInfo = res;
+                    console.log("this.patientInfo", this.patientInfo);
+                },
+                error: (err) => {
+                    console.log(err);
+                },
+            });
+        }
     }
 
     markMedicationAsAvailable() {
@@ -133,6 +135,7 @@ export class MedicationDetailsComponent implements OnInit {
         this.availabilityService.add(availability).subscribe({
             next: (res) => {
                 if (res) {
+                    this.getSearchUserInfo(this.search?.patient);
                     this.isMedicationMarkedAsAvailable = true;
                     this.toastrService.success('Medication successfully marked as available!');
                 } else {
@@ -413,8 +416,8 @@ export class MedicationDetailsComponent implements OnInit {
     }
 
     getAvailability() {
+        if (!this.searchId || this.userType === UserType.Clinician) return;
         this.isLoading = true;
-        if (!this.searchId || this.userType === UserType.Patient) return;
         this.availabilityService.get(this.searchId).subscribe({
             next: (res) => {
                 this.isLoading = false;
@@ -451,6 +454,8 @@ export class MedicationDetailsComponent implements OnInit {
                 this.generateForm();
                 this.getPharmaciesNearSearch();
                 this.getPharmaciesNearSearchCount();
+                this.getSearchUserInfo(this.search?.patient);
+                this.getAvailability();
             },
             error: (err) => { },
         });
