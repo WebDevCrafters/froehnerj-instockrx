@@ -6,7 +6,7 @@ interface Payment {
   userId: string;
   subscription: Subscription;
   status?: PaymentStatus;
-  paidOn?: number;
+  paidOn: number;
   searchesConsumed: number;
 }
 
