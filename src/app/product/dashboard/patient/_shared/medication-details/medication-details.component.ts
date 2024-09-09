@@ -386,14 +386,14 @@ export class MedicationDetailsComponent implements OnInit {
                         pickUpDate: pickUpDate,
                         brandName:
                             formValues.prescribedMedication[0]?.brandName ||
-                            '',
+                            '---',
                         alternatives: formValues.prescribedMedication
                             .slice(1)
                             .map((med: any) => ({
-                                name: med.name || '',
-                                dose: med.dose ?? undefined,
-                                quantity: Number(med.quantity),
-                                brandName: med.brandName,
+                                name: med.name || '---',
+                                dose: med.dose ?? '---',
+                                quantity: Number(med.quantity) || '---',
+                                brandName: med.brandName || '---',
                             })),
                     }
                     : undefined,
@@ -403,12 +403,6 @@ export class MedicationDetailsComponent implements OnInit {
     }
 
     getSearchDetails() {
-        // if (this.searchId) {
-        //     this.search = this.dataService.getSearch(this.searchId);
-        //     console.log(this.search);
-        // }
-        // if (!this.search) {
-        // }
         this.getSearch();
     }
 

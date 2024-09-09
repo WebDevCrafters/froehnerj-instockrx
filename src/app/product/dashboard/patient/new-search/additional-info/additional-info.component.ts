@@ -58,7 +58,6 @@ export class AdditionalInfoComponent {
     }
 
     addMedication() {
-        console.log('adding');
         this.prescribedMedication.push(this.createPrescribedMedicationFormGroup());
     }
 
