@@ -125,6 +125,7 @@ export class MedicationDetailsComponent implements OnInit {
         }
         let availability: Availability = {
             search: this.searchId,
+            markedOn: Date.now()
         };
         this.availabilityService.add(availability).subscribe({
             next: (res) => {
