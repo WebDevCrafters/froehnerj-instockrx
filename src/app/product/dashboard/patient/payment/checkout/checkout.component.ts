@@ -38,6 +38,7 @@ export class CheckoutComponent implements OnDestroy {
         const addPaymentRequest: AddPaymentRequest = {
             subscription: this.selectedPackage.subscriptionId,
             status: PaymentStatus.PAID,
+            paidOn: Date.now()
         };
         const subscription$ = this.paymentService
             .addPayment(addPaymentRequest)

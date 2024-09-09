@@ -74,6 +74,7 @@ export class MarkedAsAvailableComponent implements OnInit {
         if (!searchId) return;
         const availability: Availability = {
             search: searchId,
+            markedOn: Date.now()
         };
         this.availabilityService.add(availability).subscribe({
             next: (res) => {
