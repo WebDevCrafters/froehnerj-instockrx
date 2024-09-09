@@ -1,87 +1,47 @@
 <form class="form_container" (submit)="onSuccess()">
-  <div class="input_containers">
-    <app-input
-      [control]="signUpInfoForm.controls.firstName"
-      id="firstName"
-      label="First Name:"
-      [type]="'text'"
-      [shape]="'flat'"
-    />
-    <app-input
-      [control]="signUpInfoForm.controls.lastName"
-      id="lastName"
-      label="Last Name:"
-      [type]="'text'"
-      [shape]="'flat'"
-    />
-    <app-input
-      [control]="signUpInfoForm.controls.email"
-      id="email"
-      label="Email Address:"
-      [type]="'email'"
-      [shape]="'flat'"
-    />
-    <div class="phoneNumber_container">
-      <app-input
-        [control]="signUpInfoForm.controls.phoneNumber"
-        id="phoneNumber"
-        label="Phone Number:"
-        [type]="'text'"
-        [shape]="'flat'"
-      />
+    <div class="input_containers">
+        <app-input [control]="signUpInfoForm.controls.firstName" id="firstName" label="First Name:" [type]="'text'"
+            [shape]="'flat'" />
+        <app-input [control]="signUpInfoForm.controls.lastName" id="lastName" label="Last Name:" [type]="'text'"
+            [shape]="'flat'" />
+        <app-input [control]="signUpInfoForm.controls.email" id="email" label="Email Address:" [type]="'email'"
+            [shape]="'flat'" />
+        <div class="phoneNumber_container">
+            <app-input [control]="signUpInfoForm.controls.phoneNumber" id="phoneNumber" label="Phone Number:"
+                [type]="'text'" [shape]="'flat'" />
+        </div>
+        <div class="phoneNumber_container">
+            <app-input [control]="signUpInfoForm.controls.zipCode" id="zipCode" label="Zip Code:" [type]="'text'"
+                [shape]="'flat'" />
+        </div>
+        <app-input [control]="signUpInfoForm.controls.password" id="password" label="Password:" [type]="'password'"
+            [shape]="'flat'" />
+        <app-input [control]="signUpInfoForm.controls.confirmPassword" id="confirm-password" label="Confirm Password:"
+            [type]="'password'" [shape]="'flat'" />
     </div>
-    <div class="phoneNumber_container">
-      <app-input
-        [control]="signUpInfoForm.controls.zipCode"
-        id="zipCode"
-        label="Zip Code:"
-        [type]="'text'"
-        [shape]="'flat'"
-      />
+    <div class="button_container">
+        <app-button [shape]="'rounded'" [title]="'Sign Up'" [type]="'small_primary'"
+            [isLoading]="isLoading"></app-button>
     </div>
-    <app-input
-      [control]="signUpInfoForm.controls.password"
-      id="password"
-      label="Password:"
-      [type]="'password'"
-      [shape]="'flat'"
-    />
-    <app-input
-      [control]="signUpInfoForm.controls.confirmPassword"
-      id="confirm-password"
-      label="Confirm Password:"
-      [type]="'password'"
-      [shape]="'flat'"
-    />
-  </div>
-  <div class="button_container">
-    <app-button
-      [shape]="'rounded'"
-      [title]="'Sign Up'"
-      [type]="'small_primary'"
-      [isLoading]="isLoading"
-    ></app-button>
-  </div>
-  <div class="footer">
-    <span>
-      By creating an account you agree to our
-      <a (click)="navigateToPrivacyPolicy()" target="_blank">privacy-policy</a>
-      and
-      <a (click)="navigateToTermsOfService()" target="_blank"
-        >terms of service and business associated agreements.</a
-      >
-    </span>
-    @if(true && true) {
-    <div class="patient_footer">
-      You also agree to recieve SMS messages from InStockRx health regarding
-      search status updates & marketing. Reply STOP to opt out, HELP for
-      assistance. Standard message & data rates may apply. These texts are
-      non-recurring.
+    <div class="footer">
+        <span>
+            By creating an account you agree to our
+            <a (click)="navigateToPrivacyPolicy()" target="_blank">privacy-policy</a>
+            and
+            <a (click)="navigateToTermsOfService()" target="_blank">terms of service and business associated
+                agreements.</a>
+        </span>
+        @if(true && true) {
+        <div class="patient_footer">
+            You also agree to recieve SMS messages from InStockRx health regarding
+            search status updates & marketing. Reply STOP to opt out, HELP for
+            assistance. Standard message & data rates may apply. These texts are
+            non-recurring.
+        </div>
+        }
+        <div class="signin">
+            Already have an account?
+            <a class="signIn_tag" (click)="openSignInScreen()">Sign In</a>
+        </div>
     </div>
-    }
-    <div class="signin">
-      Already have an account?
-      <a class="signIn_tag" (click)="openSignInScreen()">Sign In</a>
-    </div>
-  </div>
 </form>

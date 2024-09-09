@@ -18,6 +18,7 @@ import { HttpErrorResponse } from '@angular/common/http';
 import UserType from '../../_shared/interfaces/UserType';
 import { DataService } from '../../../_core/services/data.service';
 import { ToastrService } from 'ngx-toastr';
+import { emailValidator, requiredValidator } from '../../../_shared/utils/Validators';
 
 @Component({
     selector: 'app-signin',
@@ -39,11 +40,17 @@ export class SigninComponent {
     public isLoading: boolean = false;
 
     public signInInfoForm = new FormGroup({
-        email: new FormControl(''),
-        phoneNumber: new FormControl(''),
-        password: new FormControl(''),
-    });
-    public countryCode: string = '';
+        email: new FormControl('', [
+            requiredValidator('Email field must not be blank.'),
+            emailValidator('Invalid email format.'),
+        ]),
+        phoneNumber: new FormControl('', [
+            requiredValidator('Phone Number field must not be blank.'),
+        ]),
+        password: new FormControl('', [
+            requiredValidator('Password field must not be blank.'),
+        ]),
+    }); public countryCode: string = '';
 
     constructor(
         private userService: UserService,
@@ -51,7 +58,7 @@ export class SigninComponent {
         private route: ActivatedRoute,
         private dataService: DataService,
         private toastrService: ToastrService
-    ) {}
+    ) { }
 
     public setCountryCode(countryCode: string) {
         this.countryCode = countryCode;
