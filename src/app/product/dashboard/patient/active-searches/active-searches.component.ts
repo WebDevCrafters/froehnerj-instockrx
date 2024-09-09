@@ -52,7 +52,7 @@ export class ActiveSearchesComponent implements OnInit {
             error: (err) => {
                 console.log(err);
                 this.isLoading = false;
-                this.toastrService.error('Unable to fetch active searches. Please try again later.');
+                this.toastrService.error(err.error.message);
             },
         });
     }

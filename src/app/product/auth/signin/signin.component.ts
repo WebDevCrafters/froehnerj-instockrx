@@ -106,7 +106,7 @@ export class SigninComponent {
             error: (err: HttpErrorResponse) => {
                 this.isLoading = false;
                 this.error = err.error.message;
-                this.toastrService.error('Failed to signin');
+                this.toastrService.error(this.error);
             },
         });
     }

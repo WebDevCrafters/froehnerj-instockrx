@@ -13,6 +13,7 @@ import UserType from '../../_shared/interfaces/UserType';
 import { DataService } from '../../../_core/services/data.service';
 import { ToastrService } from 'ngx-toastr';
 import { charLimitValidator, emailValidator, matchPasswordValidator, passwordValidator, requiredValidator } from '../../../_shared/utils/Validators';
+import { HttpErrorResponse } from '@angular/common/http';
 
 @Component({
     selector: 'app-signup',
@@ -125,10 +126,10 @@ export class SignupComponent implements OnInit {
                     { replaceUrl: true }
                 );
             },
-            error: (err) => {
+            error: (err: HttpErrorResponse) => {
                 console.log(err);
                 this.isLoading = false;
-                this.toastrService.error('Failed to signup');
+                this.toastrService.error(err.error.message);
             },
         });
     }

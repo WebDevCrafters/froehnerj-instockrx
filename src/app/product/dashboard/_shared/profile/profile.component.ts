@@ -118,10 +118,10 @@ export class ProfileComponent implements OnInit {
                 this.isProfileEditable = false;
             },
             error: (err) => {
-                this.toastrService.error('Profile update failed. Please try again.');
                 console.log(err);
                 this.isLoading = false;
                 this.isProfileEditable = false;
+                this.toastrService.error(err.error.message);
             },
         })
     }

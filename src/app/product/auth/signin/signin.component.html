@@ -1,7 +1,7 @@
 <form class="form_container" (submit)="onSuccess()">
-  <div class="log_option_container">
-    <!-- <div class="title">Welcome Back!</div> -->
-    <!-- <div class="option_container">
+    <div class="log_option_container">
+        <!-- <div class="title">Welcome Back!</div> -->
+        <!-- <div class="option_container">
       <div
         class="email_section"
         (click)="markEmailOptionAsSelected()"
@@ -17,60 +17,33 @@
         Phone Number
       </div>
     </div> -->
-  </div>
-  <div class="input_containers">
-    @if(isEmailLoginInOptionSelected) {
-    <app-input
-      [control]="signInInfoForm.controls.email"
-      id="email"
-      label="Email Address:"
-      [type]="'email'"
-      [shape]="'flat'"
-    />
-    } @else {
-    <div class="phoneNumber_container">
-      <app-custom-search-dropdown
-        (countryCode)="setCountryCode($event)"
-      ></app-custom-search-dropdown>
-      <app-input
-        [control]="signInInfoForm.controls.phoneNumber"
-        id="phoneNumber"
-        label="Phone number"
-        [type]="'text'"
-        [shape]="'flat'"
-      />
     </div>
-    }
-    <app-input
-      [control]="signInInfoForm.controls.password"
-      id="password"
-      label="Password:"
-      [type]="'password'"
-      [shape]="'flat'"
-    />
-  </div>
-  <div class="button_container">
-    <app-button
-      [shape]="'rounded'"
-      [title]="'Login'"
-      [type]="'small_primary'"
-      formButtonType="submit"
-      [isLoading]="isLoading"
-    ></app-button>
-  </div>
-  <p class="error">{{error}}</p>
-  <div class="footer">
-    <div class="signin">
-      Trouble Logging In?
-      <a class="signIn_tag" (click)="openForgotPasswordScreen()"
-        >Forgot your password?</a
-      >
+    <div class="input_containers">
+        @if(isEmailLoginInOptionSelected) {
+        <app-input [control]="signInInfoForm.controls.email" id="email" label="Email Address:" [type]="'email'"
+            [shape]="'flat'" />
+        } @else {
+        <div class="phoneNumber_container">
+            <app-custom-search-dropdown (countryCode)="setCountryCode($event)"></app-custom-search-dropdown>
+            <app-input [control]="signInInfoForm.controls.phoneNumber" id="phoneNumber" label="Phone number"
+                [type]="'text'" [shape]="'flat'" />
+        </div>
+        }
+        <app-input [control]="signInInfoForm.controls.password" id="password" label="Password:" [type]="'password'"
+            [shape]="'flat'" />
     </div>
-    <div class="signin">
-      Want to join as a Provider?
-      <a class="signIn_tag" (click)="openClinicianSignUpScreen()"
-        >Create Your Account Today!</a
-      >
+    <div class="button_container">
+        <app-button [shape]="'rounded'" [title]="'Login'" [type]="'small_primary'" formButtonType="submit"
+            [isLoading]="isLoading"></app-button>
     </div>
-  </div>
+    <div class="footer">
+        <div class="signin">
+            Trouble Logging In?
+            <a class="signIn_tag" (click)="openForgotPasswordScreen()">Forgot your password?</a>
+        </div>
+        <div class="signin">
+            Want to join as a Provider?
+            <a class="signIn_tag" (click)="openClinicianSignUpScreen()">Create Your Account Today!</a>
+        </div>
+    </div>
 </form>

@@ -129,9 +129,8 @@ export class NewSearchComponent implements OnInit {
                 this.toastrService.success('Your new search has been added successfully!');
             },
             error: (err) => {
-                this.toastrService.error('There was an issue adding your new search. Please try again later.');
-                console.log(err);
                 this.isLoading = false;
+                this.toastrService.error(err.error.message);
             },
         });
     }

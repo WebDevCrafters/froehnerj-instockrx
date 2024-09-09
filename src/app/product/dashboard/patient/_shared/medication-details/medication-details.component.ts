@@ -143,6 +143,7 @@ export class MedicationDetailsComponent implements OnInit {
             error: (err) => {
                 console.log(err);
                 this.isMarkAsAvailableLoading = false;
+                this.toastrService.error(err.error.message);
             },
         });
     }

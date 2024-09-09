@@ -37,11 +37,11 @@ export class PreviousSearchesComponent implements OnInit {
                 this.setInDatService(result);
                 this.previousSearches.push(...result);
                 this.isLoading = false;
-                this.toastrService.error('Unable to fetch completed searches. Please try again later.');
             },
             error: (err) => {
                 console.log(err);
                 this.isLoading = false;
+                this.toastrService.error(err.error.message);
             },
         });
     }

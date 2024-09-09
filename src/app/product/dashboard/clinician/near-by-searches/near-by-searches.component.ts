@@ -48,7 +48,7 @@ export class NearBySearchesComponent implements OnInit {
             error: (err) => {
                 console.log(err);
                 this.isLoading = false;
-                this.toastrService.error('Unable to fetch near by searches. Please try again later.');
+                this.toastrService.error(err.error.message);
             },
         });
     }
