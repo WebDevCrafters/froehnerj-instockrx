@@ -17,6 +17,8 @@ export const appConfig: ApplicationConfig = {
         provideLottieOptions({ player: () => player }),
         provideCacheableAnimationLoader(),
         provideAnimations(),
-        provideToastr()
+        provideToastr(
+            { positionClass: 'toast-bottom-left' }
+        )
     ],
 };
