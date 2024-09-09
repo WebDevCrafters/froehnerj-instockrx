@@ -12,6 +12,7 @@ import { UserService } from '../../../_core/services/user.service';
 import UserType from '../../_shared/interfaces/UserType';
 import { DataService } from '../../../_core/services/data.service';
 import { ToastrService } from 'ngx-toastr';
+import { charLimitValidator, emailValidator, matchPasswordValidator, passwordValidator, requiredValidator } from '../../../_shared/utils/Validators';
 
 @Component({
     selector: 'app-signup',
@@ -30,15 +31,38 @@ export class SignupComponent implements OnInit {
     userType: UserType | null = null;
     isLoading: boolean = false;
 
-    public signUpInfoForm = new FormGroup({
-        firstName: new FormControl(''),
-        lastName: new FormControl(''),
-        email: new FormControl(''),
-        phoneNumber: new FormControl(''),
-        zipCode: new FormControl(),
-        password: new FormControl(''),
-        confirmPassword: new FormControl(''),
-    });
+    public signUpInfoForm = new FormGroup(
+        {
+            firstName: new FormControl('', [
+                requiredValidator('First name cannot be empty.'),
+            ]),
+            lastName: new FormControl('', [
+                requiredValidator('Last name cannot be empty.'),
+            ]),
+            email: new FormControl('', [
+                requiredValidator('Email cannot be empty.'),
+                emailValidator('Invalid email format.'),
+            ]),
+            phoneNumber: new FormControl('', [
+                requiredValidator('Phone number cannot be empty.'),
+            ]),
+            password: new FormControl('', [
+                requiredValidator('Password cannot be empty.'),
+                passwordValidator(
+                    'Password must be at least 8 characters long, include an uppercase letter, a lowercase letter, a number, and a special character'
+                ),
+            ]),
+            zipCode: new FormControl('', [
+                requiredValidator('Zip code must not be empty'),
+                charLimitValidator(5, 'Zip code must be 5 digits'),
+            ]),
+            confirmPassword: new FormControl('', [
+                requiredValidator('Confirm password cannot be empty.'),
+            ]),
+        },
+        { validators: matchPasswordValidator('password', 'confirmPassword') }
+    );
+
 
     /**
         @todo: add validators in these fields 
@@ -87,7 +111,7 @@ export class SignupComponent implements OnInit {
                 }`,
             phoneNumber: this.signUpInfoForm.get('phoneNumber')?.value || '',
             userType: this.userType,
-            zipCode: this.signUpInfoForm.get('zipCode')?.value || '',
+            zipCode: Number(this.signUpInfoForm.get('zipCode')?.value) || 0,
             password: this.signUpInfoForm.get('password')?.value || '',
         };
         this.userService.signUp(user).subscribe({
