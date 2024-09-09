@@ -20,6 +20,7 @@ import APP_ROUTES from '../../../../_shared/constants/routes';
 import { ModalComponent } from "../../../../_shared/components/modal/modal.component";
 import Payment from '../../../_shared/interfaces/Payment';
 import { markAllAsDirty } from '../../../../_shared/utils/formUtils';
+import { ToastrService } from 'ngx-toastr';
 
 @Component({
     selector: 'app-new-search',
@@ -47,7 +48,8 @@ export class NewSearchComponent implements OnInit {
     constructor(
         private searchService: SearchService,
         private paymentService: PaymentService,
-        private router: Router
+        private router: Router,
+        private toastrService: ToastrService
     ) { }
 
     async ngOnInit(): Promise<void> {
@@ -124,8 +126,10 @@ export class NewSearchComponent implements OnInit {
                 if (!isPaid) this.navigateToPayment();
                 else this.navigateToActiveSearch();
                 this.isLoading = false;
+                this.toastrService.success('Your new search has been added successfully!');
             },
             error: (err) => {
+                this.toastrService.error('There was an issue adding your new search. Please try again later.');
                 console.log(err);
                 this.isLoading = false;
             },

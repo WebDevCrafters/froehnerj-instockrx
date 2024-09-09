@@ -29,6 +29,7 @@ import APP_ROUTES from '../../../../../_shared/constants/routes';
 import { PharmacyService } from '../../../../../_core/services/pharmacy.service';
 import Pharmacy from '../../../../_shared/interfaces/Pharmacy';
 import Medication from '../../../../_shared/interfaces/Medication';
+import { ToastrService } from 'ngx-toastr';
 
 @Component({
     selector: 'app-medication-details',
@@ -83,7 +84,8 @@ export class MedicationDetailsComponent implements OnInit {
         private notificationService: NotificationService,
         private paymentService: PaymentService,
         private router: Router,
-        private pharmacyService: PharmacyService
+        private pharmacyService: PharmacyService,
+        private toastrService: ToastrService
     ) { }
 
     async ngOnInit(): Promise<void> {
@@ -131,7 +133,9 @@ export class MedicationDetailsComponent implements OnInit {
             next: (res) => {
                 if (res) {
                     this.isMedicationMarkedAsAvailable = true;
+                    this.toastrService.success('Medication successfully marked as available!');
                 } else {
+                    this.toastrService.error('Failed to mark medication as available.');
                     this.isMarkAsAvailableLoading = false;
                 }
             },
@@ -278,6 +282,7 @@ export class MedicationDetailsComponent implements OnInit {
                 if (this.isDecisionModalVisible) {
                     this.toggleDecisionModalPopup();
                 }
+                this.toastrService.success('Search status updated successfully!');
             },
             error: (err) => {
                 console.log(err);
@@ -286,6 +291,7 @@ export class MedicationDetailsComponent implements OnInit {
                 if (this.isDecisionModalVisible) {
                     this.toggleDecisionModalPopup();
                 }
+                this.toastrService.success('Failed to update search status');
             },
         });
     }
@@ -307,8 +313,10 @@ export class MedicationDetailsComponent implements OnInit {
                 this.isEditMedicationLoading = false;
                 this.isModalVisible = false;
                 // console.log("Response update search:", this.search);
+                this.toastrService.success('Medication Details updated successfully!');
             },
             error: (err) => {
+                this.toastrService.success('Failed to update Medication Details');
                 console.error("Error updating search:", err);
                 this.isEditMedicationLoading = false;
                 this.isModalVisible = false;

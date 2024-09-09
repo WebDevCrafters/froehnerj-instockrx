@@ -8,6 +8,7 @@ import { LoaderComponent } from '../../../../_shared/components/loader/loader.co
 import { CurrentPackageComponent } from './current-package/current-package.component';
 import Subscription from '../../../_shared/interfaces/Subscription';
 import { CheckoutComponent } from './checkout/checkout.component';
+import { ToastrService } from 'ngx-toastr';
 
 @Component({
     selector: 'app-payment',
@@ -27,7 +28,8 @@ export class PaymentComponent implements OnInit {
     selectedPackage: Subscription | null = null;
     step: 1 | 2 = 1;
 
-    constructor(private paymentService: PaymentService) {}
+    constructor(private paymentService: PaymentService,
+        private toastrService: ToastrService) { }
 
     ngOnInit(): void {
         this.getUserSubscription();
@@ -53,6 +55,7 @@ export class PaymentComponent implements OnInit {
     }
 
     public onPaymentComplete(payment: Payment) {
+        this.toastrService.success("Payment successfull");
         this.payment = payment;
     }
 }
