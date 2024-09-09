@@ -51,6 +51,10 @@ const routes: Routes = [
                         path: APP_ROUTES.product.signUp + '/:userType',
                         component: SignupComponent,
                     },
+                    {
+                        path: APP_ROUTES.product.resetPassword,
+                        component: ResetPasswordComponent,
+                    },
                 ],
             },
             {
@@ -104,11 +108,6 @@ const routes: Routes = [
                     },
                 ],
             },
-            {
-                path: APP_ROUTES.product.resetPassword,
-                component: ResetPasswordComponent,
-                canActivate: [authGuard],
-            },
         ],
     },
 ];
@@ -117,4 +116,4 @@ const routes: Routes = [
     imports: [RouterModule.forChild(routes)],
     exports: [RouterModule],
 })
-export class ProductRoutingModule { }
+export class ProductRoutingModule {}
