@@ -17,6 +17,7 @@ import { UserService } from '../../../_core/services/user.service';
 import { HttpErrorResponse } from '@angular/common/http';
 import UserType from '../../_shared/interfaces/UserType';
 import { DataService } from '../../../_core/services/data.service';
+import { ToastrService } from 'ngx-toastr';
 
 @Component({
     selector: 'app-signin',
@@ -48,7 +49,8 @@ export class SigninComponent {
         private userService: UserService,
         private router: Router,
         private route: ActivatedRoute,
-        private dataService: DataService
+        private dataService: DataService,
+        private toastrService: ToastrService
     ) {}
 
     public setCountryCode(countryCode: string) {
@@ -97,6 +99,7 @@ export class SigninComponent {
             error: (err: HttpErrorResponse) => {
                 this.isLoading = false;
                 this.error = err.error.message;
+                this.toastrService.error('Failed to signin');
             },
         });
     }
