@@ -1,36 +1,57 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, EventEmitter, OnInit, Output } from '@angular/core';
 import { ModalComponent } from '../modal/modal.component';
-import { AuthService } from '../../../_core/services/auth.service';
 import { ButtonComponent } from '../button/button.component';
-import { User } from '../../dataTypes/User';
+import { User } from '../../../product/_shared/interfaces/User';
 import { Router } from '@angular/router';
 import APP_ROUTES from '../../constants/routes';
-import { Location } from '@angular/common';
+import { CommonModule, Location } from '@angular/common';
+import { UserService } from '../../../_core/services/user.service';
+import { SocketService } from '../../../_core/services/socket.service';
+import { SocketEvents } from '../../../product/_shared/interfaces/SocketEvents';
+import { NotificationService } from '../../../_core/services/notification.service';
+import { Notification } from '../../../product/_shared/interfaces/Notification';
+import { NotificationComponent } from './notification/notification.component';
 
 @Component({
     selector: 'app-header',
     standalone: true,
-    imports: [ModalComponent, ButtonComponent],
+    imports: [
+        ButtonComponent,
+        CommonModule,
+        NotificationComponent,
+        ModalComponent,
+    ],
     templateUrl: './header.component.html',
     styleUrl: './header.component.scss',
 })
 export class HeaderComponent implements OnInit {
-    constructor(private authService: AuthService, private router: Router, private location: Location) { }
+    @Output() toggleSidebar = new EventEmitter<void>();
+    count: number = 0;
+
+    constructor(
+        private userService: UserService,
+        private router: Router,
+        private location: Location,
+        private socketService: SocketService,
+        private notificationService: NotificationService
+    ) { }
 
     modalVisible: boolean = false;
     user: User | null = null;
 
     ngOnInit(): void {
         this.getUserEmail();
+        this.initializeSocketConnection();
+        this.getUnreadCount();
     }
 
     getUserEmail() {
-        const user = this.authService.getUserData();
-        if (!user) return;
-        this.user = user;
+        const authResponse = this.userService.getUserData();
+        if (!authResponse) return;
+        this.user = authResponse.user;
     }
 
-    toggleSettings() {
+    toggleSettings(event?: any) {
         this.modalVisible = !this.modalVisible;
     }
 
@@ -40,7 +61,7 @@ export class HeaderComponent implements OnInit {
     }
 
     signout() {
-        this.authService.signOut();
+        this.userService.signOut();
         this.router.navigate(
             [`${APP_ROUTES.product.app}/${APP_ROUTES.product.auth}`],
             { replaceUrl: true }
@@ -59,12 +80,59 @@ export class HeaderComponent implements OnInit {
             APP_ROUTES.product.app,
             APP_ROUTES.product.dashboard,
             APP_ROUTES.product.patient,
-            APP_ROUTES.product.editPatientsProfile
+            APP_ROUTES.product.profile,
         ]);
         this.toggleSettings();
     }
 
+    onMenuClick() {
+        this.toggleSidebar.emit();
+    }
+
     goBack() {
         this.location.back();
+    }
+
+    initializeSocketConnection() {
+        const userId = this.user?.userId;
+
+        if (!userId) return;
+
+        this.socketService.init();
+        this.socketService.onEvent(SocketEvents.Connect, () => {
+            console.info('Socket Connected');
+        });
+        this.socketService.emitEvent(SocketEvents.JoinMyRoom, userId);
+        this.socketService.onEvent(
+            SocketEvents.Notification,
+            (notification) => {
+                this.playAudio();
+                this.count++;
+                this.notificationService.emitNotification(notification);
+                console.log(notification);
+            }
+        );
+    }
+
+    getUnreadCount() {
+        this.notificationService.getUnreadCount().subscribe({
+            next: (res) => {
+                this.count = res.count;
+            },
+            error: (err) => {
+                console.log(err);
+            },
+        });
+    }
+
+    updateCount(count: number) {
+        this.count = count;
+    }
+
+    playAudio() {
+        let audio = new Audio();
+        audio.src = '../../../assets/audio/notification.wav';
+        audio.load();
+        audio.play();
     }
 }

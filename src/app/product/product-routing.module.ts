@@ -1,22 +1,27 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import APP_ROUTES from '../_shared/constants/routes';
-import { SelfServiceComponent } from './self-service/self-service.component';
 import { DashboardComponent } from './dashboard/dashboard.component';
 import { ProductComponent } from './product.component';
 import { AuthComponent } from './auth/auth.component';
 import { authPreventGuard } from '../_core/guards/auth-prevent.guard';
 import { authGuard } from '../_core/guards/auth.guard';
 import { ResetPasswordComponent } from './reset-password/reset-password.component';
-import { PatientComponent } from './auth/patient/patient.component';
-import { ClinicianComponent } from './auth/clinician/clinician.component';
 import { SigninComponent } from './auth/signin/signin.component';
 import { SignupComponent } from './auth/signup/signup.component';
 import { ForgotPasswordComponent } from './auth/forgot-password/forgot-password.component';
-import { PatientDashboardComponent } from './dashboard/patient-dashboard/patient-dashboard.component';
-import { ClinicianDashboardComponent } from './dashboard/clinician-dashboard/clinician-dashboard.component';
-import { SearchInfoComponent } from './dashboard/patient-dashboard/search-info/search-info.component';
-import { EditPatientProfileComponent } from './dashboard/patient-dashboard/edit-patient-profile/edit-patient-profile.component';
+import { NewSearchComponent } from './dashboard/patient/new-search/new-search.component';
+import { ActiveSearchesComponent } from './dashboard/patient/active-searches/active-searches.component';
+import { PreviousSearchesComponent } from './dashboard/patient/previous-searches/previous-searches.component';
+import { NearBySearchesComponent } from './dashboard/clinician/near-by-searches/near-by-searches.component';
+import { MedicationDetailsComponent } from './dashboard/patient/_shared/medication-details/medication-details.component';
+import { SelectPackageComponent } from './dashboard/patient/payment/select-package/select-package.component';
+import { PaymentComponent } from './dashboard/patient/payment/payment.component';
+import UserType from './_shared/interfaces/UserType';
+import { patientGuard } from '../_core/guards/patient.guard';
+import { clinicianGuard } from '../_core/guards/clinician.guard';
+import { MarkedAsAvailableComponent } from './dashboard/clinician/marked-as-available/marked-as-available.component';
+import { ProfileComponent } from './dashboard/_shared/profile/profile.component';
 
 const routes: Routes = [
     {
@@ -35,51 +40,22 @@ const routes: Routes = [
                 children: [
                     {
                         path: '',
-                        redirectTo: APP_ROUTES.product.patient + '/' + APP_ROUTES.product.signUp,
+                        redirectTo: APP_ROUTES.product.signIn,
                         pathMatch: 'full',
                     },
                     {
-                        path: APP_ROUTES.product.patient,
-                        component: PatientComponent,
-                        children: [
-                            {
-                                path: APP_ROUTES.product.signUp,
-                                component: SignupComponent,
-                            },
-                            {
-                                path: APP_ROUTES.product.signIn,
-                                component: SigninComponent,
-                            },
-                            {
-                                path: APP_ROUTES.product.forgotPassword,
-                                component: ForgotPasswordComponent,
-                            },
-                        ]
+                        path: APP_ROUTES.product.signIn,
+                        component: SigninComponent,
                     },
                     {
-                        path: APP_ROUTES.product.clinician,
-                        component: ClinicianComponent,
-                        children: [
-                            {
-                                path: APP_ROUTES.product.signUp,
-                                component: SignupComponent,
-                            },
-                            {
-                                path: APP_ROUTES.product.signIn,
-                                component: SigninComponent,
-                            },
-                            {
-                                path: APP_ROUTES.product.forgotPassword,
-                                component: ForgotPasswordComponent,
-                            },
-                        ]
+                        path: APP_ROUTES.product.signUp + '/:userType',
+                        component: SignupComponent,
+                    },
+                    {
+                        path: APP_ROUTES.product.resetPassword,
+                        component: ResetPasswordComponent,
                     },
                 ],
-            },
-            {
-                path: APP_ROUTES.product.selfService,
-                component: SelfServiceComponent,
-                canActivate: [authGuard],
             },
             {
                 path: APP_ROUTES.product.dashboard,
@@ -88,38 +64,49 @@ const routes: Routes = [
                 children: [
                     {
                         path: '',
-                        redirectTo: APP_ROUTES.product.patient,
+                        redirectTo: APP_ROUTES.product.newSearch,
                         pathMatch: 'full',
                     },
                     {
-                        path: APP_ROUTES.product.patient,
-                        component: PatientDashboardComponent,
-                        children: [
-                            {
-                                path: '',
-                                redirectTo: APP_ROUTES.product.searchInfo,
-                                pathMatch: 'full',
-                            },
-                            {
-                                path: APP_ROUTES.product.searchInfo,
-                                component: SearchInfoComponent,
-                            },
-                            {
-                                path: APP_ROUTES.product.editPatientsProfile,
-                                component: EditPatientProfileComponent,
-                            },
-                        ]
+                        path: APP_ROUTES.product.newSearch,
+                        component: NewSearchComponent,
+                        canActivate: [patientGuard],
                     },
                     {
-                        path: APP_ROUTES.product.clinician,
-                        component: ClinicianDashboardComponent,
+                        path: APP_ROUTES.product.activeSearches,
+                        component: ActiveSearchesComponent,
+                        canActivate: [patientGuard],
+                    },
+                    {
+                        path: APP_ROUTES.product.previousSearches,
+                        component: PreviousSearchesComponent,
+                        canActivate: [patientGuard],
+                    },
+                    {
+                        path: APP_ROUTES.product.payments,
+                        component: PaymentComponent,
+                        canActivate: [patientGuard],
+                    },
+                    {
+                        path: APP_ROUTES.product.nearBySearches,
+                        component: NearBySearchesComponent,
+                        canActivate: [clinicianGuard],
+                    },
+                    {
+                        path: APP_ROUTES.product.markedAsAvailable,
+                        component: MarkedAsAvailableComponent,
+                        canActivate: [clinicianGuard],
+                    },
+                    {
+                        path:
+                            APP_ROUTES.product.medicationDetails + '/:searchId',
+                        component: MedicationDetailsComponent,
+                    },
+                    {
+                        path: APP_ROUTES.product.profile,
+                        component: ProfileComponent,
                     },
                 ],
-            },
-            {
-                path: APP_ROUTES.product.resetPassword,
-                component: ResetPasswordComponent,
-                canActivate: [authGuard],
             },
         ],
     },
@@ -129,4 +116,4 @@ const routes: Routes = [
     imports: [RouterModule.forChild(routes)],
     exports: [RouterModule],
 })
-export class ProductRoutingModule { }
+export class ProductRoutingModule {}

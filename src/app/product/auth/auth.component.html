@@ -1,45 +1,60 @@
 <div class="main_container">
-  <div class="box_container">
-    <div class="scroll_container">
-      <div class="home_icon_container" (click)="gotoHomePage()">
-        <img
-          src="assets/images/svg/home-icon.svg"
-          alt="Home"
-          class="home_icon"
-        />
-      </div>
-      <div class="header">
-        <div class="brand" (click)="gotoHomePage()">
-          <img src="assets/images/png/pill-logo.png" alt="" />
-          <div class="brand_name">
-            <div class="heading">FindMyMeds</div>
-            <div class="sub_heading">by InStockRx</div>
-          </div>
+    <div class="box_container">
+        <div class="scroll_container">
+            <div class="home_icon_container" (click)="gotoHomePage()">
+                <img
+                    src="assets/images/svg/home-icon.svg"
+                    alt="Home"
+                    class="home_icon"
+                />
+            </div>
+            <div class="header">
+                <div class="brand" (click)="gotoHomePage()">
+                    <img src="assets/images/png/pill-logo.png" alt="" />
+                    <div class="brand_name">
+                        <div class="heading">FindMyMeds</div>
+                        <div class="sub_heading">by InStockRx</div>
+                    </div>
+                </div>
+            </div>
+            <div class="title_container">
+                <div class="title">
+                    {{
+                        isSignUpPage
+                            ? userType === UserType.Patient
+                                ? "Patient portal"
+                                : "Clinician portal"
+                            : "Welcome Back!"
+                    }}
+                </div>
+                <div
+                    *ngIf="userType === UserType.Patient && isSignUpPage"
+                    class="patient_sub_heading"
+                >
+                    Never Search for Your Meds Again
+                </div>
+                <div
+                    class="footer"
+                    *ngIf="userType === UserType.Patient && isSignUpPage"
+                >
+                    <div class="text">Let us find your meds for you!</div>
+                    <div class="text">We just need some info to start</div>
+                </div>
+                <div
+                    *ngIf="!(userType === UserType.Patient)"
+                    class="sub_heading"
+                >
+                    If you are a patient searching for meds, please
+                </div>
+                <div
+                    *ngIf="!(userType === UserType.Patient)"
+                    class="signup_container"
+                    (click)="navigateToPatientSignUp()"
+                >
+                    signup here.
+                </div>
+            </div>
+            <router-outlet></router-outlet>
         </div>
-      </div>
-      <div class="title_container">
-        <div class="title">
-          {{ isPatientRoute ? "Patient portal" : "Clinician portal" }}
-        </div>
-        <div *ngIf="isPatientRoute && isSignUpPage" class="patient_sub_heading">
-          Never Search for Your Meds Again
-        </div>
-        <div class="footer" *ngIf="isPatientRoute && isSignUpPage">
-          <div class="text">Let us find your meds for you!</div>
-          <div class="text">We just need some info to start</div>
-        </div>
-        <div *ngIf="!isPatientRoute" class="sub_heading">
-          If you are a patient searching for meds, please
-        </div>
-        <div
-          *ngIf="!isPatientRoute"
-          class="signup_container"
-          (click)="navigateToPatientSignUp()"
-        >
-          signup here instead.
-        </div>
-      </div>
-      <router-outlet></router-outlet>
     </div>
-  </div>
 </div>

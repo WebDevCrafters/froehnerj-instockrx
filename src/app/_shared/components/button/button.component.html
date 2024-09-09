@@ -1,22 +1,21 @@
-<button
-  [ngClass]="[type, shape]"
-  (click)="onClick($event)"
-  [type]="formButtonType"
->
-  <div
-    class="icon_and_title_container"
-    [ngClass]="{ icon_vertical: iconAlignment === 'vertical' }"
-  >
-    <ng-container *ngIf="leftImageSrc || src">
-      <div class="icon">
-        <img [src]="leftImageSrc || src" alt="" />
-      </div>
-    </ng-container>
-    <span *ngIf="title" class="title">{{ title }}</span>
-    <ng-container *ngIf="rightImageSrc">
-      <div class="icon">
-        <img [src]="rightImageSrc" alt="" />
-      </div>
-    </ng-container>
-  </div>
+<button [ngClass]="[type, shape]" (click)="onClick($event)" [type]="formButtonType" [disabled]="isLoading">
+    @if (isLoading) {
+    <div class="loader"></div>
+    } @else {
+    <div class="icon_and_title_container" [ngClass]="{ icon_vertical: iconAlignment === 'vertical' }">
+        <ng-container *ngIf="leftImageSrc || src">
+            <div class="icon">
+                <img [src]="leftImageSrc || src" alt="" />
+            </div>
+        </ng-container>
+        <span *ngIf="title" class="title">
+            {{ title }}
+        </span>
+        <ng-container *ngIf="rightImageSrc">
+            <div class="icon">
+                <img [src]="rightImageSrc" alt="" />
+            </div>
+        </ng-container>
+    </div>
+    }
 </button>

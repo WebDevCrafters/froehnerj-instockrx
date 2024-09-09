@@ -1,0 +1,315 @@
+@import "variables";
+
+.main_container {
+    height: 100%;
+
+    .header {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        height: 10%;
+        padding: 0 2rem;
+
+        .title_container {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 8px;
+            p {
+                font-size: 25px;
+                font-weight: 600;
+            }
+            .edit_icon {
+                cursor: pointer;
+                height: 30px;
+            }
+        }
+
+        .sub_heading {
+            font-size: 19px;
+        }
+
+        .title {
+            font-size: 25px;
+            font-weight: 600;
+        }
+
+        .edit_btn {
+            // width: 140px;
+        }
+        .mark_btn {
+            width: 180px;
+        }
+    }
+
+    .medication_info,
+    .user_nfo {
+        height: max-content;
+        padding: 0 2rem;
+        display: grid;
+        grid-template-columns: repeat(2, 1fr);
+        margin-bottom: 5px;
+
+        .label_and_value {
+            display: flex;
+            gap: 12px;
+            padding: 0.5rem 0;
+
+            .label {
+                color: $globalBlackColor;
+                font-weight: bold;
+                margin-bottom: 0.2rem;
+            }
+
+            .value {
+                color: $darkBrownColor;
+            }
+        }
+    }
+
+    .table_container {
+        height: 80vh;
+        padding: 0 1rem;
+        padding-bottom: 2rem;
+        overflow-x: scroll;
+        min-width: 800px;
+
+        .empty_container,
+        .loader_container {
+            width: 100%;
+            height: 100%;
+        }
+
+        table {
+            width: 100%;
+            height: 100%;
+            border-collapse: collapse;
+            border-radius: 16px;
+            // overflow: hidden;
+
+            thead {
+                display: table;
+                table-layout: fixed;
+                height: 10%;
+                width: 100%;
+                background-color: $brandLightPrimaryColor;
+                color: black;
+                border-radius: 16px 16px 0 0;
+
+                th {
+                    padding: 12px 15px;
+                    text-align: left;
+                    font-weight: bold;
+                    white-space: nowrap;
+                    color: $offWhiteColor;
+                }
+            }
+
+            tbody {
+                height: 90%;
+                width: 100%;
+                display: block;
+                overflow-y: auto;
+                border-radius: 0 0 16px 16px;
+                border: 1px solid $normalGrey;
+                -webkit-overflow-scrolling: touch;
+
+                tr {
+                    display: table;
+                    table-layout: fixed;
+                    width: 100%;
+                    height: 46px;
+                    border-bottom: 1px solid $normalGrey;
+
+                    // &:nth-child(even) {
+                    //     background-color: $brandExtraLightPrimaryColor;
+                    // }
+
+                    &:hover {
+                        background-color: $brandExtraLightPrimaryColor;
+                    }
+
+                    &:last-child {
+                        border-bottom: none;
+                        // border-radius: 0 0 16px 16px;
+                        border-bottom: 1px solid $normalGrey;
+                    }
+
+                    td {
+                        overflow: hidden;
+                        text-overflow: ellipsis;
+                        padding: 12px 15px;
+                        // border-bottom: 1px solid $offBlackColor;
+                        white-space: nowrap;
+
+                        &:first-child {
+                            // border-left: 1px solid $offBlackColor;
+                        }
+
+                        &:last-child {
+                            // border-right: 1px solid $offBlackColor;
+                            // text-align: center;
+                        }
+
+                        .view_btn {
+                            padding: 8px 16px;
+                            cursor: pointer;
+                            color: $brandPrimaryColor;
+                            border-radius: 8px;
+                            display: inline-block;
+                            text-align: center;
+                            font-size: 14px;
+                            text-decoration: underline;
+                            font-weight: bold;
+                        }
+                    }
+                }
+
+                .bottom_loader_container {
+                    height: 150px;
+                    width: 100%;
+
+                    &:hover {
+                        background-color: $offWhiteColor;
+                    }
+                }
+            }
+        }
+    }
+}
+
+.model_container,
+.decision_container {
+    overflow-y: scroll;
+    height: 80%;
+    width: 50%;
+    box-shadow: 0px 0px 15px 5px $normalGrey;
+    border-radius: 12px;
+    background-color: $offWhiteColor;
+    position: fixed;
+    left: 50%;
+    top: 50%;
+    transform: translate(-50%, -50%);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+    z-index: 10;
+
+    .heading {
+        height: 10%;
+        width: 100%;
+        text-align: left;
+        font-weight: 600;
+        font-size: 20px;
+        padding: 0 16px;
+        display: flex;
+        align-items: center;
+        justify-content: flex-start;
+    }
+
+    .content {
+        padding-top: 8px;
+        width: 90%;
+        height: 75%;
+        max-height: 75%;
+        overflow-y: auto;
+        display: flex;
+        flex-direction: column;
+        gap: 16px;
+        padding: 4px 16px;
+        padding-top: 20px;
+    }
+
+    .footer {
+        height: 15%;
+        width: 100%;
+        display: flex;
+        align-items: center;
+        justify-content: flex-end;
+        border-radius: 0 0 12px 12px;
+        gap: 24px;
+        padding: 0 16px;
+
+        .btn_container {
+            width: 120px;
+        }
+    }
+
+    hr {
+        border-top: 1px solid $normalGrey;
+    }
+}
+
+.decision_container {
+    height: 180px;
+    width: 40%;
+
+    .heading {
+        height: 15%;
+        width: 100%;
+        text-align: left;
+        font-weight: 600;
+        font-size: 20px;
+        padding: 0 16px;
+        display: flex;
+        align-items: center;
+        justify-content: flex-start;
+    }
+
+    .content {
+        padding-top: 8px;
+        width: 100%;
+        height: 45%;
+        max-height: 45%;
+        overflow-y: auto;
+        display: flex;
+        flex-direction: column;
+        gap: 16px;
+        padding: 4px 16px;
+        padding-top: 20px;
+    }
+
+    .footer {
+        height: 30%;
+        width: 100%;
+        display: flex;
+        align-items: center;
+        justify-content: flex-end;
+        border-radius: 0 0 12px 12px;
+        gap: 24px;
+        padding: 0 16px;
+
+        .btn_container {
+            width: 120px;
+        }
+    }
+
+    hr {
+        border-top: 1px solid $normalGrey;
+    }
+}
+
+@media screen and (max-width: 700px) {
+    .main_container {
+        .header {
+            .title {
+                font-size: 18px;
+            }
+        }
+        .medication_info {
+            grid-template-columns: repeat(1, 1fr);
+        }
+    }
+}
+
+@media screen and (max-width: 950px) {
+    .model_container {
+        height: 70%;
+        width: 90%;
+    }
+    .decision_container {
+        height: 250px;
+        width: 90%;
+    }
+}

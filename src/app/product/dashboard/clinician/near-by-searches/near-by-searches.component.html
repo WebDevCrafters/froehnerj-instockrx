@@ -1,0 +1,41 @@
+<div class="main_container">
+    <div class="header">Clusters of patients</div>
+    <div class="content">
+        @if(isLoading) {
+        <div class="loader_container">
+            <app-loader></app-loader>
+        </div>
+        } @else { @if(searches.length) {
+
+        <table class="responsive-table">
+            <thead>
+                <tr>
+                    <th>Medication Name</th>
+                    <th>Pickup Date</th>
+                    <th>Alternative Provided</th>
+                    <th></th>
+                </tr>
+            </thead>
+            <tbody>
+                @for (search of searches; track $index) {
+                <tr>
+                    <td>{{ search.medication?.name }}</td>
+                    <td>{{ search.medication?.pickUpDate }}</td>
+                    <td>{{ search.medication?.alternatives?.length ? 'Yes' : 'No' }}</td>
+                    <td>
+                        <div class="view_btn" (click)="viewInfo(search?.searchId)">
+                            View Details
+                        </div>
+                    </td>
+                </tr>
+                }
+            </tbody>
+        </table>
+        } @else {
+        <div class="empty_container">
+            <app-empty-state [src]="'assets/images/svg/no-search-icon.svg'"
+                [caption]="'No Active Searches'"></app-empty-state>
+        </div>
+        } }
+    </div>
+</div>

@@ -1,0 +1,36 @@
+<div class="settings_container">
+    <div class="heading">
+        <span> Notifications </span>
+    </div>
+    <hr />
+    <div class="content">
+        @for (notification of notificationArr; track $index) {
+        <div
+            class="notification"
+            (click)="onNotificationClick(notification)"
+        >
+            <span>
+                <strong>
+                    {{ notification.data?.clinician?.name }}
+                </strong>
+                has marked your medication as available.
+            </span>
+            <div class="details">
+                <span class="time">{{
+                    notification.createdOn | date : "shortTime"
+                }}</span>
+                @if (!notification.isRead ) {
+                <span class="unread_dot"></span>
+                }
+            </div>
+        </div>
+        <hr class="inner_hr" />
+
+        } @if(!notificationArr.length){
+        <app-empty-state
+            caption="No notifications"
+            [src]="'assets/images/svg/no-search-icon.svg'"
+        />
+        }
+    </div>
+</div>

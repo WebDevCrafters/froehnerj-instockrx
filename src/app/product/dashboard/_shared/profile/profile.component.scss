@@ -1,0 +1,116 @@
+@import "variables";
+
+.main_container {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+    gap: 2rem;
+    padding: 2rem 0;
+
+    .form_container {
+        width: 90%;
+        .my_profile {
+            width: 100%;
+            display: flex;
+            flex-direction: column;
+
+            .header_container {
+                display: flex;
+                align-items: center;
+                justify-content: flex-start;
+                gap: 1rem;
+                margin-bottom: 1.5rem;
+
+                .heading {
+                    font-weight: 600;
+                    font-size: 30px;
+                }
+
+                .edit_icon {
+                    cursor: pointer;
+                    height: 30px;
+                }
+
+                .btn_container {
+                    margin-left: auto;
+                }
+            }
+
+            .content_container {
+                padding: 1rem 0;
+
+                .edit_profile_form {
+                    display: grid;
+                    grid-template-columns: 1fr 1fr;
+                    gap: 2rem;
+
+                    .actions {
+                        display: flex;
+                        gap: 1rem;
+
+                        .action_btn {
+                            width: 120px;
+                        }
+                    }
+                }
+                .value_container {
+                    display: grid;
+                    grid-template-columns: 1fr 1fr;
+                    gap: 2.6rem;
+
+                    .info {
+                        display: flex;
+                        gap: 0.5rem;
+                        flex-direction: column;
+
+                        .label {
+                            font-weight: 600;
+                        }
+                    }
+                }
+            }
+        }
+    }
+
+    .section_container {
+        width: 90%;
+        display: flex;
+        flex-direction: column;
+        gap: 2rem;
+
+        .acc_deletion,
+        .reset_password {
+            width: max-content;
+            display: flex;
+            align-items: center;
+            justify-content: flex-start;
+            gap: 12px;
+            cursor: pointer;
+            span {
+                font-weight: 600;
+                font-size: 20px;
+            }
+            img {
+                height: 28px;
+            }
+        }
+    }
+}
+
+@media screen and (max-width: 600px) {
+    .main_container {
+        .form_container {
+            .my_profile {
+                .content_container {
+                    .edit_profile_form {
+                        grid-template-columns: 1fr;
+                    }
+                    .value_container {
+                        grid-template-columns: 1fr;
+                    }
+                }
+            }
+        }
+    }
+}

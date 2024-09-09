@@ -1,14 +1,14 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, HostListener } from '@angular/core';
 import { HeaderComponent } from '../../_shared/components/header/header.component';
 import { ButtonComponent } from '../../_shared/components/button/button.component';
 import { CommonModule } from '@angular/common';
 import { ModalComponent } from '../../_shared/components/modal/modal.component';
-import { PatientDashboardComponent } from './patient-dashboard/patient-dashboard.component';
 import { InputComponent } from '../../_shared/components/input/input.component';
-import { ClinicianDashboardComponent } from './clinician-dashboard/clinician-dashboard.component';
-import { AuthService } from '../../_core/services/auth.service';
-import { RouterOutlet } from '@angular/router';
-
+import { RouterLink, RouterLinkActive, RouterOutlet } from '@angular/router';
+import APP_ROUTES from '../../_shared/constants/routes';
+import { SidebarComponent } from './_shared/sidebar/sidebar.component';
+import { UserService } from '../../_core/services/user.service';
+import UserType from '../_shared/interfaces/UserType';
 
 @Component({
     selector: 'app-dashboard',
@@ -18,25 +18,46 @@ import { RouterOutlet } from '@angular/router';
         ButtonComponent,
         CommonModule,
         ModalComponent,
-        PatientDashboardComponent,
-        ClinicianDashboardComponent,
-        RouterOutlet
+        RouterOutlet,
+        RouterLink,
+        RouterLinkActive,
+        SidebarComponent,
     ],
     templateUrl: './dashboard.component.html',
     styleUrl: './dashboard.component.scss',
 })
 export class DashboardComponent implements OnInit {
-    userType: "patient" | "clinician" = "patient"
+    APP_ROUTES = APP_ROUTES;
+    userType?: UserType = UserType.Patient;
+    UserType = UserType;
+    public isSidebarExpanded: boolean = true;
 
-    constructor(private authService: AuthService) { }
+    constructor(private userService: UserService) { }
 
     ngOnInit(): void {
         this.getUserType();
     }
 
     getUserType() {
-        const user = this.authService.getUserData();
-        if (!user) return;
-        this.userType = user.type;
+        const authResponse = this.userService.getUserData();
+        if (!authResponse) return;
+        this.userType = authResponse.user.userType;
+    }
+
+    toggleSidebar() {
+        this.isSidebarExpanded = !this.isSidebarExpanded;
+    }
+
+    closeSidebar() {
+        if (window.innerWidth <= 700) {
+            this.isSidebarExpanded = false;
+        }
+    }
+
+    @HostListener('window:resize', ['$event'])
+    onResize(event: Event) {
+        if (window.innerWidth > 700 && !this.isSidebarExpanded) {
+            this.isSidebarExpanded = true;
+        }
     }
 }

@@ -2,11 +2,12 @@ import { CommonModule } from '@angular/common';
 import { Component, EventEmitter, Input, Output } from '@angular/core';
 import { ButtonType } from '../../dataTypes/ButtonType';
 import { Shape } from '../../dataTypes/ButtonShape';
+import { LoaderComponent } from '../loader/loader.component';
 
 @Component({
     selector: 'app-button',
     standalone: true,
-    imports: [CommonModule],
+    imports: [CommonModule, LoaderComponent],
     templateUrl: './button.component.html',
     styleUrl: './button.component.scss',
 })

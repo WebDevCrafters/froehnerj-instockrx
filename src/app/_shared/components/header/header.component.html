@@ -1,62 +1,21 @@
 <div class="header">
-  <div class="back_icon" (click)="goBack()">
-    <img src="assets/images/svg/arrow-backward.svg" alt="" />
-  </div>
-  <div class="brand">
-    <img src="assets/images/png/pill-logo.png" alt="" />
-    <div class="brand_name">
-      <div class="heading">FindMyMeds</div>
-      <div class="sub_heading">by InStockRx</div>
+    <div class="back_icon" (click)="onMenuClick()">
+        <img src="assets/images/svg/menu-icon.svg" alt="" />
     </div>
-  </div>
-  <div class="icon_container">
-    <img src="assets/images/svg/settings-icon.svg" alt="" />
-    <img
-      class="profile_icon"
-      src="assets/images/svg/profile-icon.svg"
-      alt=""
-      (click)="toggleSettings()"
-    />
-  </div>
+    <div class="brand">
+        <img src="assets/images/png/pill-logo.png" alt="" />
+        <div class="brand_name">
+            <div class="heading">FindMyMeds</div>
+            <div class="sub_heading">by InStockRx</div>
+        </div>
+    </div>
+    <div class="icon_container" (click)="toggleSettings()">
+        @if (count>0) {
+        <span class="count">{{ count }}</span>
+        }
+        <img class="profile_icon" src="assets/images/svg/notification-icon.svg" alt="" />
+    </div>
 </div>
-
-<app-modal
-  [isVisible]="modalVisible"
-  bg="transparent"
-  (closeModal)="toggleSettings()"
->
-  <div class="settings_container">
-    <div class="profile_section">
-      <img
-        class="profile_icon"
-        src="assets/images/svg/profile-icon.svg"
-        alt=""
-      />
-      <div class="user_info">
-        <div class="type">{{ user?.type }}</div>
-        <div class="email">{{ user?.email }}</div>
-      </div>
-    </div>
-    <hr />
-    <div class="option">Search Status</div>
-    <hr />
-    <div class="option" (click)="navigateToEditProfile()">Edit Profile</div>
-    <hr />
-    <div class="option" (click)="requestAccountDeletion()">
-      Request Account Deletion
-    </div>
-    <hr />
-    @if (user?.type!=="clinician") {
-    <div class="option" (click)="resetPassword()">Reset Password</div>
-    <hr />
-    }
-    <div class="sign_out">
-      <app-button
-        title="Sign out"
-        type="small_primary"
-        shape="rounded"
-        (clickEvent)="signout()"
-      />
-    </div>
-  </div>
+<app-modal [isVisible]="modalVisible" bg="transparent" (closeModal)="toggleSettings()">
+    <app-notification [count]="count" (countChange)="updateCount($event)" (isModalVisible)="toggleSettings($event)" />
 </app-modal>

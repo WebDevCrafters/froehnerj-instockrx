@@ -1,0 +1,57 @@
+@import "variables";
+
+.main_container {
+    height: 100%;
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    .loader {
+        position: relative;
+        width: 100px;
+        height: 100px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        
+        .pill{
+            width: 1rem;
+            height: 2rem;
+            border-radius: 1rem;
+            background: linear-gradient(180deg, $brandPrimaryColor 50%, $globalWhiteColor 50%);
+            animation: rotate-reverse 0.6s linear infinite;
+            border: 2px solid $brandPrimaryColor;
+        }
+    }
+
+    .loader:before,
+    .loader:after {
+        content: "";
+        border-radius: 50%;
+        position: absolute;
+        inset: 0;
+    }
+    .loader:after {
+        box-shadow: 0 2px 0 $brandPrimaryColor inset;
+        animation: rotate 0.6s linear infinite;
+    }
+}
+
+@keyframes rotate-reverse {
+    0% {
+        transform: rotate(360deg);
+    }
+    100% {
+        transform: rotate(0);
+    }
+}
+
+@keyframes rotate {
+    0% {
+        transform: rotate(0);
+    }
+    100% {
+        transform: rotate(360deg);
+    }
+}

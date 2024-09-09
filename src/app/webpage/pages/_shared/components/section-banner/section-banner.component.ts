@@ -3,6 +3,7 @@ import { ButtonComponent } from '../../../../../_shared/components/button/button
 import { ButtonType } from '../../../../../_shared/dataTypes/ButtonType';
 import { Router } from '@angular/router';
 import APP_ROUTES from '../../../../../_shared/constants/routes';
+import UserType from '../../../../../product/_shared/interfaces/UserType';
 
 @Component({
     selector: 'app-section-banner',
@@ -19,12 +20,13 @@ export class SectionBannerComponent {
     @Input() primaryBtnType: ButtonType = 'default_primary';
     @Input() secondaryBtnType: ButtonType = 'default_secondary';
     @Input() routeOnPrimaryBtnClick: string = APP_ROUTES.webpage.findMyMeds;
-    @Input() routeOnSecondaryBtnClick: string = `${APP_ROUTES.product.app}/${APP_ROUTES.product.selfService}`;
+    @Input()
+    routeOnSecondaryBtnClick: string = `${APP_ROUTES.product.app}/${APP_ROUTES.product.newSearch}`;
     @Input() openOnNewPage: boolean = true;
 
     APP_ROUTES = APP_ROUTES;
 
-    constructor(private router: Router) { }
+    constructor(private router: Router) {}
 
     openFindMyMeds(event: MouseEvent) {
         if (this.openOnNewPage) {
@@ -32,8 +34,7 @@ export class SectionBannerComponent {
                 this.router.createUrlTree([this.routeOnPrimaryBtnClick])
             );
             window.open(url, '_blank');
-        }
-        else {
+        } else {
             this.router.navigate([this.routeOnPrimaryBtnClick]);
         }
     }
@@ -51,9 +52,11 @@ export class SectionBannerComponent {
     // }
 
     openSignUpPage(event: MouseEvent) {
-        this.router.navigate(
-            [`${APP_ROUTES.product.app}/${APP_ROUTES.product.auth}`],
-            { queryParams: { patientSignUp: JSON.stringify(false) } }
-        );
+        this.router.navigate([
+            APP_ROUTES.product.app,
+            APP_ROUTES.product.auth,
+            APP_ROUTES.product.signUp,
+            UserType.Clinician,
+        ]);
     }
 }

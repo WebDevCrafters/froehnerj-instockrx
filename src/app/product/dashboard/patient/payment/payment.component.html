@@ -1,0 +1,9 @@
+@if (isLoading) {
+<app-loader />
+} @else { @if (payment) { <app-current-package [payment]="payment" /> } @else {
+@switch (step) { @case (1) {
+<app-select-package (onSelectPackageSubmit)="selectPackage($event)" />
+
+} @case (2) {
+<app-checkout [selectedPackage]="selectedPackage" (onPaymentComplete)="onPaymentComplete($event)"/>
+} } } }

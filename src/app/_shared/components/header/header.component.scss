@@ -41,14 +41,24 @@
     }
 
     .icon_container {
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        gap: 30px;
+        position: relative;
 
         .profile_icon {
             height: 30px;
             width: 30px;
+        }
+
+        .count{
+            background-color: $green;
+            position: absolute;
+            right: 0;   
+            color: $offWhiteColor;
+            font-size: 0.8rem;
+            width: 1rem;
+            height: 1rem;
+            text-align: center;
+            aspect-ratio: 1;
+            border-radius: 50%;
         }
 
         > img {
@@ -57,57 +67,4 @@
     }
 }
 
-.settings_container {
-    width: 15rem;
-    box-shadow: 0px 0px 10px 0px $normalGrey;
-    border-radius: 12px;
-    background-color: $offWhiteColor;
-    position: absolute;
-    top: 3.5rem;
-    right: 2rem;
-    display: flex;
-    gap: 8px;
-    flex-direction: column;
-    padding: 1rem 0.6rem;
-    z-index: 10;
 
-    .profile_section {
-        display: flex;
-        align-items: center;
-        justify-content: flex-start;
-        gap: 0;
-        .profile_icon {
-            height: 40px;
-            width: 40px;
-        }
-        .user_info {
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            flex-direction: column;
-            gap: 2px;
-            padding: 0 8px;
-
-            .type {
-                font-size: 14px;
-            }
-
-            .email {
-                font-size: 13px;
-            }
-        }
-    }
-
-    .option {
-        padding: 8px 16px 8px 0px;
-        cursor: pointer;
-    }
-
-    .sign_out {
-        width: 100%;
-    }
-
-    hr {
-        border-top: 1px solid $normalGrey;
-    }
-}
