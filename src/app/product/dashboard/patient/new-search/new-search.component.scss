@@ -182,6 +182,12 @@
         }
     }
 
+    .alternate_medication_info_section {
+        display: flex;
+        flex-direction: column;
+        gap: 10px;
+    }
+
     .footer {
         height: 15%;
         width: 100%;

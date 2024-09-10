@@ -65,31 +65,33 @@
                     </div>
                 </div>
             </div>
-            @if(true) {
+            @if(search?.medication?.alternatives?.length) {
             <div class="alternate_medication_info_section">
                 <div class="section_heading">Alternate Medication Details:</div>
+                @for(med of search?.medication?.alternatives; track search?.medication?.alternatives) {
                 <div class="section_content">
                     <div class="label_and_value">
                         <div class="label">Medication Name:</div>
-                        <div class="value">{{ search?.medication?.name }}</div>
+                        <div class="value">{{ med?.name }}</div>
                     </div>
                     <div class="label_and_value">
                         <div class="label">Dose:</div>
-                        <div class="value">{{ search?.medication?.dose }}</div>
+                        <div class="value">{{ med?.dose }}</div>
                     </div>
                     <div class="label_and_value">
                         <div class="label">Quantity:</div>
                         <div class="value">
-                            {{ search?.medication?.quantity }}
+                            {{ med?.quantity }}
                         </div>
                     </div>
                     <div class="label_and_value">
                         <div class="label">Brand Name:</div>
                         <div class="value">
-                            {{ search?.medication?.brandName }}
+                            {{ med?.brandName }}
                         </div>
                     </div>
                 </div>
+                }
             </div>
             }
             <div class="pick_up_date">
