@@ -7,7 +7,7 @@ interface Search {
     patient?: string;
     medication?: Medication;
     status?: SearchStatus;
-    zipCode?: number;
+    zipCode?: string;
     dob?: number;
     location?: Location;
     prescriberName?: string;

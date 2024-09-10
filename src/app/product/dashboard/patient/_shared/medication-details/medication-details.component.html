@@ -143,7 +143,16 @@
         <div class="loader_container">
             <app-loader></app-loader>
         </div>
-        } @else {
+        }
+        @else {
+        @if(pharmaciesNearSearchArray.length === 0) {
+        <div class="empty_container">
+            <app-empty-state [src]="'assets/images/svg/no-search-icon.svg'" [caption]="
+                            'There are no pharmacies within a 30-mile radius of this zipcode.'
+                        "></app-empty-state>
+        </div>
+        }
+        @else {
         <table>
             <thead>
                 <tr>
@@ -157,14 +166,11 @@
             </thead>
             <tbody (scroll)="onScroll($event)">
                 <tr *ngFor="
-                        let pharmacy of pharmaciesNearSearchArray;
-                        let i = index
-                    ">
+                                let pharmacy of pharmaciesNearSearchArray;
+                                let i = index
+                            ">
                     <td>{{ pharmacy.name }}</td>
-                    <!-- <td>{{ pharmacy.authorizedOfficialName }}</td> -->
-                    <!-- <td>{{ pharmacy.authorizedOfficialContactNumber }}</td> -->
                     <td>{{ pharmacy.phoneNumber }}</td>
-                    <!-- <td>{{ pharmacy.url }}</td> -->
                     <td [title]="pharmacy.address">{{ pharmacy.address }}</td>
                 </tr>
                 @if(isNextPharmacyLoading) {
@@ -176,6 +182,7 @@
                 }
             </tbody>
         </table>
+        }
         }
     </div>
 

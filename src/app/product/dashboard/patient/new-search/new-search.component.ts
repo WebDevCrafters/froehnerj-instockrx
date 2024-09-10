@@ -168,7 +168,7 @@ export class NewSearchComponent implements OnInit {
         const search: Search = {
             prescriberName: formValues.prescriber || '',
             dob: dob,
-            zipCode: Number(formValues.zipCode),
+            zipCode: formValues.zipCode || '',
             status: isPaid ? SearchStatus.InProgress : SearchStatus.NotStarted,
             medication:
                 formValues.prescribedMedication &&

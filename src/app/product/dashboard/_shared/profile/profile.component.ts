@@ -81,7 +81,7 @@ export class ProfileComponent implements OnInit {
             name: this.user.name || '',
             email: this.user.email || '',
             phoneNumber: this.user.phoneNumber || '',
-            zipCode: this.user.zipCode?.toString() || '',
+            zipCode: this.user.zipCode || '',
         });
         console.log("this.profileForm", this.profileForm.value);
         // this.profileBackup = this.profileForm.value;
@@ -170,7 +170,7 @@ export class ProfileComponent implements OnInit {
         const formValues = this.profileForm.value;
         const user: User = {
             email: formValues.email || '',
-            zipCode: Number(formValues.zipCode) || 0,
+            zipCode: formValues.zipCode || '0',
             name: formValues.name || '',
             phoneNumber: formValues.phoneNumber || '',
         };

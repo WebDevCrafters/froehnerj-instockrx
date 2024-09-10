@@ -188,7 +188,7 @@ export class MedicationDetailsComponent implements OnInit {
                     ),
                     dateValidator('Please enter a valid date'),
                 ]),
-                zipCode: new FormControl(JSON.stringify(this.search?.zipCode), [
+                zipCode: new FormControl(this.search?.zipCode, [
                     requiredValidator('Zip code must not be empty'),
                     charLimitValidator(5, 'Zip code must be 5 digits'),
                 ]),
@@ -314,9 +314,14 @@ export class MedicationDetailsComponent implements OnInit {
                         alternative.medicationId = resAlternatives[index] as any;
                     });
                 }
-
+                if (this.search) {
+                    this.search.location = res.location
+                }
                 this.isEditMedicationLoading = false;
                 this.isModalVisible = false;
+                console.log("This.search", this.search);
+                this.getPharmaciesNearSearch();
+                this.getPharmaciesNearSearchCount();
                 // console.log("Response update search:", this.search);
                 this.toastrService.success('Medication Details updated successfully!');
             },
@@ -338,7 +343,6 @@ export class MedicationDetailsComponent implements OnInit {
         this.isEditMedicationLoading = true;
         if (this.search) {
             this.search = this.convertFormToSearch();
-            // console.log("Request update search", this.search);
             this.updateSearch(this.search);
         } else {
             this.isEditMedicationLoading = false;
@@ -372,8 +376,9 @@ export class MedicationDetailsComponent implements OnInit {
             searchId: this.searchId,
             prescriberName: formValues.prescriber || '',
             dob: dob,
-            zipCode: Number(formValues.zipCode),
+            zipCode: formValues.zipCode || '',
             status: this.search?.status,
+            location: this.search.location,
             medication:
                 formValues.prescribedMedication &&
                     formValues.prescribedMedication.length > 0
@@ -449,7 +454,6 @@ export class MedicationDetailsComponent implements OnInit {
         this.searchService.getSearch(this.searchId).subscribe({
             next: (res) => {
                 this.search = res;
-                console.log("Fetched Search", this.search);
                 this.checkPayment();
                 this.generateForm();
                 this.getPharmaciesNearSearch();
@@ -484,18 +488,21 @@ export class MedicationDetailsComponent implements OnInit {
     }
 
     getPharmaciesNearSearch() {
-        this.isGetNearPharmacyloading = true;
         if (!this.search?.location) return;
+        this.isGetNearPharmacyloading = true;
         this.pharmacyService
             .getPharmacyInRadius(this.search?.location, 1, 20)
             .subscribe({
                 next: (res) => {
                     this.pharmaciesNearSearchArray.push(...res);
                     this.isGetNearPharmacyloading = false;
+                    // console.log("Success: ", this.pharmaciesNearSearchArray);
                 },
                 error: (err) => {
                     console.log(err);
                     this.isGetNearPharmacyloading = false;
+                    this.pharmaciesNearSearchArray = [];
+                    // console.log("Error: ", this.pharmaciesNearSearchArray);
                 },
             });
     }

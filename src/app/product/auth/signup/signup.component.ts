@@ -112,7 +112,7 @@ export class SignupComponent implements OnInit {
                 }`,
             phoneNumber: this.signUpInfoForm.get('phoneNumber')?.value || '',
             userType: this.userType,
-            zipCode: Number(this.signUpInfoForm.get('zipCode')?.value) || 0,
+            zipCode: this.signUpInfoForm.get('zipCode')?.value || '',
             password: this.signUpInfoForm.get('password')?.value || '',
         };
         this.userService.signUp(user).subscribe({

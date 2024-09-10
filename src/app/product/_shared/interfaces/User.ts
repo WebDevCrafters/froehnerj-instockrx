@@ -8,7 +8,7 @@ export type User = {
   userType?: UserType;
   dob?: number;
   doctorId?: string;
-  zipCode?: number;
+  zipCode?: string;
   password?: string;
   location?: Location;
 };
