@@ -20,7 +20,7 @@
                 @for (search of searches; track $index) {
                 <tr>
                     <td>{{ search.medication?.name }}</td>
-                    <td>{{ search.medication?.pickUpDate }}</td>
+                    <td>{{ search.medication?.pickUpDate | date }}</td>
                     <td>{{ search.medication?.alternatives?.length ? 'Yes' : 'No' }}</td>
                     <td>
                         <div class="view_btn" (click)="viewInfo(search?.searchId)">
