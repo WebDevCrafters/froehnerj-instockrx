@@ -11,6 +11,7 @@ interface Search {
     dob?: number;
     location?: Location;
     prescriberName?: string;
+    radius?: number;
 }
 
 export default Search;

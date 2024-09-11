@@ -96,6 +96,14 @@
             }
             <div class="pick_up_date">
                 <div class="label_and_value">
+                    <div class="label">Search Radius:</div>
+                    <div class="value">
+                        {{ search?.radius }}
+                    </div>
+                </div>
+            </div>
+            <div class="pick_up_date">
+                <div class="label_and_value">
                     <div class="label">Pick up date:</div>
                     <div class="value">
                         {{ search?.medication?.pickUpDate | date }}

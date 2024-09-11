@@ -50,6 +50,20 @@
     <div class="date_picker">
         <app-input type="dates" label="Enter date" [control]="additionalInfoForm.controls.pickupDate" />
     </div>
+
+    <div class="field-info">
+        <p>Choose Radius for Pharmacy Search (In Miles)</p>
+        <span>Your search will include pharmacies located within the radius you choose.</span>
+    </div>
+
+    <div class="dropdown-container">
+        <select id="distance" class="dropdown" (change)="setDropDownValue($event)">
+            <option *ngFor="let distance of distances" [value]="distance" [selected]="distance === 30">{{ distance }}
+            </option>
+        </select>
+    </div>
+
+
     } @else {
     <div class="button_container">
         <app-button [title]="
@@ -57,6 +71,24 @@
             " type="small_secondary" shape="square" [formButtonType]="'button'" iconAlignment="vertical"
             src="assets/images/svg/calendar-icon.svg" (clickEvent)="openDateChooserModal()" />
     </div>
+
+
+    <div class="field-info">
+        <p>Choose Radius for Pharmacy Search (In Miles)</p>
+        <span>Your search will include pharmacies located within the radius you choose.</span>
+    </div>
+
+    <div class="dropdown-container">
+        <select id="distance" class="dropdown" (change)="setDropDownValue($event)">
+            <option *ngFor="let distance of distances" [value]="distance" [selected]="distance === 30">{{ distance }}
+            </option>
+        </select>
+    </div>
+
+
+
+
+
     <div class="continue_button_container">
         <div class="btn_container">
             <app-button title="Continue" type="small_primary" shape="rounded" />

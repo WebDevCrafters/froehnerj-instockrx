@@ -164,6 +164,7 @@ export class MedicationDetailsComponent implements OnInit {
                     brandName: new FormControl(''),
                 }),
             ]),
+            radius: new FormControl(),
             pickupDate: new FormControl(new Date().getTime()),
         });
     }
@@ -211,6 +212,7 @@ export class MedicationDetailsComponent implements OnInit {
                         ),
                     }),
                 ]),
+                radius: new FormControl(this.search.radius),
                 pickupDate: new FormControl(PickUpDateString, [
                     Validators.required,
                 ]),
@@ -379,6 +381,7 @@ export class MedicationDetailsComponent implements OnInit {
             zipCode: formValues.zipCode || '',
             status: this.search?.status,
             location: this.search.location,
+            radius: this.search.radius,
             medication:
                 formValues.prescribedMedication &&
                     formValues.prescribedMedication.length > 0

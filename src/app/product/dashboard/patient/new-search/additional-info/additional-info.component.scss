@@ -66,6 +66,42 @@
         width: 10rem;
     }
 
+    .dropdown-container {
+        display: flex;
+        flex-direction: column;
+        margin: 0 0 10px 0;
+        border-radius: 8px;
+
+        .dropdown-label {
+            border-radius: 8px;
+            font-size: 16px;
+            margin-bottom: 5px;
+            color: $darkBrownColor;
+        }
+
+        .dropdown {
+            width: 200px;
+            padding: 8px 12px;
+            border-radius: 8px;
+            font-size: 16px;
+            border: 1px solid $normalGrey;
+            color: $offBlackColor;
+            outline: none;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            background-color: $globalWhiteColor;
+
+            &:hover {
+                border-color: $brandPrimaryColor;
+            }
+
+            &:focus {
+                border-color: $brandDarkPrimaryColor;
+                box-shadow: 0 0 5px rgba(0, 0, 0, 0.2);
+            }
+        }
+    }
+
     .continue_button_container {
         width: 100%;
         display: flex;

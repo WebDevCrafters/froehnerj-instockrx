@@ -79,6 +79,7 @@ export class NewSearchComponent implements OnInit {
                 brandName: new FormControl(''),
             }),
         ]),
+        radius: new FormControl(),
         pickupDate: new FormControl(new Date().getTime(), [
             Validators.required,
         ]),
@@ -170,6 +171,7 @@ export class NewSearchComponent implements OnInit {
             dob: dob,
             zipCode: formValues.zipCode || '',
             status: isPaid ? SearchStatus.InProgress : SearchStatus.NotStarted,
+            radius: formValues.radius || 30,
             medication:
                 formValues.prescribedMedication &&
                     formValues.prescribedMedication.length > 0

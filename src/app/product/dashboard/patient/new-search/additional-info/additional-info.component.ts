@@ -4,6 +4,7 @@ import {
     FormArray,
     FormControl,
     FormGroup,
+    FormsModule,
     ReactiveFormsModule,
 } from '@angular/forms';
 import { ButtonComponent } from '../../../../../_shared/components/button/button.component';
@@ -12,7 +13,6 @@ import { InputComponent } from '../../../../../_shared/components/input/input.co
 import { ModalComponent } from '../../../../../_shared/components/modal/modal.component';
 import { formatTimestampToMMDDYYYY, formatTimestamp, mmddyyToTimestamp } from '../../../../../_shared/utils/dateTime';
 import { dateValidator } from '../../../../../_shared/utils/Validators';
-
 
 @Component({
     selector: 'app-additional-info',
@@ -24,6 +24,7 @@ import { dateValidator } from '../../../../../_shared/utils/Validators';
         ReactiveFormsModule,
         ModalComponent,
         DatePickerComponent,
+        FormsModule
     ],
     templateUrl: './additional-info.component.html',
     styleUrl: './additional-info.component.scss',
@@ -37,6 +38,8 @@ export class AdditionalInfoComponent {
         formatTimestampToMMDDYYYY(this.selectedDate),
         dateValidator('Invalid format')
     );
+    distances: number[] = [10, 30, 50];
+
     @Output() onAdditionalInfoSubmit = new EventEmitter<void>();
     @Input() additionalInfoForm = new FormGroup({
         dob: new FormControl(''),
@@ -50,11 +53,18 @@ export class AdditionalInfoComponent {
                 brandName: new FormControl(''),
             }),
         ]),
+        radius: new FormControl(),
         pickupDate: new FormControl(new Date().getTime()),
     });
 
     get prescribedMedication(): FormArray {
         return this.additionalInfoForm.get('prescribedMedication') as FormArray;
+    }
+
+    setDropDownValue(event: Event) {
+        const selectElement = event.target as HTMLSelectElement;
+        const selectedValue = selectElement.value;
+        this.additionalInfoForm.controls.radius.setValue(Number(selectedValue));
     }
 
     addMedication() {

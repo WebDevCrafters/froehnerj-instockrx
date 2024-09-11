@@ -67,6 +67,10 @@
             <div class="label">Status:</div>
             <div class="value">{{ search?.status }}</div>
         </div>
+        <div class="label_and_value">
+            <div class="label">Search Radius:</div>
+            <div class="value">{{ search?.radius || 30 }}</div>
+        </div>
     </div>
     @if(search?.medication?.alternatives?.length) {
     <div class="header">
