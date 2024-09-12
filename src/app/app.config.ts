@@ -8,6 +8,7 @@ import { provideCacheableAnimationLoader, provideLottieOptions } from 'ngx-lotti
 import player from 'lottie-web';
 import { provideToastr } from 'ngx-toastr';
 import { provideAnimations } from '@angular/platform-browser/animations';
+import { provideNgxStripe } from 'ngx-stripe';
 
 export const appConfig: ApplicationConfig = {
     providers: [
@@ -19,6 +20,7 @@ export const appConfig: ApplicationConfig = {
         provideAnimations(),
         provideToastr(
             { positionClass: 'toast-bottom-left' }
-        )
+        ),
+        provideNgxStripe()
     ],
 };
