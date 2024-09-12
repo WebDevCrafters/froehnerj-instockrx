@@ -45,6 +45,7 @@ export class ActiveSearchesComponent implements OnInit {
     getMyActiveSearches() {
         this.searchService.getMySearches([SearchStatus.InProgress, SearchStatus.NotStarted]).subscribe({
             next: (result) => {
+                console.log("All searches: ", result);
                 this.setInDatService(result);
                 this.activeSearches.unshift(...result);
                 this.isLoading = false;

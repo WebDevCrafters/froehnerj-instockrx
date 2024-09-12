@@ -69,7 +69,7 @@
         </div>
         <div class="label_and_value">
             <div class="label">Search Radius:</div>
-            <div class="value">{{ search?.radius || 30 }}</div>
+            <div class="value">{{ search?.miles }}</div>
         </div>
     </div>
     @if(search?.medication?.alternatives?.length) {
@@ -138,7 +138,7 @@
             List of Pharmacies
             {{ search?.status !== searchStatus.NotStarted ? "" : "to be" }}
             Notified via Fax: {{
-            pharmaciesCount > 0 ? pharmaciesCount : "--"
+            pharmaciesNearSearchArray.length > 0 ? pharmaciesNearSearchArray.length : "--"
             }}
         </div>
     </div>
@@ -168,7 +168,7 @@
                     <th>Address</th>
                 </tr>
             </thead>
-            <tbody (scroll)="onScroll($event)">
+            <tbody>
                 <tr *ngFor="
                                 let pharmacy of pharmaciesNearSearchArray;
                                 let i = index

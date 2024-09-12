@@ -79,7 +79,7 @@ export class NewSearchComponent implements OnInit {
                 brandName: new FormControl(''),
             }),
         ]),
-        radius: new FormControl(),
+        miles: new FormControl(),
         pickupDate: new FormControl(new Date().getTime(), [
             Validators.required,
         ]),
@@ -121,9 +121,10 @@ export class NewSearchComponent implements OnInit {
 
     private addNewSearch(search: Search, isPaid: boolean) {
         this.isLoading = true;
+        console.log("search request object: ", search);
         this.searchService.addSearch(search).subscribe({
             next: (search) => {
-                console.log(search);
+                console.log("Response after adding search: ",search);
                 if (!isPaid) this.navigateToPayment();
                 else this.navigateToActiveSearch();
                 this.isLoading = false;
@@ -171,7 +172,7 @@ export class NewSearchComponent implements OnInit {
             dob: dob,
             zipCode: formValues.zipCode || '',
             status: isPaid ? SearchStatus.InProgress : SearchStatus.NotStarted,
-            radius: formValues.radius || 30,
+            miles: formValues.miles || 30,
             medication:
                 formValues.prescribedMedication &&
                     formValues.prescribedMedication.length > 0
@@ -197,7 +198,7 @@ export class NewSearchComponent implements OnInit {
                     : undefined,
         };
 
-        console.log(search);
+        // console.log(search);
 
         return search;
     }

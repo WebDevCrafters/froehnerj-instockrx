@@ -60,7 +60,7 @@ export class MedicationDetailsComponent implements OnInit {
     public isModalVisible: boolean = false;
     public isDecisionModalVisible: boolean = false;
     public isLoading: boolean = true;
-    public isGetNearPharmacyloading: boolean = true;
+    public isGetNearPharmacyloading: boolean = false;
     public isNextPharmacyLoading: boolean = false;
     public isPaid: boolean | null = null;
     public additionalInfoForm: any;
@@ -113,7 +113,7 @@ export class MedicationDetailsComponent implements OnInit {
             this.userService.getUser(userId).subscribe({
                 next: (res) => {
                     this.patientInfo = res;
-                    console.log("this.patientInfo", this.patientInfo);
+                    // console.log("this.patientInfo", this.patientInfo);
                 },
                 error: (err) => {
                     console.log(err);
@@ -164,7 +164,7 @@ export class MedicationDetailsComponent implements OnInit {
                     brandName: new FormControl(''),
                 }),
             ]),
-            radius: new FormControl(),
+            miles: new FormControl(),
             pickupDate: new FormControl(new Date().getTime()),
         });
     }
@@ -212,7 +212,7 @@ export class MedicationDetailsComponent implements OnInit {
                         ),
                     }),
                 ]),
-                radius: new FormControl(this.search.radius),
+                miles: new FormControl(this.search.miles),
                 pickupDate: new FormControl(PickUpDateString, [
                     Validators.required,
                 ]),
@@ -321,9 +321,9 @@ export class MedicationDetailsComponent implements OnInit {
                 }
                 this.isEditMedicationLoading = false;
                 this.isModalVisible = false;
-                console.log("This.search", this.search);
+                // console.log("This.search", this.search);
                 this.getPharmaciesNearSearch();
-                this.getPharmaciesNearSearchCount();
+                // this.getPharmaciesNearSearchCount();
                 // console.log("Response update search:", this.search);
                 this.toastrService.success('Medication Details updated successfully!');
             },
@@ -381,7 +381,7 @@ export class MedicationDetailsComponent implements OnInit {
             zipCode: formValues.zipCode || '',
             status: this.search?.status,
             location: this.search.location,
-            radius: this.search.radius,
+            miles: this.search.miles,
             medication:
                 formValues.prescribedMedication &&
                     formValues.prescribedMedication.length > 0
@@ -456,11 +456,12 @@ export class MedicationDetailsComponent implements OnInit {
         if (!this.searchId) return;
         this.searchService.getSearch(this.searchId).subscribe({
             next: (res) => {
+                console.log("Medication details: ", res);
                 this.search = res;
                 this.checkPayment();
                 this.generateForm();
                 this.getPharmaciesNearSearch();
-                this.getPharmaciesNearSearchCount();
+                // this.getPharmaciesNearSearchCount();
                 this.getSearchUserInfo(this.search?.patient);
                 this.getAvailability();
             },
@@ -492,12 +493,13 @@ export class MedicationDetailsComponent implements OnInit {
 
     getPharmaciesNearSearch() {
         if (!this.search?.location) return;
+        if (!this.search.miles) return;
         this.isGetNearPharmacyloading = true;
         this.pharmacyService
-            .getPharmacyInRadius(this.search?.location, 1, 20)
+            .getPharmacyInRadius(this.search?.location, this.search.miles)
             .subscribe({
                 next: (res) => {
-                    this.pharmaciesNearSearchArray.push(...res);
+                    this.pharmaciesNearSearchArray = res;
                     this.isGetNearPharmacyloading = false;
                     // console.log("Success: ", this.pharmaciesNearSearchArray);
                 },
@@ -509,46 +511,4 @@ export class MedicationDetailsComponent implements OnInit {
                 },
             });
     }
-
-    getPharmaciesNearSearchCount() {
-        if (!this.search?.location) return;
-
-        this.pharmacyService
-            .getPharmacyInRadiusCount(this.search?.location)
-            .subscribe({
-                next: (res) => {
-                    this.pharmaciesCount = res.count;
-                },
-                error: (err) => {
-                    console.log(err);
-                },
-            });
-    }
-
-    @HostListener('window:scroll', ['$event'])
-    onScroll(event: any) {
-        const element = event.target;
-        if (element.scrollTop + element.clientHeight + 3 >= element.scrollHeight) {
-            this.loadMorePharmacies();
-        }
-    }
-
-    loadMorePharmacies() {
-        if (!this.search?.location) return;
-        this.isNextPharmacyLoading = true;
-        this.pharmacyService
-            .getPharmacyInRadius(this.search?.location, this.page, 20)
-            .subscribe({
-                next: (res) => {
-                    this.pharmaciesNearSearchArray.push(...res);
-                    this.page++;
-                    this.isNextPharmacyLoading = false;
-                },
-                error: (err) => {
-                    console.error(err);
-                    this.isNextPharmacyLoading = false;
-                },
-            });
-    }
-
 }

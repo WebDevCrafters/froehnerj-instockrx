@@ -53,7 +53,7 @@ export class AdditionalInfoComponent {
                 brandName: new FormControl(''),
             }),
         ]),
-        radius: new FormControl(),
+        miles: new FormControl(),
         pickupDate: new FormControl(new Date().getTime()),
     });
 
@@ -64,7 +64,7 @@ export class AdditionalInfoComponent {
     setDropDownValue(event: Event) {
         const selectElement = event.target as HTMLSelectElement;
         const selectedValue = selectElement.value;
-        this.additionalInfoForm.controls.radius.setValue(Number(selectedValue));
+        this.additionalInfoForm.controls.miles.setValue(Number(selectedValue));
     }
 
     addMedication() {

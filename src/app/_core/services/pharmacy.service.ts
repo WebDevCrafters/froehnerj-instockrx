@@ -15,11 +15,11 @@ export class PharmacyService {
     constructor(
         private userService: UserService,
         private httpClient: HttpClient
-    ) {}
+    ) { }
 
-    getPharmacyInRadius(location: Location, page: number, limit: number) {
+    getPharmacyInRadius(location: Location, miles: number) {
         const accessToken = this.userService.getAccessToken();
-        const url = `${API_URL}${this.PHARMACY_URL}?longitude=${location.longitude}&latitude=${location.latitude}&page=${page}&limit=${limit}`;
+        const url = `${API_URL}${this.PHARMACY_URL}?longitude=${location.longitude}&latitude=${location.latitude}&miles=${miles}`;
         const headers = new HttpHeaders().set('authorization', accessToken);
         return this.httpClient.get(url, { headers }).pipe(
             map((res) => {
