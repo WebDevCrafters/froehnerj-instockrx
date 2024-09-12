@@ -3,8 +3,9 @@ import { User } from '../../product/_shared/interfaces/User';
 import { KEYS } from '../../_shared/constants/localStorageKeys';
 import { API_URL } from '../../../../env';
 import { AuthResponse } from '../../product/_shared/interfaces/AuthResponse';
-import { HttpClient, HttpErrorResponse, HttpHeaders } from '@angular/common/http';
+import { HttpClient, HttpErrorResponse, HttpHeaders, HttpResponse } from '@angular/common/http';
 import { catchError, map, of, throwError } from 'rxjs';
+import { ResetPasswordRequest } from '../../product/_shared/interfaces/ResetPasswordRequest';
 
 @Injectable({
     providedIn: 'root',
@@ -61,6 +62,32 @@ export class UserService {
                 return res as User;
             }),
             catchError((err) => throwError(() => err))
+        );
+    }
+
+    forgotPassword(userEmail: string) {
+        const url = `${API_URL}${this.USER_URL}/forgot-password`;
+        return this.httpClient.post(url, { email: userEmail }).pipe(
+            map((result) => {
+                let forgotPasswordResult = result as string;
+                return forgotPasswordResult;
+            }),
+            catchError((error: HttpErrorResponse) => {
+                return throwError(() => error);
+            })
+        );
+    }
+
+    resetPassword(resetPasswordRequest: ResetPasswordRequest) {
+        const url = `${API_URL}${this.USER_URL}/reset-password`;
+        return this.httpClient.post(url, resetPasswordRequest).pipe(
+            map((result) => {
+                let resetPasswordResult = result as string;
+                return resetPasswordResult;
+            }),
+            catchError((error: HttpErrorResponse) => {
+                return throwError(() => error);
+            })
         );
     }
 
