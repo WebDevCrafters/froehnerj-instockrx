@@ -53,7 +53,7 @@ export class AdditionalInfoComponent {
                 brandName: new FormControl(''),
             }),
         ]),
-        miles: new FormControl(),
+        miles: new FormControl(30),
         pickupDate: new FormControl(new Date().getTime()),
     });
 

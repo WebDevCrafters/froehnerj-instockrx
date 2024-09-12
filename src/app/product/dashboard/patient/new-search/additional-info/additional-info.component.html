@@ -58,7 +58,7 @@
 
     <div class="dropdown-container">
         <select id="distance" class="dropdown" (change)="setDropDownValue($event)">
-            <option *ngFor="let distance of distances" [value]="distance" [selected]="distance === 30">{{ distance }}
+            <option *ngFor="let distance of distances" [value]="distance" [selected]="additionalInfoForm.controls.miles.value === 30">{{ distance }}
             </option>
         </select>
     </div>

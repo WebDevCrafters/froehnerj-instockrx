@@ -318,6 +318,7 @@ export class MedicationDetailsComponent implements OnInit {
                 }
                 if (this.search) {
                     this.search.location = res.location
+                    this.search.miles = res.miles
                 }
                 this.isEditMedicationLoading = false;
                 this.isModalVisible = false;
@@ -381,7 +382,7 @@ export class MedicationDetailsComponent implements OnInit {
             zipCode: formValues.zipCode || '',
             status: this.search?.status,
             location: this.search.location,
-            miles: this.search.miles,
+            miles: formValues.miles,
             medication:
                 formValues.prescribedMedication &&
                     formValues.prescribedMedication.length > 0

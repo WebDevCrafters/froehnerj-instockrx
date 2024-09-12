@@ -9,8 +9,7 @@
         </div>
         @if(isPaid!==null && search?.status === searchStatus.NotStarted) {
         <div class="edit_btn" (click)="isPaid ? toggleDecisionModalPopup() : pay()">
-            <app-button [title]="isPaid ? 'Start Search' : 'Complete Payment'" [type]="'small_primary'"
-                [isLoading]="isStartSearchLoading" />
+            <app-button [title]="isPaid ? 'Start Search' : 'Complete Payment'" [type]="'small_primary'" />
         </div>
         } @if((search?.status === searchStatus.InProgress && availability.length
         && !isMedicationMarkedAsAvailable)) {
@@ -35,7 +34,7 @@
     <div class="medication_info">
         <div class="label_and_value">
             <div class="label">Name:</div>
-            <div class="value">{{ search?.medication?.name }}</div>
+            <div class="value">{{ search?.medication?.name || "---" }}</div>
         </div>
         <div class="label_and_value">
             <div class="label">Dose:</div>
@@ -53,11 +52,11 @@
         </div>
         <div class="label_and_value">
             <div class="label">DOB:</div>
-            <div class="value">{{ search?.dob | date }}</div>
+            <div class="value">{{ (search?.dob | date )|| "---" }}</div>
         </div>
         <div class="label_and_value">
             <div class="label">Zip Code</div>
-            <div class="value">{{ search?.zipCode }}</div>
+            <div class="value">{{ search?.zipCode || "---" }}</div>
         </div>
         <div class="label_and_value">
             <div class="label">Pick up date:</div>
@@ -69,7 +68,7 @@
         </div>
         <div class="label_and_value">
             <div class="label">Search Radius:</div>
-            <div class="value">{{ search?.miles }}</div>
+            <div class="value">{{ search?.miles || "---" }}</div>
         </div>
     </div>
     @if(search?.medication?.alternatives?.length) {
@@ -247,7 +246,6 @@
             cannot be reverted. If you have successfully obtained the
             medication, kindly confirm to mark the search as completed.
         </div>
-
         }
         <hr />
         <div class="footer">
@@ -257,7 +255,7 @@
             </div>
             <div class="btn_container">
                 <app-button [title]="'Confirm'" [type]="'small_primary'" [shape]="'rounded'" (clickEvent)="onSuccess()"
-                    [isLoading]="isMarkAsCompleteLoading"></app-button>
+                    [isLoading]=" search?.status === searchStatus.NotStarted ? isStartSearchLoading :isMarkAsCompleteLoading "></app-button>
             </div>
         </div>
     </div>
