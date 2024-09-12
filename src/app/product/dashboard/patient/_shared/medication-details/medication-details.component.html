@@ -177,19 +177,11 @@
                     <td>{{ pharmacy.phoneNumber }}</td>
                     <td [title]="pharmacy.address">{{ pharmacy.address }}</td>
                 </tr>
-                @if(isNextPharmacyLoading) {
-                <tr>
-                    <div class="bottom_loader_container">
-                        <app-loader></app-loader>
-                    </div>
-                </tr>
-                }
             </tbody>
         </table>
         }
         }
     </div>
-
     } @else { @if(isMedicationMarkedAsAvailable) {
     <div class="header">
         <div class="title">User Details:</div>
