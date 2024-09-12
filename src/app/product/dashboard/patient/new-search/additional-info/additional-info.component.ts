@@ -38,7 +38,7 @@ export class AdditionalInfoComponent {
         formatTimestampToMMDDYYYY(this.selectedDate),
         dateValidator('Invalid format')
     );
-    distances: number[] = [10, 30, 50];
+    distances: number[] = [10, 20, 30];
 
     @Output() onAdditionalInfoSubmit = new EventEmitter<void>();
     @Input() additionalInfoForm = new FormGroup({
