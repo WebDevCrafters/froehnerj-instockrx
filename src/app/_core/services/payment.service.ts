@@ -70,12 +70,11 @@ export class PaymentService {
             `Bearer ${accessToken}`
         );
 
-        this.httpClinet
-            .post(
-                API_URL + this.PAYMENT_URL + '/stripe',
-                addPaymentReq, 
-                { headers, observe: 'response' } 
-            )
+        return this.httpClinet
+            .post(API_URL + this.PAYMENT_URL + '/stripe', addPaymentReq, {
+                headers,
+                observe: 'response',
+            })
             .pipe(
                 switchMap((response: HttpResponse<Object>) => {
                     const session: IStripeSession =
@@ -84,11 +83,6 @@ export class PaymentService {
                         sessionId: session.id,
                     });
                 })
-            )
-            .subscribe((result) => {
-                if (result.error) {
-                    console.log(result.error);
-                }
-            });
+            );
     }
 }

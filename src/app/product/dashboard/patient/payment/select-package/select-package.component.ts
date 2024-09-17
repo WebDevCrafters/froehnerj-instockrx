@@ -27,8 +27,12 @@ export class SelectPackageComponent implements OnInit, OnDestroy {
     packageOptions: Subscription[] = [];
     @Input() selectedPackage: Subscription | null = null;
     public allSubscriptions$: ObservableSubscription[] = [];
+    isLoading = false;
 
-    constructor(private subscriptionService: SubscriptionService, private paymentService: PaymentService) {}
+    constructor(
+        private subscriptionService: SubscriptionService,
+        private paymentService: PaymentService
+    ) {}
 
     ngOnInit(): void {
         this.getSubscriptions();
@@ -57,21 +61,28 @@ export class SelectPackageComponent implements OnInit, OnDestroy {
     selectPackage(selectedPackage: Subscription) {
         this.selectedPackage = selectedPackage;
     }
-    
+
     onSubmit() {
         this.checkout();
         // this.onSelectPackageSubmit.emit(this.selectedPackage);
     }
 
-    checkout(){
-        if(!this.selectedPackage?.subscriptionId) return;
-
+    checkout() {
+        if (!this.selectedPackage?.subscriptionId) return;
+        this.isLoading = true;
         const addPaymentRequest: AddPaymentRequest = {
             subscription: this.selectedPackage.subscriptionId,
             status: PaymentStatus.PAID,
             paidOn: Date.now(),
         };
 
-        this.paymentService.stripeSession(addPaymentRequest)
+        this.paymentService
+            .stripeSession(addPaymentRequest)
+            .subscribe((result) => {
+                if (result.error) {
+                    console.log(result.error);
+                }
+                this.isLoading = false;
+            });
     }
 }
