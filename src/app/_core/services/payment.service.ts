@@ -63,7 +63,7 @@ export class PaymentService {
         );
     }
 
-    stripeSession(stripeAmount: number) {
+    stripeSession(addPaymentReq: AddPaymentRequest) {
         const accessToken = this.userService.getAccessToken();
         const headers = new HttpHeaders().set(
             'Authorization',
@@ -73,7 +73,7 @@ export class PaymentService {
         this.httpClinet
             .post(
                 API_URL + this.PAYMENT_URL + '/stripe',
-                { amount: stripeAmount * 100 }, 
+                addPaymentReq, 
                 { headers, observe: 'response' } 
             )
             .pipe(

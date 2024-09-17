@@ -11,6 +11,9 @@ import { ButtonComponent } from '../../../../../_shared/components/button/button
 import { SubscriptionService } from '../../../../../_core/services/subscription.service';
 import Subscription from '../../../../_shared/interfaces/Subscription';
 import { Subscription as ObservableSubscription } from 'rxjs';
+import { AddPaymentRequest } from '../../../../_shared/interfaces/AddPaymentRequest';
+import PaymentStatus from '../../../../_shared/interfaces/PaymentStatus';
+import { PaymentService } from '../../../../../_core/services/payment.service';
 
 @Component({
     selector: 'app-select-package',
@@ -25,7 +28,7 @@ export class SelectPackageComponent implements OnInit, OnDestroy {
     @Input() selectedPackage: Subscription | null = null;
     public allSubscriptions$: ObservableSubscription[] = [];
 
-    constructor(private subscriptionService: SubscriptionService) {}
+    constructor(private subscriptionService: SubscriptionService, private paymentService: PaymentService) {}
 
     ngOnInit(): void {
         this.getSubscriptions();
@@ -54,8 +57,21 @@ export class SelectPackageComponent implements OnInit, OnDestroy {
     selectPackage(selectedPackage: Subscription) {
         this.selectedPackage = selectedPackage;
     }
-
+    
     onSubmit() {
-        this.onSelectPackageSubmit.emit(this.selectedPackage);
+        this.checkout();
+        // this.onSelectPackageSubmit.emit(this.selectedPackage);
+    }
+
+    checkout(){
+        if(!this.selectedPackage?.subscriptionId) return;
+
+        const addPaymentRequest: AddPaymentRequest = {
+            subscription: this.selectedPackage.subscriptionId,
+            status: PaymentStatus.PAID,
+            paidOn: Date.now(),
+        };
+
+        this.paymentService.stripeSession(addPaymentRequest)
     }
 }

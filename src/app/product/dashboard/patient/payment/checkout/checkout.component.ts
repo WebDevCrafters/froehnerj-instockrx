@@ -64,6 +64,7 @@ export class CheckoutComponent implements OnDestroy {
     }
 
     checkout() {
-        this.paymentService.stripeSession(20);
+        if (!this.selectedPackage) return; 
+        // this.paymentService.stripeSession(this.selectedPackage);
     }
 }
