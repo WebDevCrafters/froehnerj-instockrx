@@ -1,5 +1,5 @@
-import { CommonModule } from '@angular/common';
-import { Component, EventEmitter, HostListener, OnInit, Output } from '@angular/core';
+import { CommonModule, isPlatformBrowser } from '@angular/common';
+import { Component, EventEmitter, HostListener, OnInit, Output, PLATFORM_ID } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 
 interface Country {
@@ -246,10 +246,12 @@ export class CustomSearchDropdownComponent implements OnInit {
 
     @HostListener('document:click', ['$event'])
     clickOutside(event: MouseEvent) {
-        const targetElement = event.target as HTMLElement;
-        const clickedInside = targetElement.closest('.dropdown-container');
-        if (!clickedInside) {
-            this.isOpen = false;
+        if(isPlatformBrowser(PLATFORM_ID)){
+            const targetElement = event.target as HTMLElement;
+            const clickedInside = targetElement.closest('.dropdown-container');
+            if (!clickedInside) {
+                this.isOpen = false;
+            }
         }
     }
 

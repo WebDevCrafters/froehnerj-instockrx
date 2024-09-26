@@ -1,5 +1,5 @@
-import { CommonModule } from '@angular/common';
-import { Component, ElementRef, HostListener, OnInit, ViewChild } from '@angular/core';
+import { CommonModule, isPlatformBrowser } from '@angular/common';
+import { Component, ElementRef, HostListener, OnInit, PLATFORM_ID, ViewChild } from '@angular/core';
 import { FormControl, FormGroup, FormsModule } from '@angular/forms';
 import { ButtonComponent } from '../../../../_shared/components/button/button.component';
 import { DatePickerComponent } from '../../../../_shared/components/date-picker/date-picker.component';
@@ -136,10 +136,12 @@ export class ProfileComponent implements OnInit {
 
     @HostListener('document:click', ['$event'])
     onDocumentClick(event: MouseEvent): void {
-        const clickedInsideProfile =
-            this.myProfileEleRef?.nativeElement.contains(event.target);
-        if (!clickedInsideProfile) {
-            this.cancelEditProfile();
+        if(isPlatformBrowser(PLATFORM_ID)){
+            const clickedInsideProfile =
+                this.myProfileEleRef?.nativeElement.contains(event.target);
+            if (!clickedInsideProfile) {
+                this.cancelEditProfile();
+            }
         }
     }
 
