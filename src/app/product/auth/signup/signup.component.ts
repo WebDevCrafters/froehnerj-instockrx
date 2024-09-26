@@ -147,6 +147,7 @@ export class SignupComponent implements OnInit {
     }
 
     public navigateToPrivacyPolicy() {
+        if(!window) return;
         const url = this.router.serializeUrl(
             this.router.createUrlTree([`${APP_ROUTES.webpage.privacy}`])
         );
@@ -154,6 +155,7 @@ export class SignupComponent implements OnInit {
     }
 
     public navigateToTermsOfService() {
+        if(!window) return;
         const url = this.router.serializeUrl(
             this.router.createUrlTree([`${APP_ROUTES.webpage.termsOfService}`])
         );

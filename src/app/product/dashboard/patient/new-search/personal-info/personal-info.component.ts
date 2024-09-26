@@ -36,7 +36,9 @@ export class PersonalInfoComponent {
         this.onPersonalInfoSubmit.emit();
     }
 
+
     openPrivacy() {
+        if(!window) return;
         const url = this.router.serializeUrl(
             this.router.createUrlTree([APP_ROUTES.webpage.privacy])
         );
@@ -44,6 +46,7 @@ export class PersonalInfoComponent {
     }
 
     openTermsOfService() {
+        if(!window) return;
         const url = this.router.serializeUrl(
             this.router.createUrlTree([APP_ROUTES.webpage.termsOfService])
         );

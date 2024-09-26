@@ -21,6 +21,7 @@ export class NavbarComponent {
     }
 
     private checkScreenWidth() {
+        if(!window) return;
         if (window.innerWidth > 800) {
             this.menuOpen = false;
         }

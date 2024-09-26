@@ -146,6 +146,7 @@ export class ProfileComponent implements OnInit {
     }
 
     requestAccountDeletion() {
+        if(!window) return;
         const url = 'https://u4acjiu8lv3.typeform.com/to/WDj0hN0I';
         window.open(url, '_blank');
     }

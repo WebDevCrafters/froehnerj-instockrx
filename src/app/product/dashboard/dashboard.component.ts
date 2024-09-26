@@ -49,6 +49,7 @@ export class DashboardComponent implements OnInit {
     }
 
     closeSidebar() {
+        if(!window) return;
         if (window.innerWidth <= 700) {
             this.isSidebarExpanded = false;
         }
@@ -56,6 +57,7 @@ export class DashboardComponent implements OnInit {
 
     @HostListener('window:resize', ['$event'])
     onResize(event: Event) {
+        if(!window) return;
         if (window.innerWidth > 700 && !this.isSidebarExpanded) {
             this.isSidebarExpanded = true;
         }

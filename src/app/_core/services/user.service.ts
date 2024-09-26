@@ -18,6 +18,7 @@ export class UserService {
     constructor(private httpClient: HttpClient) { }
 
     checkIfSignedIn(): boolean {
+        if(!window) return false;
         if (typeof window !== 'undefined' && localStorage) {
             const isSignedIn = localStorage.getItem(KEYS.isSignedIn);
             this.isSignedIn = isSignedIn === 'true';
