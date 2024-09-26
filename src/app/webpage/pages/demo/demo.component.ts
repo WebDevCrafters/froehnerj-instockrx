@@ -1,4 +1,5 @@
-import { Component, OnInit } from '@angular/core';
+import { isPlatformBrowser } from '@angular/common';
+import { Component, OnInit, PLATFORM_ID } from '@angular/core';
 
 @Component({
     selector: 'app-demo',
@@ -12,9 +13,11 @@ export class DemoComponent implements OnInit {
     constructor() { }
 
     ngOnInit(): void {
-        const script = document.createElement('script');
-        script.src = 'https://assets.calendly.com/assets/external/widget.js';
-        script.async = true;
-        document.body.appendChild(script);
+        if(isPlatformBrowser(PLATFORM_ID)){
+            const script = document.createElement('script');
+            script.src = 'https://assets.calendly.com/assets/external/widget.js';
+            script.async = true;
+            document.body.appendChild(script);
+        }
     }
 }
