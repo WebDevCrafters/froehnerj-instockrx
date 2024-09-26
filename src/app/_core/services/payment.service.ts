@@ -8,11 +8,9 @@ import {
     HttpHeaders,
     HttpResponse,
 } from '@angular/common/http';
-import { API_URL, STRIPE_PK } from '../../../../env';
-import PaymentStatus from '../../product/_shared/interfaces/PaymentStatus';
 import { AddPaymentRequest } from '../../product/_shared/interfaces/AddPaymentRequest';
-import { error } from 'node:console';
 import { StripeFactoryService, StripeInstance } from 'ngx-stripe';
+import { environment } from '../../../environments/environment';
 
 interface IStripeSession {
     id: string;
@@ -22,7 +20,7 @@ interface IStripeSession {
     providedIn: 'root',
 })
 export class PaymentService {
-    PAYMENT_URL: string = '/payment';
+    PAYMENT_URL: string = '/api/payment';
 
     public stripe!: StripeInstance;
 
@@ -31,11 +29,11 @@ export class PaymentService {
         private httpClinet: HttpClient,
         private stripeFactory: StripeFactoryService
     ) {
-        this.stripe = this.stripeFactory.create(STRIPE_PK);
+        this.stripe = this.stripeFactory.create(environment.STRIPE_PK);
     }
 
     getCurrentPayment(): Observable<Payment | null> {
-        const url = `${API_URL}${this.PAYMENT_URL}`;
+        const url = `${environment.BASE_URL}${this.PAYMENT_URL}`;
         const accessToken = this.userService.getAccessToken();
         const headers = new HttpHeaders().set('authorization', accessToken);
         return this.httpClinet.get(url, { headers }).pipe(
@@ -52,7 +50,7 @@ export class PaymentService {
     }
 
     addPayment(requestBody: AddPaymentRequest) {
-        const url = `${API_URL}${this.PAYMENT_URL}`;
+        const url = `${environment.BASE_URL}${this.PAYMENT_URL}`;
         const accessToken = this.userService.getAccessToken();
         const headers = new HttpHeaders().set('authorization', accessToken);
         return this.httpClinet.post(url, requestBody, { headers }).pipe(
@@ -71,7 +69,7 @@ export class PaymentService {
         );
 
         return this.httpClinet
-            .post(API_URL + this.PAYMENT_URL + '/stripe', addPaymentReq, {
+            .post(environment.BASE_URL + this.PAYMENT_URL + '/stripe', addPaymentReq, {
                 headers,
                 observe: 'response',
             })

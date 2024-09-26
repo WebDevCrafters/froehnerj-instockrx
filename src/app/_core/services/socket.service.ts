@@ -1,7 +1,6 @@
 import { Injectable } from '@angular/core';
 import { io, Socket } from 'socket.io-client';
-import { API_URL, BASE_URL } from '../../../../env';
-import { SocketEvents } from '../../product/_shared/interfaces/SocketEvents';
+import { environment } from '../../../environments/environment';
 
 @Injectable({
     providedIn: 'root',
@@ -12,7 +11,7 @@ export class SocketService {
     constructor() {}
 
     init() {
-        this.socket = io(BASE_URL);
+        this.socket = io(environment.BASE_URL);
     }
 
     emitEvent(event: string, data: any) {
